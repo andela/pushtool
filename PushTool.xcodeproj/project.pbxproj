@@ -1,0 +1,1013 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DF94D5083471D9D584B45231FB7DC7B1 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F914BF9A96C62C38818F9BC04672B0 /* Application.xib */; };
+		D8BB4F4E1B746F4C3F0E836301003A21 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */; };
+		AED716DD470E38CCEA21D089AD324554 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */; };
+		EA7E30B0F9232ED0BB1C53ABECFAEFE8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 339E7B873EECA678EE962221321EFA68 /* Default-568h@2x.png */; };
+		71C427AB6FE8811973E6DFC7D92EFF64 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 14E113EF9CA9DD722E1B1C688E999564 /* Default.png */; };
+		828E5F29FBC6B0A18EC1E6B94E40377D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48EEA3B2DE9256F7AD816A27999B8C24 /* Default@2x.png */; };
+		950A1E765947E0656488F0136E26E0DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */; };
+		D8F49A37AFE07CF28DF822C12C084212 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 696D97E9A867DCED959BA5689464BC2D /* Icon-72.png */; };
+		109AEAB7AD1DAB0F671FD86D861B1AF6 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6CA773ABF172D892AFA5C6C4FDFAE1 /* Icon-72@2x.png */; };
+		96362E62E4B9D01B5FB15BC84130C144 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E09837A651813E20AFE5B147BAE26CAF /* Icon@2x.png */; };
+		10D7DC7DD849F3698F3D7058C5DA3F34 /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 496A3DB8F1103FDD461515E6C4315277 /* NWAppDelegate.m */; };
+		59101E1F9919528C4D2AD88758BFB6E2 /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C80CED9392B9E3EA29C06A7B04FD7 /* NWAppDelegate.m */; };
+		27F7BE415E133993C462168A8B53331A /* NWHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E54152508EACCC1CBFD5017642266B9 /* NWHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6C4D3296FCB73D33B8E37F61E1AA2D3 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
+		AC165FAC2F7E4D889E3F527D8298A421 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
+		09DD0FD0E2B91A015B01A2DB6498C0AB /* NWLCore.c in Sources */ = {isa = PBXBuildFile; fileRef = 69802EEDFDB8DB1185B2FD220C5E59CD /* NWLCore.c */; };
+		6F19F79BA98659A158FC66B4FC24D633 /* NWLCore.c in Sources */ = {isa = PBXBuildFile; fileRef = 69802EEDFDB8DB1185B2FD220C5E59CD /* NWLCore.c */; };
+		1B56ADE12A6D814DA48DD13960D4001C /* NWLCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AE5DCED1C3DC44BB79D5D662687F853 /* NWLCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DAB636461A0EFA71FFA5870C9D93CB27 /* NWLCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AE5DCED1C3DC44BB79D5D662687F853 /* NWLCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F6B610F3A2EB0A53CDEF6EF3935E401 /* NWNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = BA947E73E088777709D011DAA0893F2C /* NWNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		88FD1E362D8233D2D91A45517406968D /* NWNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = BA947E73E088777709D011DAA0893F2C /* NWNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0528B0EE3A33AFD48C01D4092BB7692A /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
+		C19A314EC376B7AB6A32FF8202088A7F /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
+		064B2C865E8E9884B48E8DA5E36B52CB /* NWPushFeedback.h in Headers */ = {isa = PBXBuildFile; fileRef = D6B7B1CD5300C3763F0F76225FECE875 /* NWPushFeedback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F166A23A48F24339CED685199C8E5AF /* NWPushFeedback.h in Headers */ = {isa = PBXBuildFile; fileRef = D6B7B1CD5300C3763F0F76225FECE875 /* NWPushFeedback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		091E5F68F2D9DA3789017E3D99F3BC33 /* NWPushFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */; };
+		8B2F954BABE8EA691F6E29094416D9AB /* NWPushFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */; };
+		229779112955EFC8BCF62FA1B42D1F80 /* NWPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEBB0A712785602647EDE79846353FA /* NWPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		31DE9A08250484246DC3C1A9DF903577 /* NWPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEBB0A712785602647EDE79846353FA /* NWPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		287CD7749A31AFF60FEE923154EDD174 /* NWPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 592C511044599C4548E6D6F046C979FE /* NWPusher.m */; };
+		4468DFAB7CAB5B3B15118A9CF31F8D09 /* NWPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 592C511044599C4548E6D6F046C979FE /* NWPusher.m */; };
+		02F0423306978B2313D9B62827B82E59 /* NWSSLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F0D7A78F4C8D495F79A6E1164B979F0D /* NWSSLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75437763946E77567E0DC05C6D09D11F /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
+		E28AFECED5C17BFABEF4D3EC493C002A /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
+		05271DC19D905DA5C4DEC3EE282D021B /* NWSecTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 39F0CBABAECD2011008AC414C77A796F /* NWSecTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		12C8E9DB7645D93DEDF5CF30B799E3F8 /* NWSecTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 39F0CBABAECD2011008AC414C77A796F /* NWSecTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DAD8B90AFC471C8DCEDCF1CD6571D173 /* NWSecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */; };
+		DAFF9E70BC25E5A325C88A715652405E /* NWSecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */; };
+		47A1E7E44B1CA00CB548B406EE0B0298 /* NWType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACD3BB27C7093FAF237E35416CFF0769 /* NWType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1249C25A04ABA91DE3D216BD7368D0C1 /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
+		C22BEBC2DD55DC1381F2EA2656E143DD /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
+		526A2C924AEACA538FB76BA57A72FA57 /* PushToolKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3490A4FED639A41D1EDD81284D6DC64B /* PushToolKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		598DD32436E337972A2C3C3F03D7E66D /* PushToolKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3490A4FED639A41D1EDD81284D6DC64B /* PushToolKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B34BB7498FD4321D0EDD40FBEF7DCB6C /* PushToolKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3490A4FED639A41D1EDD81284D6DC64B /* PushToolKit.framework */; };
+		DF294E0B480F7E5CDF86548AA93F4151 /* PushToolKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3490A4FED639A41D1EDD81284D6DC64B /* PushToolKit.framework */; };
+		7F4B78F33A50069C7D3F3078AF72C4AD /* PushToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AF7FF79EF10BC27B173469539ECA1EBD /* PushToolKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93C44D2047F6BF8D6CEB6ACA115E9F09 /* PushToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B7B5D28ACE226B39B3F27A11E02184C2 /* PushToolKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DAE1845BDC2686EB8FCB607EC26FCFE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
+		C2C2C4A47008C2E36C1217177FCF8872 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
+		1880618D7E3FB79FC64076DD79B9C8CE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
+		ED4F3EAE68D90FFD1FD076B254AA301E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
+		11463603DF2298B2C674B30F9FDCFD68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */; };
+		04DF86305A946F5F88A3DE4C4B155BE8 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA8D22879A390277C8EBCF3643C5C2AC /* config.plist */; };
+		10F279867C0A23233963A12694B0E883 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = A2C675D7B9EAD53F0BA27B73A162E40A /* icon.icns */; };
+		5F9F98EB64FDB884ED37BA3A2F2F8E83 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0BCF86B9CC8DED85BE9347432D6548 /* icon.png */; };
+		10F86CBE8A9001379CC30AD6FD3CD86F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C04EBBC0112A520592147863508B21C /* main.m */; };
+		7EBD48D285E4D34FF9BF3F79C4BDF603 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C079B178B5B2239077B045C295FE6B26 /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		66C724E9E1545BACA2AEAAC8A9F390A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 249EA1D406BFEFAE3143060E00AFB762 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 858C63AF14C96509E76D70CC94145185;
+			remoteInfo = "PusherKit-iOS";
+		};
+		D8BE635620CD61D1AA9312B4FDA37BA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 249EA1D406BFEFAE3143060E00AFB762 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD94C238D9511B43D664FE0B665D6283;
+			remoteInfo = "PusherKit-OSX";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D798FAAB2FDEF1C4CE7EED0804EB21A9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				598DD32436E337972A2C3C3F03D7E66D /* PushToolKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE78635B1C9E69B253D644DD0FE70A97 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				526A2C924AEACA538FB76BA57A72FA57 /* PushToolKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A347CF633AC3D0CDE521B7D62A20A804 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		97F914BF9A96C62C38818F9BC04672B0 /* Application.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
+		68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		339E7B873EECA678EE962221321EFA68 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		14E113EF9CA9DD722E1B1C688E999564 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		48EEA3B2DE9256F7AD816A27999B8C24 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		696D97E9A867DCED959BA5689464BC2D /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		AE6CA773ABF172D892AFA5C6C4FDFAE1 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		E09837A651813E20AFE5B147BAE26CAF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		93FBBBD9EAB4DDE2FC2445A03EA19868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5AF0F82E065E062C6B7649107189811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		808599CF210A41C8D88C4F9E3EB53EF3 /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
+		84064AD251DB246E063403E575593CF9 /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
+		049C80CED9392B9E3EA29C06A7B04FD7 /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
+		496A3DB8F1103FDD461515E6C4315277 /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
+		3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWHub.h; sourceTree = "<group>"; };
+		DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWHub.m; sourceTree = "<group>"; };
+		69802EEDFDB8DB1185B2FD220C5E59CD /* NWLCore.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = NWLCore.c; path = Mac/NWLCore.c; sourceTree = SOURCE_ROOT; };
+		5AE5DCED1C3DC44BB79D5D662687F853 /* NWLCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NWLCore.h; path = Mac/NWLCore.h; sourceTree = SOURCE_ROOT; };
+		BA947E73E088777709D011DAA0893F2C /* NWNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWNotification.h; sourceTree = "<group>"; };
+		2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWNotification.m; sourceTree = "<group>"; };
+		D6B7B1CD5300C3763F0F76225FECE875 /* NWPushFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWPushFeedback.h; sourceTree = "<group>"; };
+		1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWPushFeedback.m; sourceTree = "<group>"; };
+		EAEBB0A712785602647EDE79846353FA /* NWPusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWPusher.h; sourceTree = "<group>"; };
+		592C511044599C4548E6D6F046C979FE /* NWPusher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWPusher.m; sourceTree = "<group>"; };
+		2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWSSLConnection.h; sourceTree = "<group>"; };
+		87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWSSLConnection.m; sourceTree = "<group>"; };
+		39F0CBABAECD2011008AC414C77A796F /* NWSecTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWSecTools.h; sourceTree = "<group>"; };
+		394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWSecTools.m; sourceTree = "<group>"; };
+		9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWType.h; sourceTree = "<group>"; };
+		A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWType.m; sourceTree = "<group>"; };
+		94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5CA00AC4ADF360BADB5B40291023C7 /* PushTool.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushTool.podspec; sourceTree = "<group>"; };
+		3490A4FED639A41D1EDD81284D6DC64B /* PushToolKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PushToolKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF7FF79EF10BC27B173469539ECA1EBD /* PushToolKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushToolKit.h; sourceTree = "<group>"; };
+		B7B5D28ACE226B39B3F27A11E02184C2 /* PushToolKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushToolKit.h; sourceTree = "<group>"; };
+		3336FDA56D58539E73139CD99F755D0F /* PushToolMac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PushToolMac-Info.plist"; sourceTree = "<group>"; };
+		D91C3507D26750EE36897B0B9F8B94A3 /* PushToolMac-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushToolMac-Prefix.pch"; sourceTree = "<group>"; };
+		8A0A674ADE78789168774581553C7295 /* PushToolTouch-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PushToolTouch-Info.plist"; sourceTree = "<group>"; };
+		A37114C54AD67B5C634349026598B4EF /* PushToolTouch-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushToolTouch-Prefix.pch"; sourceTree = "<group>"; };
+		FD768C9EA6A50DFA4EA70DAD34EB22B7 /* PushToolTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushToolTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		658F71FE87626920A3229836F8D66988 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		EA8D22879A390277C8EBCF3643C5C2AC /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		A2C675D7B9EAD53F0BA27B73A162E40A /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		DA0BCF86B9CC8DED85BE9347432D6548 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		7C04EBBC0112A520592147863508B21C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C079B178B5B2239077B045C295FE6B26 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07BCD67E25F4C8C00DF570C02F0A453D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AED716DD470E38CCEA21D089AD324554 /* CoreGraphics.framework in Frameworks */,
+				950A1E765947E0656488F0136E26E0DE /* Foundation.framework in Frameworks */,
+				B34BB7498FD4321D0EDD40FBEF7DCB6C /* PushToolKit.framework in Frameworks */,
+				ED4F3EAE68D90FFD1FD076B254AA301E /* Security.framework in Frameworks */,
+				11463603DF2298B2C674B30F9FDCFD68 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1607450B9034336BA7A7B46B355DE66E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8BB4F4E1B746F4C3F0E836301003A21 /* Cocoa.framework in Frameworks */,
+				DF294E0B480F7E5CDF86548AA93F4151 /* PushToolKit.framework in Frameworks */,
+				1880618D7E3FB79FC64076DD79B9C8CE /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDD96FF790985D26DB366C87F24FA054 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E46B0D050F8611A1D66D69619F42C60A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03DC86293678A02BC3E36A90BECE8D48 /* Touch */ = {
+			isa = PBXGroup;
+			children = (
+				07FC9FD613E98305CBDE6AFF33A0F0FC /* Supporting Files */,
+				808599CF210A41C8D88C4F9E3EB53EF3 /* NWAppDelegate.h */,
+				496A3DB8F1103FDD461515E6C4315277 /* NWAppDelegate.m */,
+				69802EEDFDB8DB1185B2FD220C5E59CD /* NWLCore.c */,
+				5AE5DCED1C3DC44BB79D5D662687F853 /* NWLCore.h */,
+			);
+			path = Touch;
+			sourceTree = "<group>";
+		};
+		07FC9FD613E98305CBDE6AFF33A0F0FC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				339E7B873EECA678EE962221321EFA68 /* Default-568h@2x.png */,
+				14E113EF9CA9DD722E1B1C688E999564 /* Default.png */,
+				48EEA3B2DE9256F7AD816A27999B8C24 /* Default@2x.png */,
+				696D97E9A867DCED959BA5689464BC2D /* Icon-72.png */,
+				AE6CA773ABF172D892AFA5C6C4FDFAE1 /* Icon-72@2x.png */,
+				E09837A651813E20AFE5B147BAE26CAF /* Icon@2x.png */,
+				8A0A674ADE78789168774581553C7295 /* PushToolTouch-Info.plist */,
+				A37114C54AD67B5C634349026598B4EF /* PushToolTouch-Prefix.pch */,
+				DA0BCF86B9CC8DED85BE9347432D6548 /* icon.png */,
+				7C04EBBC0112A520592147863508B21C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5D44DE4A16580C2624CF506C05146E70 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A347CF633AC3D0CDE521B7D62A20A804 /* AppKit.framework */,
+				68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */,
+				E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */,
+				7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */,
+				658F71FE87626920A3229836F8D66988 /* Security.framework */,
+				32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7255B32476ED6B9ABCC08884B49F9711 /* PushToolKit-OSX */ = {
+			isa = PBXGroup;
+			children = (
+				93FBBBD9EAB4DDE2FC2445A03EA19868 /* Info.plist */,
+				B7B5D28ACE226B39B3F27A11E02184C2 /* PushToolKit.h */,
+			);
+			path = "PushToolKit-OSX";
+			sourceTree = "<group>";
+		};
+		81A9CA59CBF072BF95A16B45D14AB831 /* PushToolKit-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				B5AF0F82E065E062C6B7649107189811 /* Info.plist */,
+				AF7FF79EF10BC27B173469539ECA1EBD /* PushToolKit.h */,
+			);
+			path = "PushToolKit-iOS";
+			sourceTree = "<group>";
+		};
+		B1D116BD7DFDFD66849644CDAAEE17CA /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */,
+				DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */,
+				BA947E73E088777709D011DAA0893F2C /* NWNotification.h */,
+				2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */,
+				D6B7B1CD5300C3763F0F76225FECE875 /* NWPushFeedback.h */,
+				1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */,
+				EAEBB0A712785602647EDE79846353FA /* NWPusher.h */,
+				592C511044599C4548E6D6F046C979FE /* NWPusher.m */,
+				2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */,
+				87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */,
+				39F0CBABAECD2011008AC414C77A796F /* NWSecTools.h */,
+				394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */,
+				9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */,
+				A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		BD1A693E3C4E73479A4A3D5AEF4097A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */,
+				3490A4FED639A41D1EDD81284D6DC64B /* PushToolKit.framework */,
+				FD768C9EA6A50DFA4EA70DAD34EB22B7 /* PushToolTouch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C0F5CF051DDFC5AFACC67BB2D26AF935 = {
+			isa = PBXGroup;
+			children = (
+				5D44DE4A16580C2624CF506C05146E70 /* Frameworks */,
+				C9A8FEEFF1F4D0F0A858E9E86A95839B /* Mac */,
+				BD1A693E3C4E73479A4A3D5AEF4097A4 /* Products */,
+				7255B32476ED6B9ABCC08884B49F9711 /* PushToolKit-OSX */,
+				81A9CA59CBF072BF95A16B45D14AB831 /* PushToolKit-iOS */,
+				B1D116BD7DFDFD66849644CDAAEE17CA /* Source */,
+				03DC86293678A02BC3E36A90BECE8D48 /* Touch */,
+				CF5CA00AC4ADF360BADB5B40291023C7 /* PushTool.podspec */,
+				DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */,
+			);
+			sourceTree = "<group>";
+		};
+		C9A8FEEFF1F4D0F0A858E9E86A95839B /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				ECF689000434019E5B6E306EE2953805 /* Supporting Files */,
+				97F914BF9A96C62C38818F9BC04672B0 /* Application.xib */,
+				84064AD251DB246E063403E575593CF9 /* NWAppDelegate.h */,
+				049C80CED9392B9E3EA29C06A7B04FD7 /* NWAppDelegate.m */,
+				EA8D22879A390277C8EBCF3643C5C2AC /* config.plist */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		ECF689000434019E5B6E306EE2953805 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3336FDA56D58539E73139CD99F755D0F /* PushToolMac-Info.plist */,
+				D91C3507D26750EE36897B0B9F8B94A3 /* PushToolMac-Prefix.pch */,
+				A2C675D7B9EAD53F0BA27B73A162E40A /* icon.icns */,
+				C079B178B5B2239077B045C295FE6B26 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0C543FF4D9E696E0D6C5C7A12533AFBA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F7BE415E133993C462168A8B53331A /* NWHub.h in Headers */,
+				DAB636461A0EFA71FFA5870C9D93CB27 /* NWLCore.h in Headers */,
+				4F6B610F3A2EB0A53CDEF6EF3935E401 /* NWNotification.h in Headers */,
+				6F166A23A48F24339CED685199C8E5AF /* NWPushFeedback.h in Headers */,
+				31DE9A08250484246DC3C1A9DF903577 /* NWPusher.h in Headers */,
+				02F0423306978B2313D9B62827B82E59 /* NWSSLConnection.h in Headers */,
+				12C8E9DB7645D93DEDF5CF30B799E3F8 /* NWSecTools.h in Headers */,
+				ACD3BB27C7093FAF237E35416CFF0769 /* NWType.h in Headers */,
+				7F4B78F33A50069C7D3F3078AF72C4AD /* PushToolKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		342AD831F3F758109BD8C9672B623559 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E54152508EACCC1CBFD5017642266B9 /* NWHub.h in Headers */,
+				1B56ADE12A6D814DA48DD13960D4001C /* NWLCore.h in Headers */,
+				88FD1E362D8233D2D91A45517406968D /* NWNotification.h in Headers */,
+				064B2C865E8E9884B48E8DA5E36B52CB /* NWPushFeedback.h in Headers */,
+				229779112955EFC8BCF62FA1B42D1F80 /* NWPusher.h in Headers */,
+				F0D7A78F4C8D495F79A6E1164B979F0D /* NWSSLConnection.h in Headers */,
+				05271DC19D905DA5C4DEC3EE282D021B /* NWSecTools.h in Headers */,
+				47A1E7E44B1CA00CB548B406EE0B0298 /* NWType.h in Headers */,
+				93C44D2047F6BF8D6CEB6ACA115E9F09 /* PushToolKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		77E38B2521B414941C97C03D1E46FB3B /* PushToolMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38985034FAF269610E43C2EC606AD2A0 /* Build configuration list for PBXNativeTarget "PushToolMac" */;
+			buildPhases = (
+				3626473861CC755F5E5642B24819B759 /* Sources */,
+				1607450B9034336BA7A7B46B355DE66E /* Frameworks */,
+				64137E059360C8551EFE625AE263E71D /* Resources */,
+				EE78635B1C9E69B253D644DD0FE70A97 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1489D924A7499846B88C74E96CB135C2 /* PBXTargetDependency */,
+			);
+			name = PushToolMac;
+			productName = Pusher;
+			productReference = 94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */;
+			productType = "com.apple.product-type.application";
+		};
+		858C63AF14C96509E76D70CC94145185 /* PushToolKit-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7933ACD7F09DF80289DD7BB9C063AFD3 /* Build configuration list for PBXNativeTarget "PushToolKit-iOS" */;
+			buildPhases = (
+				8906CA4C4CA5A912FC32AFDF6330C433 /* Sources */,
+				CDD96FF790985D26DB366C87F24FA054 /* Frameworks */,
+				0C543FF4D9E696E0D6C5C7A12533AFBA /* Headers */,
+				C0773E85B0E4A40B58FCF601B47AFD03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PushToolKit-iOS";
+			productName = "PusherKit-iOS";
+			productReference = 3490A4FED639A41D1EDD81284D6DC64B /* PushToolKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8BE200DE5C89166EB4CA23C488159A44 /* PushToolTouch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1782D856F1165713E664619CD926251 /* Build configuration list for PBXNativeTarget "PushToolTouch" */;
+			buildPhases = (
+				89522F7D60B5D9E9AC80B0E4AEB8A5B6 /* Sources */,
+				07BCD67E25F4C8C00DF570C02F0A453D /* Frameworks */,
+				9EA1336E601C6E0145C0D92047641D71 /* Resources */,
+				D798FAAB2FDEF1C4CE7EED0804EB21A9 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4FF7353683D795F88D57CA542151E8FF /* PBXTargetDependency */,
+			);
+			name = PushToolTouch;
+			productName = PusherTouch;
+			productReference = FD768C9EA6A50DFA4EA70DAD34EB22B7 /* PushToolTouch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BD94C238D9511B43D664FE0B665D6283 /* PushToolKit-OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5ED0946749F7384DF931E4D9C75C51EB /* Build configuration list for PBXNativeTarget "PushToolKit-OSX" */;
+			buildPhases = (
+				864D6B57D7FAFE22C6AF1921E3011445 /* Sources */,
+				E46B0D050F8611A1D66D69619F42C60A /* Frameworks */,
+				342AD831F3F758109BD8C9672B623559 /* Headers */,
+				661E7297B32A4ACD1206ADFBE9D940C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PushToolKit-OSX";
+			productName = "PusherKit-OSX";
+			productReference = 3490A4FED639A41D1EDD81284D6DC64B /* PushToolKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		249EA1D406BFEFAE3143060E00AFB762 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = NW;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = Andela;
+				TargetAttributes = {
+					858C63AF14C96509E76D70CC94145185 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					BD94C238D9511B43D664FE0B665D6283 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 4335BA8FAFE51AA4C506BEC5E36BA63A /* Build configuration list for PBXProject "PushTool" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C0F5CF051DDFC5AFACC67BB2D26AF935;
+			productRefGroup = BD1A693E3C4E73479A4A3D5AEF4097A4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				77E38B2521B414941C97C03D1E46FB3B /* PushToolMac */,
+				8BE200DE5C89166EB4CA23C488159A44 /* PushToolTouch */,
+				858C63AF14C96509E76D70CC94145185 /* PushToolKit-iOS */,
+				BD94C238D9511B43D664FE0B665D6283 /* PushToolKit-OSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		64137E059360C8551EFE625AE263E71D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF94D5083471D9D584B45231FB7DC7B1 /* Application.xib in Resources */,
+				0DAE1845BDC2686EB8FCB607EC26FCFE /* README.md in Resources */,
+				04DF86305A946F5F88A3DE4C4B155BE8 /* config.plist in Resources */,
+				10F279867C0A23233963A12694B0E883 /* icon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		661E7297B32A4ACD1206ADFBE9D940C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9EA1336E601C6E0145C0D92047641D71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA7E30B0F9232ED0BB1C53ABECFAEFE8 /* Default-568h@2x.png in Resources */,
+				71C427AB6FE8811973E6DFC7D92EFF64 /* Default.png in Resources */,
+				828E5F29FBC6B0A18EC1E6B94E40377D /* Default@2x.png in Resources */,
+				D8F49A37AFE07CF28DF822C12C084212 /* Icon-72.png in Resources */,
+				109AEAB7AD1DAB0F671FD86D861B1AF6 /* Icon-72@2x.png in Resources */,
+				96362E62E4B9D01B5FB15BC84130C144 /* Icon@2x.png in Resources */,
+				C2C2C4A47008C2E36C1217177FCF8872 /* README.md in Resources */,
+				5F9F98EB64FDB884ED37BA3A2F2F8E83 /* icon.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0773E85B0E4A40B58FCF601B47AFD03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3626473861CC755F5E5642B24819B759 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59101E1F9919528C4D2AD88758BFB6E2 /* NWAppDelegate.m in Sources */,
+				7EBD48D285E4D34FF9BF3F79C4BDF603 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		864D6B57D7FAFE22C6AF1921E3011445 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC165FAC2F7E4D889E3F527D8298A421 /* NWHub.m in Sources */,
+				6F19F79BA98659A158FC66B4FC24D633 /* NWLCore.c in Sources */,
+				C19A314EC376B7AB6A32FF8202088A7F /* NWNotification.m in Sources */,
+				8B2F954BABE8EA691F6E29094416D9AB /* NWPushFeedback.m in Sources */,
+				4468DFAB7CAB5B3B15118A9CF31F8D09 /* NWPusher.m in Sources */,
+				E28AFECED5C17BFABEF4D3EC493C002A /* NWSSLConnection.m in Sources */,
+				DAFF9E70BC25E5A325C88A715652405E /* NWSecTools.m in Sources */,
+				1249C25A04ABA91DE3D216BD7368D0C1 /* NWType.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8906CA4C4CA5A912FC32AFDF6330C433 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6C4D3296FCB73D33B8E37F61E1AA2D3 /* NWHub.m in Sources */,
+				09DD0FD0E2B91A015B01A2DB6498C0AB /* NWLCore.c in Sources */,
+				0528B0EE3A33AFD48C01D4092BB7692A /* NWNotification.m in Sources */,
+				091E5F68F2D9DA3789017E3D99F3BC33 /* NWPushFeedback.m in Sources */,
+				287CD7749A31AFF60FEE923154EDD174 /* NWPusher.m in Sources */,
+				75437763946E77567E0DC05C6D09D11F /* NWSSLConnection.m in Sources */,
+				DAD8B90AFC471C8DCEDCF1CD6571D173 /* NWSecTools.m in Sources */,
+				C22BEBC2DD55DC1381F2EA2656E143DD /* NWType.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89522F7D60B5D9E9AC80B0E4AEB8A5B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10D7DC7DD849F3698F3D7058C5DA3F34 /* NWAppDelegate.m in Sources */,
+				10F86CBE8A9001379CC30AD6FD3CD86F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1489D924A7499846B88C74E96CB135C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BD94C238D9511B43D664FE0B665D6283 /* PushToolKit-OSX */;
+			targetProxy = D8BE635620CD61D1AA9312B4FDA37BA6 /* PBXContainerItemProxy */;
+		};
+		4FF7353683D795F88D57CA542151E8FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 858C63AF14C96509E76D70CC94145185 /* PushToolKit-iOS */;
+			targetProxy = 66C724E9E1545BACA2AEAAC8A9F390A2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0310CD2AD63A48F6FD6326F60ED07980 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "PushToolKit-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushToolKit;
+				PRODUCT_NAME = PushToolKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1EB1876B1A4829261B31BCFEFD33EFDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "PushToolKit-OSX/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushTooKit;
+				PRODUCT_NAME = PushToolKit;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4F6BAEC16A6A5816A2E5BB664C695A7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 7688PWZMS6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Touch/PushToolTouch-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "NWL_LIB=PushTool";
+				INFOPLIST_FILE = "Touch/PushToolTouch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		56FDD8FD704800FF84B47053A58F2ACC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mac/PushToolMac-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NWL_LIB=PushTool",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Mac/PushToolMac-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andela.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = PushTool;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		894D128FBD480CA115E44776F85631B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "PushToolKit-OSX/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushTooKit;
+				PRODUCT_NAME = PushToolKit;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AD87ADA896EAD092EDEECDCEACC5E6AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B4A5AF02B6EB1E741FF7363AD2C9D6C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mac/PushToolMac-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NWL_LIB=PushTool",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Mac/PushToolMac-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andela.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = PushTool;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D8A1412A384D795D5F093B33582047A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E39BBF0135A6C722FBD33B7CE52A3AAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 7688PWZMS6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Touch/PushToolTouch-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NWL_LIB=PushTool",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Touch/PushToolTouch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FEBC13B8412ECFAB47A1010BDFCE6C95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "PushToolKit-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushToolKit;
+				PRODUCT_NAME = PushToolKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		38985034FAF269610E43C2EC606AD2A0 /* Build configuration list for PBXNativeTarget "PushToolMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56FDD8FD704800FF84B47053A58F2ACC /* Debug */,
+				B4A5AF02B6EB1E741FF7363AD2C9D6C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4335BA8FAFE51AA4C506BEC5E36BA63A /* Build configuration list for PBXProject "PushTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8A1412A384D795D5F093B33582047A3 /* Debug */,
+				AD87ADA896EAD092EDEECDCEACC5E6AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5ED0946749F7384DF931E4D9C75C51EB /* Build configuration list for PBXNativeTarget "PushToolKit-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EB1876B1A4829261B31BCFEFD33EFDE /* Debug */,
+				894D128FBD480CA115E44776F85631B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7933ACD7F09DF80289DD7BB9C063AFD3 /* Build configuration list for PBXNativeTarget "PushToolKit-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0310CD2AD63A48F6FD6326F60ED07980 /* Debug */,
+				FEBC13B8412ECFAB47A1010BDFCE6C95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1782D856F1165713E664619CD926251 /* Build configuration list for PBXNativeTarget "PushToolTouch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E39BBF0135A6C722FBD33B7CE52A3AAC /* Debug */,
+				4F6BAEC16A6A5816A2E5BB664C695A7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 249EA1D406BFEFAE3143060E00AFB762 /* Project object */;
+}

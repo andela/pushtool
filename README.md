@@ -1,6 +1,3 @@
-<img src="icon.png" alt="PushTool Icon" width="72"/>
-
-
 PushTool
 ======
 

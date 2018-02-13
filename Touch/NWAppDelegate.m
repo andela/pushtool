@@ -1,5 +1,9 @@
+#import <UIKit/UIKit.h>
+
 #import "NWAppDelegate.h"
-#import <PushToolKit/PushToolKit.h>
+#import "NWHub.h"
+#import "NWLCore.h"
+#import "NWSecTools.h"
 
 // TODO: Export your push certificate and key in PKCS12 format to PushTool.p12 in the root of the project directory.
 static NSString * const pkcs12FileName = @"PushTool.p12";

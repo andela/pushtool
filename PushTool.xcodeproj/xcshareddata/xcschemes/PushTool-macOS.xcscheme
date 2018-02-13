@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8BE200DE5C89166EB4CA23C488159A44"
-               BuildableName = "PushToolTouch.app"
-               BlueprintName = "PushToolTouch"
+               BlueprintIdentifier = "77E38B2521B414941C97C03D1E46FB3B"
+               BuildableName = "PushTool.app"
+               BlueprintName = "PushTool-macOS"
                ReferencedContainer = "container:PushTool.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,9 +33,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8BE200DE5C89166EB4CA23C488159A44"
-            BuildableName = "PushToolTouch.app"
-            BlueprintName = "PushToolTouch"
+            BlueprintIdentifier = "77E38B2521B414941C97C03D1E46FB3B"
+            BuildableName = "PushTool.app"
+            BlueprintName = "PushTool-macOS"
             ReferencedContainer = "container:PushTool.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -57,9 +57,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8BE200DE5C89166EB4CA23C488159A44"
-            BuildableName = "PushToolTouch.app"
-            BlueprintName = "PushToolTouch"
+            BlueprintIdentifier = "77E38B2521B414941C97C03D1E46FB3B"
+            BuildableName = "PushTool.app"
+            BlueprintName = "PushTool-macOS"
             ReferencedContainer = "container:PushTool.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -76,9 +76,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8BE200DE5C89166EB4CA23C488159A44"
-            BuildableName = "PushToolTouch.app"
-            BlueprintName = "PushToolTouch"
+            BlueprintIdentifier = "77E38B2521B414941C97C03D1E46FB3B"
+            BuildableName = "PushTool.app"
+            BlueprintName = "PushTool-macOS"
             ReferencedContainer = "container:PushTool.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

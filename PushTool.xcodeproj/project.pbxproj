@@ -7,19 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BCFA9B66F9E926A39F04183348194776 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEBCA02703AB3A020722E6DF5A30928E /* Application.xib */; };
+		18B38194738A167BF5725EFA71E598B5 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */; };
+		36D54B2CC763F636A6F5C8721EC3DA72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
+		9FFD9865D421E2102537DDBE315C7628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
 		6C30CF126968AB86A7ED80E2DE35CF2C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */; };
 		07BA7B31259F1774118B9345DB9E888B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */; };
-		0E97E12D58E58BDDBCA923719305995B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DDEEB6DFA0802151AC2592347AE91DF /* Default-568h@2x.png */; };
-		20886C7FB297D0BF7971994EDF7979C8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2293127F08D0C3352862294F13DE4AC6 /* Default.png */; };
-		518F7A3112BA29D26C91F35B542F8099 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A11934A5F330DFA2F646B68DFDED /* Default@2x.png */; };
 		85DF6F2E73F7EC1EA141C0E6A20CC9B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */; };
-		98B77718B1488895AFD3CE5FC9FDE07F /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = E5620C8FF1967DB121F84F7D19A26825 /* Icon-72.png */; };
-		C746C2DB41E02A6E12A19B41EA3B542E /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D036C45BD4A4E79E945D18AA00B14 /* Icon-72@2x.png */; };
-		B0E3A897AEE37F0928E8B90AE5B0831C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCBECFC94E1099CBBE82DC8B52454F7 /* Icon.png */; };
-		4D538B21E0CBDC52A2016569DE217FD7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 106F16FAA1A87D9E479FB454A45580A4 /* Icon@2x.png */; };
-		29DEAEA91279408BC208313C8C0BFA79 /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C5565057C8E38FF3025919DBA1DECB /* NWAppDelegate.m */; };
-		86778F4952631221C8D8596F6D6B819E /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A182EF5C534BAD13493346539659DE /* NWAppDelegate.m */; };
+		D33F67563375169E6EE2CD19E813FD32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */; };
+		1DA11F25D63D240E1879DDCA0D15407F /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */; };
+		391DC7519B2060B8FB1645F3B66FF665 /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED04C11062B3793CD6B5EB7FEE3377 /* NWAppDelegate.m */; };
 		CDB66CAA955369B0FA03D30051842A11 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
 		F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
 		0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
@@ -39,10 +35,10 @@
 		6315D14787C83D5942AE5C222A84A5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
 		C0B65FDE6DE7BB52E7F3D37B226B0F53 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
 		037EDD2B43689B7E1D73F243A6A3B079 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */; };
-		38BB395A42843BD45071820953FAA482 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD239A36C43B2598233A354059B57737 /* config.plist */; };
-		642A2AEB4283D865187E8C6946D917F9 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = FB98B604D6669B72E38C0F1F49FE0377 /* icon.icns */; };
-		2391D00BD447E5628B04E860C0E32E23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C9C1FDD106853DE04E6091EBB10220 /* main.m */; };
-		5C37C9EA000C1923A749D58D68AD7206 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9545664C806847764E368DFC53CC35 /* main.m */; };
+		827A6E0369D3A6D0D2E2DB64CC8B38DE /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */; };
+		D594D2C57D2060F8FC035DC54EF88BE7 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */; };
+		0114C9AF57C812FA943F2241116693F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C441803E081F0BA8EA2F316A89204A8 /* main.m */; };
+		401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B4339B3DAC3C6648B8622401AB97C4 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,23 +66,18 @@
 
 /* Begin PBXFileReference section */
 		A347CF633AC3D0CDE521B7D62A20A804 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		AEBCA02703AB3A020722E6DF5A30928E /* Application.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
+		E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
+		9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		2DDEEB6DFA0802151AC2592347AE91DF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		2293127F08D0C3352862294F13DE4AC6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		8B92A11934A5F330DFA2F646B68DFDED /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		E5620C8FF1967DB121F84F7D19A26825 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		D32D036C45BD4A4E79E945D18AA00B14 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
-		3BCBECFC94E1099CBBE82DC8B52454F7 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		106F16FAA1A87D9E479FB454A45580A4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		F1263FCF40789C8C8CA0687DEED9400B /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
-		2BCA780D5610A240B5C240F416535C15 /* Info-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
-		ACE9C5F7B654E3AD6000BAECDE41B542 /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
-		DC1C0FE10A1668FF18D6B0354D0424A7 /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
-		47A182EF5C534BAD13493346539659DE /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
-		52C5565057C8E38FF3025919DBA1DECB /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
+		FF54DF503E2C7FB2BCC5E072C470C676 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
+		2A098A9029478E788A8002819FDCF342 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
+		B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4A64270830D6D10F375E803E1937448C /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
+		52270B059CF4701F5F9DAB8FEC0FDC9B /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
+		4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
+		63ED04C11062B3793CD6B5EB7FEE3377 /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
 		3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWHub.h; sourceTree = "<group>"; };
 		DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWHub.m; sourceTree = "<group>"; };
 		BA947E73E088777709D011DAA0893F2C /* NWNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWNotification.h; sourceTree = "<group>"; };
@@ -111,15 +102,9 @@
 		DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		658F71FE87626920A3229836F8D66988 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		AD239A36C43B2598233A354059B57737 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
-		FB98B604D6669B72E38C0F1F49FE0377 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
-		C5807DFD22B22A77FE85195F6609A086 /* ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios.png; sourceTree = "<group>"; };
-		7C71F31F8E5E43138DE8D0FF6CB5F142 /* keychain1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keychain1.png; sourceTree = "<group>"; };
-		4E3366BCF3679BB301EB7DC847FFA0A2 /* keychain2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keychain2.png; sourceTree = "<group>"; };
-		41C9C1FDD106853DE04E6091EBB10220 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7F9545664C806847764E368DFC53CC35 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		09ED8232635D1EAC129DCE3F64DA4230 /* osx1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = osx1.png; sourceTree = "<group>"; };
-		7EC774C3B66D2347A5199084DDD53081 /* osx2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = osx2.png; sourceTree = "<group>"; };
+		57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		4C441803E081F0BA8EA2F316A89204A8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		93B4339B3DAC3C6648B8622401AB97C4 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		617DFE0F3282328E69EF62966C6AF7AF /* uniquify_projects.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uniquify_projects.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,11 +135,12 @@
 		2206F44DF98982671F92BA11E890CBFC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C5807DFD22B22A77FE85195F6609A086 /* ios.png */,
-				7C71F31F8E5E43138DE8D0FF6CB5F142 /* keychain1.png */,
-				4E3366BCF3679BB301EB7DC847FFA0A2 /* keychain2.png */,
-				09ED8232635D1EAC129DCE3F64DA4230 /* osx1.png */,
-				7EC774C3B66D2347A5199084DDD53081 /* osx2.png */,
+				E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */,
+				9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */,
+				FF54DF503E2C7FB2BCC5E072C470C676 /* Info-iOS.plist */,
+				2A098A9029478E788A8002819FDCF342 /* Info-macOS.plist */,
+				B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */,
+				57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -169,24 +155,6 @@
 				9167D4589C9F8DEAFD3279CF4898983F /* ProjectWarnings.xcconfig */,
 			);
 			path = BuildSettings;
-			sourceTree = "<group>";
-		};
-		4A184E730C88673582C57DABEC466711 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				2DDEEB6DFA0802151AC2592347AE91DF /* Default-568h@2x.png */,
-				2293127F08D0C3352862294F13DE4AC6 /* Default.png */,
-				8B92A11934A5F330DFA2F646B68DFDED /* Default@2x.png */,
-				E5620C8FF1967DB121F84F7D19A26825 /* Icon-72.png */,
-				D32D036C45BD4A4E79E945D18AA00B14 /* Icon-72@2x.png */,
-				3BCBECFC94E1099CBBE82DC8B52454F7 /* Icon.png */,
-				106F16FAA1A87D9E479FB454A45580A4 /* Icon@2x.png */,
-				F1263FCF40789C8C8CA0687DEED9400B /* Info-iOS.plist */,
-				ACE9C5F7B654E3AD6000BAECDE41B542 /* NWAppDelegate.h */,
-				47A182EF5C534BAD13493346539659DE /* NWAppDelegate.m */,
-				7F9545664C806847764E368DFC53CC35 /* main.m */,
-			);
-			path = iOS;
 			sourceTree = "<group>";
 		};
 		5D44DE4A16580C2624CF506C05146E70 /* Frameworks */ = {
@@ -210,9 +178,21 @@
 			path = Scripts;
 			sourceTree = "<group>";
 		};
+		85A7667934856BAE3BA4F5230AC2C044 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				52270B059CF4701F5F9DAB8FEC0FDC9B /* NWAppDelegate.h */,
+				4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */,
+				4C441803E081F0BA8EA2F316A89204A8 /* main.m */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
 		B1D116BD7DFDFD66849644CDAAEE17CA /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B3EA69D9A11D66C1B6C7FB838B5CF84C /* iOS */,
+				85A7667934856BAE3BA4F5230AC2C044 /* macOS */,
 				3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */,
 				DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */,
 				BA947E73E088777709D011DAA0893F2C /* NWNotification.h */,
@@ -229,6 +209,16 @@
 				A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		B3EA69D9A11D66C1B6C7FB838B5CF84C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4A64270830D6D10F375E803E1937448C /* NWAppDelegate.h */,
+				63ED04C11062B3793CD6B5EB7FEE3377 /* NWAppDelegate.m */,
+				93B4339B3DAC3C6648B8622401AB97C4 /* main.m */,
+			);
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		BD1A693E3C4E73479A4A3D5AEF4097A4 /* Products */ = {
@@ -249,24 +239,8 @@
 				2206F44DF98982671F92BA11E890CBFC /* Resources */,
 				7F2F4D2B9D6E791D51F2E2E57C727D0E /* Scripts */,
 				B1D116BD7DFDFD66849644CDAAEE17CA /* Source */,
-				4A184E730C88673582C57DABEC466711 /* iOS */,
-				C2CA794E1593F26392914E1DC8294836 /* macOS */,
 				DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */,
 			);
-			sourceTree = "<group>";
-		};
-		C2CA794E1593F26392914E1DC8294836 /* macOS */ = {
-			isa = PBXGroup;
-			children = (
-				AEBCA02703AB3A020722E6DF5A30928E /* Application.xib */,
-				2BCA780D5610A240B5C240F416535C15 /* Info-macOS.plist */,
-				DC1C0FE10A1668FF18D6B0354D0424A7 /* NWAppDelegate.h */,
-				52C5565057C8E38FF3025919DBA1DECB /* NWAppDelegate.m */,
-				AD239A36C43B2598233A354059B57737 /* config.plist */,
-				FB98B604D6669B72E38C0F1F49FE0377 /* icon.icns */,
-				41C9C1FDD106853DE04E6091EBB10220 /* main.m */,
-			);
-			path = macOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,9 +288,14 @@
 		249EA1D406BFEFAE3143060E00AFB762 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = NW;
+				CLASSPREFIX = "";
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Andela;
+				TargetAttributes = {
+					4C4F333727553ED96B2BD9E5327CD5F5 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 4335BA8FAFE51AA4C506BEC5E36BA63A /* Build configuration list for PBXProject "PushTool" */;
 			compatibilityVersion = "Xcode 8.0";
@@ -341,14 +320,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E97E12D58E58BDDBCA923719305995B /* Default-568h@2x.png in Resources */,
-				20886C7FB297D0BF7971994EDF7979C8 /* Default.png in Resources */,
-				518F7A3112BA29D26C91F35B542F8099 /* Default@2x.png in Resources */,
-				98B77718B1488895AFD3CE5FC9FDE07F /* Icon-72.png in Resources */,
-				C746C2DB41E02A6E12A19B41EA3B542E /* Icon-72@2x.png in Resources */,
-				B0E3A897AEE37F0928E8B90AE5B0831C /* Icon.png in Resources */,
-				4D538B21E0CBDC52A2016569DE217FD7 /* Icon@2x.png in Resources */,
+				36D54B2CC763F636A6F5C8721EC3DA72 /* Assets.xcassets in Resources */,
+				D33F67563375169E6EE2CD19E813FD32 /* LaunchScreen.storyboard in Resources */,
 				4A502FC03236A7A9857082B9EBDEA522 /* README.md in Resources */,
+				827A6E0369D3A6D0D2E2DB64CC8B38DE /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,10 +331,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCFA9B66F9E926A39F04183348194776 /* Application.xib in Resources */,
+				18B38194738A167BF5725EFA71E598B5 /* Application.xib in Resources */,
+				9FFD9865D421E2102537DDBE315C7628 /* Assets.xcassets in Resources */,
 				E231C0FE439040506E058213AF107332 /* README.md in Resources */,
-				38BB395A42843BD45071820953FAA482 /* config.plist in Resources */,
-				642A2AEB4283D865187E8C6946D917F9 /* icon.icns in Resources */,
+				D594D2C57D2060F8FC035DC54EF88BE7 /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86778F4952631221C8D8596F6D6B819E /* NWAppDelegate.m in Sources */,
+				391DC7519B2060B8FB1645F3B66FF665 /* NWAppDelegate.m in Sources */,
 				CDB66CAA955369B0FA03D30051842A11 /* NWHub.m in Sources */,
 				0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */,
 				2DB1F72A1DBD25864D3FF1E137BE9F75 /* NWPushFeedback.m in Sources */,
@@ -378,7 +353,7 @@
 				3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */,
 				30863083D4E77D3DFB249208054438AE /* NWSecTools.m in Sources */,
 				620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */,
-				5C37C9EA000C1923A749D58D68AD7206 /* main.m in Sources */,
+				401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29DEAEA91279408BC208313C8C0BFA79 /* NWAppDelegate.m in Sources */,
+				1DA11F25D63D240E1879DDCA0D15407F /* NWAppDelegate.m in Sources */,
 				F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */,
 				39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */,
 				30EA9D831EEBF05823F9F7421AEEBF3A /* NWPushFeedback.m in Sources */,
@@ -394,7 +369,7 @@
 				6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */,
 				9B9FC7C7222906F0F09CBA90BA63FB9E /* NWSecTools.m in Sources */,
 				10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */,
-				2391D00BD447E5628B04E860C0E32E23 /* main.m in Sources */,
+				0114C9AF57C812FA943F2241116693F8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,18 +379,21 @@
 		593FBB12A0158EFD2499034CB061AF6C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7688PWZMS6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NWL_LIB=PushTool",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "macOS/Info-macOS.plist";
+				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andela.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_NAME = PushTool;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -423,18 +401,21 @@
 		6BDC67F08D1321AB83D2C8E33434DFC5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7688PWZMS6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NWL_LIB=PushTool",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "macOS/Info-macOS.plist";
+				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andela.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_NAME = PushTool;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -442,6 +423,7 @@
 		A9236675585E336471A0DAFBB7D35177 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -458,10 +440,9 @@
 					"NWL_LIB=PushTool",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "iOS/Info-iOS.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				INFOPLIST_FILE = "Resources/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -502,7 +483,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -547,7 +529,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -556,6 +539,7 @@
 		E5976D8F29E1A8FB03392B7AC1878D83 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -569,11 +553,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "NWL_LIB=PushTool";
-				INFOPLIST_FILE = "iOS/Info-iOS.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				INFOPLIST_FILE = "Resources/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

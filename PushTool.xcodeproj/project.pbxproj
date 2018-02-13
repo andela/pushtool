@@ -7,48 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7CF01F7F019F8CB16D71E5D2CFCC83CD /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F914BF9A96C62C38818F9BC04672B0 /* Application.xib */; };
+		BCFA9B66F9E926A39F04183348194776 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEBCA02703AB3A020722E6DF5A30928E /* Application.xib */; };
 		6C30CF126968AB86A7ED80E2DE35CF2C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */; };
 		07BA7B31259F1774118B9345DB9E888B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */; };
-		C96933BA97E7E6F00AC779B5A075CA4F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 339E7B873EECA678EE962221321EFA68 /* Default-568h@2x.png */; };
-		60394ACEB146B230EA7E94F04CB7A3A3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 14E113EF9CA9DD722E1B1C688E999564 /* Default.png */; };
-		4075758F0EF1FC460CD48A378298DB9E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48EEA3B2DE9256F7AD816A27999B8C24 /* Default@2x.png */; };
+		0E97E12D58E58BDDBCA923719305995B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DDEEB6DFA0802151AC2592347AE91DF /* Default-568h@2x.png */; };
+		20886C7FB297D0BF7971994EDF7979C8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2293127F08D0C3352862294F13DE4AC6 /* Default.png */; };
+		518F7A3112BA29D26C91F35B542F8099 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A11934A5F330DFA2F646B68DFDED /* Default@2x.png */; };
 		85DF6F2E73F7EC1EA141C0E6A20CC9B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */; };
-		3F5E65B3AC12B11A8E14C0D3EA9F45BF /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 696D97E9A867DCED959BA5689464BC2D /* Icon-72.png */; };
-		8970832F94DEF946F8AC93B4DAC1643D /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6CA773ABF172D892AFA5C6C4FDFAE1 /* Icon-72@2x.png */; };
-		84D9668B34D21557B68930CF74A9CD0A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E09837A651813E20AFE5B147BAE26CAF /* Icon@2x.png */; };
-		3438822F46F23873C387389030C5F27E /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 496A3DB8F1103FDD461515E6C4315277 /* NWAppDelegate.m */; };
-		D8CA0283DC3DC5B9403148612B2A3F23 /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C80CED9392B9E3EA29C06A7B04FD7 /* NWAppDelegate.m */; };
-		F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
+		98B77718B1488895AFD3CE5FC9FDE07F /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = E5620C8FF1967DB121F84F7D19A26825 /* Icon-72.png */; };
+		C746C2DB41E02A6E12A19B41EA3B542E /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D036C45BD4A4E79E945D18AA00B14 /* Icon-72@2x.png */; };
+		B0E3A897AEE37F0928E8B90AE5B0831C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCBECFC94E1099CBBE82DC8B52454F7 /* Icon.png */; };
+		4D538B21E0CBDC52A2016569DE217FD7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 106F16FAA1A87D9E479FB454A45580A4 /* Icon@2x.png */; };
+		29DEAEA91279408BC208313C8C0BFA79 /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C5565057C8E38FF3025919DBA1DECB /* NWAppDelegate.m */; };
+		86778F4952631221C8D8596F6D6B819E /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A182EF5C534BAD13493346539659DE /* NWAppDelegate.m */; };
 		CDB66CAA955369B0FA03D30051842A11 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
-		D41C1E84A22DB507C447723CFE65EC0A /* NWLCore.c in Sources */ = {isa = PBXBuildFile; fileRef = 69802EEDFDB8DB1185B2FD220C5E59CD /* NWLCore.c */; };
-		D6DE0084D9105532E923DE87245D878B /* NWLCore.c in Sources */ = {isa = PBXBuildFile; fileRef = 69802EEDFDB8DB1185B2FD220C5E59CD /* NWLCore.c */; };
-		39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
+		F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
+		BC3AF281C4ABC6341363891939E3DB2A /* NWLCore.c in Sources */ = {isa = PBXBuildFile; fileRef = 759C8FF0C059BBFBC738D352C6FE47E3 /* NWLCore.c */; };
 		0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
-		30EA9D831EEBF05823F9F7421AEEBF3A /* NWPushFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */; };
+		39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
 		2DB1F72A1DBD25864D3FF1E137BE9F75 /* NWPushFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */; };
+		30EA9D831EEBF05823F9F7421AEEBF3A /* NWPushFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */; };
 		C7C6F33019660D16382BA1DF22111EA4 /* NWPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 592C511044599C4548E6D6F046C979FE /* NWPusher.m */; };
 		D993025C5FFA1693C8AEC1AE898CFB49 /* NWPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 592C511044599C4548E6D6F046C979FE /* NWPusher.m */; };
-		6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
 		3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
-		9B9FC7C7222906F0F09CBA90BA63FB9E /* NWSecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */; };
+		6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
 		30863083D4E77D3DFB249208054438AE /* NWSecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */; };
+		9B9FC7C7222906F0F09CBA90BA63FB9E /* NWSecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */; };
 		10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
 		620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
-		E231C0FE439040506E058213AF107332 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		4A502FC03236A7A9857082B9EBDEA522 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
+		E231C0FE439040506E058213AF107332 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		6315D14787C83D5942AE5C222A84A5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
 		C0B65FDE6DE7BB52E7F3D37B226B0F53 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
 		037EDD2B43689B7E1D73F243A6A3B079 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */; };
-		17C5462819315711E973E077D700BD16 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA8D22879A390277C8EBCF3643C5C2AC /* config.plist */; };
-		6BFFF771E1DA0900D4347051D13E075B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = A2C675D7B9EAD53F0BA27B73A162E40A /* icon.icns */; };
-		0BD849D3980CEA64F30E837F1709C9F3 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0BCF86B9CC8DED85BE9347432D6548 /* icon.png */; };
-		2B0FBB69ED57964FA6349D85E0EEF0AD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C04EBBC0112A520592147863508B21C /* main.m */; };
-		B91C45DB899573F6606B42199EC149C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C079B178B5B2239077B045C295FE6B26 /* main.m */; };
+		38BB395A42843BD45071820953FAA482 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD239A36C43B2598233A354059B57737 /* config.plist */; };
+		642A2AEB4283D865187E8C6946D917F9 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = FB98B604D6669B72E38C0F1F49FE0377 /* icon.icns */; };
+		2391D00BD447E5628B04E860C0E32E23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C9C1FDD106853DE04E6091EBB10220 /* main.m */; };
+		5C37C9EA000C1923A749D58D68AD7206 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9545664C806847764E368DFC53CC35 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B42F072AD621AE87753C6CA382B7BEA4 /* Embed Frameworks */ = {
+		4D077E4E9DCD95B06485AA50A86C7C52 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -58,7 +57,7 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D077E4E9DCD95B06485AA50A86C7C52 /* Embed Frameworks */ = {
+		B42F072AD621AE87753C6CA382B7BEA4 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -72,24 +71,27 @@
 
 /* Begin PBXFileReference section */
 		A347CF633AC3D0CDE521B7D62A20A804 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		97F914BF9A96C62C38818F9BC04672B0 /* Application.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
+		AEBCA02703AB3A020722E6DF5A30928E /* Application.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
 		68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		339E7B873EECA678EE962221321EFA68 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		14E113EF9CA9DD722E1B1C688E999564 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		48EEA3B2DE9256F7AD816A27999B8C24 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		2DDEEB6DFA0802151AC2592347AE91DF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		2293127F08D0C3352862294F13DE4AC6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		8B92A11934A5F330DFA2F646B68DFDED /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		696D97E9A867DCED959BA5689464BC2D /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		AE6CA773ABF172D892AFA5C6C4FDFAE1 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
-		E09837A651813E20AFE5B147BAE26CAF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		808599CF210A41C8D88C4F9E3EB53EF3 /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
-		84064AD251DB246E063403E575593CF9 /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
-		049C80CED9392B9E3EA29C06A7B04FD7 /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
-		496A3DB8F1103FDD461515E6C4315277 /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
+		E5620C8FF1967DB121F84F7D19A26825 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		D32D036C45BD4A4E79E945D18AA00B14 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		3BCBECFC94E1099CBBE82DC8B52454F7 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		106F16FAA1A87D9E479FB454A45580A4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		F1263FCF40789C8C8CA0687DEED9400B /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
+		2BCA780D5610A240B5C240F416535C15 /* Info-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
+		ACE9C5F7B654E3AD6000BAECDE41B542 /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
+		DC1C0FE10A1668FF18D6B0354D0424A7 /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
+		47A182EF5C534BAD13493346539659DE /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
+		52C5565057C8E38FF3025919DBA1DECB /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
 		3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWHub.h; sourceTree = "<group>"; };
 		DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWHub.m; sourceTree = "<group>"; };
-		69802EEDFDB8DB1185B2FD220C5E59CD /* NWLCore.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = NWLCore.c; path = Mac/NWLCore.c; sourceTree = SOURCE_ROOT; };
-		5AE5DCED1C3DC44BB79D5D662687F853 /* NWLCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NWLCore.h; path = Mac/NWLCore.h; sourceTree = SOURCE_ROOT; };
+		759C8FF0C059BBFBC738D352C6FE47E3 /* NWLCore.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NWLCore.c; sourceTree = "<group>"; };
+		6AC7509F2EE3ADEA35F9F5254BEDF924 /* NWLCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWLCore.h; sourceTree = "<group>"; };
 		BA947E73E088777709D011DAA0893F2C /* NWNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWNotification.h; sourceTree = "<group>"; };
 		2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWNotification.m; sourceTree = "<group>"; };
 		D6B7B1CD5300C3763F0F76225FECE875 /* NWPushFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWPushFeedback.h; sourceTree = "<group>"; };
@@ -102,20 +104,26 @@
 		394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWSecTools.m; sourceTree = "<group>"; };
 		9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWType.h; sourceTree = "<group>"; };
 		A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWType.m; sourceTree = "<group>"; };
+		8C47112F945765EE38CC31701B993A93 /* ProjectBase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectBase.xcconfig; sourceTree = "<group>"; };
+		E73FD753D1D6F5D6A6FD912629D760A5 /* ProjectDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectDebug.xcconfig; sourceTree = "<group>"; };
+		7FE967AD886F7ABEC622BFD6EA3C4E74 /* ProjectRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectRelease.xcconfig; sourceTree = "<group>"; };
+		9E387C3A9A39BC328274AD273C4C054C /* ProjectVersion.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectVersion.xcconfig; sourceTree = "<group>"; };
+		9167D4589C9F8DEAFD3279CF4898983F /* ProjectWarnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectWarnings.xcconfig; sourceTree = "<group>"; };
 		11BC446A9ED8212EEFAB971FA6A7923D /* PushTool-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PushTool-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3336FDA56D58539E73139CD99F755D0F /* PushToolMac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PushToolMac-Info.plist"; sourceTree = "<group>"; };
-		D91C3507D26750EE36897B0B9F8B94A3 /* PushToolMac-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushToolMac-Prefix.pch"; sourceTree = "<group>"; };
-		8A0A674ADE78789168774581553C7295 /* PushToolTouch-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PushToolTouch-Info.plist"; sourceTree = "<group>"; };
-		A37114C54AD67B5C634349026598B4EF /* PushToolTouch-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushToolTouch-Prefix.pch"; sourceTree = "<group>"; };
 		DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		658F71FE87626920A3229836F8D66988 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		EA8D22879A390277C8EBCF3643C5C2AC /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
-		A2C675D7B9EAD53F0BA27B73A162E40A /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
-		DA0BCF86B9CC8DED85BE9347432D6548 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		7C04EBBC0112A520592147863508B21C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C079B178B5B2239077B045C295FE6B26 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AD239A36C43B2598233A354059B57737 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		FB98B604D6669B72E38C0F1F49FE0377 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		C5807DFD22B22A77FE85195F6609A086 /* ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios.png; sourceTree = "<group>"; };
+		7C71F31F8E5E43138DE8D0FF6CB5F142 /* keychain1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keychain1.png; sourceTree = "<group>"; };
+		4E3366BCF3679BB301EB7DC847FFA0A2 /* keychain2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keychain2.png; sourceTree = "<group>"; };
+		41C9C1FDD106853DE04E6091EBB10220 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7F9545664C806847764E368DFC53CC35 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		09ED8232635D1EAC129DCE3F64DA4230 /* osx1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = osx1.png; sourceTree = "<group>"; };
+		7EC774C3B66D2347A5199084DDD53081 /* osx2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = osx2.png; sourceTree = "<group>"; };
+		617DFE0F3282328E69EF62966C6AF7AF /* uniquify_projects.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uniquify_projects.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,33 +150,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03DC86293678A02BC3E36A90BECE8D48 /* Touch */ = {
+		2206F44DF98982671F92BA11E890CBFC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				07FC9FD613E98305CBDE6AFF33A0F0FC /* Supporting Files */,
-				808599CF210A41C8D88C4F9E3EB53EF3 /* NWAppDelegate.h */,
-				496A3DB8F1103FDD461515E6C4315277 /* NWAppDelegate.m */,
-				69802EEDFDB8DB1185B2FD220C5E59CD /* NWLCore.c */,
-				5AE5DCED1C3DC44BB79D5D662687F853 /* NWLCore.h */,
+				C5807DFD22B22A77FE85195F6609A086 /* ios.png */,
+				7C71F31F8E5E43138DE8D0FF6CB5F142 /* keychain1.png */,
+				4E3366BCF3679BB301EB7DC847FFA0A2 /* keychain2.png */,
+				09ED8232635D1EAC129DCE3F64DA4230 /* osx1.png */,
+				7EC774C3B66D2347A5199084DDD53081 /* osx2.png */,
 			);
-			path = Touch;
+			path = Resources;
 			sourceTree = "<group>";
 		};
-		07FC9FD613E98305CBDE6AFF33A0F0FC /* Supporting Files */ = {
+		24D45C6454E9422DE49CFB5DFA08E9C5 /* BuildSettings */ = {
 			isa = PBXGroup;
 			children = (
-				339E7B873EECA678EE962221321EFA68 /* Default-568h@2x.png */,
-				14E113EF9CA9DD722E1B1C688E999564 /* Default.png */,
-				48EEA3B2DE9256F7AD816A27999B8C24 /* Default@2x.png */,
-				696D97E9A867DCED959BA5689464BC2D /* Icon-72.png */,
-				AE6CA773ABF172D892AFA5C6C4FDFAE1 /* Icon-72@2x.png */,
-				E09837A651813E20AFE5B147BAE26CAF /* Icon@2x.png */,
-				8A0A674ADE78789168774581553C7295 /* PushToolTouch-Info.plist */,
-				A37114C54AD67B5C634349026598B4EF /* PushToolTouch-Prefix.pch */,
-				DA0BCF86B9CC8DED85BE9347432D6548 /* icon.png */,
-				7C04EBBC0112A520592147863508B21C /* main.m */,
+				8C47112F945765EE38CC31701B993A93 /* ProjectBase.xcconfig */,
+				E73FD753D1D6F5D6A6FD912629D760A5 /* ProjectDebug.xcconfig */,
+				7FE967AD886F7ABEC622BFD6EA3C4E74 /* ProjectRelease.xcconfig */,
+				9E387C3A9A39BC328274AD273C4C054C /* ProjectVersion.xcconfig */,
+				9167D4589C9F8DEAFD3279CF4898983F /* ProjectWarnings.xcconfig */,
 			);
-			name = "Supporting Files";
+			path = BuildSettings;
+			sourceTree = "<group>";
+		};
+		4A184E730C88673582C57DABEC466711 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2DDEEB6DFA0802151AC2592347AE91DF /* Default-568h@2x.png */,
+				2293127F08D0C3352862294F13DE4AC6 /* Default.png */,
+				8B92A11934A5F330DFA2F646B68DFDED /* Default@2x.png */,
+				E5620C8FF1967DB121F84F7D19A26825 /* Icon-72.png */,
+				D32D036C45BD4A4E79E945D18AA00B14 /* Icon-72@2x.png */,
+				3BCBECFC94E1099CBBE82DC8B52454F7 /* Icon.png */,
+				106F16FAA1A87D9E479FB454A45580A4 /* Icon@2x.png */,
+				F1263FCF40789C8C8CA0687DEED9400B /* Info-iOS.plist */,
+				ACE9C5F7B654E3AD6000BAECDE41B542 /* NWAppDelegate.h */,
+				47A182EF5C534BAD13493346539659DE /* NWAppDelegate.m */,
+				7F9545664C806847764E368DFC53CC35 /* main.m */,
+			);
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		5D44DE4A16580C2624CF506C05146E70 /* Frameworks */ = {
@@ -182,6 +203,14 @@
 				32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7F2F4D2B9D6E791D51F2E2E57C727D0E /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				617DFE0F3282328E69EF62966C6AF7AF /* uniquify_projects.sh */,
+			);
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 		B1D116BD7DFDFD66849644CDAAEE17CA /* Source */ = {
@@ -217,36 +246,32 @@
 		C0F5CF051DDFC5AFACC67BB2D26AF935 = {
 			isa = PBXGroup;
 			children = (
+				24D45C6454E9422DE49CFB5DFA08E9C5 /* BuildSettings */,
 				5D44DE4A16580C2624CF506C05146E70 /* Frameworks */,
-				C9A8FEEFF1F4D0F0A858E9E86A95839B /* Mac */,
 				BD1A693E3C4E73479A4A3D5AEF4097A4 /* Products */,
+				2206F44DF98982671F92BA11E890CBFC /* Resources */,
+				7F2F4D2B9D6E791D51F2E2E57C727D0E /* Scripts */,
 				B1D116BD7DFDFD66849644CDAAEE17CA /* Source */,
-				03DC86293678A02BC3E36A90BECE8D48 /* Touch */,
+				4A184E730C88673582C57DABEC466711 /* iOS */,
+				C2CA794E1593F26392914E1DC8294836 /* macOS */,
 				DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
-		C9A8FEEFF1F4D0F0A858E9E86A95839B /* Mac */ = {
+		C2CA794E1593F26392914E1DC8294836 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				ECF689000434019E5B6E306EE2953805 /* Supporting Files */,
-				97F914BF9A96C62C38818F9BC04672B0 /* Application.xib */,
-				84064AD251DB246E063403E575593CF9 /* NWAppDelegate.h */,
-				049C80CED9392B9E3EA29C06A7B04FD7 /* NWAppDelegate.m */,
-				EA8D22879A390277C8EBCF3643C5C2AC /* config.plist */,
+				AEBCA02703AB3A020722E6DF5A30928E /* Application.xib */,
+				2BCA780D5610A240B5C240F416535C15 /* Info-macOS.plist */,
+				DC1C0FE10A1668FF18D6B0354D0424A7 /* NWAppDelegate.h */,
+				52C5565057C8E38FF3025919DBA1DECB /* NWAppDelegate.m */,
+				759C8FF0C059BBFBC738D352C6FE47E3 /* NWLCore.c */,
+				6AC7509F2EE3ADEA35F9F5254BEDF924 /* NWLCore.h */,
+				AD239A36C43B2598233A354059B57737 /* config.plist */,
+				FB98B604D6669B72E38C0F1F49FE0377 /* icon.icns */,
+				41C9C1FDD106853DE04E6091EBB10220 /* main.m */,
 			);
-			path = Mac;
-			sourceTree = "<group>";
-		};
-		ECF689000434019E5B6E306EE2953805 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3336FDA56D58539E73139CD99F755D0F /* PushToolMac-Info.plist */,
-				D91C3507D26750EE36897B0B9F8B94A3 /* PushToolMac-Prefix.pch */,
-				A2C675D7B9EAD53F0BA27B73A162E40A /* icon.icns */,
-				C079B178B5B2239077B045C295FE6B26 /* main.m */,
-			);
-			name = "Supporting Files";
+			path = macOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,73 +342,110 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CE59149861910180EE0331862A0F758E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7CF01F7F019F8CB16D71E5D2CFCC83CD /* Application.xib in Resources */,
-				E231C0FE439040506E058213AF107332 /* README.md in Resources */,
-				17C5462819315711E973E077D700BD16 /* config.plist in Resources */,
-				6BFFF771E1DA0900D4347051D13E075B /* icon.icns in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B6EDD7230228574C82923B9834AFB735 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C96933BA97E7E6F00AC779B5A075CA4F /* Default-568h@2x.png in Resources */,
-				60394ACEB146B230EA7E94F04CB7A3A3 /* Default.png in Resources */,
-				4075758F0EF1FC460CD48A378298DB9E /* Default@2x.png in Resources */,
-				3F5E65B3AC12B11A8E14C0D3EA9F45BF /* Icon-72.png in Resources */,
-				8970832F94DEF946F8AC93B4DAC1643D /* Icon-72@2x.png in Resources */,
-				84D9668B34D21557B68930CF74A9CD0A /* Icon@2x.png in Resources */,
+				0E97E12D58E58BDDBCA923719305995B /* Default-568h@2x.png in Resources */,
+				20886C7FB297D0BF7971994EDF7979C8 /* Default.png in Resources */,
+				518F7A3112BA29D26C91F35B542F8099 /* Default@2x.png in Resources */,
+				98B77718B1488895AFD3CE5FC9FDE07F /* Icon-72.png in Resources */,
+				C746C2DB41E02A6E12A19B41EA3B542E /* Icon-72@2x.png in Resources */,
+				B0E3A897AEE37F0928E8B90AE5B0831C /* Icon.png in Resources */,
+				4D538B21E0CBDC52A2016569DE217FD7 /* Icon@2x.png in Resources */,
 				4A502FC03236A7A9857082B9EBDEA522 /* README.md in Resources */,
-				0BD849D3980CEA64F30E837F1709C9F3 /* icon.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE59149861910180EE0331862A0F758E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFA9B66F9E926A39F04183348194776 /* Application.xib in Resources */,
+				E231C0FE439040506E058213AF107332 /* README.md in Resources */,
+				38BB395A42843BD45071820953FAA482 /* config.plist in Resources */,
+				642A2AEB4283D865187E8C6946D917F9 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		EE6EE39BD3E632CAA082C4F29D7FC47A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D8CA0283DC3DC5B9403148612B2A3F23 /* NWAppDelegate.m in Sources */,
-				F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */,
-				D41C1E84A22DB507C447723CFE65EC0A /* NWLCore.c in Sources */,
-				39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */,
-				30EA9D831EEBF05823F9F7421AEEBF3A /* NWPushFeedback.m in Sources */,
-				C7C6F33019660D16382BA1DF22111EA4 /* NWPusher.m in Sources */,
-				6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */,
-				9B9FC7C7222906F0F09CBA90BA63FB9E /* NWSecTools.m in Sources */,
-				10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */,
-				B91C45DB899573F6606B42199EC149C4 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9CEEFFB105BDD3277648F02022EC3B11 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3438822F46F23873C387389030C5F27E /* NWAppDelegate.m in Sources */,
+				86778F4952631221C8D8596F6D6B819E /* NWAppDelegate.m in Sources */,
 				CDB66CAA955369B0FA03D30051842A11 /* NWHub.m in Sources */,
-				D6DE0084D9105532E923DE87245D878B /* NWLCore.c in Sources */,
 				0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */,
 				2DB1F72A1DBD25864D3FF1E137BE9F75 /* NWPushFeedback.m in Sources */,
 				D993025C5FFA1693C8AEC1AE898CFB49 /* NWPusher.m in Sources */,
 				3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */,
 				30863083D4E77D3DFB249208054438AE /* NWSecTools.m in Sources */,
 				620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */,
-				2B0FBB69ED57964FA6349D85E0EEF0AD /* main.m in Sources */,
+				5C37C9EA000C1923A749D58D68AD7206 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE6EE39BD3E632CAA082C4F29D7FC47A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29DEAEA91279408BC208313C8C0BFA79 /* NWAppDelegate.m in Sources */,
+				F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */,
+				BC3AF281C4ABC6341363891939E3DB2A /* NWLCore.c in Sources */,
+				39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */,
+				30EA9D831EEBF05823F9F7421AEEBF3A /* NWPushFeedback.m in Sources */,
+				C7C6F33019660D16382BA1DF22111EA4 /* NWPusher.m in Sources */,
+				6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */,
+				9B9FC7C7222906F0F09CBA90BA63FB9E /* NWSecTools.m in Sources */,
+				10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */,
+				2391D00BD447E5628B04E860C0E32E23 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		E5976D8F29E1A8FB03392B7AC1878D83 /* Release */ = {
+		593FBB12A0158EFD2499034CB061AF6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NWL_LIB=PushTool",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "macOS/Info-macOS.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andela.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = PushTool;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6BDC67F08D1321AB83D2C8E33434DFC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NWL_LIB=PushTool",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "macOS/Info-macOS.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andela.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = PushTool;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A9236675585E336471A0DAFBB7D35177 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
@@ -398,37 +460,17 @@
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Touch/PushToolTouch-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "NWL_LIB=PushTool";
-				INFOPLIST_FILE = "Touch/PushToolTouch-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushTool;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		593FBB12A0158EFD2499034CB061AF6C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Mac/PushToolMac-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NWL_LIB=PushTool",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Mac/PushToolMac-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andela.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = PushTool;
+				INFOPLIST_FILE = "iOS/Info-iOS.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -468,26 +510,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		6BDC67F08D1321AB83D2C8E33434DFC5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Mac/PushToolMac-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"NWL_LIB=PushTool",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Mac/PushToolMac-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andela.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = PushTool;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -537,7 +559,7 @@
 			};
 			name = Debug;
 		};
-		A9236675585E336471A0DAFBB7D35177 /* Debug */ = {
+		E5976D8F29E1A8FB03392B7AC1878D83 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
@@ -552,30 +574,28 @@
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Touch/PushToolTouch-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"NWL_LIB=PushTool",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Touch/PushToolTouch-Info.plist";
+				GCC_PREPROCESSOR_DEFINITIONS = "NWL_LIB=PushTool";
+				INFOPLIST_FILE = "iOS/Info-iOS.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andela.PushTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
-			name = Debug;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F59CEEC7908DD4287B7D12D6C97D0AB5 /* Build configuration list for PBXNativeTarget "PushTool-macOS" */ = {
+		1B3F9A8864F3E22C49405B343986506C /* Build configuration list for PBXNativeTarget "PushTool-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				593FBB12A0158EFD2499034CB061AF6C /* Debug */,
-				6BDC67F08D1321AB83D2C8E33434DFC5 /* Release */,
+				A9236675585E336471A0DAFBB7D35177 /* Debug */,
+				E5976D8F29E1A8FB03392B7AC1878D83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -589,11 +609,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1B3F9A8864F3E22C49405B343986506C /* Build configuration list for PBXNativeTarget "PushTool-iOS" */ = {
+		F59CEEC7908DD4287B7D12D6C97D0AB5 /* Build configuration list for PBXNativeTarget "PushTool-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A9236675585E336471A0DAFBB7D35177 /* Debug */,
-				E5976D8F29E1A8FB03392B7AC1878D83 /* Release */,
+				593FBB12A0158EFD2499034CB061AF6C /* Debug */,
+				6BDC67F08D1321AB83D2C8E33434DFC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

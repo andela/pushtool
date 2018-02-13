@@ -2,7 +2,6 @@
 
 #import "NWAppDelegate.h"
 #import "NWHub.h"
-#import "NWLCore.h"
 #import "NWSecTools.h"
 
 // TODO: Export your push certificate and key in PKCS12 format to PushTool.p12 in the root of the project directory.
@@ -38,8 +37,6 @@ static NWPusherViewController *controller = nil;
     [super viewDidLoad];
     
     controller = self;
-    NWLAddPrinter("NWPusher", NWPusherPrinter, 0);
-    NWLPrintInfo();
     _serial = dispatch_queue_create("NWAppDelegate", DISPATCH_QUEUE_SERIAL);
     
     _connectButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -77,8 +74,8 @@ static NWPusherViewController *controller = nil;
     _infoLabel.font = [UIFont systemFontOfSize:12];
     _infoLabel.numberOfLines = 0;
     [self.view addSubview:_infoLabel];
-    
-    NWLogInfo(@"Connect with Apple's Push Notification service");
+
+    //NWLogInfo(@"Connect with Apple's Push Notification service");
     
     [self loadCertificate];
 }
@@ -91,14 +88,14 @@ static NWPusherViewController *controller = nil;
     
     NSArray *ids = [NWSecTools identitiesWithPKCS12Data:pkcs12 password:pkcs12Password error:&error];
     if (!ids) {
-        NWLogWarn(@"Unable to read p12 file: %@", error.localizedDescription);
+        //NWLogWarn(@"Unable to read p12 file: %@", error.localizedDescription);
         return;
     }
     for (NWIdentityRef identity in ids) {
         NSError *error = nil;
         NWCertificateRef certificate = [NWSecTools certificateWithIdentity:identity error:&error];
         if (!certificate) {
-            NWLogWarn(@"Unable to import p12 file: %@", error.localizedDescription);
+            //NWLogWarn(@"Unable to import p12 file: %@", error.localizedDescription);
             return;
         }
         
@@ -147,14 +144,14 @@ static NWPusherViewController *controller = nil;
 {
     [self disableButtons];
     [_hub disconnect]; _hub = nil;
-    NWLogInfo(@"Disconnected");
+    //NWLogInfo(@"Disconnected");
 }
 
 - (void)connectToEnvironment:(NWEnvironment)environment
 {
     [self disableButtons];
     
-    NWLogInfo(@"Connecting..");
+    //NWLogInfo(@"Connecting..");
     dispatch_async(_serial, ^{
         NSError *error = nil;
         
@@ -163,12 +160,12 @@ static NWPusherViewController *controller = nil;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (hub) {
                 NSString *summary = [NWSecTools summaryWithCertificate:_certificate];
-                NWLogInfo(@"Connected to APN: %@ (%@)", summary, descriptionForEnvironent(environment));
+                //NWLogInfo(@"Connected to APN: %@ (%@)", summary, descriptionForEnvironent(environment));
                 _hub = hub;
                 
                 [_connectButton setTitle:@"Disconnect" forState:UIControlStateNormal];
             } else {
-                NWLogWarn(@"Unable to connect: %@", error.localizedDescription);
+                //NWLogWarn(@"Unable to connect: %@", error.localizedDescription);
             }
             
             [self enableButtonsForCertificate:_certificate environment:environment];
@@ -180,13 +177,13 @@ static NWPusherViewController *controller = nil;
 {
     NSString *payload = [NSString stringWithFormat:@"{\"aps\":{\"alert\":\"%@\",\"badge\":1,\"sound\":\"default\"}}", _textField.text];
     NSString *token = deviceToken;
-    NWLogInfo(@"Pushing..");
+    //NWLogInfo(@"Pushing..");
     dispatch_async(_serial, ^{
         NSUInteger failed = [_hub pushPayload:payload token:token];
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
         dispatch_after(popTime, _serial, ^(void){
-            NSUInteger failed2 = failed + [_hub readFailed];
-            if (!failed2) NWLogInfo(@"Payload has been pushed");
+//            NSUInteger failed2 = failed + [_hub readFailed];
+//            if (!failed2) NWLogInfo(@"Payload has been pushed");
         });
     });
 }
@@ -195,7 +192,7 @@ static NWPusherViewController *controller = nil;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         //NSLog(@"failed notification: %@ %@ %lu %lu %lu", notification.payload, notification.token, notification.identifier, notification.expires, notification.priority);
-        NWLogWarn(@"Notification error: %@", error.localizedDescription);
+        //NWLogWarn(@"Notification error: %@", error.localizedDescription);
     });
 }
 
@@ -231,10 +228,10 @@ static NWPusherViewController *controller = nil;
     });
 }
 
-static void NWPusherPrinter(NWLContext context, CFStringRef message, void *info) {
-    BOOL warning = strncmp(context.tag, "warn", 5) == 0;
-    [controller log:(__bridge NSString *)message warning:warning];
-}
+//static void NWPusherPrinter(NWLContext context, CFStringRef message, void *info) {
+//    BOOL warning = strncmp(context.tag, "warn", 5) == 0;
+//    [controller log:(__bridge NSString *)message warning:warning];
+//}
 
 @end
 

@@ -1,12 +1,9 @@
-<img src="icon.png" alt="PushTool Icon" width="72"/>
-
-
 PushTool
 ======
 
 *OS X and iOS application and framework to play with the Apple Push Notification service (APNs)*
 
-<img src="Docs/osx1.png" alt="PushTool OS X" width="612"/>
+<img src="Resources/Assets.xcassets/osx1.imageset/osx1.png" alt="PushTool OS X" width="612"/>
 
 
 About
@@ -54,13 +51,13 @@ Let's start with the SSL certificate. The goal is to get both the certificate *a
 
 Keep in mind that you will eventually be downloading a certificate, which you will need to install in your keychain together with the private key. This should look something like this:
 
-<img src="Docs/keychain1.png" alt="Keychain export" width="690"/>
+<img src="Resources/Assets.xcassets/keychain1.imageset/keychain1.png" alt="Keychain export" width="690"/>
 
 NB: There is `Development` and `Production` certificates, which should (generally) correspond to respectively `DEBUG` and `RELEASE` versions of your app. Make sure you get the right one, check *Development (sandbox) or Production*, *iOS or Mac*, and the *bundle identifier*.
 
 The push certificate should be exported to a PKCS12 file, which allows you to share these with fellow developers:
 
-<img src="Docs/keychain2.png" alt="PKCS12 file" width="690"/>
+<img src="Resources/Assets.xcassets/keychain2.imageset/keychain2.png" alt="PKCS12 file" width="690"/>
 
 ### Device token
 Now you need to obtain a device token, which is a 64 character hex string (256 bits). This should be done from within the iOS app you're going to push to. Add the following lines to the application delegate (Xcode 6 required):
@@ -132,7 +129,7 @@ Now, when you run the application, the 64 character push string will be logged t
 ### Push from OS X
 With the SSL certificate and private key in the keychain and the device token on the pasteboard, you're ready to send some push notifications. Let's start by sending a notification using the *PushTool app for Mac OS X*. Open the PushTool Xcode project and run the PushToolMac target:
 
-<img src="Docs/osx1.png" alt="PushTool OS X" width="612"/>
+<img src="Resources/Assets.xcassets/osx1.imageset/osx1.png" alt="PushTool OS X" width="612"/>
 
 The combo box at the top lists the available SSL certificates in the keychain. Select the certificate you want to use and paste the device token of the device you're pushing to. The text field below shows the JSON formatted payload text that you're sending. Read more about this format in the Apple documentation under *Apple Push Notification Service*.
 
@@ -140,12 +137,12 @@ Now before you press *Push*, make sure the application you're *sending to* is in
 
 If things are not working as expected, then take a look at the *Troubleshooting* section below.
 
-<img src="Docs/osx2.png" alt="PushTool OS X" width="612"/>
+<img src="Resources/Assets.xcassets/osx2.imageset/osx2.png" alt="PushTool OS X" width="612"/>
 
 ### Push from iOS
 The ultimate experience is of course pushing from an iPhone to an iPhone, directly. This can be done with the PushTool iOS app. Before you run the PushToolTouch target, make sure to include the *certificate, private key, and device token* inside the app. Take the PKCS12 file that you exported earlier and include it in the PushToolTouch bundle. Then go to `NWAppDelegate.m` in the `Touch` folder and configure `pkcs12FileName`, `pkcs12Password`, and `deviceToken`. Now run the PushToolTouch target:
 
-<img src="Docs/ios.png" alt="PushTool iOS" width="414"/>
+<img src="Resources/Assets.xcassets/ios.imageset/ios.png" alt="PushTool iOS" width="414"/>
 
 If everything is set up correctly, you only need to *Connect* and *Push*. Then you should receive the `Testing..` push message on the device.
 

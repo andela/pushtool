@@ -159,7 +159,7 @@ static NWPusherViewController *controller = nil;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             if (hub) {
-                NSString *summary = [NWSecTools summaryWithCertificate:_certificate];
+                //NSString *summary = [NWSecTools summaryWithCertificate:_certificate];
                 //NWLogInfo(@"Connected to APN: %@ (%@)", summary, descriptionForEnvironent(environment));
                 _hub = hub;
                 
@@ -179,7 +179,7 @@ static NWPusherViewController *controller = nil;
     NSString *token = deviceToken;
     //NWLogInfo(@"Pushing..");
     dispatch_async(_serial, ^{
-        NSUInteger failed = [_hub pushPayload:payload token:token];
+        /*NSUInteger failed =*/ [_hub pushPayload:payload token:token];
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
         dispatch_after(popTime, _serial, ^(void){
 //            NSUInteger failed2 = failed + [_hub readFailed];
@@ -220,13 +220,13 @@ static NWPusherViewController *controller = nil;
 
 #pragma mark - NWLogging
 
-- (void)log:(NSString *)message warning:(BOOL)warning
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        _infoLabel.textColor = warning ? UIColor.redColor : UIColor.blackColor;
-        _infoLabel.text = message;
-    });
-}
+//- (void)log:(NSString *)message warning:(BOOL)warning
+//{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        _infoLabel.textColor = warning ? UIColor.redColor : UIColor.blackColor;
+//        _infoLabel.text = message;
+//    });
+//}
 
 //static void NWPusherPrinter(NWLContext context, CFStringRef message, void *info) {
 //    BOOL warning = strncmp(context.tag, "warn", 5) == 0;

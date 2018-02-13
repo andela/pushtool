@@ -22,7 +22,6 @@
 		86778F4952631221C8D8596F6D6B819E /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A182EF5C534BAD13493346539659DE /* NWAppDelegate.m */; };
 		CDB66CAA955369B0FA03D30051842A11 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
 		F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
-		BC3AF281C4ABC6341363891939E3DB2A /* NWLCore.c in Sources */ = {isa = PBXBuildFile; fileRef = 759C8FF0C059BBFBC738D352C6FE47E3 /* NWLCore.c */; };
 		0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
 		39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
 		2DB1F72A1DBD25864D3FF1E137BE9F75 /* NWPushFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */; };
@@ -90,8 +89,6 @@
 		52C5565057C8E38FF3025919DBA1DECB /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
 		3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWHub.h; sourceTree = "<group>"; };
 		DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWHub.m; sourceTree = "<group>"; };
-		759C8FF0C059BBFBC738D352C6FE47E3 /* NWLCore.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NWLCore.c; sourceTree = "<group>"; };
-		6AC7509F2EE3ADEA35F9F5254BEDF924 /* NWLCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWLCore.h; sourceTree = "<group>"; };
 		BA947E73E088777709D011DAA0893F2C /* NWNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWNotification.h; sourceTree = "<group>"; };
 		2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWNotification.m; sourceTree = "<group>"; };
 		D6B7B1CD5300C3763F0F76225FECE875 /* NWPushFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWPushFeedback.h; sourceTree = "<group>"; };
@@ -265,8 +262,6 @@
 				2BCA780D5610A240B5C240F416535C15 /* Info-macOS.plist */,
 				DC1C0FE10A1668FF18D6B0354D0424A7 /* NWAppDelegate.h */,
 				52C5565057C8E38FF3025919DBA1DECB /* NWAppDelegate.m */,
-				759C8FF0C059BBFBC738D352C6FE47E3 /* NWLCore.c */,
-				6AC7509F2EE3ADEA35F9F5254BEDF924 /* NWLCore.h */,
 				AD239A36C43B2598233A354059B57737 /* config.plist */,
 				FB98B604D6669B72E38C0F1F49FE0377 /* icon.icns */,
 				41C9C1FDD106853DE04E6091EBB10220 /* main.m */,
@@ -393,7 +388,6 @@
 			files = (
 				29DEAEA91279408BC208313C8C0BFA79 /* NWAppDelegate.m in Sources */,
 				F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */,
-				BC3AF281C4ABC6341363891939E3DB2A /* NWLCore.c in Sources */,
 				39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */,
 				30EA9D831EEBF05823F9F7421AEEBF3A /* NWPushFeedback.m in Sources */,
 				C7C6F33019660D16382BA1DF22111EA4 /* NWPusher.m in Sources */,

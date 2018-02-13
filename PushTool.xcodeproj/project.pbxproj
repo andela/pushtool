@@ -30,6 +30,8 @@
 		9B9FC7C7222906F0F09CBA90BA63FB9E /* NWSecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */; };
 		10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
 		620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
+		FC0A678E18435EFF9410A285556A5C2E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A48939C7B38170911247110839411 /* Notification.swift */; };
+		4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A48939C7B38170911247110839411 /* Notification.swift */; };
 		4A502FC03236A7A9857082B9EBDEA522 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		E231C0FE439040506E058213AF107332 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		6315D14787C83D5942AE5C222A84A5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
@@ -92,12 +94,15 @@
 		394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWSecTools.m; sourceTree = "<group>"; };
 		9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWType.h; sourceTree = "<group>"; };
 		A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWType.m; sourceTree = "<group>"; };
+		D94A48939C7B38170911247110839411 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		8C47112F945765EE38CC31701B993A93 /* ProjectBase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectBase.xcconfig; sourceTree = "<group>"; };
 		E73FD753D1D6F5D6A6FD912629D760A5 /* ProjectDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectDebug.xcconfig; sourceTree = "<group>"; };
 		7FE967AD886F7ABEC622BFD6EA3C4E74 /* ProjectRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectRelease.xcconfig; sourceTree = "<group>"; };
 		9E387C3A9A39BC328274AD273C4C054C /* ProjectVersion.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectVersion.xcconfig; sourceTree = "<group>"; };
 		9167D4589C9F8DEAFD3279CF4898983F /* ProjectWarnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectWarnings.xcconfig; sourceTree = "<group>"; };
+		C2D91C24AF37D115D22F0E3EB83D8A28 /* PushTool-iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushTool-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		11BC446A9ED8212EEFAB971FA6A7923D /* PushTool-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PushTool-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B013B2461ABB44C459CAAE572EA6FB /* PushTool-macOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushTool-macOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		658F71FE87626920A3229836F8D66988 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -207,6 +212,9 @@
 				394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */,
 				9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */,
 				A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */,
+				D94A48939C7B38170911247110839411 /* Notification.swift */,
+				C2D91C24AF37D115D22F0E3EB83D8A28 /* PushTool-iOS-Bridging-Header.h */,
+				B0B013B2461ABB44C459CAAE572EA6FB /* PushTool-macOS-Bridging-Header.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -293,7 +301,11 @@
 				ORGANIZATIONNAME = Andela;
 				TargetAttributes = {
 					4C4F333727553ED96B2BD9E5327CD5F5 = {
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
+					};
+					F2A43D4759A09338023CC0184E226C68 = {
+						LastSwiftMigration = 0920;
 					};
 				};
 			};
@@ -353,6 +365,7 @@
 				3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */,
 				30863083D4E77D3DFB249208054438AE /* NWSecTools.m in Sources */,
 				620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */,
+				4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */,
 				401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +382,7 @@
 				6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */,
 				9B9FC7C7222906F0F09CBA90BA63FB9E /* NWSecTools.m in Sources */,
 				10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */,
+				FC0A678E18435EFF9410A285556A5C2E /* Notification.swift in Sources */,
 				0114C9AF57C812FA943F2241116693F8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,6 +394,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -394,6 +409,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_NAME = PushTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-macOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -402,6 +420,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -416,6 +435,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_NAME = PushTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-macOS-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -425,6 +446,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -445,6 +467,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-iOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -541,6 +566,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -559,6 +585,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-iOS-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

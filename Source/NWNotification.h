@@ -1,6 +1,8 @@
 #import "NWType.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** A single push message, containing the receiver device token, the payload, and delivery attributes.
 
  This class represents a single push message, or *remote notification* as Apple calls it. It consists of device token, payload, and some optional attributes. The device token is a unique reference to a single installed app on a single Apple device. The payload is a JSON-formatted string that is delivered into the app. Among app-specific data, this payload contains information on how the device should handle and display this notification.
@@ -31,7 +33,7 @@
 @property (nonatomic, assign) NSUInteger identifier;
 
 /** The expiration date after which the server will not attempt to deliver. */
-@property (nonatomic, strong) NSDate *expiration;
+@property (nonatomic, strong, nullable) NSDate *expiration;
 
 /** Epoch seconds representation of expiration date. */
 @property (nonatomic, assign) NSUInteger expirationStamp;
@@ -45,10 +47,19 @@
 /** @name Initialization */
 
 /** Create and returns a notification object based on given attribute objects. */
-- (instancetype)initWithPayload:(NSString *)payload token:(NSString *)token identifier:(NSUInteger)identifier expiration:(NSDate *)date priority:(NSUInteger)priority;
+- (instancetype)initWithPayload:(NSString *)payload
+                          token:(NSString *)token
+                     identifier:(NSUInteger)identifier
+                     expiration:(nullable NSDate *)date
+                       priority:(NSUInteger)priority;
 
 /** Create and returns a notification object based on given raw attributes. */
-- (instancetype)initWithPayloadData:(NSData *)payload tokenData:(NSData *)token identifier:(NSUInteger)identifier expirationStamp:(NSUInteger)expirationStamp addExpiration:(BOOL)addExpiration priority:(NSUInteger)priority;
+- (instancetype)initWithPayloadData:(NSData *)payload
+                          tokenData:(NSData *)token
+                         identifier:(NSUInteger)identifier
+                    expirationStamp:(NSUInteger)expirationStamp
+                      addExpiration:(BOOL)addExpiration
+                           priority:(NSUInteger)priority;
 
 /** @name Serialization */
 
@@ -64,3 +75,5 @@
 + (NSString *)hexFromData:(NSData *)data;
 
 @end
+
+NS_ASSUME_NONNULL_END

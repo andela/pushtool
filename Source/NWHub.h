@@ -3,6 +3,8 @@
 
 @class NWNotification, NWPusher;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** Allows callback on errors while pushing to and reading from server.
 
  Check out `NWHub` for more details.
@@ -40,16 +42,24 @@
 /** @name Initialization */
 
 /** Create and return a hub object with a delegate object assigned. */
-- (instancetype)initWithDelegate:(id<NWHubDelegate>)delegate;
+- (instancetype)initWithDelegate:(nullable id<NWHubDelegate>)delegate;
 
 /** Create and return a hub object with a delegate and pusher object assigned. */
-- (instancetype)initWithPusher:(NWPusher *)pusher delegate:(id<NWHubDelegate>)delegate;
+- (instancetype)initWithPusher:(NWPusher *)pusher
+                      delegate:(nullable id<NWHubDelegate>)delegate;
 
 /** Create, connect and returns an instance with delegate and identity. */
-+ (instancetype)connectWithDelegate:(id<NWHubDelegate>)delegate identity:(NWIdentityRef)identity environment:(NWEnvironment)environment error:(NSError **)error;
++ (instancetype)connectWithDelegate:(nullable id<NWHubDelegate>)delegate
+                           identity:(NWIdentityRef)identity
+                        environment:(NWEnvironment)environment
+                              error:(NSError **)error;
 
 /** Create, connect and returns an instance with delegate and identity. */
-+ (instancetype)connectWithDelegate:(id<NWHubDelegate>)delegate PKCS12Data:(NSData *)data password:(NSString *)password environment:(NWEnvironment)environment error:(NSError **)error;
++ (instancetype)connectWithDelegate:(nullable id<NWHubDelegate>)delegate
+                         PKCS12Data:(NSData *)data
+                           password:(NSString *)password
+                        environment:(NWEnvironment)environment
+                              error:(NSError **)error;
 
 /** @name Connecting */
 
@@ -123,7 +133,7 @@
  @see trimIdentifiers
  @see feedbackSpan
  */
-- (BOOL)readFailed:(NWNotification **)notification autoReconnect:(BOOL)reconnect error:(NSError **)error;
+- (BOOL)readFailed:(NWNotification *_Nullable*_Nullable)notification autoReconnect:(BOOL)reconnect error:(NSError **)error;
 
 /** Let go of old notification, after you read the failed notifications.
 
@@ -136,11 +146,6 @@
  */
 - (BOOL)trimIdentifiers;
 
-// deprecated
-
-+ (instancetype)connectWithDelegate:(id<NWHubDelegate>)delegate identity:(NWIdentityRef)identity error:(NSError **)error __deprecated;
-+ (instancetype)connectWithDelegate:(id<NWHubDelegate>)delegate PKCS12Data:(NSData *)data password:(NSString *)password error:(NSError **)error __deprecated;
-- (BOOL)connectWithIdentity:(NWIdentityRef)identity error:(NSError **)error __deprecated;
-- (BOOL)connectWithPKCS12Data:(NSData *)data password:(NSString *)password error:(NSError **)error __deprecated;
-
 @end
+
+NS_ASSUME_NONNULL_END

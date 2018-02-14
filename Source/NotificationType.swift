@@ -1,3 +1,5 @@
+import Foundation
+
 @objc
 public enum NotificationType: Int {
     case type0

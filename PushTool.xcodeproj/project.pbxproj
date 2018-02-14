@@ -16,8 +16,8 @@
 		07BA7B31259F1774118B9345DB9E888B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */; };
 		9B3B6748BDD9319E08404E2221ED1531 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */; };
 		A402D98B56FE9CFCB3E9E70FD98A37B7 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */; };
-		F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
 		717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
+		F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
 		85DF6F2E73F7EC1EA141C0E6A20CC9B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */; };
 		D33F67563375169E6EE2CD19E813FD32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */; };
 		1DA11F25D63D240E1879DDCA0D15407F /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */; };
@@ -280,6 +280,7 @@
 				9AE06B970D4186889FC07B4E6CFFB4AD /* Frameworks */,
 				CE59149861910180EE0331862A0F758E /* Resources */,
 				4D077E4E9DCD95B06485AA50A86C7C52 /* Embed Frameworks */,
+				478C12A43B54CAC2B66BB940DB8AA7C2 /* Update Info Plist */,
 			);
 			buildRules = (
 			);
@@ -298,6 +299,7 @@
 				798752C28920A18A4DD08C3C3EEF3B85 /* Frameworks */,
 				B6EDD7230228574C82923B9834AFB735 /* Resources */,
 				B42F072AD621AE87753C6CA382B7BEA4 /* Embed Frameworks */,
+				FCCD46FE997D8EBF70CBD8CB93D84992 /* Update Info Plist */,
 			);
 			buildRules = (
 			);
@@ -324,6 +326,7 @@
 					};
 					F2A43D4759A09338023CC0184E226C68 = {
 						LastSwiftMigration = 0920;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -369,6 +372,38 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		478C12A43B54CAC2B66BB940DB8AA7C2 /* Update Info Plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Info Plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}\"/Scripts/update_info_plist.sh\n";
+			showEnvVarsInLog = 0;
+		};
+		FCCD46FE997D8EBF70CBD8CB93D84992 /* Update Info Plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Info Plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}\"/Scripts/update_info_plist.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9CEEFFB105BDD3277648F02022EC3B11 /* Sources */ = {
@@ -421,205 +456,78 @@
 		593FBB12A0158EFD2499034CB061AF6C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7688PWZMS6;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"NWL_LIB=PushTool",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
-				PRODUCT_NAME = PushTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				WRAPPER_EXTENSION = app;
+				SDKROOT = macosx;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
 		};
 		6BDC67F08D1321AB83D2C8E33434DFC5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7688PWZMS6;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"NWL_LIB=PushTool",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
-				PRODUCT_NAME = PushTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
-				WRAPPER_EXTENSION = app;
+				SDKROOT = macosx;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};
 		A9236675585E336471A0DAFBB7D35177 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7688PWZMS6;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"NWL_LIB=PushTool",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = "Resources/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_MODULE_NAME = PushTool;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "PushTool-iOS";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
 		AD87ADA896EAD092EDEECDCEACC5E6AA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E73FD753D1D6F5D6A6FD912629D760A5 /* ProjectDebug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				SDKROOT = macosx;
+				VALID_ARCHS = "";
 			};
 			name = Release;
 		};
 		D8A1412A384D795D5F093B33582047A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E73FD753D1D6F5D6A6FD912629D760A5 /* ProjectDebug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				VALID_ARCHS = "";
 			};
 			name = Debug;
 		};
 		E5976D8F29E1A8FB03392B7AC1878D83 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7688PWZMS6;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "NWL_LIB=PushTool";
 				INFOPLIST_FILE = "Resources/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_MODULE_NAME = PushTool;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "PushTool-iOS";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};

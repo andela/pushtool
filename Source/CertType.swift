@@ -1,3 +1,5 @@
+import Foundation
+
 @objc
 public enum CertType: Int {
     case none

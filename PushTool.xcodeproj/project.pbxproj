@@ -280,6 +280,7 @@
 				9AE06B970D4186889FC07B4E6CFFB4AD /* Frameworks */,
 				CE59149861910180EE0331862A0F758E /* Resources */,
 				4D077E4E9DCD95B06485AA50A86C7C52 /* Embed Frameworks */,
+				478C12A43B54CAC2B66BB940DB8AA7C2 /* Update Info Plist */,
 			);
 			buildRules = (
 			);
@@ -298,6 +299,7 @@
 				798752C28920A18A4DD08C3C3EEF3B85 /* Frameworks */,
 				B6EDD7230228574C82923B9834AFB735 /* Resources */,
 				B42F072AD621AE87753C6CA382B7BEA4 /* Embed Frameworks */,
+				FCCD46FE997D8EBF70CBD8CB93D84992 /* Update Info Plist */,
 			);
 			buildRules = (
 			);
@@ -370,6 +372,38 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		478C12A43B54CAC2B66BB940DB8AA7C2 /* Update Info Plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Info Plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}\"/Scripts/update_info_plist.sh\n";
+			showEnvVarsInLog = 0;
+		};
+		FCCD46FE997D8EBF70CBD8CB93D84992 /* Update Info Plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Info Plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}\"/Scripts/update_info_plist.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9CEEFFB105BDD3277648F02022EC3B11 /* Sources */ = {

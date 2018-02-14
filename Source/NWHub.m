@@ -3,7 +3,6 @@
 #import "NWNotification.h"
 #import "NWSecTools.h"
 
-
 @implementation NWHub {
     NSMutableDictionary *_notificationForIdentifier;
 }

@@ -40,7 +40,7 @@ public class Notification: NSObject {
         self.priority = priority
     }
 
-    public func data(with type: NWNotificationType) -> Data {
+    public func data(with type: NotificationType) -> Data {
         return Data()
     }
 

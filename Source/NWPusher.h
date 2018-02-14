@@ -1,6 +1,8 @@
 #import "NWType.h"
 #import <Foundation/Foundation.h>
 
+#import "PushTool-Swift.h"
+
 @class NWNotification, NWSSLConnection;
 
 /** Serializes notification objects and pushes them to the APNs.

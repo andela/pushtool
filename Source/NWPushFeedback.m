@@ -3,7 +3,6 @@
 #import "NWSecTools.h"
 #import "NWNotification.h"
 
-
 static NSString * const NWSandboxPushHost = @"feedback.sandbox.push.apple.com";
 static NSString * const NWPushHost = @"feedback.push.apple.com";
 static NSUInteger const NWPushPort = 2196;

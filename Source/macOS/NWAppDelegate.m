@@ -1,5 +1,8 @@
 #import "NWAppDelegate.h"
-#import <PushToolKit/PushToolKit.h>
+#import "NWHub.h"
+#import "NWNotification.h"
+#import "NWPushFeedback.h"
+#import "NWSecTools.h"
 
 @interface NWAppDelegate () <NWHubDelegate> @end
 

@@ -1,5 +1,7 @@
 #import "NWSecTools.h"
 
+#import "PushTool-Swift.h"
+
 @implementation NWSecTools
 
 #pragma mark - Initialization

@@ -1,6 +1,8 @@
 #import "NWSSLConnection.h"
 #include <netdb.h>
 
+#import "PushTool-Swift.h"
+
 #define NWSSL_HANDSHAKE_TRY_COUNT 1 << 26
 
 OSStatus NWSSLRead(SSLConnectionRef connection, void *data, size_t *length);

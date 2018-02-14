@@ -16,8 +16,8 @@
 		07BA7B31259F1774118B9345DB9E888B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */; };
 		9B3B6748BDD9319E08404E2221ED1531 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */; };
 		A402D98B56FE9CFCB3E9E70FD98A37B7 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */; };
-		F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
 		717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
+		F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
 		85DF6F2E73F7EC1EA141C0E6A20CC9B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */; };
 		D33F67563375169E6EE2CD19E813FD32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */; };
 		1DA11F25D63D240E1879DDCA0D15407F /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */; };
@@ -437,6 +437,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_NAME = PushTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -463,6 +464,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
 				PRODUCT_NAME = PushTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
@@ -539,7 +541,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -586,7 +587,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};

@@ -10,8 +10,14 @@
 		18B38194738A167BF5725EFA71E598B5 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */; };
 		36D54B2CC763F636A6F5C8721EC3DA72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
 		9FFD9865D421E2102537DDBE315C7628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
+		5488FEFACD09F056A806A4A2B44F51CE /* CertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72095B91071C6D557C03C6392C4A27D /* CertType.swift */; };
+		A914E512BF63EF2708D511E40497FF16 /* CertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72095B91071C6D557C03C6392C4A27D /* CertType.swift */; };
 		6C30CF126968AB86A7ED80E2DE35CF2C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */; };
 		07BA7B31259F1774118B9345DB9E888B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */; };
+		9B3B6748BDD9319E08404E2221ED1531 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */; };
+		A402D98B56FE9CFCB3E9E70FD98A37B7 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */; };
+		F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
+		717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
 		85DF6F2E73F7EC1EA141C0E6A20CC9B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */; };
 		D33F67563375169E6EE2CD19E813FD32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */; };
 		1DA11F25D63D240E1879DDCA0D15407F /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */; };
@@ -32,6 +38,10 @@
 		620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
 		4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A48939C7B38170911247110839411 /* Notification.swift */; };
 		FC0A678E18435EFF9410A285556A5C2E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A48939C7B38170911247110839411 /* Notification.swift */; };
+		119594ED389BE44EE8217E8247A78A2D /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09259B14A54E34E349BD67B6883AC8 /* NotificationType.swift */; };
+		1EEA34607E6AA1BF0298480FE48FBF05 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09259B14A54E34E349BD67B6883AC8 /* NotificationType.swift */; };
+		11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */; };
+		5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */; };
 		4A502FC03236A7A9857082B9EBDEA522 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		E231C0FE439040506E058213AF107332 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		6315D14787C83D5942AE5C222A84A5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
@@ -70,8 +80,11 @@
 		A347CF633AC3D0CDE521B7D62A20A804 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
 		9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A72095B91071C6D557C03C6392C4A27D /* CertType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertType.swift; sourceTree = "<group>"; };
 		68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentOptions.swift; sourceTree = "<group>"; };
 		7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FF54DF503E2C7FB2BCC5E072C470C676 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		2A098A9029478E788A8002819FDCF342 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
@@ -95,11 +108,13 @@
 		9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWType.h; sourceTree = "<group>"; };
 		A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWType.m; sourceTree = "<group>"; };
 		D94A48939C7B38170911247110839411 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		3C09259B14A54E34E349BD67B6883AC8 /* NotificationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		8C47112F945765EE38CC31701B993A93 /* ProjectBase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectBase.xcconfig; sourceTree = "<group>"; };
 		E73FD753D1D6F5D6A6FD912629D760A5 /* ProjectDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectDebug.xcconfig; sourceTree = "<group>"; };
 		7FE967AD886F7ABEC622BFD6EA3C4E74 /* ProjectRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectRelease.xcconfig; sourceTree = "<group>"; };
 		9E387C3A9A39BC328274AD273C4C054C /* ProjectVersion.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectVersion.xcconfig; sourceTree = "<group>"; };
 		9167D4589C9F8DEAFD3279CF4898983F /* ProjectWarnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectWarnings.xcconfig; sourceTree = "<group>"; };
+		6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushError.swift; sourceTree = "<group>"; };
 		140F5B21E58BEC6B88A66E65DF5C4C4D /* PushTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushTool-Bridging-Header.h"; sourceTree = "<group>"; };
 		11BC446A9ED8212EEFAB971FA6A7923D /* PushTool-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PushTool-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,6 +212,9 @@
 			children = (
 				B3EA69D9A11D66C1B6C7FB838B5CF84C /* iOS */,
 				85A7667934856BAE3BA4F5230AC2C044 /* macOS */,
+				A72095B91071C6D557C03C6392C4A27D /* CertType.swift */,
+				5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */,
+				049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */,
 				3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */,
 				DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */,
 				BA947E73E088777709D011DAA0893F2C /* NWNotification.h */,
@@ -212,6 +230,8 @@
 				9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */,
 				A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */,
 				D94A48939C7B38170911247110839411 /* Notification.swift */,
+				3C09259B14A54E34E349BD67B6883AC8 /* NotificationType.swift */,
+				6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */,
 				140F5B21E58BEC6B88A66E65DF5C4C4D /* PushTool-Bridging-Header.h */,
 			);
 			path = Source;
@@ -355,6 +375,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A914E512BF63EF2708D511E40497FF16 /* CertType.swift in Sources */,
+				A402D98B56FE9CFCB3E9E70FD98A37B7 /* Environment.swift in Sources */,
+				717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */,
 				391DC7519B2060B8FB1645F3B66FF665 /* NWAppDelegate.m in Sources */,
 				CDB66CAA955369B0FA03D30051842A11 /* NWHub.m in Sources */,
 				0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */,
@@ -364,6 +387,8 @@
 				30863083D4E77D3DFB249208054438AE /* NWSecTools.m in Sources */,
 				620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */,
 				4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */,
+				1EEA34607E6AA1BF0298480FE48FBF05 /* NotificationType.swift in Sources */,
+				5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */,
 				401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,6 +397,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5488FEFACD09F056A806A4A2B44F51CE /* CertType.swift in Sources */,
+				9B3B6748BDD9319E08404E2221ED1531 /* Environment.swift in Sources */,
+				F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */,
 				1DA11F25D63D240E1879DDCA0D15407F /* NWAppDelegate.m in Sources */,
 				F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */,
 				39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */,
@@ -381,6 +409,8 @@
 				9B9FC7C7222906F0F09CBA90BA63FB9E /* NWSecTools.m in Sources */,
 				10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */,
 				FC0A678E18435EFF9410A285556A5C2E /* Notification.swift in Sources */,
+				119594ED389BE44EE8217E8247A78A2D /* NotificationType.swift in Sources */,
+				11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */,
 				0114C9AF57C812FA943F2241116693F8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +493,7 @@
 				INFOPLIST_FILE = "Resources/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
+				PRODUCT_MODULE_NAME = PushTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-Bridging-Header.h";
@@ -581,6 +612,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andela.pushtool;
+				PRODUCT_MODULE_NAME = PushTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/PushTool-Bridging-Header.h";

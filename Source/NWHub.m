@@ -3,6 +3,7 @@
 #import "NWNotification.h"
 #import "NWSecTools.h"
 
+#import "PushTool-Swift.h"
 
 @implementation NWHub {
     NSMutableDictionary *_notificationForIdentifier;

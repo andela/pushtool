@@ -46,6 +46,7 @@
 		E231C0FE439040506E058213AF107332 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		6315D14787C83D5942AE5C222A84A5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
 		C0B65FDE6DE7BB52E7F3D37B226B0F53 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
+		A753C6A26F38B04BD364B1EF50CA719B /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */; };
 		037EDD2B43689B7E1D73F243A6A3B079 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */; };
 		827A6E0369D3A6D0D2E2DB64CC8B38DE /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */; };
 		D594D2C57D2060F8FC035DC54EF88BE7 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */; };
@@ -119,6 +120,7 @@
 		891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pusher.swift; sourceTree = "<group>"; };
 		DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		658F71FE87626920A3229836F8D66988 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		4C441803E081F0BA8EA2F316A89204A8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };

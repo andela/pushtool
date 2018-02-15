@@ -1,6 +1,8 @@
 #import "NWType.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NWNotification, NWSSLConnection;
 
 /** Serializes notification objects and pushes them to the APNs.
@@ -20,7 +22,7 @@
 /** @name Properties */
 
 /** The SSL connection through which all notifications are pushed. */
-@property (nonatomic, strong) NWSSLConnection *connection;
+@property (nonatomic, strong, nullable) NWSSLConnection *connection;
 
 /** @name Initialization */
 
@@ -60,11 +62,6 @@
 /** Read back multiple notification identifiers of, up to max, failed pushes. */
 - (NSArray *)readFailedIdentifierErrorPairsWithMax:(NSUInteger)max error:(NSError **)error;
 
-// deprecated
-
-+ (instancetype)connectWithIdentity:(NWIdentityRef)identity error:(NSError **)error __deprecated;
-+ (instancetype)connectWithPKCS12Data:(NSData *)data password:(NSString *)password error:(NSError **)error __deprecated;
-- (BOOL)connectWithIdentity:(NWIdentityRef)identity error:(NSError **)error __deprecated;
-- (BOOL)connectWithPKCS12Data:(NSData *)data password:(NSString *)password error:(NSError **)error __deprecated;
-
 @end
+
+NS_ASSUME_NONNULL_END

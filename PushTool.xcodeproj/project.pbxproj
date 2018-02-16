@@ -40,6 +40,8 @@
 		1EEA34607E6AA1BF0298480FE48FBF05 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09259B14A54E34E349BD67B6883AC8 /* NotificationType.swift */; };
 		11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */; };
 		5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */; };
+		E0AF842A33E8C3A1A33B1B8728B4B7BF /* PushFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */; };
+		7A01DAA5CE5CF36769A54C76383FF325 /* PushFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */; };
 		123BBCE517D6D5EF48C46861046EEA1F /* Pusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */; };
 		27FB77F9807A29E312E18DFCF5456812 /* Pusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */; };
 		4A502FC03236A7A9857082B9EBDEA522 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
@@ -115,6 +117,7 @@
 		9E387C3A9A39BC328274AD273C4C054C /* ProjectVersion.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectVersion.xcconfig; sourceTree = "<group>"; };
 		9167D4589C9F8DEAFD3279CF4898983F /* ProjectWarnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectWarnings.xcconfig; sourceTree = "<group>"; };
 		6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushError.swift; sourceTree = "<group>"; };
+		82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushFeedback.swift; sourceTree = "<group>"; };
 		140F5B21E58BEC6B88A66E65DF5C4C4D /* PushTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushTool-Bridging-Header.h"; sourceTree = "<group>"; };
 		11BC446A9ED8212EEFAB971FA6A7923D /* PushTool-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PushTool-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,6 +235,7 @@
 				D94A48939C7B38170911247110839411 /* Notification.swift */,
 				3C09259B14A54E34E349BD67B6883AC8 /* NotificationType.swift */,
 				6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */,
+				82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */,
 				140F5B21E58BEC6B88A66E65DF5C4C4D /* PushTool-Bridging-Header.h */,
 				891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */,
 				1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */,
@@ -425,6 +429,7 @@
 				4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */,
 				1EEA34607E6AA1BF0298480FE48FBF05 /* NotificationType.swift in Sources */,
 				5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */,
+				7A01DAA5CE5CF36769A54C76383FF325 /* PushFeedback.swift in Sources */,
 				27FB77F9807A29E312E18DFCF5456812 /* Pusher.swift in Sources */,
 				BF9FA9B727985DFF910A43EC6E4B964D /* Type.swift in Sources */,
 				401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */,
@@ -448,6 +453,7 @@
 				FC0A678E18435EFF9410A285556A5C2E /* Notification.swift in Sources */,
 				119594ED389BE44EE8217E8247A78A2D /* NotificationType.swift in Sources */,
 				11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */,
+				E0AF842A33E8C3A1A33B1B8728B4B7BF /* PushFeedback.swift in Sources */,
 				123BBCE517D6D5EF48C46861046EEA1F /* Pusher.swift in Sources */,
 				A753C6A26F38B04BD364B1EF50CA719B /* Type.swift in Sources */,
 				0114C9AF57C812FA943F2241116693F8 /* main.m in Sources */,

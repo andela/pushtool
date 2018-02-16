@@ -1,7 +1,7 @@
 
 import Foundation
 
-public class NWPusher : NSObject {
+public class Pusher : NSObject {
     
     private let sandboxPushHost = "gateway.sandbox.push.apple.com"
     private let pushHost = "gateway.push.apple.com"
@@ -81,20 +81,20 @@ public class NWPusher : NSObject {
 //        return self.push(notification, type: NWNotificationType.type2)
     }
 
-    public func push(_ notification: NWNotification, type: NWNotificationType) throws {
+    public func push(_ notification: NWNotification,
+                     type: NWNotificationType) throws {
         var length: UInt = 0
-        let data = notification.data(with: NWNotificationType.type2)
+        let data = notification.data(with: .type2)
+
         guard let SSLConnection = self.connection
             else { return  }
-        do {
-            try SSLConnection.write(data, length: &length)
-            if length != data.count {
-                return try NWErrorUtil.noWithErrorCode(NWError.pushWriteFail, reason: Int(length))
-            }
-        } catch let error as NSError {
-            throw error
+
+        try SSLConnection.write(data, length: &length)
+
+        if length != data.count {
+            throw NWErrorUtil.errorWithErrorCode(.pushWriteFail,
+                                                 reason: Int(length))
         }
-        
     }
     
     public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<UInt>, apnError: NSErrorPointer) throws {

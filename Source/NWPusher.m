@@ -118,23 +118,23 @@ static NSUInteger const NWPushPort = 2195;
     return YES;
 }
 
-- (NSArray *)readFailedIdentifierErrorPairsWithMax:(NSUInteger)max error:(NSError *__autoreleasing *)error
-{
-    NSMutableArray *pairs = @[].mutableCopy;
-    for (NSUInteger i = 0; i < max; i++) {
-        NSUInteger identifier = 0;
-        NSError *apnError = nil;
-        BOOL read = [self readFailedIdentifier:&identifier apnError:&apnError error:error];
-        if (!read) {
-            return nil;
-        }
-        if (!apnError) {
-            break;
-        }
-        [pairs addObject:@[@(identifier), apnError]];
-    }
-    return pairs;
-}
+//- (NSArray *)readFailedIdentifierErrorPairsWithMax:(NSUInteger)max error:(NSError *__autoreleasing *)error
+//{
+//    NSMutableArray *pairs = @[].mutableCopy;
+//    for (NSUInteger i = 0; i < max; i++) {
+//        NSUInteger identifier = 0;
+//        NSError *apnError = nil;
+//        BOOL read = [self readFailedIdentifier:&identifier apnError:&apnError error:error];
+//        if (!read) {
+//            return nil;
+//        }
+//        if (!apnError) {
+//            break;
+//        }
+//        [pairs addObject:@[@(identifier), apnError]];
+//    }
+//    return pairs;
+//}
 
 #pragma mark - Deprecated
 

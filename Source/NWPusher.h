@@ -59,8 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** Read back from the server the notification identifiers of failed pushes. */
 - (BOOL)readFailedIdentifier:(NSUInteger *)identifier apnError:(NSError **)apnError error:(NSError **)error;
 
-/** Read back multiple notification identifiers of, up to max, failed pushes. */
-- (NSArray *)readFailedIdentifierErrorPairsWithMax:(NSUInteger)max error:(NSError **)error;
+///** Read back multiple notification identifiers of, up to max, failed pushes. */
+//- (NSArray *)readFailedIdentifierErrorPairsWithMax:(NSUInteger)max error:(NSError **)error;
 
 @end
 

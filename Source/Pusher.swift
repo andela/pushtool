@@ -26,40 +26,35 @@ public class NWPusher : NSObject {
             return nil
         }
     }
-    public func connect(withIdentity identity: NWIdentityRef, environment: NWEnvironment) throws -> Bool {
-        
-        var selectedEnvironment = environment
-
-        if let connection =  self.connection {
-            connection.disconnect()
-        }
-        self.connection = nil
-        if environment == NWEnvironment.auto {
-            selectedEnvironment = NWSecTools.environment(forIdentity: identity)
-        }
-        let host = ((environment == NWEnvironment.sandbox) ? sandboxPushHost : pushHost)
-        let connection = NWSSLConnection(host: host, port: pushPort, identity: identity)
-        
-        guard let SSLConnection = connection
-            else { return false }
-        
-        let connected: Bool = (try? SSLConnection.connect()) != nil
-        if !connected {
-            return connected
-        }
-        self.connection = connection
-        return true
-    }
-
     
-    public func connect(withPKCS12Data data: Data, password: String, environment: NWEnvironment) throws -> Bool {
-        do {
-            let identity: NWIdentityRef = try NWSecTools.identities(withPKCS12Data: data, password: password) as NWIdentityRef
-            let result: Bool = (try? self.connect(withIdentity: identity, environment: environment)) != nil
-            return result
-        } catch {
-            return false
+    public func connect(withIdentity identity: NWIdentityRef,
+                        environment: NWEnvironment) throws {
+        self.connection?.disconnect()
+
+        var environment = environment
+
+        if environment == .auto {
+            environment = NWSecTools.environment(forIdentity: identity)
         }
+
+        let host = (environment == .sandbox) ? sandboxPushHost : pushHost
+
+        if let connection = NWSSLConnection(host: host,
+                                            port: pushPort,
+                                            identity: identity) {
+            try connection.connect()
+            self.connection = connection
+        }
+    }
+    
+    public func connect(withPKCS12Data data: Data,
+                        password: String,
+                        environment: NWEnvironment) throws {
+        let identity: NWIdentityRef = try NWSecTools.identities(withPKCS12Data: data,
+                                                                password: password) as NWIdentityRef
+
+        try connect(withIdentity: identity,
+                    environment: environment)
     }
     
     public func reconnect() throws -> Bool {

@@ -3,6 +3,8 @@
 
 @class NWSSLConnection;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** Reads tokens and dates from the APNs feedback service.
 
  The feedback service is a separate server that provides a list of all device tokens that it tried to deliver a notification to, but was unable to. This usually indicates that this device no longer has the app installed. This way, the feedback service provides reliable way of finding out who uninstalled the app, which can be fed back into your database.
@@ -15,15 +17,20 @@
 
 /** @name Properties */
 
-@property (nonatomic, strong) NWSSLConnection *connection;
+@property (nullable, nonatomic, strong) NWSSLConnection *connection;
 
 /** @name Initialization */
 
 /** Setup connection with feedback service based on identity. */
-+ (instancetype)connectWithIdentity:(NWIdentityRef)identity environment:(NWEnvironment)environment error:(NSError **)error;
++ (instancetype)connectWithIdentity:(NWIdentityRef)identity
+                        environment:(NWEnvironment)environment
+                              error:(NSError **)error;
 
 /** Setup connection with feedback service based on PKCS #12 data. */
-+ (instancetype)connectWithPKCS12Data:(NSData *)data password:(NSString *)password environment:(NWEnvironment)environment error:(NSError **)error;
++ (instancetype)connectWithPKCS12Data:(NSData *)data
+                             password:(nullable NSString *)password
+                          environment:(NWEnvironment)environment
+                                error:(NSError **)error;
 
 /** @name Connecting */
 
@@ -31,7 +38,10 @@
 - (BOOL)connectWithIdentity:(NWIdentityRef)identity environment:(NWEnvironment)environment error:(NSError **)error;
 
 /** Connect with feedback service based on PKCS #12 data. */
-- (BOOL)connectWithPKCS12Data:(NSData *)data password:(NSString *)password environment:(NWEnvironment)environment error:(NSError **)error;
+- (BOOL)connectWithPKCS12Data:(NSData *)data
+                     password:(nullable NSString *)password
+                  environment:(NWEnvironment)environment
+                        error:(NSError **)error;
 
 /** Disconnect from feedback service. The server will automatically drop the connection after all feedback data has been read. */
 - (void)disconnect;
@@ -48,3 +58,5 @@
 - (NSArray *)readTokenDatePairsWithMax:(NSUInteger)max error:(NSError **)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

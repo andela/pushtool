@@ -1,6 +1,7 @@
 
 import Foundation
 
+@objcMembers
 public class Pusher : NSObject {
     
     private let sandboxPushHost = "gateway.sandbox.push.apple.com"
@@ -9,22 +10,20 @@ public class Pusher : NSObject {
     
     public var connection: NWSSLConnection?
 
-    public init?(withIdentity identity: NWIdentityRef, environment: NWEnvironment) {
-        super.init()
-        do {
-            try self.connect(withIdentity: identity, environment: environment)
-        } catch {
-            return nil
-        }
+    public class func connect(withIdentity identity: NWIdentityRef, environment: NWEnvironment) throws -> Pusher {
+            let pusher = Pusher()
+        
+            try pusher.connect(withIdentity: identity,
+                               environment: environment)
+            return pusher
     }
     
-    public init?(withPKCS12Data data: Data, password: String, environment: NWEnvironment) {
-       super.init()
-        do {
-            try self.connect(withPKCS12Data: data, password: password, environment: environment)
-        } catch {
-            return nil
-        }
+    public class func connect(withPKCS12Data data: Data,
+                              password: String,
+                              environment: NWEnvironment) throws -> Pusher {
+        let pusher = Pusher()
+        try pusher.connect(withPKCS12Data: data, password: password, environment: environment)
+        return pusher
     }
     
     public func connect(withIdentity identity: NWIdentityRef,
@@ -57,18 +56,12 @@ public class Pusher : NSObject {
                     environment: environment)
     }
     
-    public func reconnect() throws -> Bool {
-        guard let SSLConnection = self.connection else {
-            return false
-        }
-        let result: Bool = (try? SSLConnection.connect()) != nil
-        return result
+    public func reconnect() throws {
+        try self.connection?.connect()
     }
     
     public func disconnect() {
-        guard let SSLConnection = self.connection
-            else { return }
-        SSLConnection.disconnect()
+        self.connection?.disconnect()
         self.connection = nil
     }
     
@@ -78,7 +71,7 @@ public class Pusher : NSObject {
                                           identifier: identifier,
                                           expiration: nil,
                                           priority: 0)
-//        return self.push(notification, type: NWNotificationType.type2)
+        try self.push(notification, type: .type2)
     }
 
     public func push(_ notification: NWNotification,
@@ -97,11 +90,59 @@ public class Pusher : NSObject {
         }
     }
     
-    public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<UInt>, apnError: NSErrorPointer) throws {
+    public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<UInt>) throws {
+        
+        let identifier = identifier
+        
+        identifier.pointee = 0
+        
+        let dataLength = UInt8.bitWidth*2 + UInt32.bitWidth
+        
+        let data = NSMutableData(length: dataLength)
+        
+        try self.connection?.read(data, length: identifier)
+        
+        var command: UInt8 = 0
+        data?.getBytes(&command, range: NSMakeRange(0, 1))
+        
+        if command != 8 {
+            throw NWErrorUtil.errorWithErrorCode(.pushResponseCommand, reason: Int(command))
+        }
+        
+        var status: UInt8 = 0
+        data?.getBytes(&status, range: NSMakeRange(1, 1))
+        
+        var ID: UInt32 = 0
+        data?.getBytes(&ID, range: NSMakeRange(2, 4))
+        
+        identifier.pointee = UInt(ID.bigEndian)
+        
+        try throwStatusError(status: Int(status))
         
     }
     
-    public func readFailedIdentifierErrorPairs(withMax max: UInt, error: NSErrorPointer) -> [Any] {
-        return [1]
+    private func throwStatusError(status: Int) throws {
+        switch status {
+        case 1:
+            throw NWErrorUtil.errorWithErrorCode(.apnProcessing, reason: status)
+        case 2:
+            throw NWErrorUtil.errorWithErrorCode(.apnMissingDeviceToken, reason: status)
+        case 3:
+            throw NWErrorUtil.errorWithErrorCode(.apnMissingTopic, reason: status)
+        case 4:
+            throw NWErrorUtil.errorWithErrorCode(.apnMissingPayload, reason: status)
+        case 5:
+            throw NWErrorUtil.errorWithErrorCode(.apnInvalidTokenSize, reason: status)
+        case 6:
+            throw NWErrorUtil.errorWithErrorCode(.apnInvalidTopicSize, reason: status)
+        case 7:
+            throw NWErrorUtil.errorWithErrorCode(.apnInvalidPayloadSize, reason: status)
+        case 8:
+            throw NWErrorUtil.errorWithErrorCode(.apnInvalidTokenContent, reason: status)
+        case 10:
+            throw NWErrorUtil.errorWithErrorCode(.apnShutdown, reason: status)
+        default:
+            throw NWErrorUtil.errorWithErrorCode(.apnUnknownErrorCode, reason: status)
+        }
     }
 }

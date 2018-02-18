@@ -3,7 +3,7 @@
 #import "NWSecTools.h"
 #import "NWNotification.h"
 
-//#import "PushTool-Swift.h"
+#import "PushTool-Swift.h"
 
 static NSString * const NWSandboxPushHost = @"gateway.sandbox.push.apple.com";
 static NSString * const NWPushHost = @"gateway.push.apple.com";

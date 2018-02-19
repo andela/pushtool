@@ -458,7 +458,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -472,7 +472,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PROVISIONING_PROFILE_SPECIFIER = "";

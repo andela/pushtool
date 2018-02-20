@@ -4,6 +4,8 @@
 #import "NWPushFeedback.h"
 #import "NWSecTools.h"
 
+#import "PushTool-Swift.h"
+
 @interface NWAppDelegate () <NWHubDelegate> @end
 
 @implementation NWAppDelegate {
@@ -164,11 +166,11 @@
         NWEnvironmentOptions environmentOptions = [NWSecTools environmentOptionsForCertificate:certificate];
         NSString *summary = nil;
         NWCertType certType = [NWSecTools typeWithCertificate:certificate summary:&summary];
-        NSString *type = descriptionForCertType(certType);
+        NSString *type = [ErrorUtil descriptionForCertType: certType];
         NSDate *date = [NWSecTools expirationWithCertificate:certificate];
         NSString *expire = [NSString stringWithFormat:@"  [%@]", date ? [formatter stringFromDate:date] : @"expired"];
         // summary = @"com.example.app";
-        [_certificatePopup addItemWithTitle:[NSString stringWithFormat:@"%@%@ (%@ %@)%@%@", hasIdentity ? @"imported: " : @"", summary, type, descriptionForEnvironentOptions(environmentOptions), expire, suffix]];
+        [_certificatePopup addItemWithTitle:[NSString stringWithFormat:@"%@%@ (%@ %@)%@%@", hasIdentity ? @"imported: " : @"", summary, type, [ErrorUtil descriptionForEnvironmentOptions: environmentOptions], expire, suffix]];
         [suffix appendString:@" "];
     }
     [_certificatePopup addItemWithTitle:@"Import PKCS #12 file (.p12)..."];
@@ -452,7 +454,7 @@
 {
     NWEnvironmentOptions environmentOptions = [NWSecTools environmentOptionsForCertificate:certificate];
     NSString *summary = [NWSecTools summaryWithCertificate:certificate];
-    return summary ? [NSString stringWithFormat:@"%@-%@", summary, descriptionForEnvironentOptions(environmentOptions)] : nil;
+    return summary ? [NSString stringWithFormat:@"%@-%@", summary, [ErrorUtil descriptionForEnvironmentOptions: environmentOptions]] : nil;
 }
 
 - (NSMutableArray *)tokensWithCertificate:(NWCertificateRef)certificate create:(BOOL)create

@@ -1,46 +1,48 @@
 #import "NWType.h"
 
+#import "PushTool-Swift.h"
+
 NSString * const NWErrorReasonCodeKey = @"NWErrorReasonCodeKey";
 
-NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptions)
-{
-    switch (environmentOptions) {
-        case NWEnvironmentOptionNone: return @"No environment";
-        case NWEnvironmentOptionSandbox: return @"Sandbox";
-        case NWEnvironmentOptionProduction: return @"Production";
-        case NWEnvironmentOptionAny: return @"Sandbox|Production";
-    }
-    return nil;
-}
-
-NSString * descriptionForEnvironent(NWEnvironment environment)
-{
-    switch (environment) {
-        case NWEnvironmentNone: return @"none";
-        case NWEnvironmentProduction: return @"production";
-        case NWEnvironmentSandbox: return @"sandbox";
-        case NWEnvironmentAuto: return @"auto";
-    }
-    return nil;
-}
-
-NSString * descriptionForCertType(NWCertType type)
-{
-    switch (type) {
-        case kNWCertTypeNone: return @"none";
-        case kNWCertTypeIOSDevelopment:
-        case kNWCertTypeIOSProduction: return @"iOS";
-        case kNWCertTypeMacDevelopment:
-        case kNWCertTypeMacProduction: return @"macOS";
-        case kNWCertTypeSimplified: return @"All";
-        case kNWCertTypeWebProduction: return @"Website";
-        case kNWCertTypeVoIPServices: return @"VoIP";
-        case kNWCertTypeWatchKitServices: return @"WatchKit";
-        case kNWCertTypePasses: return @"Pass";
-        case kNWCertTypeUnknown: return @"unknown";
-    }
-    return nil;
-}
+//NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptions)
+//{
+//    switch (environmentOptions) {
+//        case NWEnvironmentOptionNone: return @"No environment";
+//        case NWEnvironmentOptionSandbox: return @"Sandbox";
+//        case NWEnvironmentOptionProduction: return @"Production";
+//        case NWEnvironmentOptionAny: return @"Sandbox|Production";
+//    }
+//    return nil;
+//}
+//
+//NSString * descriptionForEnvironent(NWEnvironment environment)
+//{
+//    switch (environment) {
+//        case NWEnvironmentNone: return @"none";
+//        case NWEnvironmentProduction: return @"production";
+//        case NWEnvironmentSandbox: return @"sandbox";
+//        case NWEnvironmentAuto: return @"auto";
+//    }
+//    return nil;
+//}
+//
+//NSString * descriptionForCertType(NWCertType type)
+//{
+//    switch (type) {
+//        case kNWCertTypeNone: return @"none";
+//        case kNWCertTypeIOSDevelopment:
+//        case kNWCertTypeIOSProduction: return @"iOS";
+//        case kNWCertTypeMacDevelopment:
+//        case kNWCertTypeMacProduction: return @"macOS";
+//        case kNWCertTypeSimplified: return @"All";
+//        case kNWCertTypeWebProduction: return @"Website";
+//        case kNWCertTypeVoIPServices: return @"VoIP";
+//        case kNWCertTypeWatchKitServices: return @"WatchKit";
+//        case kNWCertTypePasses: return @"Pass";
+//        case kNWCertTypeUnknown: return @"unknown";
+//    }
+//    return nil;
+//}
 
 @implementation NWErrorUtil
 
@@ -127,15 +129,6 @@ NSString * descriptionForCertType(NWCertType type)
 
 #pragma mark - Helpers
 
-+ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason
-{
-    NSString *description = [self stringWithCode:code];
-    if (reason) description = [NSString stringWithFormat:@"%@ (%i)", description, (int)reason];
-    NSMutableDictionary *info = @{ NSLocalizedDescriptionKey:description }.mutableCopy;
-    if (reason) [info setValue:@(reason) forKey:NWErrorReasonCodeKey];
-    return [NSError errorWithDomain:@"NWPusherErrorDomain" code:code userInfo:info];
-}
-
 + (BOOL)noWithErrorCode:(NWError)code error:(NSError *__autoreleasing *)error
 {
     return [self noWithErrorCode:code reason:0 error:error];
@@ -144,7 +137,7 @@ NSString * descriptionForCertType(NWCertType type)
 + (BOOL)noWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError *__autoreleasing *)error
 {
     NSAssert(code != kNWErrorNone, @"code != kNWErrorNone");
-    if (error) *error = [self errorWithErrorCode:code reason:reason];
+    if (error) *error = [ErrorUtil errorWithErrorCode:code reason:reason];
     return NO;
 }
 
@@ -156,7 +149,7 @@ NSString * descriptionForCertType(NWCertType type)
 + (id)nilWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError *__autoreleasing *)error
 {
     NSAssert(code != kNWErrorNone, @"code != kNWErrorNone");
-    if (error) *error = [self errorWithErrorCode:code reason:reason];
+    if (error) *error = [ErrorUtil errorWithErrorCode:code reason:reason];
     return nil;
 }
 

@@ -206,23 +206,8 @@ typedef NS_ENUM(NSInteger, NWEnvironmentOptions) {
 /** NSError dictionary key for integer code that indicates underlying reason. */
 extern NSString * const NWErrorReasonCodeKey;
 
-/** A collection of helper methods to support Cocoa-style error handling (`NSError`).
-
- Most methods in this framework return `NO` or `nil` to indicate an error occurred. In that case an error object will be assigned. This class provides a mapping from codes to description string and some methods to instantiate the `NSError` object.
- */
-
-/** Returns string for given environment, for logging purposes */
-NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptions);
-NSString * descriptionForEnvironent(NWEnvironment environment);
-NSString * descriptionForCertType(NWCertType type);
-
 @interface NWErrorUtil : NSObject
 
-/** @name Helpers */
-
-+ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason;
-
-/** Assigns the error with provided code and associated description, for returning `NO`. */
 + (BOOL)noWithErrorCode:(NWError)code error:(NSError **)error;
 + (BOOL)noWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError **)error;
 

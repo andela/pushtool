@@ -162,6 +162,7 @@ OSStatus NWSSLWrite(SSLConnectionRef connection, const void *data, size_t *lengt
     size_t processed = 0;
     OSStatus status = SSLRead(_context, data.mutableBytes, data.length, &processed);
     *length = processed;
+    
     switch (status) {
         case errSecSuccess: return YES;
         case errSSLWouldBlock: return YES;

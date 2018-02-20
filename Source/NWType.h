@@ -217,6 +217,10 @@ NSString * descriptionForEnvironment(NWEnvironment environment);
 NSString * descriptionForCertType(NWCertType type);
 @interface NWErrorUtil : NSObject
 
+/** @name Helpers */
+
+/** Assigns the error with provided code and associated description, for returning `NO`. */
++ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason;
 + (BOOL)noWithErrorCode:(NWError)code error:(NSError **)error;
 + (BOOL)noWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError **)error;
 

@@ -6,14 +6,12 @@ public typealias identityRef = Any
 public typealias certificateRef = Any
 public typealias keyRef = Any
 
-
 @objcMembers
-public class ErrorUtil {
+public class ErrorUtil: NSObject {
     
     // MARK: Public Type Methods
     
-    
-    public class func descriptionForCertType(_ type: CertType) -> String {
+    public static func descriptionForCertType(_ type: NWCertType) -> String {
         switch type {
         case .none:
             return "none";
@@ -46,7 +44,7 @@ public class ErrorUtil {
         }
     }
     
-    public class func descriptionForEnvironment(_ environment: NWEnvironment) -> String {
+    public static func descriptionForEnvironment(_ environment: NWEnvironment) -> String {
         switch environment {
         case .none:
             return "none";
@@ -62,7 +60,7 @@ public class ErrorUtil {
         }
     }
     
-    public class func descriptionForEnvironmentOptions(_ environmentOptions: EnvironmentOptions) -> String {
+    public static func descriptionForEnvironmentOptions(_ environmentOptions: NWEnvironmentOptions) -> String {
         switch environmentOptions {
         case .none:
             return "No environment";
@@ -78,8 +76,8 @@ public class ErrorUtil {
         }
     }
     
-    public class func errorWithErrorCode(_ code: PushError,
-                                         reason: Int) -> NSError {
+    public static func errorWithErrorCode(_ code: PushError,
+                                          reason: Int) -> NSError {
         var description: String = self.string(code)
         
         if reason != 0 {
@@ -93,13 +91,13 @@ public class ErrorUtil {
         }
         
         return NSError(domain: "PusherErrorDomain",
-                      code: code.rawValue,
-                      userInfo: info)
+                       code: code.rawValue,
+                       userInfo: info)
     }
     
     // MARK: Private Type Methods
     
-    private class func string(_ code: PushError) -> String {
+    private static func string(_ code: PushError) -> String {
         switch code {
         case .none:
             return "No error, that's odd";

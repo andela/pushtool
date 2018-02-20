@@ -129,15 +129,6 @@ NSString * const NWErrorReasonCodeKey = @"NWErrorReasonCodeKey";
 
 #pragma mark - Helpers
 
-//+ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason
-//{
-//    NSString *description = [self stringWithCode:code];
-//    if (reason) description = [NSString stringWithFormat:@"%@ (%i)", description, (int)reason];
-//    NSMutableDictionary *info = @{ NSLocalizedDescriptionKey:description }.mutableCopy;
-//    if (reason) [info setValue:@(reason) forKey:NWErrorReasonCodeKey];
-//    return [NSError errorWithDomain:@"NWPusherErrorDomain" code:code userInfo:info];
-//}
-
 + (BOOL)noWithErrorCode:(NWError)code error:(NSError *__autoreleasing *)error
 {
     return [self noWithErrorCode:code reason:0 error:error];
@@ -146,7 +137,7 @@ NSString * const NWErrorReasonCodeKey = @"NWErrorReasonCodeKey";
 + (BOOL)noWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError *__autoreleasing *)error
 {
     NSAssert(code != kNWErrorNone, @"code != kNWErrorNone");
-    //if (error) *error = [ErrorUtil errorWithErrorCode:code reason:reason];
+    if (error) *error = [ErrorUtil errorWithErrorCode:code reason:reason];
     return NO;
 }
 
@@ -158,7 +149,7 @@ NSString * const NWErrorReasonCodeKey = @"NWErrorReasonCodeKey";
 + (id)nilWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError *__autoreleasing *)error
 {
     NSAssert(code != kNWErrorNone, @"code != kNWErrorNone");
-    //if (error) *error = [ErrorUtil errorWithErrorCode:code reason:reason];
+    if (error) *error = [ErrorUtil errorWithErrorCode:code reason:reason];
     return nil;
 }
 

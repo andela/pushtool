@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** The current and past data formats supported by APNs. For more information see Apple documentation under 'Legacy Information'. */
 typedef NS_ENUM(NSInteger, NWNotificationType) {
     /** The 'Simple Notification Format'. The oldest format, simply concatenates the device token and payload. */
@@ -218,6 +220,8 @@ NSString * descriptionForCertType(NWCertType type);
 
 /** @name Helpers */
 
++ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason;
+
 /** Assigns the error with provided code and associated description, for returning `NO`. */
 + (BOOL)noWithErrorCode:(NWError)code error:(NSError **)error;
 + (BOOL)noWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError **)error;
@@ -227,3 +231,5 @@ NSString * descriptionForCertType(NWCertType type);
 + (id)nilWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError **)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

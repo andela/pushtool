@@ -1,5 +1,4 @@
 #import "NWHub.h"
-#import "NWPusher.h"
 #import "NWNotification.h"
 #import "NWSecTools.h"
 
@@ -11,15 +10,15 @@
 
 - (instancetype)init
 {
-    return [self initWithPusher:[[NWPusher alloc] init] delegate:nil];
+    return [self initWithPusher:[[Pusher alloc] init] delegate:nil];
 }
 
 - (instancetype)initWithDelegate:(id<NWHubDelegate>)delegate
 {
-    return [self initWithPusher:[[NWPusher alloc] init] delegate:delegate];
+    return [self initWithPusher:[[Pusher alloc] init] delegate:delegate];
 }
 
-- (instancetype)initWithPusher:(NWPusher *)pusher delegate:(id<NWHubDelegate>)delegate
+- (instancetype)initWithPusher:(Pusher *)pusher delegate:(id<NWHubDelegate>)delegate
 {
     self = [super init];
     if (self) {
@@ -48,7 +47,7 @@
 
 - (BOOL)reconnectWithError:(NSError *__autoreleasing *)error
 {
-    return [_pusher reconnectWithError:error];
+    return [_pusher reconnectAndReturnError:error];
 }
 
 - (void)disconnect

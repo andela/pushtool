@@ -170,7 +170,7 @@ To create a connection directly from a PKCS12 (.p12) file:
     NSURL *url = [NSBundle.mainBundle URLForResource:@"PushTool.p12" withExtension:nil];
     NSData *pkcs12 = [NSData dataWithContentsOfURL:url];
     NSError *error = nil;
-    NWPusher *PushTool = [NWPusher connectWithPKCS12Data:pkcs12 password:@"pa$$word" error:&error];
+    Pusher *PushTool = [Pusher connectWithPKCS12Data:pkcs12 password:@"pa$$word" error:&error];
     if (PushTool) {
         NSLog(@"Connected to APNs");
     } else {
@@ -374,7 +374,7 @@ If it fails to connect then check:
 
 - Are you using the right identity? Use `[NWSecTools inspectIdentity:identity]` to inspect the identity instance. In general `NWSecTools` can be helpful for inspecting certificates, identities and the keychain.
 
-- Can you connect with the push servers? Try `[NWPusher connectWithIdentity:identity error:&error]` or `[NWPusher connectWithPKCS12Data:pkcs12 password:password error:&error]`.
+- Can you connect with the push servers? Try `[Pusher connectWithIdentity:identity error:&error]` or `[Pusher connectWithPKCS12Data:pkcs12 password:password error:&error]`.
 
 - PushTool connects on port `2195` with hosts `gateway.push.apple.com` and `gateway.sandbox.push.apple.com`, and on port `2196` with hosts `feedback.push.apple.com` and `feedback.sandbox.push.apple.com`. Make sure your firewall is configured to allow these connections.
 

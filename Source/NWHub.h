@@ -1,7 +1,7 @@
 #import "NWType.h"
 #import <Foundation/Foundation.h>
 
-@class NWNotification, NWPusher;
+@class NWNotification, Pusher;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notification:(NWNotification *)notification didFailWithError:(NSError *)error;
 @end
 
-/** Helper on top of `NWPusher` that hides the details of pushing and reading.
+/** Helper on top of `Pusher` that hides the details of pushing and reading.
 
- This class provides a more convenient way of pushing notifications to the APNs. It deals with the trouble of assigning a unique identifier to every notification and the handling of error responses from the server. It hides the latency that comes with transmitting the pushes, allowing you to simply push your notifications and getting notified of errors through the delegate. If this feels over-abstracted, then definitely check out the `NWPusher` class, which will give you full control.
+ This class provides a more convenient way of pushing notifications to the APNs. It deals with the trouble of assigning a unique identifier to every notification and the handling of error responses from the server. It hides the latency that comes with transmitting the pushes, allowing you to simply push your notifications and getting notified of errors through the delegate. If this feels over-abstracted, then definitely check out the `Pusher` class, which will give you full control.
 
  There are two set of methods for pushing notifications: the easy and the pros. The former will just do the pushing and reconnect if the connection breaks. This is your low-worry solution, provided that you call `readFailed` every so often (seconds) to handle error data from the server. The latter will give you a little more control and a little more responsibility.
  */
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** @name Properties */
 
 /** The pusher instance that does the actual work. */
-@property (nonatomic, strong) NWPusher *pusher;
+@property (nonatomic, strong) Pusher *pusher;
 
 /** Assign a delegate to get notified when something fails during or after pushing. */
 @property (nonatomic, weak) id<NWHubDelegate> delegate;
@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDelegate:(nullable id<NWHubDelegate>)delegate;
 
 /** Create and return a hub object with a delegate and pusher object assigned. */
-- (instancetype)initWithPusher:(NWPusher *)pusher
+- (instancetype)initWithPusher:(Pusher *)pusher
                       delegate:(nullable id<NWHubDelegate>)delegate;
 
 /** Create, connect and returns an instance with delegate and identity. */

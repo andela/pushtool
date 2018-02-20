@@ -49,6 +49,7 @@ public class PushFeedback : NSObject {
                                             identity: identity) {
 
             try connection.connect()
+
             self.connection = connection
         }
     }
@@ -71,49 +72,58 @@ public class PushFeedback : NSObject {
         connection?.disconnect()
     }
 
-    public func readTokenData(_ token: Data?, date: Date?) throws {
+    public func readTokenDatePairs(withMax max: Int) throws -> [Any] {
+        var pairs = [Any]()
 
-        let data = NSMutableData(length: (UInt8.bitWidth*2 + UInt32.bitWidth + tokenMaxSize))
-        let length = 0
+        for _ in 0..<max {
+            let (token, date) = try readToken()
 
-        try connection?.read(data, length:length)
-        if (length != data?.length) {
-            NWErrorUtil.errorWithErrorCode(.feedbackLength, reason: Int(length))
+            pairs.append([token, date])
         }
-        var time : UnsafeMutablePointer<UInt8>? = nil
-        time?.pointee = 0
-        data?.getBytes(&time, range: NSMakeRange(0, 4))
-        var l: UInt16 = 0
-        data?.getBytes(&l, range: NSMakeRange(4, 2))
-        let tokenLength = Int(l)
+
+        return pairs
+    }
+
+    private func readTokenData() throws -> (Data, Date) {
+
+        guard
+            let data = NSMutableData(length: (UInt8.bitWidth * 2 + UInt32.bitWidth + tokenMaxSize))
+            else { return (Data(), Date()) }
+
+        var length = 0
+
+        try connection?.read(data, length: &length)
+
+        if (length != data.length) {
+            NWErrorUtil.errorWithErrorCode(.feedbackLength,
+                                           reason: Int(length))
+        }
+
+        var time: UInt32 = 0
+
+        data.getBytes(&time, range: NSMakeRange(0, 4))
+
+        let date = Date(timeIntervalSince1970: TimeInterval(time))
+
+        var len: UInt16 = 0
+
+        data.getBytes(&len, range: NSMakeRange(4, 2))
+
+        let tokenLength = Int(len)
+
         if tokenLength != tokenMaxSize {
             NWErrorUtil.errorWithErrorCode(.feedbackTokenLength, reason: tokenLength)
         }
+
+        let token = data.subdata(with: NSMakeRange(6, length - 6))
+
+        return (token, date)
     }
 
-    public func readToken(_ token: String?, date: Date?) throws {
+    private func readToken() throws -> (String, Date) {
 
-        var data: Data?
-        try self.readTokenData(data, date: date)
-        if data != nil, let data = data  {
-            NWNotification.hex(from: data)
-        }
+        let (data, date) = try readTokenData()
 
-    }
-
-    public func readTokenDatePairs(withMax max: Int) throws -> [Any] {
-        var pairs = [Any]()
-        for _ in 0..<max {
-            var token: String?
-            var date: Date?
-            try self.readToken(token, date: date)
-
-            if token != nil && date != nil {
-                if let token = token, let date = date {
-                    pairs.append(contentsOf: [token, date])
-                }
-            }
-        }
-        return pairs
+        return (NWNotification.hex(from: data), date)
     }
 }

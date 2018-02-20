@@ -48,12 +48,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** @name Reading */
 
-/** Read a single token-date pair, where token is data. */
-- (BOOL)readTokenData:(NSData **)token date:(NSDate **)date error:(NSError **)error;
-
-/** Read a single token-date pair, where token is hex string. */
-- (BOOL)readToken:(NSString **)token date:(NSDate **)date error:(NSError **)error;
-
 /** Read all (or max) token-date pairs, where token is hex string. */
 - (NSArray *)readTokenDatePairsWithMax:(NSUInteger)max error:(NSError **)error;
 

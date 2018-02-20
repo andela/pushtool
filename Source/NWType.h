@@ -212,18 +212,18 @@ extern NSString * const NWErrorReasonCodeKey;
  */
 
 /** Returns string for given environment, for logging purposes */
-NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptions);
-NSString * descriptionForEnvironent(NWEnvironment environment);
-NSString * descriptionForCertType(NWCertType type);
+//NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptions);
+//NSString * descriptionForEnvironent(NWEnvironment environment);
+//NSString * descriptionForCertType(NWCertType type);
 
 @interface NWErrorUtil : NSObject
 
 /** @name Helpers */
 
-+ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason;
+//+ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason;
 
 /** Assigns the error with provided code and associated description, for returning `NO`. */
-+ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason;
+//+ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason;
 
 + (BOOL)noWithErrorCode:(NWError)code error:(NSError **)error;
 + (BOOL)noWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError **)error;

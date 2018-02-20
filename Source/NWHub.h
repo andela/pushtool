@@ -1,6 +1,7 @@
 #import "NWType.h"
 #import <Foundation/Foundation.h>
 
+
 @class NWNotification, Pusher;
 
 NS_ASSUME_NONNULL_BEGIN

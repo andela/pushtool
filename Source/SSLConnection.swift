@@ -1,24 +1,28 @@
 import Foundation
+import Security
 
 @objcMembers
 
 public class SSLConnection : NSObject {
     
-    //MARK:- Public Instance Properties
+    // MARK: Public Instance Properties
     
     public var host: String?
     public var port: UInt
     public var identity: NWIdentityRef?
-    public var socket: Int
-    
+
     //MARK:- Public Instance Initializers
     
     public override convenience init() {
         
-        self.init(host: nil, port: 0, identity: nil)
+        self.init(host: nil,
+                  port: 0,
+                  identity: nil)
     }
     
-    public init(host: String?, port: UInt, identity: NWIdentityRef?) {
+    public init(host: String?,
+                port: UInt,
+                identity: NWIdentityRef?) {
         
         self.identity = identity
         self.host = host
@@ -27,51 +31,53 @@ public class SSLConnection : NSObject {
         
     }
     
-    //MARK:- Public Instance De-initializer
+    // MARK: Public Instance De-initializer
     
     deinit {
         self.disconnect()
     }
     
-    // MARK:- Private Instance Methods
+    // MARK: Private Instance Methods
     
     public func connect() throws {
-        self.disconnect()
-        
-        try self.connectSocket()
-        self.disconnect()
-        
-        try self.connectSSL()
-        self.disconnect()
-        
-        try self.handshakeSSL()
-        self.disconnect()
-        
+        disconnect()
+
+        do {
+            try connectSocket()
+            try connectSSL()
+            try handshakeSSL()
+        } catch {
+            disconnect()
+            throw error
+        }
     }
     
     public func disconnect() {
         
         if let context = self.context {
-            //            SSLContext(context!)
+            SSLClose(context)
         }
-        if  socket >= 0 {
+
+        if socket >= 0 {
             close(Int32(socket))
+            socket = -1
         }
-        socket = -1
-        
     }
     
-    public func read(_ data: NSMutableData, length: UnsafeMutablePointer<UInt>) throws {
+    public func read(_ data: NSMutableData,
+                     length: UnsafeMutablePointer<UInt>) throws {
+
+        guard let context = self.context
+            else { return }
         
+        var processed: Int = 0
+
+        let status: OSStatus = SSLRead(context,
+                                       data.mutableBytes,
+                                       data.length,
+                                       &processed)
         
-        var length = 0
-        var processed = 0
-        
-        guard let context = self.context else { return }
-        
-        let status: OSStatus = SSLRead(context, data.mutableBytes, data.length, &processed)
-        
-        length = processed
+        length.pointee = UInt(processed)
         
         switch (status) {
         case errSecSuccess:
@@ -81,32 +87,38 @@ public class SSLConnection : NSObject {
             break
             
         case errSecIO:
-            throw NWErrorUtil.errorWithErrorCode(.readDroppedByServer, reason: Int(status))
+            throw NWErrorUtil.errorWithErrorCode(.readDroppedByServer,
+                                                 reason: Int(status))
             
         case errSSLClosedAbort:
-            throw NWErrorUtil.errorWithErrorCode(.readClosedAbort, reason: Int(status))
+            throw NWErrorUtil.errorWithErrorCode(.readClosedAbort,
+                                                 reason: Int(status))
             
         case errSSLClosedGraceful:
-            throw NWErrorUtil.errorWithErrorCode(.readClosedGraceful, reason: Int(status))
+            throw NWErrorUtil.errorWithErrorCode(.readClosedGraceful,
+                                                 reason: Int(status))
             
         default:
-            break
+            throw NWErrorUtil.errorWithErrorCode(.readFail,
+                                                 reason: Int(status))
         }
-        
-        throw NWErrorUtil.errorWithErrorCode(.readFail, reason: Int(status))
     }
     
-    public func write(_ data: Data, length: UnsafeMutablePointer<UInt>) throws {
+    public func write(_ data: NSData,
+                      length: UnsafeMutablePointer<UInt>) throws {
         
-        var length = 0
         var processed = 0
         
-        guard let context = self.context else { return }
+        guard let context = self.context
+            else { return }
         
-        let status: OSStatus = SSLRead(context, data.mutableBytes, data.count, &processed)
+        let status: OSStatus = SSLWrite(context,
+                                        data.bytes,
+                                        data.length,
+                                        &processed)
         
-        length = processed
-        
+        length.pointee = UInt(processed)
+
         switch (status) {
             
         case errSecSuccess:
@@ -116,33 +128,31 @@ public class SSLConnection : NSObject {
             break
             
         case errSecIO:
-            throw NWErrorUtil.errorWithErrorCode(.writeDroppedByServer, reason: Int(status))
+            throw NWErrorUtil.errorWithErrorCode(.writeDroppedByServer,
+                                                 reason: Int(status))
             
         case errSSLClosedAbort:
-            throw NWErrorUtil.errorWithErrorCode(.writeClosedAbort, reason: Int(status))
+            throw NWErrorUtil.errorWithErrorCode(.writeClosedAbort,
+                                                 reason: Int(status))
             
         case errSSLClosedGraceful:
-            throw NWErrorUtil.errorWithErrorCode(.writeClosedGraceful, reason: Int(status))
+            throw NWErrorUtil.errorWithErrorCode(.writeClosedGraceful,
+                                                 reason: Int(status))
             
         default:
-            break
+            throw NWErrorUtil.errorWithErrorCode(.writeFail,
+                                                 reason: Int(status))
         }
-        
-        throw NWErrorUtil.errorWithErrorCode(.writeFail, reason: Int(status))
     }
     
-    //MARK:- Private Instance Properties
+    // MARK: Private Instance Properties
     
     private let SSL_HANDSHAKE_TRY_COUNT = 1 << 26
-    private var context: SSLContext? = nil
+
+    private var context: SSLContext?
+    private var socket: Int
     
     // MARK:- Private Instance Methods
-    
-    private func SSLRead(connection: SSLConnectionRef, data: Void, length: size_t) -> OSStatus {
-    }
-    
-    private func SSLWrite(connection: SSLConnectionRef, data: Void, length: size_t) -> OSStatus {
-    }
     
     private func connectSocket() throws {
         

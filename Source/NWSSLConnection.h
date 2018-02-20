@@ -1,6 +1,7 @@
 #import "NWType.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 /** An SSL (TLS) connection to the APNs.
 
@@ -17,13 +18,13 @@
 /** @name Properties */
 
 /** The host name, which will be resolved using DNS. */
-@property (nonatomic, strong) NSString *host;
+@property (nonatomic, strong, nullable) NSString *host;
 
 /** The host TCP port number. */
 @property (nonatomic, assign) NSUInteger port;
 
 /** Identity containing a certificate-key pair for setting up the TLS connection. */
-@property (nonatomic, strong) NWIdentityRef identity;
+@property (nonatomic, strong, nullable) NWIdentityRef identity;
 
 /** @name Initialization */
 
@@ -48,3 +49,5 @@
 - (BOOL)write:(NSData *)data length:(NSUInteger *)length error:(NSError **)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

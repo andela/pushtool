@@ -54,7 +54,6 @@ public class PushFeedback : NSObject {
     }
 
 
-    /** Connect with feedback service based on PKCS #12 data. */
     public func connect(withPKCS12Data data: Data,
                         password: String?,
                         environment: NWEnvironment) throws {
@@ -72,19 +71,49 @@ public class PushFeedback : NSObject {
         connection?.disconnect()
     }
 
-    public func readTokenData(_ token: Data, date: Date) throws {
+    public func readTokenData(_ token: Data?, date: Date?) throws {
 
-//        var data = Data(length: MemoryLayout<UInt32>.size + MemoryLayout<UInt16>.size + tokenMaxSize)
+        let data = NSMutableData(length: (UInt8.bitWidth*2 + UInt32.bitWidth + tokenMaxSize))
+        let length = 0
 
+        try connection?.read(data, length:length)
+        if (length != data?.length) {
+            NWErrorUtil.errorWithErrorCode(.feedbackLength, reason: Int(length))
+        }
+        var time : UnsafeMutablePointer<UInt8>? = nil
+        time?.pointee = 0
+        data?.getBytes(&time, range: NSMakeRange(0, 4))
+        var l: UInt16 = 0
+        data?.getBytes(&l, range: NSMakeRange(4, 2))
+        let tokenLength = Int(l)
+        if tokenLength != tokenMaxSize {
+            NWErrorUtil.errorWithErrorCode(.feedbackTokenLength, reason: tokenLength)
+        }
+    }
 
+    public func readToken(_ token: String?, date: Date?) throws {
+
+        var data: Data?
+        try self.readTokenData(data, date: date)
+        if data != nil, let data = data  {
+            NWNotification.hex(from: data)
+        }
 
     }
 
-    public func readToken(_ token: Data, date: Date) throws {
+    public func readTokenDatePairs(withMax max: Int) throws -> [Any] {
+        var pairs = [Any]()
+        for _ in 0..<max {
+            var token: String?
+            var date: Date?
+            try self.readToken(token, date: date)
 
-    }
-
-    public func readTokenDatePairs(withMax max: UInt) throws -> [Any] {
-        return []
+            if token != nil && date != nil {
+                if let token = token, let date = date {
+                    pairs.append(contentsOf: [token, date])
+                }
+            }
+        }
+        return pairs
     }
 }

@@ -97,8 +97,8 @@ public class Pusher: NSObject {
         try self.push(notification, type: .type2)
     }
 
-    public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<UInt>) throws {
-        
+    public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<UInt>,
+                                     apnError: NSErrorPointer) throws {
         let identifier = identifier
         
         identifier.pointee = 0
@@ -131,8 +131,8 @@ public class Pusher: NSObject {
                        range: NSMakeRange(2, 4))
         
         identifier.pointee = UInt(ID.bigEndian)
-        
-        try throwStatusError(status: Int(status))
+
+        apnError?.pointee = error(for: Int(status))
     }
 
     public func reconnect() throws {
@@ -147,47 +147,47 @@ public class Pusher: NSObject {
 
     // MARK: Private Instance Methods
     
-    private func throwStatusError(status: Int) throws {
+    private func error(for status: Int) -> NSError {
         switch status {
         case 1:
-            throw NWErrorUtil.errorWithErrorCode(.apnProcessing,
-                                                 reason: status)
+            return NWErrorUtil.errorWithErrorCode(.apnProcessing,
+                                                  reason: status) as NSError
 
         case 2:
-            throw NWErrorUtil.errorWithErrorCode(.apnMissingDeviceToken,
-                                                 reason: status)
+            return NWErrorUtil.errorWithErrorCode(.apnMissingDeviceToken,
+                                                  reason: status) as NSError
 
         case 3:
-            throw NWErrorUtil.errorWithErrorCode(.apnMissingTopic,
-                                                 reason: status)
+            return NWErrorUtil.errorWithErrorCode(.apnMissingTopic,
+                                                  reason: status) as NSError
 
         case 4:
-            throw NWErrorUtil.errorWithErrorCode(.apnMissingPayload,
-                                                 reason: status)
+            return NWErrorUtil.errorWithErrorCode(.apnMissingPayload,
+                                                  reason: status) as NSError
 
         case 5:
-            throw NWErrorUtil.errorWithErrorCode(.apnInvalidTokenSize,
-                                                 reason: status)
+            return NWErrorUtil.errorWithErrorCode(.apnInvalidTokenSize,
+                                                  reason: status) as NSError
 
         case 6:
-            throw NWErrorUtil.errorWithErrorCode(.apnInvalidTopicSize,
-                                                 reason: status)
+            return NWErrorUtil.errorWithErrorCode(.apnInvalidTopicSize,
+                                                  reason: status) as NSError
 
         case 7:
-            throw NWErrorUtil.errorWithErrorCode(.apnInvalidPayloadSize,
-                                                 reason: status)
+            return NWErrorUtil.errorWithErrorCode(.apnInvalidPayloadSize,
+                                                  reason: status) as NSError
 
         case 8:
-            throw NWErrorUtil.errorWithErrorCode(.apnInvalidTokenContent,
-                                                 reason: status)
+            return NWErrorUtil.errorWithErrorCode(.apnInvalidTokenContent,
+                                                  reason: status) as NSError
 
         case 10:
-            throw NWErrorUtil.errorWithErrorCode(.apnShutdown,
-                                                 reason: status)
+            return NWErrorUtil.errorWithErrorCode(.apnShutdown,
+                                                  reason: status) as NSError
 
         default:
-            throw NWErrorUtil.errorWithErrorCode(.apnUnknownErrorCode,
-                                                 reason: status)
+            return NWErrorUtil.errorWithErrorCode(.apnUnknownErrorCode,
+                                                  reason: status) as NSError
         }
     }
 }

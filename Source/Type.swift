@@ -1,6 +1,8 @@
+import Foundation
+
 public let errorReasonCodeKey: String = "NWErrorReasonCodeKey"
 
-public func descriptionForEnvironentOptions(_ environmentOptions: EnvironmentOptions) -> String {
+public func descriptionForEnvironmentOptions(_ environmentOptions: EnvironmentOptions) -> String {
     switch environmentOptions {
     case .none:
         return "No environment";
@@ -13,7 +15,7 @@ public func descriptionForEnvironentOptions(_ environmentOptions: EnvironmentOpt
     }
 }
 
-public func descriptionForEnvironent(_ environment: NWEnvironment) -> String {
+public func descriptionForEnvironment(_ environment: NWEnvironment) -> String {
     switch environment {
     case .none:
         return "none";
@@ -38,14 +40,19 @@ public func descriptionForCertType(_ type: CertType) -> String {
         return "macOS";
     case .simplified:
         return "All";
+
     case .webProduction:
         return "Website";
+
     case .voIPServices:
         return "VoIP";
+
     case .watchKitServices:
         return "WatchKit";
+
     case .passes:
         return "Pass";
+
     case .unknown:
         return "unknown";
     }
@@ -54,20 +61,25 @@ public func descriptionForCertType(_ type: CertType) -> String {
 @objcMembers
 public class ErrorUtil {
 
-    convenience init(errorCode code: PushError, reason: Int) throws {
+    public class func errorWithErrorCode(_ code: PushError, reason: Int) throws {
         var description: String = self.string(code)
+
         if reason != 0 {
             description = "\(description) (\(Int(reason)))"
         }
+
         var info = [NSLocalizedDescriptionKey: description]
+
         if reason != 0 {
             info[NWErrorReasonCodeKey] = "\(reason)"
         }
-        throw PushError(domain: "PusherErrorDomain", code: Int(code), userInfo: info)
+
+        throw NSError(domain: "PusherErrorDomain",
+                      code: code.rawValue,
+                      userInfo: info)
     }
 
-    
-    private func string(_ code: PushError) -> String {
+    private class func string(_ code: PushError) -> String {
         switch code {
         case .none:
             return "No error, that's odd";
@@ -163,48 +175,64 @@ public class ErrorUtil {
             
         case .readDroppedByServer:
             return "Read connection dropped by server";
+
         case .readClosedAbort:
             return "Read connection error";
+
         case .readClosedGraceful:
             return "Read connection closed";
+
         case .readFail:
             return "Read failed";
             
         case .writeDroppedByServer:
             return "Write connection dropped by server";
+
         case .writeClosedAbort:
             return "Write connection error";
+
         case .writeClosedGraceful:
             return "Write connection closed";
+
         case .writeFail:
             return "Write failed";
             
         case .identityCopyCertificate:
             return "Identity does not contain certificate";
+
         case .identityCopyPrivateKey:
             return "Identity does not contain private key";
             
         case .pkcs12Import:
             return "PKCS12 data cannot be imported";
+
         case .pkcs12EmptyData:
             return "PKCS12 data is empty";
+
         case .pkcs12Decode:
             return "PKCS12 data cannot be read or is malformed";
+
         case .pkcs12AuthFailed:
             return "PKCS12 data password incorrect";
+
         case .pkcs12Password:
             return "PKCS12 data wrong password";
+
         case .pkcs12PasswordRequired:
             return "PKCS12 data password required";
+
         case .pkcs12NoItems:
             return "PKCS12 data contains no identities";
+
         case .pkcs12MultipleItems:
             return "PKCS12 data contains multiple identities";
             
         case .keychainCopyMatching:
             return "Keychain cannot be searched";
+
         case .keychainItemNotFound:
             return "Keychain does not contain private key";
+
         case .keychainCreateIdentity:
             return "Keychain does not contain certificate";
         }

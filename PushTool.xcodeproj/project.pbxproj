@@ -47,6 +47,7 @@
 		6315D14787C83D5942AE5C222A84A5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
 		C0B65FDE6DE7BB52E7F3D37B226B0F53 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
 		A753C6A26F38B04BD364B1EF50CA719B /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */; };
+		BF9FA9B727985DFF910A43EC6E4B964D /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */; };
 		037EDD2B43689B7E1D73F243A6A3B079 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */; };
 		827A6E0369D3A6D0D2E2DB64CC8B38DE /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */; };
 		D594D2C57D2060F8FC035DC54EF88BE7 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */; };
@@ -233,6 +234,7 @@
 				6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */,
 				140F5B21E58BEC6B88A66E65DF5C4C4D /* PushTool-Bridging-Header.h */,
 				891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */,
+				1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -424,6 +426,7 @@
 				1EEA34607E6AA1BF0298480FE48FBF05 /* NotificationType.swift in Sources */,
 				5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */,
 				27FB77F9807A29E312E18DFCF5456812 /* Pusher.swift in Sources */,
+				BF9FA9B727985DFF910A43EC6E4B964D /* Type.swift in Sources */,
 				401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +449,7 @@
 				119594ED389BE44EE8217E8247A78A2D /* NotificationType.swift in Sources */,
 				11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */,
 				123BBCE517D6D5EF48C46861046EEA1F /* Pusher.swift in Sources */,
+				A753C6A26F38B04BD364B1EF50CA719B /* Type.swift in Sources */,
 				0114C9AF57C812FA943F2241116693F8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,7 +462,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z2TAY6TRFW;
+				DEVELOPMENT_TEAM = 7688PWZMS6;
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -472,7 +476,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z2TAY6TRFW;
+				DEVELOPMENT_TEAM = 7688PWZMS6;
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PROVISIONING_PROFILE_SPECIFIER = "";

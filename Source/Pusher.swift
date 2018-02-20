@@ -69,8 +69,8 @@ public class Pusher: NSObject {
         self.connection = nil
     }
     
-    public func push(_ notification: NWNotification,
-                     type: NWNotificationType) throws {
+    public func pushNotification(_ notification: NWNotification,
+                                 type: NWNotificationType) throws {
         let data = notification.data(with: .type2)
 
         guard let connection = self.connection
@@ -87,14 +87,17 @@ public class Pusher: NSObject {
         }
     }
 
-    public func pushPayload(_ payload: String, token: String, identifier: UInt) throws {
+    public func pushPayload(_ payload: String,
+                            token: String,
+                            identifier: UInt) throws {
         let notification = NWNotification(payload: payload,
                                           token: token,
                                           identifier: identifier,
                                           expiration: nil,
                                           priority: 0)
 
-        try self.push(notification, type: .type2)
+        try self.pushNotification(notification,
+                                  type: .type2)
     }
 
     public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<UInt>,

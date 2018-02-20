@@ -4,7 +4,7 @@
 
 /** An SSL (TLS) connection to the APNs.
 
- This class is basically an Objective-C wrapper around `SSLContextRef` and `SSLConnectionRef`, which are part of the native Secure Transport framework. This class provides a generic interface for SSL (TLS) connections, independent of NWPusher.
+ This class is basically an Objective-C wrapper around `SSLContextRef` and `SSLConnectionRef`, which are part of the native Secure Transport framework. This class provides a generic interface for SSL (TLS) connections, independent of Pusher.
 
  A SSL connection is set up using the host name, host port and an identity. The host name will be resolved using DNS. The identity is an instance of `SecIdentityRef` and contains both a certificate and a private key. See the *Secure Transport Reference* for more info on that.
 

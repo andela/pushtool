@@ -73,7 +73,7 @@ public class PushFeedback : NSObject {
     }
 
     public func readTokenDatePairs(withMax max: Int) throws -> [Any] {
-        var pairs = [Any]()
+        var pairs: [Any] = []
 
         for _ in 0..<max {
             let (token, date) = try readToken()
@@ -95,7 +95,7 @@ public class PushFeedback : NSObject {
         try connection?.read(data, length: &length)
 
         if (length != data.length) {
-            NWErrorUtil.errorWithErrorCode(.feedbackLength,
+           throw ErrorUtil.errorWithErrorCode(.feedbackLength,
                                            reason: Int(length))
         }
 
@@ -112,7 +112,7 @@ public class PushFeedback : NSObject {
         let tokenLength = Int(len)
 
         if tokenLength != tokenMaxSize {
-            NWErrorUtil.errorWithErrorCode(.feedbackTokenLength, reason: tokenLength)
+            throw ErrorUtil.errorWithErrorCode(.feedbackTokenLength, reason: tokenLength)
         }
 
         let token = data.subdata(with: NSMakeRange(6, length - 6))

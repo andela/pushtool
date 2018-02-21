@@ -100,9 +100,8 @@ public class Pusher: NSObject {
                                   type: .type2)
     }
     
-    public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<UInt>,
+    public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<Int>,
                                      apnError: NSErrorPointer) throws {
-        let identifier = identifier
         
         identifier.pointee = 0
         
@@ -133,7 +132,7 @@ public class Pusher: NSObject {
         data?.getBytes(&ID,
                        range: NSMakeRange(2, 4))
         
-        identifier.pointee = UInt(ID.bigEndian)
+        identifier.pointee = Int(ID.bigEndian)
         
         apnError?.pointee = error(for: Int(status))
     }

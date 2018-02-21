@@ -22,7 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		ABCB519E2A42297B53B541583ED79F8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */; };
+		C56D9547F9EC2490F0AC70B52E72F792 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D298BB86B2BF7751DC7C9C6D3936FB3 /* AppDelegate.swift */; };
 		18B38194738A167BF5725EFA71E598B5 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */; };
 		36D54B2CC763F636A6F5C8721EC3DA72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
 		9FFD9865D421E2102537DDBE315C7628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
@@ -107,7 +107,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3D298BB86B2BF7751DC7C9C6D3936FB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A347CF633AC3D0CDE521B7D62A20A804 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
 		9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -223,6 +223,7 @@
 		85A7667934856BAE3BA4F5230AC2C044 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				3D298BB86B2BF7751DC7C9C6D3936FB3 /* AppDelegate.swift */,
 				52270B059CF4701F5F9DAB8FEC0FDC9B /* NWAppDelegate.h */,
 				4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */,
 				4C441803E081F0BA8EA2F316A89204A8 /* main.m */,
@@ -452,6 +453,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C56D9547F9EC2490F0AC70B52E72F792 /* AppDelegate.swift in Sources */,
 				5488FEFACD09F056A806A4A2B44F51CE /* CertType.swift in Sources */,
 				9B3B6748BDD9319E08404E2221ED1531 /* Environment.swift in Sources */,
 				F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */,
@@ -506,7 +508,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
@@ -521,7 +523,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;

@@ -42,7 +42,7 @@
 /** @name I/O */
 
 /** Read length number of bytes into mutable data object. */
-- (BOOL)read:(NSMutableData *)data length:(NSUInteger *)length error:(NSError **)error;
+- (BOOL)read:(NSMutableData * _Nullable)data length:(NSInteger *)length error:(NSError **)error;
 
 /** Write length number of bytes from data object. */
 - (BOOL)write:(NSData *)data length:(NSUInteger *)length error:(NSError **)error;

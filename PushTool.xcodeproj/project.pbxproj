@@ -6,6 +6,21 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		CCB78D094D2D383149AFB5455DD3F943 /* PushTool */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = CBD3BBF8FD48CB94FFFC9F4E8869C799 /* Build configuration list for PBXAggregateTarget "PushTool" */;
+			buildPhases = (
+			);
+			dependencies = (
+				24CE16BF578BA6FF46511AEC7F1D788F /* PBXTargetDependency */,
+				D155C9155FFAA55BF6D16601E0638FDF /* PBXTargetDependency */,
+			);
+			name = PushTool;
+			productName = PushTool;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		18B38194738A167BF5725EFA71E598B5 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */; };
 		36D54B2CC763F636A6F5C8721EC3DA72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
@@ -26,8 +41,6 @@
 		F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
 		0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
 		39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
-		2DB1F72A1DBD25864D3FF1E137BE9F75 /* NWPushFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */; };
-		30EA9D831EEBF05823F9F7421AEEBF3A /* NWPushFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */; };
 		3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
 		6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
 		30863083D4E77D3DFB249208054438AE /* NWSecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 394857CC384C598C8FC13E37117A40E5 /* NWSecTools.m */; };
@@ -40,6 +53,8 @@
 		1EEA34607E6AA1BF0298480FE48FBF05 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09259B14A54E34E349BD67B6883AC8 /* NotificationType.swift */; };
 		11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */; };
 		5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */; };
+		7A01DAA5CE5CF36769A54C76383FF325 /* PushFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */; };
+		E0AF842A33E8C3A1A33B1B8728B4B7BF /* PushFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */; };
 		123BBCE517D6D5EF48C46861046EEA1F /* Pusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */; };
 		27FB77F9807A29E312E18DFCF5456812 /* Pusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */; };
 		4A502FC03236A7A9857082B9EBDEA522 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
@@ -54,6 +69,23 @@
 		0114C9AF57C812FA943F2241116693F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C441803E081F0BA8EA2F316A89204A8 /* main.m */; };
 		401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B4339B3DAC3C6648B8622401AB97C4 /* main.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FFD67C246FF3B2E9A018AC4FE4D551E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 249EA1D406BFEFAE3143060E00AFB762 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C4F333727553ED96B2BD9E5327CD5F5;
+			remoteInfo = "PushTool-macOS";
+		};
+		673BFBC39E05F1FA1FF0C4D7893B31EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 249EA1D406BFEFAE3143060E00AFB762 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2A43D4759A09338023CC0184E226C68;
+			remoteInfo = "PushTool-iOS";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		4D077E4E9DCD95B06485AA50A86C7C52 /* Embed Frameworks */ = {
@@ -99,8 +131,6 @@
 		DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWHub.m; sourceTree = "<group>"; };
 		BA947E73E088777709D011DAA0893F2C /* NWNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWNotification.h; sourceTree = "<group>"; };
 		2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWNotification.m; sourceTree = "<group>"; };
-		D6B7B1CD5300C3763F0F76225FECE875 /* NWPushFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWPushFeedback.h; sourceTree = "<group>"; };
-		1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWPushFeedback.m; sourceTree = "<group>"; };
 		2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWSSLConnection.h; sourceTree = "<group>"; };
 		87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWSSLConnection.m; sourceTree = "<group>"; };
 		39F0CBABAECD2011008AC414C77A796F /* NWSecTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWSecTools.h; sourceTree = "<group>"; };
@@ -115,6 +145,7 @@
 		9E387C3A9A39BC328274AD273C4C054C /* ProjectVersion.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectVersion.xcconfig; sourceTree = "<group>"; };
 		9167D4589C9F8DEAFD3279CF4898983F /* ProjectWarnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectWarnings.xcconfig; sourceTree = "<group>"; };
 		6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushError.swift; sourceTree = "<group>"; };
+		82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushFeedback.swift; sourceTree = "<group>"; };
 		140F5B21E58BEC6B88A66E65DF5C4C4D /* PushTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushTool-Bridging-Header.h"; sourceTree = "<group>"; };
 		11BC446A9ED8212EEFAB971FA6A7923D /* PushTool-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PushTool-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,8 +252,6 @@
 				DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */,
 				BA947E73E088777709D011DAA0893F2C /* NWNotification.h */,
 				2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */,
-				D6B7B1CD5300C3763F0F76225FECE875 /* NWPushFeedback.h */,
-				1AD6BF8B96A464E5D28E739FCBCD2EE2 /* NWPushFeedback.m */,
 				2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */,
 				87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */,
 				39F0CBABAECD2011008AC414C77A796F /* NWSecTools.h */,
@@ -232,6 +261,7 @@
 				D94A48939C7B38170911247110839411 /* Notification.swift */,
 				3C09259B14A54E34E349BD67B6883AC8 /* NotificationType.swift */,
 				6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */,
+				82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */,
 				140F5B21E58BEC6B88A66E65DF5C4C4D /* PushTool-Bridging-Header.h */,
 				891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */,
 				1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */,
@@ -330,6 +360,10 @@
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
+					CCB78D094D2D383149AFB5455DD3F943 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 4335BA8FAFE51AA4C506BEC5E36BA63A /* Build configuration list for PBXProject "PushTool" */;
@@ -346,6 +380,7 @@
 			targets = (
 				4C4F333727553ED96B2BD9E5327CD5F5 /* PushTool-macOS */,
 				F2A43D4759A09338023CC0184E226C68 /* PushTool-iOS */,
+				CCB78D094D2D383149AFB5455DD3F943 /* PushTool */,
 			);
 		};
 /* End PBXProject section */
@@ -418,13 +453,13 @@
 				391DC7519B2060B8FB1645F3B66FF665 /* NWAppDelegate.m in Sources */,
 				CDB66CAA955369B0FA03D30051842A11 /* NWHub.m in Sources */,
 				0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */,
-				2DB1F72A1DBD25864D3FF1E137BE9F75 /* NWPushFeedback.m in Sources */,
 				3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */,
 				30863083D4E77D3DFB249208054438AE /* NWSecTools.m in Sources */,
 				620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */,
 				4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */,
 				1EEA34607E6AA1BF0298480FE48FBF05 /* NotificationType.swift in Sources */,
 				5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */,
+				7A01DAA5CE5CF36769A54C76383FF325 /* PushFeedback.swift in Sources */,
 				27FB77F9807A29E312E18DFCF5456812 /* Pusher.swift in Sources */,
 				BF9FA9B727985DFF910A43EC6E4B964D /* Type.swift in Sources */,
 				401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */,
@@ -441,13 +476,13 @@
 				1DA11F25D63D240E1879DDCA0D15407F /* NWAppDelegate.m in Sources */,
 				F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */,
 				39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */,
-				30EA9D831EEBF05823F9F7421AEEBF3A /* NWPushFeedback.m in Sources */,
 				6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */,
 				9B9FC7C7222906F0F09CBA90BA63FB9E /* NWSecTools.m in Sources */,
 				10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */,
 				FC0A678E18435EFF9410A285556A5C2E /* Notification.swift in Sources */,
 				119594ED389BE44EE8217E8247A78A2D /* NotificationType.swift in Sources */,
 				11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */,
+				E0AF842A33E8C3A1A33B1B8728B4B7BF /* PushFeedback.swift in Sources */,
 				123BBCE517D6D5EF48C46861046EEA1F /* Pusher.swift in Sources */,
 				A753C6A26F38B04BD364B1EF50CA719B /* Type.swift in Sources */,
 				0114C9AF57C812FA943F2241116693F8 /* main.m in Sources */,
@@ -455,6 +490,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D155C9155FFAA55BF6D16601E0638FDF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C4F333727553ED96B2BD9E5327CD5F5 /* PushTool-macOS */;
+			targetProxy = FFD67C246FF3B2E9A018AC4FE4D551E6 /* PBXContainerItemProxy */;
+		};
+		24CE16BF578BA6FF46511AEC7F1D788F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2A43D4759A09338023CC0184E226C68 /* PushTool-iOS */;
+			targetProxy = 673BFBC39E05F1FA1FF0C4D7893B31EC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		593FBB12A0158EFD2499034CB061AF6C /* Debug */ = {
@@ -535,6 +583,22 @@
 			};
 			name = Release;
 		};
+		3FD78376D5882E83058B1CA9DF7F2866 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		018B1F886B91632A79FD16A9B61A2705 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -561,6 +625,15 @@
 			buildConfigurations = (
 				593FBB12A0158EFD2499034CB061AF6C /* Debug */,
 				6BDC67F08D1321AB83D2C8E33434DFC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CBD3BBF8FD48CB94FFFC9F4E8869C799 /* Build configuration list for PBXAggregateTarget "PushTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FD78376D5882E83058B1CA9DF7F2866 /* Debug */,
+				018B1F886B91632A79FD16A9B61A2705 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,7 +1,6 @@
 #import "NWAppDelegate.h"
 #import "NWHub.h"
 #import "NWNotification.h"
-#import "NWPushFeedback.h"
 #import "NWSecTools.h"
 
 #import "PushTool-Swift.h"
@@ -426,7 +425,7 @@
         //NWLogInfo(@"Connecting to feedback service..  (%@ %@)", summary, descriptionForEnvironent(environment));
         NSError *error = nil;
         NWIdentityRef identity = [NWSecTools keychainIdentityWithCertificate:_selectedCertificate error:&error];
-        NWPushFeedback *feedback = [NWPushFeedback connectWithIdentity:identity environment:[self selectedEnvironmentForCertificate:certificate] error:&error];
+        PushFeedback *feedback = [PushFeedback connectWithIdentity:identity environment:[self selectedEnvironmentForCertificate:certificate] error:&error];
         if (!feedback) {
             //NWLogWarn(@"Unable to connect to feedback service: %@", error.localizedDescription);
             return;

@@ -240,13 +240,13 @@ Feedback Service
 ----------------
 The feedback service is part of the Apple Push Notification service. The feedback service is basically a list containing device tokens that became invalid. Apple recommends that you read from the feedback service once every 24 hours, and no longer send notifications to listed devices. Note that this can be used to find out who removed your app from their device.
 
-Communication with the feedback service can be done with the `NWPushFeedback` class. First connect using one of the `connect` methods:
+Communication with the feedback service can be done with the `PushFeedback` class. First connect using one of the `connect` methods:
 
 ```objective-c
     NSURL *url = [NSBundle.mainBundle URLForResource:@"PushTool.p12" withExtension:nil];
     NSData *pkcs12 = [NSData dataWithContentsOfURL:url];
     NSError *error = nil;
-    NWPushFeedback *feedback = [NWPushFeedback connectWithPKCS12Data:pkcs12 password:@"pa$$word" error:&error];
+    PushFeedback *feedback = [PushFeedback connectWithPKCS12Data:pkcs12 password:@"pa$$word" error:&error];
     if (feedback) {
         NSLog(@"Connected to feedback service");
     } else {

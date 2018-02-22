@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		ABCB519E2A42297B53B541583ED79F8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */; };
 		18B38194738A167BF5725EFA71E598B5 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */; };
 		36D54B2CC763F636A6F5C8721EC3DA72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
 		9FFD9865D421E2102537DDBE315C7628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		E0AF842A33E8C3A1A33B1B8728B4B7BF /* PushFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */; };
 		123BBCE517D6D5EF48C46861046EEA1F /* Pusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */; };
 		27FB77F9807A29E312E18DFCF5456812 /* Pusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */; };
+		00416D616191F6FE7D9E6A1F4B2B4B10 /* PusherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778E9B636B19F655FFA72B659C33A07C /* PusherViewController.swift */; };
 		4A502FC03236A7A9857082B9EBDEA522 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		E231C0FE439040506E058213AF107332 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		4B28467FC05ECD408923D0C39BCC4F19 /* SecTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F5369E55852A49894F76692217563 /* SecTools.swift */; };
@@ -111,6 +113,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A347CF633AC3D0CDE521B7D62A20A804 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
 		9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 		11BC446A9ED8212EEFAB971FA6A7923D /* PushTool-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PushTool-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pusher.swift; sourceTree = "<group>"; };
+		778E9B636B19F655FFA72B659C33A07C /* PusherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherViewController.swift; sourceTree = "<group>"; };
 		DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		493F5369E55852A49894F76692217563 /* SecTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecTools.swift; sourceTree = "<group>"; };
 		658F71FE87626920A3229836F8D66988 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -268,8 +272,10 @@
 		B3EA69D9A11D66C1B6C7FB838B5CF84C /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */,
 				4A64270830D6D10F375E803E1937448C /* NWAppDelegate.h */,
 				63ED04C11062B3793CD6B5EB7FEE3377 /* NWAppDelegate.m */,
+				778E9B636B19F655FFA72B659C33A07C /* PusherViewController.swift */,
 				93B4339B3DAC3C6648B8622401AB97C4 /* main.m */,
 			);
 			path = iOS;
@@ -443,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABCB519E2A42297B53B541583ED79F8B /* AppDelegate.swift in Sources */,
 				A914E512BF63EF2708D511E40497FF16 /* CertType.swift in Sources */,
 				A402D98B56FE9CFCB3E9E70FD98A37B7 /* Environment.swift in Sources */,
 				717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */,
@@ -456,6 +463,7 @@
 				5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */,
 				7A01DAA5CE5CF36769A54C76383FF325 /* PushFeedback.swift in Sources */,
 				27FB77F9807A29E312E18DFCF5456812 /* Pusher.swift in Sources */,
+				00416D616191F6FE7D9E6A1F4B2B4B10 /* PusherViewController.swift in Sources */,
 				B4EAF08DDE6A95460F408DEDFB81A65B /* SecTools.swift in Sources */,
 				BF9FA9B727985DFF910A43EC6E4B964D /* Type.swift in Sources */,
 				401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */,

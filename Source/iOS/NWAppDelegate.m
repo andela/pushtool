@@ -1,8 +1,9 @@
 #import <UIKit/UIKit.h>
 
 #import "NWAppDelegate.h"
-#import "NWHub.h"
 #import "NWSecTools.h"
+
+#import "PushTool-Swift.h"
 
 // TODO: Export your push certificate and key in PKCS12 format to PushTool.p12 in the root of the project directory.
 static NSString * const pkcs12FileName = @"PushTool.p12";
@@ -16,7 +17,7 @@ static NSString * const deviceToken = @"ABCDEF0123456789ABCDEF0123456789ABCDEF01
 
 static NWPusherViewController *controller = nil;
 
-@interface NWPusherViewController () <NWHubDelegate> @end
+@interface NWPusherViewController () <HubDelegate> @end
 
 @implementation NWPusherViewController {
     UIButton *_connectButton;
@@ -24,7 +25,7 @@ static NWPusherViewController *controller = nil;
     UIButton *_pushButton;
     UILabel *_infoLabel;
     UISwitch *_sanboxSwitch;
-    NWHub *_hub;
+    Hub *_hub;
     NSUInteger _index;
     dispatch_queue_t _serial;
     
@@ -155,7 +156,7 @@ static NWPusherViewController *controller = nil;
     dispatch_async(_serial, ^{
         NSError *error = nil;
         
-        NWHub *hub = [NWHub connectWithDelegate:self identity:_identity environment:environment error:&error];
+        Hub *hub = [Hub connectWith:self identity:_identity environment:environment error:&error];
 
         dispatch_async(dispatch_get_main_queue(), ^{
             if (hub) {

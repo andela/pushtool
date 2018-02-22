@@ -1,11 +1,10 @@
 #import "NWAppDelegate.h"
-#import "NWHub.h"
 #import "NWNotification.h"
 #import "NWSecTools.h"
 
 #import "PushTool-Swift.h"
 
-@interface NWAppDelegate () <NWHubDelegate> @end
+@interface NWAppDelegate () <HubDelegate> @end
 
 @implementation NWAppDelegate {
     IBOutlet NSPopUpButton *_certificatePopup;
@@ -21,7 +20,7 @@
     IBOutlet NSScrollView *_logScroll;
     IBOutlet NSButton *_sanboxCheckBox;
 
-    NWHub *_hub;
+    Hub *_hub;
     NSDictionary *_config;
     NSArray *_certificateIdentityPairs;
     NSUInteger _lastSelectedIndex;
@@ -355,7 +354,7 @@
         dispatch_async(_serial, ^{
             NSError *error = nil;
             NWIdentityRef ident = identity ?: [NWSecTools keychainIdentityWithCertificate:certificate error:&error];
-            NWHub *hub = [NWHub connectWithDelegate:self identity:ident environment:environment error:&error];
+            Hub *hub = [Hub connectWith:self identity:ident environment:environment error:&error];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (hub) {
                     //NWLogInfo(@"Connected  (%@ %@)", summary, descriptionForEnvironent(environment));

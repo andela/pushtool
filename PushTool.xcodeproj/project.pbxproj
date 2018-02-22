@@ -34,11 +34,11 @@
 		717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
 		F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
 		85DF6F2E73F7EC1EA141C0E6A20CC9B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */; };
+		4ABB3B770AC0B392A89477B0B198F7C8 /* Hub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F0A205C77E96099A9E06389415C77 /* Hub.swift */; };
+		B991EC6388CB9D72A43B33DC03D32256 /* Hub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F0A205C77E96099A9E06389415C77 /* Hub.swift */; };
 		D33F67563375169E6EE2CD19E813FD32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */; };
 		1DA11F25D63D240E1879DDCA0D15407F /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */; };
 		391DC7519B2060B8FB1645F3B66FF665 /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED04C11062B3793CD6B5EB7FEE3377 /* NWAppDelegate.m */; };
-		CDB66CAA955369B0FA03D30051842A11 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
-		F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */; };
 		0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
 		39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
 		3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
@@ -71,19 +71,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FFD67C246FF3B2E9A018AC4FE4D551E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 249EA1D406BFEFAE3143060E00AFB762 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4C4F333727553ED96B2BD9E5327CD5F5;
-			remoteInfo = "PushTool-macOS";
-		};
 		673BFBC39E05F1FA1FF0C4D7893B31EC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 249EA1D406BFEFAE3143060E00AFB762 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F2A43D4759A09338023CC0184E226C68;
 			remoteInfo = "PushTool-iOS";
+		};
+		FFD67C246FF3B2E9A018AC4FE4D551E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 249EA1D406BFEFAE3143060E00AFB762 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C4F333727553ED96B2BD9E5327CD5F5;
+			remoteInfo = "PushTool-macOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -120,6 +120,7 @@
 		5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentOptions.swift; sourceTree = "<group>"; };
 		7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E75F0A205C77E96099A9E06389415C77 /* Hub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hub.swift; sourceTree = "<group>"; };
 		FF54DF503E2C7FB2BCC5E072C470C676 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		2A098A9029478E788A8002819FDCF342 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
 		B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -127,8 +128,6 @@
 		52270B059CF4701F5F9DAB8FEC0FDC9B /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
 		4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
 		63ED04C11062B3793CD6B5EB7FEE3377 /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
-		3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWHub.h; sourceTree = "<group>"; };
-		DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWHub.m; sourceTree = "<group>"; };
 		BA947E73E088777709D011DAA0893F2C /* NWNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWNotification.h; sourceTree = "<group>"; };
 		2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWNotification.m; sourceTree = "<group>"; };
 		2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWSSLConnection.h; sourceTree = "<group>"; };
@@ -248,8 +247,7 @@
 				A72095B91071C6D557C03C6392C4A27D /* CertType.swift */,
 				5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */,
 				049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */,
-				3AB146779A28CB70FF53A1E8BDDA7D37 /* NWHub.h */,
-				DB9B112C3BBE26299A5C382AC640BC38 /* NWHub.m */,
+				E75F0A205C77E96099A9E06389415C77 /* Hub.swift */,
 				BA947E73E088777709D011DAA0893F2C /* NWNotification.h */,
 				2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */,
 				2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */,
@@ -356,12 +354,12 @@
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
-					F2A43D4759A09338023CC0184E226C68 = {
-						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
-					};
 					CCB78D094D2D383149AFB5455DD3F943 = {
 						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					F2A43D4759A09338023CC0184E226C68 = {
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -450,8 +448,8 @@
 				A914E512BF63EF2708D511E40497FF16 /* CertType.swift in Sources */,
 				A402D98B56FE9CFCB3E9E70FD98A37B7 /* Environment.swift in Sources */,
 				717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */,
+				4ABB3B770AC0B392A89477B0B198F7C8 /* Hub.swift in Sources */,
 				391DC7519B2060B8FB1645F3B66FF665 /* NWAppDelegate.m in Sources */,
-				CDB66CAA955369B0FA03D30051842A11 /* NWHub.m in Sources */,
 				0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */,
 				3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */,
 				30863083D4E77D3DFB249208054438AE /* NWSecTools.m in Sources */,
@@ -473,8 +471,8 @@
 				5488FEFACD09F056A806A4A2B44F51CE /* CertType.swift in Sources */,
 				9B3B6748BDD9319E08404E2221ED1531 /* Environment.swift in Sources */,
 				F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */,
+				B991EC6388CB9D72A43B33DC03D32256 /* Hub.swift in Sources */,
 				1DA11F25D63D240E1879DDCA0D15407F /* NWAppDelegate.m in Sources */,
-				F0557F40EC98D093AD33E049228E14E3 /* NWHub.m in Sources */,
 				39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */,
 				6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */,
 				9B9FC7C7222906F0F09CBA90BA63FB9E /* NWSecTools.m in Sources */,
@@ -492,19 +490,35 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D155C9155FFAA55BF6D16601E0638FDF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4C4F333727553ED96B2BD9E5327CD5F5 /* PushTool-macOS */;
-			targetProxy = FFD67C246FF3B2E9A018AC4FE4D551E6 /* PBXContainerItemProxy */;
-		};
 		24CE16BF578BA6FF46511AEC7F1D788F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F2A43D4759A09338023CC0184E226C68 /* PushTool-iOS */;
 			targetProxy = 673BFBC39E05F1FA1FF0C4D7893B31EC /* PBXContainerItemProxy */;
 		};
+		D155C9155FFAA55BF6D16601E0638FDF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C4F333727553ED96B2BD9E5327CD5F5 /* PushTool-macOS */;
+			targetProxy = FFD67C246FF3B2E9A018AC4FE4D551E6 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		018B1F886B91632A79FD16A9B61A2705 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		3FD78376D5882E83058B1CA9DF7F2866 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
 		593FBB12A0158EFD2499034CB061AF6C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -583,22 +597,6 @@
 			};
 			name = Release;
 		};
-		3FD78376D5882E83058B1CA9DF7F2866 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		018B1F886B91632A79FD16A9B61A2705 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -620,20 +618,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F59CEEC7908DD4287B7D12D6C97D0AB5 /* Build configuration list for PBXNativeTarget "PushTool-macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				593FBB12A0158EFD2499034CB061AF6C /* Debug */,
-				6BDC67F08D1321AB83D2C8E33434DFC5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		CBD3BBF8FD48CB94FFFC9F4E8869C799 /* Build configuration list for PBXAggregateTarget "PushTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3FD78376D5882E83058B1CA9DF7F2866 /* Debug */,
 				018B1F886B91632A79FD16A9B61A2705 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F59CEEC7908DD4287B7D12D6C97D0AB5 /* Build configuration list for PBXNativeTarget "PushTool-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				593FBB12A0158EFD2499034CB061AF6C /* Debug */,
+				6BDC67F08D1321AB83D2C8E33434DFC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

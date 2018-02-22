@@ -2,9 +2,9 @@ import Foundation
 
 public let errorReasonCodeKey: String = "NWErrorReasonCodeKey"
 
-public typealias identityRef = Any
-public typealias certificateRef = Any
-public typealias keyRef = Any
+public typealias IdentityRef = Any
+public typealias CertificateRef = Any
+public typealias KeyRef = Any
 
 @objcMembers
 public class ErrorUtil: NSObject {

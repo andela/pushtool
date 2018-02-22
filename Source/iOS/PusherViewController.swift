@@ -1,5 +1,9 @@
 import UIKit
 
+public let deviceToken = "ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789"
+public let pkcs12FileName = "PushTool.p12"
+public let pkcs12Password = "pa$$word"
+
 @objcMembers
 public class PusherViewController: UIViewController {
     
@@ -22,18 +26,18 @@ public class PusherViewController: UIViewController {
                                  for: .touchUpInside)
         view.addSubview(connectButton)
         
-        sanboxSwitch  = UISwitch()
-        sanboxSwitch.frame = CGRect(x: (view.bounds.size.width  + 40) / 2,
+        sandboxSwitch = UISwitch()
+        sandboxSwitch.frame = CGRect(x: (view.bounds.size.width  + 40) / 2,
                                      y: 20,
                                      width: 40,
                                      height: 40)
-        sanboxSwitch.addTarget(self,
+        sandboxSwitch.addTarget(self,
                                 action: #selector(self.sanboxCheckBoxDidPressed),
                                 for: .valueChanged)
-        view.addSubview(sanboxSwitch)
+        view.addSubview(sandboxSwitch)
         
         let sandboxLabel = UILabel()
-        sandboxLabel.frame = CGRect(x: (sanboxSwitch.frame.maxX) + 10,
+        sandboxLabel.frame = CGRect(x: (sandboxSwitch.frame.maxX) + 10,
                                     y: 20,
                                     width: 80,
                                     height: 40)
@@ -58,8 +62,8 @@ public class PusherViewController: UIViewController {
                                   height: 40)
         pushButton.setTitle("Push", for: .normal)
         pushButton.addTarget(self,
-                              action: #selector(self.push),
-                              for: .touchUpInside)
+                             action: #selector(push(_:)),
+                             for: .touchUpInside)
         pushButton.isEnabled = false
         view.addSubview(pushButton)
         
@@ -78,17 +82,18 @@ public class PusherViewController: UIViewController {
     
     // MARK: Private Instance Properties
     
-    private var certificate: NWCertificateRef?
     private var connectButton: UIButton!
-    private var hub: NWHub!
-    private var identity: NWIdentityRef?
-    private var index: Int = 0
     private var infoLabel: UILabel!
     private var pushButton: UIButton!
-    private var sanboxSwitch: UISwitch!
-    private var serial: DispatchQueue!
+    private var sandboxSwitch: UISwitch!
     private var textField: UITextField!
-    
+
+    private var certificate: NWCertificateRef?
+    private var hub: NWHub?
+    private var identity: NWIdentityRef?
+    private var index: Int = 0
+    private var serial: DispatchQueue?
+
     // MARK: Private Instance Methods
     
     private func loadCertificate() {
@@ -120,14 +125,14 @@ public class PusherViewController: UIViewController {
     
     @IBAction func sanboxCheckBoxDidPressed(_ sender: UISwitch) {
         
-        if certificate {
+        if let certificate = certificate {
             disconnect()
-            connect(to: selectedEnvironment(forCertificate: certificate!))
+            connect(to: selectedEnvironment(forCertificate: certificate))
         }
     }
     
    private func selectedEnvironment(forCertificate certificate: NWCertificateRef) -> NWEnvironment {
-        return (sanboxSwitch.isOn ? NWEnvironmentSandbox : NWEnvironmentProduction) as? NWEnvironment
+        return (sandboxSwitch.isOn ? NWEnvironmentSandbox : NWEnvironmentProduction) as? NWEnvironment
         
     }
     
@@ -181,14 +186,14 @@ public class PusherViewController: UIViewController {
         
     }
     @objc
-    private func push() {
+    private func push(_ sender: Any) {
     
         let payload = "{\"aps\":{\"alert\":\"%@\",\"badge\":1,\"sound\":\"default\"}}"
         let token = String(deviceToken)
         
         serial?.async(execute: {() -> Void in
             
-            self.hub.pushPayload(payload, token: token)
+            self.hub?.pushPayload(payload, token: token)
             let popTime = DispatchTime.now() + Double(__int64_t(1.0 * Double(NSEC_PER_SEC)))
             
             serial.asyncAfter(deadline: popTime / Double(NSEC_PER_SEC), execute: {(_: Void) -> Void in
@@ -207,7 +212,7 @@ public class PusherViewController: UIViewController {
         
         pushButton?.isEnabled = false
         connectButton?.isEnabled = false
-        sanboxSwitch?.isEnabled = false
+        sandboxSwitch?.isEnabled = false
     }
     
    private func enableButtons(forCertificate certificate: NWCertificateRef,

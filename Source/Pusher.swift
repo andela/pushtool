@@ -71,7 +71,7 @@ public class Pusher: NSObject {
         self.connection = nil
     }
     
-    public func pushNotification(_ notification: NWNotification,
+    public func pushNotification(_ notification: Notification,
                                  type: NWNotificationType) throws {
         let data = notification.data(with: .type2)
         
@@ -92,7 +92,7 @@ public class Pusher: NSObject {
     public func pushPayload(_ payload: String,
                             token: String,
                             identifier: UInt) throws {
-        let notification = NWNotification(payload: payload,
+        let notification = Notification(payload: payload,
                                           token: token,
                                           identifier: identifier,
                                           expiration: nil,

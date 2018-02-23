@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class Notification: NSObject {
 
     public var addExpiration: Bool
@@ -44,7 +45,6 @@ public class Notification: NSObject {
         self.priority = priority
     }
 
-
     public class func data(fromHex hex: String) -> Data {
 
         var result = Data()
@@ -68,51 +68,21 @@ public class Notification: NSObject {
         return dataWithType2()
     }
 
-    private func filter(_ hex: String) -> String {
-
-        let hexToLowerCase = hex.lowercased()
-        var result = String()
-        for index in 0..<hex.count {
-            let charIndex = hexToLowerCase.index(hexToLowerCase.startIndex,
-                                      offsetBy: index)
-            let char = hexToLowerCase[charIndex]
-            if (char == "a" && char <= "f") || (char >= "0" && char <= "9") {
-
-                result.append(char)
-            }
-        }
-
-        return result
-    }
-
-    private func getPayload() -> String? {
-        guard let payload = payloadData else {
-            return nil
-        }
-
-        let string = String(data: payload, encoding: .utf8)
-
-        return string
-    }
-
-    private func setPayload(_ payload: String) {
-
-
-    }
-
-
     private func dataWithType2() -> Data {
+
+        var expires: UInt32 = UInt32(expirationStamp)
+        var identifier: UInt32 = UInt32(self.identifier)
+        var priority = self.priority
         let result = NSMutableData()
 
         var command: UInt8 = 2
+        var length: UInt32 = 0
 
         result.append(&command, length: 1)
 
-        var length: UInt32 = 99999999   // figure out actual length ...
-
-        result.append(&length, length: 4)
-
         if let tokenData = self.tokenData as NSData? {
+
+            length += UInt32(tokenData.length)
             append(to: result,
                    identifier: 1,
                    bytes: tokenData.bytes,
@@ -120,28 +90,39 @@ public class Notification: NSObject {
         }
 
         if let payloadData = self.payloadData as NSData? {
+            length += UInt32(payloadData.length)
             append(to: result,
                    identifier: 2,
                    bytes: payloadData.bytes,
                    length: payloadData.length)
         }
 
-        var identifier: UInt32 = UInt32(self.identifier)
-
         if identifier != 0 {
+            length += UInt32(4)
             append(to: result,
                    identifier: 3,
                    bytes: &identifier,
                    length: 4)
         }
 
-        uint32_t expires = htonl(_expirationStamp);
-        if (_addExpiration) [self.class appendTo:result identifier:4 bytes:&expires length:4];
+        if (addExpiration) {
+            length += UInt32(4)
+            append(to: result,
+                   identifier:4,
+                   bytes:&expires,
+                   length: 4)
 
-        uint8_t priority = _priority;
-        if (priority) [self.class appendTo:result identifier:5 bytes:&priority length:1];
+        }
 
+        if priority != 0 {
+            length += UInt32(1)
+            append(to:result,
+                   identifier:5 ,
+                   bytes:&priority,
+                   length:1)
+        }
 
+        result.append(&length, length: 4)
 
         return result as Data
     }
@@ -168,5 +149,4 @@ extension Data {
     func string(as encoding: String.Encoding) -> String? {
         return String(data: self, encoding: encoding)
     }
-
 }

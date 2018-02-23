@@ -128,6 +128,6 @@ public class PushFeedback : NSObject {
 
         let (data, date) = try readTokenData()
 
-        return (NWNotification.hex(from: data), date)
+        return (Notification.hex(from: data), date)
     }
 }

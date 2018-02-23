@@ -22,8 +22,8 @@ public class PusherViewController: UIViewController {
                                      height: 40)
         connectButton.setTitle("Connect", for: .normal)
         connectButton.addTarget(self,
-                                 action: #selector(self.connectButtonPressed),
-                                 for: .touchUpInside)
+                                action: #selector(self.connectButtonPressed),
+                                for: .touchUpInside)
         view.addSubview(connectButton)
         
         sandboxSwitch = UISwitch()
@@ -87,13 +87,13 @@ public class PusherViewController: UIViewController {
     private var pushButton: UIButton!
     private var sandboxSwitch: UISwitch!
     private var textField: UITextField!
-
+    
     private var certificate: NWCertificateRef?
-    private var hub: NWHub?
+    private var hub: Hub?
     private var identity: NWIdentityRef?
     private var index: Int = 0
     private var serial: DispatchQueue?
-
+    
     // MARK: Private Instance Methods
     
     private func loadCertificate() {
@@ -102,25 +102,26 @@ public class PusherViewController: UIViewController {
                                         withExtension: nil)
         do {
             let pkcs12 = try Data(contentsOf: url!)
-        }
-        catch error: Error? = nil {
             
             let ids = try NWSecTools.identities(withPKCS12Data: pkcs12,
                                                 password: pkcs12Password)
             if ids.isEmpty {
                 return
             }
-            
-        }
-        for identity: NWIdentityRef in ids {
-            var error: Error? = nil
-            let certificate: NWCertificateRef = try? NWSecTools.certificate(withIdentity: identity)
-            if certificate == nil {
-                return
+            for identity: NWIdentityRef in ids {
+                var error: Error? = nil
+                let certificate: NWCertificateRef = try? NWSecTools.certificate(withIdentity: identity)
+                if certificate == nil {
+                    return
+                }
+                identity = identity
+                self.certificate = certificate
             }
-            identity = identity
-            self.certificate = certificate
         }
+        catch {
+            print(error)
+        }
+        
     }
     
     @IBAction func sanboxCheckBoxDidPressed(_ sender: UISwitch) {
@@ -131,22 +132,26 @@ public class PusherViewController: UIViewController {
         }
     }
     
-   private func selectedEnvironment(forCertificate certificate: NWCertificateRef) -> NWEnvironment {
-        return (sandboxSwitch.isOn ? NWEnvironmentSandbox : NWEnvironmentProduction) as? NWEnvironment
+    private func selectedEnvironment(forCertificate certificate: NWCertificateRef) -> NWEnvironment {
+        return (sandboxSwitch.isOn ? NWEnvironment.sandbox : NWEnvironment.production)
         
     }
     
-  private func preferredEnvironment(forCertificate certificate: NWCertificateRef) -> NWEnvironment {
+    private func preferredEnvironment(forCertificate certificate: NWCertificateRef) -> NWEnvironment {
         
         let environmentOptions: NWEnvironmentOptions = NWSecTools.environmentOptions(forCertificate: certificate)
         
-        return ((environmentOptions & NWEnvironmentOptionSandbox) ? NWEnvironmentSandbox : NWEnvironmentProduction) as? NWEnvironment
+        if environmentOptions == .none {
+            return NWEnvironment.sandbox
+        }else {
+            return  NWEnvironment.production
+        }
         
     }
     
     @objc
     private func connectButtonPressed() {
-        if hub {
+        if hub != nil {
             disconnect()
             connectButton?.isEnabled = true
             connectButton?.setTitle("Connect", for: .normal)
@@ -159,49 +164,51 @@ public class PusherViewController: UIViewController {
     
     private func disconnect() {
         disableButtons()
-        hub.disconnect()
+        hub?.disconnect()
         hub = nil
     }
     
-   private func connect(to environment: NWEnvironment) {
+    private func connect(to environment: NWEnvironment) {
         disconnect()
+        guard let identity = identity else { return }
+        guard let hubInstance = try? Hub.connect(with: self,
+                                                 identity: identity,
+                                                 environment: environment)
+            else { return }
         
-        serial?.async(execute: {() -> Void in
-            var error: Error? = nil
-            let hub = try NWHub.connect(with: self,
-                                         identity: identity,
-                                         environment: environment,
-                                         error: error)
-        })
-        DispatchQueue.main.async(execute: {() -> Void in
-            if (hub != nil) {
-                hub = self.hub
-                self.connectButton?.setTitle("Disconnect", for: .normal)
+        DispatchQueue.main.async(execute: {[weak self]() -> Void in
+            
+            if (self?.hub != nil) {
+                self?.hub = hubInstance
+                self?.connectButton?.setTitle("Disconnect", for: .normal)
             }
             else{
-                self.enableButtons(forCertificate: self.certificate!,
-                                   environment: environment)
+                guard let certificate =  self?.certificate else { return }
+                
+                self?.enableButtons(forCertificate: certificate,
+                                    environment: environment)
             }
         })
         
     }
     @objc
     private func push(_ sender: Any) {
-    
+        
         let payload = "{\"aps\":{\"alert\":\"%@\",\"badge\":1,\"sound\":\"default\"}}"
         let token = String(deviceToken)
         
-        serial?.async(execute: {() -> Void in
+        serial?.async(execute: {[weak self]() -> Void in
             
-            self.hub?.pushPayload(payload, token: token)
+            let _ = self?.hub?.pushPayload(payload, token: token)
             let popTime = DispatchTime.now() + Double(__int64_t(1.0 * Double(NSEC_PER_SEC)))
-            
-            serial.asyncAfter(deadline: popTime / Double(NSEC_PER_SEC), execute: {(_: Void) -> Void in
+            let dispatchTime = DispatchTime(uptimeNanoseconds: popTime.uptimeNanoseconds/NSEC_PER_SEC)
+            self?.serial?.asyncAfter(deadline: dispatchTime, execute: {
+                
             })
         })
     }
     
-   private func notification(_ notification: NWNotification) throws {
+    private func notification(_ notification: NWNotification) throws {
         
         DispatchQueue.main.sync(execute: {() -> Void in
             
@@ -215,10 +222,9 @@ public class PusherViewController: UIViewController {
         sandboxSwitch?.isEnabled = false
     }
     
-   private func enableButtons(forCertificate certificate: NWCertificateRef,
-                       environment: NWEnvironment) {
+    private func enableButtons(forCertificate certificate: NWCertificateRef, environment: NWEnvironment) {
     }
-
+    
     private var appDel: AppDelegate? {
         
         guard let delegate = UIApplication.shared.delegate as? AppDelegate
@@ -230,10 +236,8 @@ public class PusherViewController: UIViewController {
     
 }
 
-extension PusherViewController : NWHubDelegate {
-    public func notification(_ notification: NWNotification, didFailWithError error: Error) {
-        
+extension PusherViewController : HubDelegate {
+    public func notification(_ notification: NWNotification?, didFailWithError error: Error) {
     }
-    
     
 }

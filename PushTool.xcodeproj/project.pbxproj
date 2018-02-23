@@ -59,6 +59,8 @@
 		27FB77F9807A29E312E18DFCF5456812 /* Pusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */; };
 		4A502FC03236A7A9857082B9EBDEA522 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		E231C0FE439040506E058213AF107332 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
+		4B28467FC05ECD408923D0C39BCC4F19 /* SecTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F5369E55852A49894F76692217563 /* SecTools.swift */; };
+		B4EAF08DDE6A95460F408DEDFB81A65B /* SecTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F5369E55852A49894F76692217563 /* SecTools.swift */; };
 		6315D14787C83D5942AE5C222A84A5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
 		C0B65FDE6DE7BB52E7F3D37B226B0F53 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
 		A753C6A26F38B04BD364B1EF50CA719B /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */; };
@@ -150,6 +152,7 @@
 		94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pusher.swift; sourceTree = "<group>"; };
 		DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		493F5369E55852A49894F76692217563 /* SecTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecTools.swift; sourceTree = "<group>"; };
 		658F71FE87626920A3229836F8D66988 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -262,6 +265,7 @@
 				82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */,
 				140F5B21E58BEC6B88A66E65DF5C4C4D /* PushTool-Bridging-Header.h */,
 				891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */,
+				493F5369E55852A49894F76692217563 /* SecTools.swift */,
 				1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */,
 			);
 			path = Source;
@@ -459,6 +463,7 @@
 				5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */,
 				7A01DAA5CE5CF36769A54C76383FF325 /* PushFeedback.swift in Sources */,
 				27FB77F9807A29E312E18DFCF5456812 /* Pusher.swift in Sources */,
+				B4EAF08DDE6A95460F408DEDFB81A65B /* SecTools.swift in Sources */,
 				BF9FA9B727985DFF910A43EC6E4B964D /* Type.swift in Sources */,
 				401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */,
 			);
@@ -482,6 +487,7 @@
 				11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */,
 				E0AF842A33E8C3A1A33B1B8728B4B7BF /* PushFeedback.swift in Sources */,
 				123BBCE517D6D5EF48C46861046EEA1F /* Pusher.swift in Sources */,
+				4B28467FC05ECD408923D0C39BCC4F19 /* SecTools.swift in Sources */,
 				A753C6A26F38B04BD364B1EF50CA719B /* Type.swift in Sources */,
 				0114C9AF57C812FA943F2241116693F8 /* main.m in Sources */,
 			);
@@ -524,7 +530,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = ZAU58TE88U;
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -538,7 +544,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = ZAU58TE88U;
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -1,6 +1,8 @@
 #import "NWType.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** A collection of tools for reading, converting and inspecting Keychain objects and PKCS #12 files.
 
  This is practically the glue that connects this framework to the Security framework and allows interacting with the OS Keychain and PKCS #12 files. It is mostly an Objective-C around the Security framework, including the benefits of ARC. `NWIdentityRef`, `NWCertificateRef` and `NWKeyRef` represent respectively `SecIdentityRef`, `SecCertificateRef`, `SecKeyRef`. It uses Cocoa-style error handling, so methods return `nil` or `NO` if an error occurred.
@@ -37,7 +39,7 @@
 /** @name Inspection */
 
 /** Extracts the type and summary string. */
-+ (NWCertType)typeWithCertificate:(NWCertificateRef)certificate summary:(NSString **)summary;
++ (NWCertType)typeWithCertificate:(NWCertificateRef)certificate summary:(NSString *_Nullable*_Nullable)summary;
 
 /** Extracts the summary string. */
 + (NSString *)summaryWithCertificate:(NWCertificateRef)certificate;
@@ -70,3 +72,5 @@
 + (NWEnvironment)environmentForCertificate:(NWCertificateRef)certificate;
 
 @end
+
+NS_ASSUME_NONNULL_END

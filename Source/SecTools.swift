@@ -9,11 +9,11 @@ public class SecTools : NSObject {
         guard let data = data
             else { return nil }
         
-        return SecCertificateCreateWithData(kCFAllocatorDefault, data as CFData)
+        return SecCertificateCreateWithData(kCFAllocatorDefault,
+                                            data as CFData)
     }
     
-    public class func certificate(withIdentity identity: NWIdentityRef?,
-                                  error: NSErrorPointer)throws -> Any {
+    public class func certificate(withIdentity identity: NWIdentityRef?) throws -> Any {
         var cert: SecCertificate?
         var status: OSStatus
         
@@ -22,44 +22,45 @@ public class SecTools : NSObject {
         } else {
             status = errSecParam
         }
-    
-        if status != errSecSuccess {
-            throw ErrorUtil.errorWithErrorCode(.identityCopyCertificate, reason: Int(status))
-        }
-        guard let certificate = cert else {
-            throw ErrorUtil.errorWithErrorCode(.identityCopyCertificate, reason: 0)
-        }
+
+        guard
+            let certificate = cert,
+            status == errSecSuccess
+            else { throw ErrorUtil.errorWithErrorCode(.identityCopyCertificate,
+                                                      reason: Int(status)) }
+
         return certificate
     }
     
     public class func environmentOptions(forCertificate certificate: Any) -> NWEnvironmentOptions {
         
-        switch (self.type(withCertificate: certificate, summary: nil) ) {
-            
+        switch (self.type(withCertificate: certificate,
+                          summary: nil) ) {
         case .iosDevelopment,
              .macDevelopment:
-            return NWEnvironmentOptions.sandbox
+            return .sandbox
             
         case .iosProduction,
              .macProduction:
-            return NWEnvironmentOptions.production
+            return .production
             
         case .passes,
              .simplified,
              .voIPServices,
              .watchKitServices,
              .webProduction:
-            return NWEnvironmentOptions.any
+            return .any
             
         default:
-            return NWEnvironmentOptions.none
+            return .none
         }
     }
     
-    public class func environmentOptions(forIdentity identity: Any)throws  -> NWEnvironmentOptions {
+    public class func environmentOptions(forIdentity identity: Any) -> NWEnvironmentOptions {
         
-        let certificate: NWCertificateRef = try self.certificate(withIdentity: identity as NWIdentityRef,
-                                                             error: nil) as NWCertificateRef
+        guard
+            let certificate: NWCertificateRef = try? self.certificate(withIdentity: identity as NWIdentityRef) as NWCertificateRef
+            else { return .none }
         
         return self.environmentOptions(forCertificate: certificate)
     }
@@ -75,26 +76,40 @@ public class SecTools : NSObject {
     public class func identities(withPKCS12Data pkcs12: Data,
                                  password: String) throws -> [Any]? {
         
-        if pkcs12.isEmpty {
-            throw ErrorUtil.errorWithErrorCode(.pkcs12EmptyData, reason: 0)
+        guard
+            !pkcs12.isEmpty
+            else { throw ErrorUtil.errorWithErrorCode(.pkcs12EmptyData,
+                                                      reason: 0) }
+
+        guard
+            let dicts = try self.allIdentitities(withPKCS12Data: pkcs12,
+                                                 password: password)
+            else { return nil }
+
+        var ids: [NWIdentityRef] = []
+
+        for dict in dicts {
+            guard
+                let identity = dict[kSecImportItemIdentity]
+                else { continue }
+
+            let certificate = try self.certificate(withIdentity: identity as NWIdentityRef)
+
+            if isPushCertificate(certificate) {
+                _ = try self.key(withIdentity: identity)
+
+                ids.append(identity as NWIdentityRef)
+            }
         }
-        let dicts = try self.allIdentitities(withPKCS12Data: pkcs12, password: password)
-        
-        //        guard let dict = dicts
-        //            else { return nil }
-        //
-        //        var ids:[Any] = []
-        
-        //        for item:[AnyHashable: Any] in dict {
-        //            let identity = item[kSecImportItemIdentity]
-        //        }
-        return []
+
+        return ids
     }
     
     public class func identity(withPKCS12Data pkcs12: Data,
                                password: String) throws -> Any? {
         
-        let identitiesCollection = try self.identities(withPKCS12Data: pkcs12, password: password)
+        let identitiesCollection = try self.identities(withPKCS12Data: pkcs12,
+                                                       password: password)
         
         guard let identities = identitiesCollection
             else { return nil }
@@ -117,10 +132,37 @@ public class SecTools : NSObject {
         
         var result: [AnyHashable: Any] = [:]
         var certificate: SecCertificate?
-        
-        var certstat: OSStatus = SecIdentityCopyCertificate(id as! SecIdentity, &certificate)
-        // TO DO Later Some confusion !!
-        return [:]
+
+        let certstat: OSStatus = SecIdentityCopyCertificate(id as! SecIdentity,
+                                                            &certificate)
+
+        result["has_certificate"] = certificate != nil
+
+        if certstat != 0 {
+            result["certificate_error"] = certstat
+        }
+
+        if let certificate = certificate {
+            result["subject_summary"] = SecCertificateCopySubjectSummary(certificate)
+            result["der_data"] = SecCertificateCopyData(certificate)
+        }
+
+        var key: SecKey?
+
+        let keystat: OSStatus = SecIdentityCopyPrivateKey(identity as! SecIdentity,
+                                                          &key)
+
+        result["has_key"] = key != nil
+
+        if keystat != 0 {
+            result["key_error"] = keystat
+        }
+
+        if let key = key {
+            result["block_size"] = SecKeyGetBlockSize(key)
+        }
+
+        return result
     }
     
     public class func isPushCertificate(_ certificate: Any) -> Bool {
@@ -207,7 +249,8 @@ public class SecTools : NSObject {
     public class func summary(withCertificate certificate: Any) -> String {
         var result: NSString?
         
-        self.type(withCertificate: certificate, summary: &result)
+        _ = self.type(withCertificate: certificate,
+                      summary: &result)
         
         guard let resultValue = result else {
             return ""
@@ -218,7 +261,7 @@ public class SecTools : NSObject {
     public class func type(withCertificate certificate: Any,
                            summary: AutoreleasingUnsafeMutablePointer<NSString?>?) -> NWCertType {
         
-        return NWCertType.iosDevelopment
+        return .iosDevelopment
     }
     
     
@@ -227,40 +270,55 @@ public class SecTools : NSObject {
                              keys: [Any], error: NSErrorPointer) -> [AnyHashable : Any] {
         return [:]
     }
+
     // MARK: Private Instance Methods
     
     private class func allIdentitities(withPKCS12Data pkc12: Data?,
-                                       password: String?) throws -> [Any]? {
+                                       password: String?) throws -> [[AnyHashable: Any]]? {
         var options:[AnyHashable: Any] = [:]
         
         if let password = password {
             options[kSecImportExportPassphrase] = password
         }
+
         var items: CFArray?
-        
         var status: OSStatus
         
         if let pkc12Data = pkc12 {
-            status = SecPKCS12Import(pkc12Data as CFData, options as CFDictionary, &items)
+            status = SecPKCS12Import(pkc12Data as CFData,
+                                     options as CFDictionary,
+                                     &items)
         } else {
             status = errSecParam
         }
-        
+
+        if let dicts = items as? [[AnyHashable: Any]],
+            status == errSecSuccess {
+            return dicts
+        }
+
         switch status {
             
         case errSecDecode:
-            throw ErrorUtil.errorWithErrorCode(.pkcs12Decode, reason: Int(status))
+            throw ErrorUtil.errorWithErrorCode(.pkcs12Decode,
+                                               reason: Int(status))
+
         case errSecAuthFailed:
-            throw ErrorUtil.errorWithErrorCode(.pkcs12AuthFailed, reason: Int(status))
+            throw ErrorUtil.errorWithErrorCode(.pkcs12AuthFailed,
+                                               reason: Int(status))
+
         case errSecPkcs12VerifyFailure:
-            throw ErrorUtil.errorWithErrorCode(.pkcs12Password, reason: Int(status))
+            throw ErrorUtil.errorWithErrorCode(.pkcs12Password,
+                                               reason: Int(status))
+
         case errSecPassphraseRequired:
-            throw ErrorUtil.errorWithErrorCode(.pkcs12PasswordRequired, reason: Int(status))
+            throw ErrorUtil.errorWithErrorCode(.pkcs12PasswordRequired,
+                                               reason: Int(status))
+
         default:
-            throw ErrorUtil.errorWithErrorCode(.pkcs12Import, reason: Int(status))
+            throw ErrorUtil.errorWithErrorCode(.pkcs12Import,
+                                               reason: Int(status))
         }
-        
-        return []
     }
     
     private func allKeyChainCertificates() throws -> [Any] {
@@ -280,22 +338,31 @@ public class SecTools : NSObject {
         switch certType {
         case .iosDevelopment:
             return "Apple Development IOS Push services"
+
         case .iosProduction:
             return "Apple Production IOS Push services"
+
         case .macDevelopment:
             return "Apple Development Mac Push services"
+
         case .macProduction:
             return "Apple Production Mac Push services"
+
         case .simplified:
             return "Apple Push Services"
+
         case .webProduction:
             return "Website Push ID"
+
         case .voIPServices:
             return "VoIP Services"
+
         case .watchKitServices:
             return "Watch Kit Services"
+
         case .passes:
             return "Pass Type ID"
+
         default:
             return nil
         }
@@ -306,9 +373,4 @@ public class SecTools : NSObject {
         //        return self.values(withCertificate: certificate, keys: [key], error: nil)[key]![kSecPropertyKeyValue as? Any ]
         return 1
     }
-    
-    
-    
-    
 }
-

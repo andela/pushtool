@@ -64,15 +64,8 @@ public class Notification: NSObject {
         return stringValue
     }
 
-    public func data(with type: NotificationType) -> Data {
-
-//        switch type {
-//        case .type0:
-//            return
-//        default:
-//            <#code#>
-//        }
-        return Data()
+    public func data(with type: NWNotificationType) -> Data {
+        return dataWithType2()
     }
 
     private func filter(_ hex: String) -> String {
@@ -108,22 +101,62 @@ public class Notification: NSObject {
     }
 
 
-    private func dataWithType0() -> Data {
+    private func dataWithType2() -> Data {
+        let result = NSMutableData()
 
-        var size = (UInt8.bitWidth / 8)
-        size += (UInt32.bitWidth / 8) * 2
-        size += (UInt16.bitWidth / 8)
-        size += Int((deviceTokenSize))
-        size += (UInt16.bitWidth / 8)
-        size += Int((payloadMaxSize))
+        var command: UInt8 = 2
 
-        let command: UInt8 = 0
+        result.append(&command, length: 1)
+
+        var length: UInt32 = 99999999   // figure out actual length ...
+
+        result.append(&length, length: 4)
+
+        if let tokenData = self.tokenData as NSData? {
+            append(to: result,
+                   identifier: 1,
+                   bytes: tokenData.bytes,
+                   length: tokenData.length)
+        }
+
+        if let payloadData = self.payloadData as NSData? {
+            append(to: result,
+                   identifier: 2,
+                   bytes: payloadData.bytes,
+                   length: payloadData.length)
+        }
+
+        var identifier: UInt32 = UInt32(self.identifier)
+
+        if identifier != 0 {
+            append(to: result,
+                   identifier: 3,
+                   bytes: &identifier,
+                   length: 4)
+        }
+
+        uint32_t expires = htonl(_expirationStamp);
+        if (_addExpiration) [self.class appendTo:result identifier:4 bytes:&expires length:4];
+
+        uint8_t priority = _priority;
+        if (priority) [self.class appendTo:result identifier:5 bytes:&priority length:1];
 
 
-        return Data()
+
+        return result as Data
     }
 
+    private func append(to buffer: NSMutableData,
+                        identifier: UInt,
+                        bytes: UnsafeRawPointer,
+                        length: Int) {
+        var id = UInt8(identifier)
+        var len = UInt16(length)
 
+        buffer.append(&id, length: 1)
+        buffer.append(&len, length: 2)
+        buffer.append(bytes, length: length)
+    }
 }
 
 extension Data {

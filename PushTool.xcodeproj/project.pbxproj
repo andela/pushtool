@@ -39,7 +39,6 @@
 		B991EC6388CB9D72A43B33DC03D32256 /* Hub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F0A205C77E96099A9E06389415C77 /* Hub.swift */; };
 		D33F67563375169E6EE2CD19E813FD32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */; };
 		1DA11F25D63D240E1879DDCA0D15407F /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */; };
-		391DC7519B2060B8FB1645F3B66FF665 /* NWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED04C11062B3793CD6B5EB7FEE3377 /* NWAppDelegate.m */; };
 		0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
 		39100E9ACEF513E09621D62414DA74FB /* NWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */; };
 		3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
@@ -69,7 +68,6 @@
 		827A6E0369D3A6D0D2E2DB64CC8B38DE /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */; };
 		D594D2C57D2060F8FC035DC54EF88BE7 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */; };
 		0114C9AF57C812FA943F2241116693F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C441803E081F0BA8EA2F316A89204A8 /* main.m */; };
-		401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B4339B3DAC3C6648B8622401AB97C4 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,10 +125,8 @@
 		FF54DF503E2C7FB2BCC5E072C470C676 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		2A098A9029478E788A8002819FDCF342 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
 		B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4A64270830D6D10F375E803E1937448C /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
 		52270B059CF4701F5F9DAB8FEC0FDC9B /* NWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWAppDelegate.h; sourceTree = "<group>"; };
 		4B64673D673059758B10A24E01DC3C19 /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
-		63ED04C11062B3793CD6B5EB7FEE3377 /* NWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWAppDelegate.m; sourceTree = "<group>"; };
 		BA947E73E088777709D011DAA0893F2C /* NWNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWNotification.h; sourceTree = "<group>"; };
 		2EE7C9FE9359DB3978B4844E574858AD /* NWNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWNotification.m; sourceTree = "<group>"; };
 		2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWSSLConnection.h; sourceTree = "<group>"; };
@@ -158,7 +154,6 @@
 		32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		4C441803E081F0BA8EA2F316A89204A8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		93B4339B3DAC3C6648B8622401AB97C4 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		617DFE0F3282328E69EF62966C6AF7AF /* uniquify_projects.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uniquify_projects.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -273,10 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */,
-				4A64270830D6D10F375E803E1937448C /* NWAppDelegate.h */,
-				63ED04C11062B3793CD6B5EB7FEE3377 /* NWAppDelegate.m */,
 				778E9B636B19F655FFA72B659C33A07C /* PusherViewController.swift */,
-				93B4339B3DAC3C6648B8622401AB97C4 /* main.m */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -454,7 +446,6 @@
 				A402D98B56FE9CFCB3E9E70FD98A37B7 /* Environment.swift in Sources */,
 				717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */,
 				4ABB3B770AC0B392A89477B0B198F7C8 /* Hub.swift in Sources */,
-				391DC7519B2060B8FB1645F3B66FF665 /* NWAppDelegate.m in Sources */,
 				0FDFDF6F0B5807805B11424FDD277A6E /* NWNotification.m in Sources */,
 				3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */,
 				620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */,
@@ -466,7 +457,6 @@
 				00416D616191F6FE7D9E6A1F4B2B4B10 /* PusherViewController.swift in Sources */,
 				B4EAF08DDE6A95460F408DEDFB81A65B /* SecTools.swift in Sources */,
 				BF9FA9B727985DFF910A43EC6E4B964D /* Type.swift in Sources */,
-				401C516E5C8C7462A0BAE13539234FF5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

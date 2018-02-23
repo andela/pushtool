@@ -76,6 +76,8 @@ public class PusherViewController: UIViewController {
         infoLabel.numberOfLines = 0
         view.addSubview(infoLabel)
         
+        //NWLogInfo(@"Connect with Apple's Push Notification service");
+        
         loadCertificate()
         
     }
@@ -98,24 +100,34 @@ public class PusherViewController: UIViewController {
     
     private func loadCertificate() {
         
-        let url: URL? = Bundle.main.url(forResource: pkcs12FileName,
+        guard let url: URL = Bundle.main.url(forResource: pkcs12FileName,
                                         withExtension: nil)
+        else { return }
+        
         do {
-            let pkcs12 = try Data(contentsOf: url!)
+            let pkcs12 = try Data(contentsOf: url)
             
             let ids = try NWSecTools.identities(withPKCS12Data: pkcs12,
-                                                password: pkcs12Password)
+                                                password: pkcs12Password) as [NWIdentityRef]
+            
             if ids.isEmpty {
+                
+                //NWLogWarn(@"Unable to read p12 file: %@", error.localizedDescription);
+                
                 return
             }
-            for identity: NWIdentityRef in ids {
-                var error: Error? = nil
-                let certificate: NWCertificateRef = try? NWSecTools.certificate(withIdentity: identity)
-                if certificate == nil {
-                    return
-                }
-                identity = identity
-                self.certificate = certificate
+            
+            for identity in ids {
+                
+                guard
+                    let certificate = try? NWSecTools.certificate(withIdentity: identity)
+                    
+                    //NWLogWarn(@"Unable to import p12 file: %@", error.localizedDescription);
+                    
+                    else { return }
+                
+                self.identity = identity
+                self.certificate = certificate as NWCertificateRef
             }
         }
         catch {
@@ -127,12 +139,14 @@ public class PusherViewController: UIViewController {
     @IBAction func sanboxCheckBoxDidPressed(_ sender: UISwitch) {
         
         if let certificate = certificate {
+            
             disconnect()
             connect(to: selectedEnvironment(forCertificate: certificate))
         }
     }
     
     private func selectedEnvironment(forCertificate certificate: NWCertificateRef) -> NWEnvironment {
+        
         return (sandboxSwitch.isOn ? NWEnvironment.sandbox : NWEnvironment.production)
         
     }
@@ -142,8 +156,11 @@ public class PusherViewController: UIViewController {
         let environmentOptions: NWEnvironmentOptions = NWSecTools.environmentOptions(forCertificate: certificate)
         
         if environmentOptions == .none {
+            
             return NWEnvironment.sandbox
-        }else {
+        }
+        else {
+            
             return  NWEnvironment.production
         }
         
@@ -151,25 +168,35 @@ public class PusherViewController: UIViewController {
     
     @objc
     private func connectButtonPressed() {
+        
         if hub != nil {
             disconnect()
             connectButton?.isEnabled = true
             connectButton?.setTitle("Connect", for: .normal)
             return
         }
+        guard let certificate =  self.certificate else { return }
         
-        let preferredEnvironment: NWEnvironment = self.preferredEnvironment(forCertificate: certificate!)
+        let preferredEnvironment: NWEnvironment = self.preferredEnvironment(forCertificate: certificate)
         connect(to: preferredEnvironment)
     }
     
     private func disconnect() {
+        
         disableButtons()
         hub?.disconnect()
         hub = nil
+        
+        //NWLogInfo(@"Disconnected");
+        
     }
     
     private func connect(to environment: NWEnvironment) {
+        
         disconnect()
+        
+        //NWLogInfo(@"Connecting..");
+        
         guard let identity = identity else { return }
         guard let hubInstance = try? Hub.connect(with: self,
                                                  identity: identity,
@@ -179,29 +206,42 @@ public class PusherViewController: UIViewController {
         DispatchQueue.main.async(execute: {[weak self]() -> Void in
             
             if (self?.hub != nil) {
+                
+                //NWLogInfo(@"Connected to APN: %@ (%@)", summary, descriptionForEnvironent(environment));
+                
                 self?.hub = hubInstance
                 self?.connectButton?.setTitle("Disconnect", for: .normal)
+                
             }
             else{
-                guard let certificate =  self?.certificate else { return }
                 
+                //NWLogWarn(@"Unable to connect: %@", error.localizedDescription);
+                
+                guard let certificate =  self?.certificate else { return }
                 self?.enableButtons(forCertificate: certificate,
                                     environment: environment)
             }
         })
         
     }
+    
     @objc
     private func push(_ sender: Any) {
         
         let payload = "{\"aps\":{\"alert\":\"%@\",\"badge\":1,\"sound\":\"default\"}}"
         let token = String(deviceToken)
         
+        // NWLogInfo(@"Pushing..");
+        
         serial?.async(execute: {[weak self]() -> Void in
             
             let _ = self?.hub?.pushPayload(payload, token: token)
             let popTime = DispatchTime.now() + Double(__int64_t(1.0 * Double(NSEC_PER_SEC)))
             let dispatchTime = DispatchTime(uptimeNanoseconds: popTime.uptimeNanoseconds/NSEC_PER_SEC)
+            
+            // NSUInteger failed2 = failed + [_hub readFailed];
+            // if (!failed2) NWLogInfo(@"Payload has been pushed");
+            
             self?.serial?.asyncAfter(deadline: dispatchTime, execute: {
                 
             })
@@ -211,6 +251,9 @@ public class PusherViewController: UIViewController {
     private func notification(_ notification: NWNotification) throws {
         
         DispatchQueue.main.sync(execute: {() -> Void in
+            
+            // NSLog(@"failed notification: %@ %@ %lu %lu %lu", notification.payload, notification.token, notification.identifier, notification.expires, notification.priority);
+            // NWLogWarn(@"Notification error: %@", error.localizedDescription);
             
         })
     }
@@ -223,21 +266,15 @@ public class PusherViewController: UIViewController {
     }
     
     private func enableButtons(forCertificate certificate: NWCertificateRef, environment: NWEnvironment) {
-    }
-    
-    private var appDel: AppDelegate? {
-        
-        guard let delegate = UIApplication.shared.delegate as? AppDelegate
-            else { return nil }
-        
-        return delegate
         
     }
     
 }
 
 extension PusherViewController : HubDelegate {
+    
     public func notification(_ notification: NWNotification?, didFailWithError error: Error) {
+        
     }
     
 }

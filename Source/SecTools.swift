@@ -1,6 +1,7 @@
 
 import Foundation
 
+@objcMembers
 public class SecTools : NSObject {
     
     // MARK: Public Instance methods

@@ -267,8 +267,13 @@ public class SecTools : NSObject {
     
   
     public class func values(withCertificate certificate: Any,
-                             keys: [Any], error: NSErrorPointer) -> [AnyHashable : Any] {
-        return [:]
+                             keys: [Any]) -> [AnyHashable: [AnyHashable: Any]]? {
+        var error: Unmanaged<CFError>?
+        
+        let result = SecCertificateCopyValues(certificate as! SecCertificate,
+                                              keys as CFArray, &error) as? [AnyHashable: [AnyHashable : Any]]
+        
+       return result
     }
 
     // MARK: Private Instance Methods
@@ -323,15 +328,22 @@ public class SecTools : NSObject {
     
     private func allKeyChainCertificates() throws -> [Any] {
         
-        var options = [kSecClass : kSecClassCertificate, kSecMatchLimit: kSecMatchLimitAll]
+        let options = [kSecClass : kSecClassCertificate, kSecMatchLimit: kSecMatchLimitAll]
         
-        var certs: CFArray?
-//
-//        var status: OSStatus
-//        status = SecItemCopyMatching(options as CFDictionary, certs! as CFTypeRef as! UnsafeMutablePointer<CFTypeRef?>)
+        var  certs: CFTypeRef? = nil
+
+        var status: OSStatus
         
+        status = SecItemCopyMatching(options as CFDictionary, &certs)
         
-        return []
+        guard
+            let certificates = certs as? [Any],
+            status == errSecSuccess
+        else {
+            throw ErrorUtil.errorWithErrorCode(.keychainCopyMatching, reason: Int(status))
+        }
+        
+        return certificates
     }
     
     private func prefix(withCertType certType: CertType) -> String? {
@@ -369,8 +381,9 @@ public class SecTools : NSObject {
     }
     
     private class func value(withCertificate certificate: NWCertificateRef,
-                             key: AnyHashable) -> Any {
-        //        return self.values(withCertificate: certificate, keys: [key], error: nil)[key]![kSecPropertyKeyValue as? Any ]
-        return 1
+                             key: AnyHashable) -> Any? {
+        let values  = self.values(withCertificate: certificate, keys: [key])
+        
+        return values?[key]![kSecPropertyKeyValue]
     }
 }

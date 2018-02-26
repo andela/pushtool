@@ -40,7 +40,9 @@ public class Pusher: NSObject {
         var environment = environment
         
         if environment == .auto {
-            environment = NWSecTools.environment(forIdentity: identity)
+            let options = SecTools.environmentOptions(forIdentity: identity)
+
+            environment = options != .production ? .sandbox : .production
         }
         
         let host = (environment == .sandbox) ? sandboxPushHost : pushHost
@@ -57,8 +59,8 @@ public class Pusher: NSObject {
     public func connect(withPKCS12Data data: Data,
                         password: String,
                         environment: NWEnvironment) throws {
-        let identity: NWIdentityRef = try NWSecTools.identities(withPKCS12Data: data,
-                                                                password: password) as NWIdentityRef
+        let identity: NWIdentityRef = try SecTools.identities(withPKCS12Data: data,
+                                                              password: password) as NWIdentityRef
         
         try connect(withIdentity: identity,
                     environment: environment)

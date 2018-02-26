@@ -39,7 +39,9 @@ public class PushFeedback : NSObject {
         var environment = environment
 
         if environment == .auto {
-            environment = NWSecTools.environment(forIdentity: identity)
+            let options = SecTools.environmentOptions(forIdentity: identity)
+
+            environment = options != .production ? .sandbox : .production
         }
 
         let host = (environment == .sandbox) ? sandboxPushHost : pushHost
@@ -59,8 +61,10 @@ public class PushFeedback : NSObject {
                         password: String?,
                         environment: NWEnvironment) throws {
 
-        guard let identity = try NWSecTools.identity(withPKCS12Data: data,
-                                                     password: password) as NWIdentityRef?
+        guard
+            let password = password,
+            let identity = try SecTools.identity(withPKCS12Data: data,
+                                                 password: password) as NWIdentityRef?
             else { return }
 
         try connect(withIdentity: identity,

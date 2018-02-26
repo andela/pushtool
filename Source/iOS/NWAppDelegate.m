@@ -1,7 +1,6 @@
 #import <UIKit/UIKit.h>
 
 #import "NWAppDelegate.h"
-#import "NWSecTools.h"
 
 #import "PushTool-Swift.h"
 
@@ -87,14 +86,14 @@ static NWPusherViewController *controller = nil;
     NSData *pkcs12 = [NSData dataWithContentsOfURL:url];
     NSError *error = nil;
     
-    NSArray *ids = [NWSecTools identitiesWithPKCS12Data:pkcs12 password:pkcs12Password error:&error];
+    NSArray *ids = [SecTools identitiesWithPKCS12Data:pkcs12 password:pkcs12Password error:&error];
     if (!ids) {
         //NWLogWarn(@"Unable to read p12 file: %@", error.localizedDescription);
         return;
     }
     for (NWIdentityRef identity in ids) {
         NSError *error = nil;
-        NWCertificateRef certificate = [NWSecTools certificateWithIdentity:identity error:&error];
+        NWCertificateRef certificate = [SecTools certificateWithIdentity:identity error:&error];
         if (!certificate) {
             //NWLogWarn(@"Unable to import p12 file: %@", error.localizedDescription);
             return;
@@ -121,7 +120,7 @@ static NWPusherViewController *controller = nil;
 
 - (NWEnvironment)preferredEnvironmentForCertificate:(NWCertificateRef)certificate
 {
-    NWEnvironmentOptions environmentOptions = [NWSecTools environmentOptionsForCertificate:certificate];
+    NWEnvironmentOptions environmentOptions = [SecTools environmentOptionsForCertificate:certificate];
     
     return (environmentOptions & NWEnvironmentOptionSandbox) ? NWEnvironmentSandbox : NWEnvironmentProduction;
 }
@@ -208,7 +207,7 @@ static NWPusherViewController *controller = nil;
 
 - (void)enableButtonsForCertificate:(NWCertificateRef)certificate environment:(NWEnvironment)environment
 {
-    NWEnvironmentOptions environmentOptions = [NWSecTools environmentOptionsForCertificate:certificate];
+    NWEnvironmentOptions environmentOptions = [SecTools environmentOptionsForCertificate:certificate];
     
     BOOL shouldEnableEnvButton = (environmentOptions == NWEnvironmentOptionAny);
     BOOL shouldSelectSandboxEnv = (environment == NWEnvironmentSandbox);

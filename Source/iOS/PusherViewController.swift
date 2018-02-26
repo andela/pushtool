@@ -147,7 +147,7 @@ public class PusherViewController: UIViewController {
     
     private func selectedEnvironment(forCertificate certificate: NWCertificateRef) -> NWEnvironment {
         
-        return (sandboxSwitch.isOn ? NWEnvironment.sandbox : NWEnvironment.production)
+        return (sandboxSwitch.isOn ? .sandbox : .production)
         
     }
     
@@ -157,11 +157,11 @@ public class PusherViewController: UIViewController {
         
         if environmentOptions == .none {
             
-            return NWEnvironment.sandbox
+            return .sandbox
         }
         else {
             
-            return  NWEnvironment.production
+            return  .production
         }
         
     }
@@ -175,7 +175,7 @@ public class PusherViewController: UIViewController {
             connectButton?.setTitle("Connect", for: .normal)
             return
         }
-        guard let certificate =  self.certificate else { return }
+        guard let certificate = self.certificate else { return }
         
         let preferredEnvironment: NWEnvironment = self.preferredEnvironment(forCertificate: certificate)
         connect(to: preferredEnvironment)
@@ -267,6 +267,14 @@ public class PusherViewController: UIViewController {
     
     private func enableButtons(forCertificate certificate: NWCertificateRef, environment: NWEnvironment) {
         
+        let environmentOptions: NWEnvironmentOptions = NWSecTools.environmentOptions(forCertificate: certificate)
+        let shouldEnableEnvButton: Bool = environmentOptions == .any
+        let shouldSelectSandboxEnv: Bool = environment == .sandbox
+        
+        pushButton.isEnabled = true
+        connectButton.isEnabled = true
+        sandboxSwitch.isEnabled = shouldEnableEnvButton
+        sandboxSwitch.isOn = shouldSelectSandboxEnv
     }
     
 }
@@ -274,7 +282,6 @@ public class PusherViewController: UIViewController {
 extension PusherViewController : HubDelegate {
     
     public func notification(_ notification: NWNotification?, didFailWithError error: Error) {
-        
     }
     
 }

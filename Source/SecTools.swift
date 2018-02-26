@@ -1,5 +1,6 @@
 
 import Foundation
+import Security
 
 @objcMembers
 public class SecTools : NSObject {
@@ -66,16 +67,16 @@ public class SecTools : NSObject {
         return self.environmentOptions(forCertificate: certificate)
     }
     
-    
-    
+    #if os(macOS)
     public class func expiration(withCertificate certificate: Any) -> Date {
         
         return self.value(withCertificate: certificate as NWCertificateRef,
                           key: kSecOIDInvalidityDate) as! Date
     }
-    
+    #endif
+
     public class func identities(withPKCS12Data pkcs12: Data,
-                                 password: String) throws -> [Any]? {
+                                 password: String) throws -> [Any] {
         
         guard
             !pkcs12.isEmpty
@@ -85,7 +86,7 @@ public class SecTools : NSObject {
         guard
             let dicts = try self.allIdentitities(withPKCS12Data: pkcs12,
                                                  password: password)
-            else { return nil }
+            else { return [] }
 
         var ids: [NWIdentityRef] = []
 
@@ -107,14 +108,11 @@ public class SecTools : NSObject {
     }
     
     public class func identity(withPKCS12Data pkcs12: Data,
-                               password: String) throws -> Any? {
+                               password: String) throws -> Any {
         
-        let identitiesCollection = try self.identities(withPKCS12Data: pkcs12,
-                                                       password: password)
-        
-        guard let identities = identitiesCollection
-            else { return nil }
-        
+        let identities = try self.identities(withPKCS12Data: pkcs12,
+                                             password: password)
+
         if identities.count == 0 {
             throw ErrorUtil.errorWithErrorCode(.pkcs12NoItems, reason: 0)
         }
@@ -123,7 +121,7 @@ public class SecTools : NSObject {
             throw ErrorUtil.errorWithErrorCode(.pkcs12MultipleItems, reason: 0)
         }
         
-        return identities.last
+        return identities.last as Any
     }
     
     public class func inspectIdentity(_ identity: Any?) -> [AnyHashable : Any]? {
@@ -186,7 +184,7 @@ public class SecTools : NSObject {
         }
     }
     
-    public class func key(withIdentity identity: Any? )throws -> Any? {
+    public class func key(withIdentity identity: Any?) throws -> Any? {
         var key: SecKey?
         var status: OSStatus
         
@@ -206,13 +204,12 @@ public class SecTools : NSObject {
         
         return keyRef
     }
-    
-    public class func keychainCertificatesWithError()throws -> [Any]? {
+
+    @objc(keychainCertificatesWithError:)
+    public class func keychainCertificates() throws -> [Any] {
         
-        let candidatesCollection = try self.keychainCertificatesWithError()
+        let candidates = try self.allKeychainCertificates()
         
-        guard let candidates = candidatesCollection
-            else { return nil }
         var certificates: [Any] = []
         
         certificates = candidates.filter {
@@ -222,31 +219,32 @@ public class SecTools : NSObject {
         return certificates
     }
 
-    public class func keychainIdentity(withCertificate certificate: Any?,
-                                       error: NSErrorPointer) throws -> Any {
+    #if os(macOS)
+    public class func keychainIdentity(withCertificate certificate: Any?) throws -> Any {
         var ident: SecIdentity?
-        
+
         var status : OSStatus
-        
+
         if let cert = certificate {
             status = SecIdentityCreateWithCertificate(nil,
-                                             cert as! SecCertificate,
-                                             &ident)
+                                                      cert as! SecCertificate,
+                                                      &ident)
         } else {
             status = errSecParam
         }
-        
+
         if status !=  errSecSuccess {
             throw ErrorUtil.errorWithErrorCode(.keychainItemNotFound, reason: 0)
         }
-        
+
         guard let id = ident  else {
             throw ErrorUtil.errorWithErrorCode(.keychainCreateIdentity, reason: 0)
         }
-        
+
         return id
     }
-    
+    #endif
+
     public class func summary(withCertificate certificate: Any) -> String {
         var result: NSString?
         
@@ -265,8 +263,7 @@ public class SecTools : NSObject {
         return .iosDevelopment
     }
     
-    
-  
+    #if os(macOS)
     public class func values(withCertificate certificate: Any,
                              keys: [Any]) -> [AnyHashable: [AnyHashable: Any]]? {
         var error: Unmanaged<CFError>?
@@ -274,8 +271,9 @@ public class SecTools : NSObject {
         let result = SecCertificateCopyValues(certificate as! SecCertificate,
                                               keys as CFArray, &error) as? [AnyHashable: [AnyHashable : Any]]
         
-       return result
+        return result
     }
+    #endif
 
     // MARK: Private Instance Methods
     
@@ -327,7 +325,7 @@ public class SecTools : NSObject {
         }
     }
     
-    private func allKeyChainCertificates() throws -> [Any] {
+    private class func allKeychainCertificates() throws -> [Any] {
         
         let options = [kSecClass : kSecClassCertificate, kSecMatchLimit: kSecMatchLimitAll]
         
@@ -340,8 +338,8 @@ public class SecTools : NSObject {
         guard
             let certificates = certs as? [Any],
             status == errSecSuccess
-        else {
-            throw ErrorUtil.errorWithErrorCode(.keychainCopyMatching, reason: Int(status))
+            else {
+                throw ErrorUtil.errorWithErrorCode(.keychainCopyMatching, reason: Int(status))
         }
         
         return certificates
@@ -380,11 +378,14 @@ public class SecTools : NSObject {
             return nil
         }
     }
-    
+
+    #if os(macOS)
     private class func value(withCertificate certificate: NWCertificateRef,
                              key: AnyHashable) -> Any? {
-        let values  = self.values(withCertificate: certificate, keys: [key])
+        let values = self.values(withCertificate: certificate,
+                                 keys: [key])
         
-        return values?[key]![kSecPropertyKeyValue]
+        return values?[key]?[kSecPropertyKeyValue]
     }
+    #endif
 }

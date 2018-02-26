@@ -1,6 +1,5 @@
 #import "NWAppDelegate.h"
 #import "NWNotification.h"
-#import "NWSecTools.h"
 
 #import "PushTool-Swift.h"
 
@@ -126,7 +125,7 @@
 - (void)loadCertificatesFromKeychain
 {
     NSError *error = nil;
-    NSArray *certs = [NWSecTools keychainCertificatesWithError:&error];
+    NSArray *certs = [SecTools keychainCertificatesWithError:&error];
     if (!certs) {
         //NWLogWarn(@"Unable to access keychain: %@", error.localizedDescription);
     }
@@ -134,13 +133,13 @@
         //NWLogWarn(@"No push certificates in keychain.");
     }
     certs = [certs sortedArrayUsingComparator:^NSComparisonResult(NWCertificateRef a, NWCertificateRef b) {
-        NWEnvironmentOptions envOptionsA = [NWSecTools environmentOptionsForCertificate:a];
-        NWEnvironmentOptions envOptionsB = [NWSecTools environmentOptionsForCertificate:b];
+        NWEnvironmentOptions envOptionsA = [SecTools environmentOptionsForCertificate:a];
+        NWEnvironmentOptions envOptionsB = [SecTools environmentOptionsForCertificate:b];
         if (envOptionsA != envOptionsB) {
             return envOptionsA < envOptionsB;
         }
-        NSString *aname = [NWSecTools summaryWithCertificate:a];
-        NSString *bname = [NWSecTools summaryWithCertificate:b];
+        NSString *aname = [SecTools summaryWithCertificate:a];
+        NSString *bname = [SecTools summaryWithCertificate:b];
         return [aname compare:bname];
     }];
     NSMutableArray *pairs = @[].mutableCopy;
@@ -161,11 +160,11 @@
     for (NSArray *pair in _certificateIdentityPairs) {
         NWCertificateRef certificate = pair[0];
         BOOL hasIdentity = (pair[1] != NSNull.null);
-        NWEnvironmentOptions environmentOptions = [NWSecTools environmentOptionsForCertificate:certificate];
+        NWEnvironmentOptions environmentOptions = [SecTools environmentOptionsForCertificate:certificate];
         NSString *summary = nil;
-        NWCertType certType = [NWSecTools typeWithCertificate:certificate summary:&summary];
+        NWCertType certType = [SecTools typeWithCertificate:certificate summary:&summary];
         NSString *type = [ErrorUtil descriptionForCertType: certType];
-        NSDate *date = [NWSecTools expirationWithCertificate:certificate];
+        NSDate *date = [SecTools expirationWithCertificate:certificate];
         NSString *expire = [NSString stringWithFormat:@"  [%@]", date ? [formatter stringFromDate:date] : @"expired"];
         // summary = @"com.example.app";
         [_certificatePopup addItemWithTitle:[NSString stringWithFormat:@"%@%@ (%@ %@)%@%@", hasIdentity ? @"imported: " : @"", summary, type, [ErrorUtil descriptionForEnvironmentOptions: environmentOptions], expire, suffix]];
@@ -198,9 +197,9 @@
             NSString *password = input.stringValue;
             NSData *data = [NSData dataWithContentsOfURL:url];
             NSError *error = nil;
-            NSArray *ids = [NWSecTools identitiesWithPKCS12Data:data password:password error:&error];
+            NSArray *ids = [SecTools identitiesWithPKCS12Data:data password:password error:&error];
             if (!ids && password.length == 0 && error.code == kNWErrorPKCS12Password) {
-                ids = [NWSecTools identitiesWithPKCS12Data:data password:nil error:&error];
+                ids = [SecTools identitiesWithPKCS12Data:data password:nil error:&error];
             }
             if (!ids) {
                 //NWLogWarn(@"Unable to read p12 file: %@", error.localizedDescription);
@@ -208,7 +207,7 @@
             }
             for (NWIdentityRef identity in ids) {
                 NSError *error = nil;
-                NWCertificateRef certificate = [NWSecTools certificateWithIdentity:identity error:&error];
+                NWCertificateRef certificate = [SecTools certificateWithIdentity:identity error:&error];
                 if (!certificate) {
                     //NWLogWarn(@"Unable to import p12 file: %@", error.localizedDescription);
                     return;
@@ -284,7 +283,7 @@
 
 - (NWEnvironment)preferredEnvironmentForCertificate:(NWCertificateRef)certificate
 {
-    NWEnvironmentOptions environmentOptions = [NWSecTools environmentOptionsForCertificate:certificate];
+    NWEnvironmentOptions environmentOptions = [SecTools environmentOptionsForCertificate:certificate];
     
     return (environmentOptions & NWEnvironmentOptionSandbox) ? NWEnvironmentSandbox : NWEnvironmentProduction;
 }
@@ -323,7 +322,7 @@
 
 - (void)enableButtonsForCertificate:(NWCertificateRef)certificate environment:(NWEnvironment)environment
 {
-    NWEnvironmentOptions environmentOptions = [NWSecTools environmentOptionsForCertificate:certificate];
+    NWEnvironmentOptions environmentOptions = [SecTools environmentOptionsForCertificate:certificate];
     
     BOOL shouldEnableEnvButton = (environmentOptions == NWEnvironmentOptionAny);
     BOOL shouldSelectSandboxEnv = (environment == NWEnvironmentSandbox);
@@ -348,12 +347,12 @@
     
     if (certificate) {
         
-        //NSString *summary = [NWSecTools summaryWithCertificate:certificate];
+        //NSString *summary = [SecTools summaryWithCertificate:certificate];
         //NWLogInfo(@"Connecting to APN...  (%@ %@)", summary, descriptionForEnvironent(environment));
         
         dispatch_async(_serial, ^{
             NSError *error = nil;
-            NWIdentityRef ident = identity ?: [NWSecTools keychainIdentityWithCertificate:certificate error:&error];
+            NWIdentityRef ident = identity ?: [SecTools keychainIdentityWithCertificate:certificate error:&error];
             Hub *hub = [Hub connectWith:self identity:ident environment:environment error:&error];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (hub) {
@@ -373,7 +372,7 @@
 
 - (void)reconnect
 {
-    //NSString *summary = [NWSecTools summaryWithCertificate:_selectedCertificate];
+    //NSString *summary = [SecTools summaryWithCertificate:_selectedCertificate];
     NWEnvironment environment = [self selectedEnvironmentForCertificate:_selectedCertificate];
     
     //NWLogInfo(@"Reconnecting to APN...(%@ %@)", summary, descriptionForEnvironent(environment));
@@ -420,10 +419,10 @@
             return;
         }
         //NWEnvironment environment = [self selectedEnvironmentForCertificate:certificate];
-        //NSString *summary = [NWSecTools summaryWithCertificate:certificate];
+        //NSString *summary = [SecTools summaryWithCertificate:certificate];
         //NWLogInfo(@"Connecting to feedback service..  (%@ %@)", summary, descriptionForEnvironent(environment));
         NSError *error = nil;
-        NWIdentityRef identity = [NWSecTools keychainIdentityWithCertificate:_selectedCertificate error:&error];
+        NWIdentityRef identity = [SecTools keychainIdentityWithCertificate:_selectedCertificate error:&error];
         PushFeedback *feedback = [PushFeedback connectWithIdentity:identity environment:[self selectedEnvironmentForCertificate:certificate] error:&error];
         if (!feedback) {
             //NWLogWarn(@"Unable to connect to feedback service: %@", error.localizedDescription);
@@ -450,15 +449,15 @@
 
 - (NSString *)identifierWithCertificate:(NWCertificateRef)certificate
 {
-    NWEnvironmentOptions environmentOptions = [NWSecTools environmentOptionsForCertificate:certificate];
-    NSString *summary = [NWSecTools summaryWithCertificate:certificate];
+    NWEnvironmentOptions environmentOptions = [SecTools environmentOptionsForCertificate:certificate];
+    NSString *summary = [SecTools summaryWithCertificate:certificate];
     return summary ? [NSString stringWithFormat:@"%@-%@", summary, [ErrorUtil descriptionForEnvironmentOptions: environmentOptions]] : nil;
 }
 
 - (NSMutableArray *)tokensWithCertificate:(NWCertificateRef)certificate create:(BOOL)create
 {
     NWEnvironment environment = [self selectedEnvironmentForCertificate:_selectedCertificate];
-    NSString *summary = [NWSecTools summaryWithCertificate:certificate];
+    NSString *summary = [SecTools summaryWithCertificate:certificate];
     NSString *identifier = summary ? [NSString stringWithFormat:@"%@%@", summary, environment == NWEnvironmentSandbox ? @"-sandbox" : @""] : nil;
     if (!identifier) return nil;
     NSArray *result = _config[@"identifiers"][identifier];

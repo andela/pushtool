@@ -165,6 +165,8 @@ public class SecTools : NSObject {
     }
     
     public class func isPushCertificate(_ certificate: NWCertificateRef) -> Bool {
+
+        print("Checking certificate \(certificate)")
         
         switch (self.type(withCertificate: certificate,
                           summary: nil)) {
@@ -206,11 +208,11 @@ public class SecTools : NSObject {
     }
 
     @objc(keychainCertificatesWithError:)
-    public class func keychainCertificates() throws -> [Any] {
+    public class func keychainCertificates() throws -> [NWCertificateRef] {
         
         let candidates = try self.allKeychainCertificates()
         
-        var certificates: [Any] = []
+        var certificates: [NWCertificateRef] = []
         
         certificates = candidates.filter {
             self.isPushCertificate($0)
@@ -353,9 +355,10 @@ public class SecTools : NSObject {
     
     private class func allKeychainCertificates() throws -> [NWCertificateRef] {
         
-        let options = [kSecClass : kSecClassCertificate, kSecMatchLimit: kSecMatchLimitAll]
+        let options = [kSecClass: kSecClassCertificate,
+                       kSecMatchLimit: kSecMatchLimitAll]
         
-        var  certs: CFTypeRef? = nil
+        var certs: CFTypeRef? = nil
 
         var status: OSStatus
         
@@ -382,31 +385,31 @@ public class SecTools : NSObject {
     private class func prefix(withCertType certType: NWCertType) -> String? {
         switch certType {
         case .iosDevelopment:
-            return "Apple Development IOS Push services"
+            return "Apple Development IOS Push Services: "
 
         case .iosProduction:
-            return "Apple Production IOS Push services"
+            return "Apple Production IOS Push Services: "
 
         case .macDevelopment:
-            return "Apple Development Mac Push services"
+            return "Apple Development Mac Push Services: "
 
         case .macProduction:
-            return "Apple Production Mac Push services"
+            return "Apple Production Mac Push Services: "
 
         case .simplified:
-            return "Apple Push Services"
+            return "Apple Push Services: "
 
         case .webProduction:
-            return "Website Push ID"
+            return "Website Push ID: "
 
         case .voIPServices:
-            return "VoIP Services"
+            return "VoIP Services: "
 
         case .watchKitServices:
-            return "Watch Kit Services"
+            return "WatchKit Services: "
 
         case .passes:
-            return "Pass Type ID"
+            return "Pass Type ID: "
 
         default:
             return nil

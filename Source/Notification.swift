@@ -4,14 +4,14 @@ import Foundation
 public class Notification: NSObject {
 
     public var addExpiration: Bool
-    public var expiration: Date?
+    public var expiration: Date?        // should be computed property (if needed)
     public var expirationStamp: UInt
     public var identifier: UInt
-    public var payload: String?
-    public var payloadData: Data?
+    public var payload: String          // should be computed property (if needed)
+    public var payloadData: Data
     public var priority: UInt
-    public var token: String?
-    public var tokenData: Data?
+    public var token: String            // should be computed property (if needed)
+    public var tokenData: Data
 
     private let deviceTokenSize: UInt = 32
     private let payloadMaxSize: UInt = 256
@@ -23,7 +23,9 @@ public class Notification: NSObject {
                 expiration: Date?,
                 priority: UInt) {
         self.payload = payload
+        self.payloadData = ???
         self.token = token
+        self.tokenData = ???
         self.identifier = identifier
         self.expiration = expiration
         self.expirationStamp = 0

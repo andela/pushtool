@@ -15,7 +15,7 @@ public class SecTools : NSObject {
                                             data as CFData)
     }
     
-    public class func certificate(withIdentity identity: NWIdentityRef?) throws -> Any {
+    public class func certificate(withIdentity identity: NWIdentityRef?) throws -> NWCertificateRef {
         var cert: SecCertificate?
         var status: OSStatus
         
@@ -34,7 +34,7 @@ public class SecTools : NSObject {
         return certificate
     }
     
-    public class func environmentOptions(forCertificate certificate: Any) -> NWEnvironmentOptions {
+    public class func environmentOptions(forCertificate certificate: NWCertificateRef) -> NWEnvironmentOptions {
         
         switch (self.type(withCertificate: certificate,
                           summary: nil) ) {
@@ -164,7 +164,7 @@ public class SecTools : NSObject {
         return result
     }
     
-    public class func isPushCertificate(_ certificate: Any) -> Bool {
+    public class func isPushCertificate(_ certificate: NWCertificateRef) -> Bool {
         
         switch (self.type(withCertificate: certificate,
                           summary: nil)) {
@@ -245,7 +245,7 @@ public class SecTools : NSObject {
     }
     #endif
 
-    public class func summary(withCertificate certificate: Any) -> String {
+    public class func summary(withCertificate certificate: NWCertificateRef) -> String {
         var result: NSString?
         
         _ = self.type(withCertificate: certificate,
@@ -257,10 +257,36 @@ public class SecTools : NSObject {
         return resultValue as String
     }
     
-    public class func type(withCertificate certificate: Any,
+    public class func type(withCertificate certificate: NWCertificateRef,
                            summary: AutoreleasingUnsafeMutablePointer<NSString?>?) -> NWCertType {
+     
+        if summary != nil {
+            summary?.pointee = nil
+        }
         
-        return .iosDevelopment
+        let name: String? = self.plainSummary(withCertificate: certificate)
+    
+        
+        for type in NWCertType.none.rawValue...NWCertType.unknown.rawValue {
+            guard
+                let certType = NWCertType(rawValue: type),
+                let prefix = self.prefix(withCertType: certType),
+                let name = name,
+                name.hasPrefix(prefix)
+                else { continue }
+            
+            if summary != nil {
+                summary?.pointee = name as NSString
+            }
+            return  certType
+            
+        }
+        if summary != nil,
+           let name = name {
+            summary?.pointee = name as NSString
+        }
+        
+        return .unknown
     }
     
     #if os(macOS)
@@ -325,7 +351,7 @@ public class SecTools : NSObject {
         }
     }
     
-    private class func allKeychainCertificates() throws -> [Any] {
+    private class func allKeychainCertificates() throws -> [NWCertificateRef] {
         
         let options = [kSecClass : kSecClassCertificate, kSecMatchLimit: kSecMatchLimitAll]
         
@@ -336,7 +362,7 @@ public class SecTools : NSObject {
         status = SecItemCopyMatching(options as CFDictionary, &certs)
         
         guard
-            let certificates = certs as? [Any],
+            let certificates = certs as? [NWCertificateRef],
             status == errSecSuccess
             else {
                 throw ErrorUtil.errorWithErrorCode(.keychainCopyMatching, reason: Int(status))
@@ -345,7 +371,15 @@ public class SecTools : NSObject {
         return certificates
     }
     
-    private func prefix(withCertType certType: CertType) -> String? {
+    private class func plainSummary(withCertificate certificate:NWCertificateRef?) -> String? {
+        guard
+            let cert = certificate,
+            let summary = SecCertificateCopySubjectSummary(cert as! SecCertificate) as String?
+            else { return nil }
+        return summary
+    }
+    
+    private class func prefix(withCertType certType: NWCertType) -> String? {
         switch certType {
         case .iosDevelopment:
             return "Apple Development IOS Push services"

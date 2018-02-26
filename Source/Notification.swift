@@ -31,19 +31,19 @@ public class Notification: NSObject {
         self.addExpiration = false
     }
 
-    public init(payloadData: Data,
-                tokenData: Data,
-                identifier: UInt,
-                expirationStamp: UInt,
-                addExpiration: Bool,
-                priority: UInt) {
-        self.payloadData = payloadData
-        self.tokenData = tokenData
-        self.identifier = identifier
-        self.expirationStamp = expirationStamp
-        self.addExpiration = addExpiration
-        self.priority = priority
-    }
+//    public init(payloadData: Data,
+//                tokenData: Data,
+//                identifier: UInt,
+//                expirationStamp: UInt,
+//                addExpiration: Bool,
+//                priority: UInt) {
+//        self.payloadData = payloadData
+//        self.tokenData = tokenData
+//        self.identifier = identifier
+//        self.expirationStamp = expirationStamp
+//        self.addExpiration = addExpiration
+//        self.priority = priority
+//    }
 
     public class func data(fromHex hex: String) -> Data {
 

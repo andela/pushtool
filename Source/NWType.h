@@ -196,7 +196,7 @@ typedef NS_ENUM(NSInteger, NWEnvironment) {
     NWEnvironmentAuto = 3,
 };
 
-typedef NS_ENUM(NSInteger, NWEnvironmentOptions) {
+typedef NS_OPTIONS(NSInteger, NWEnvironmentOptions) {
     NWEnvironmentOptionNone = 0,
     NWEnvironmentOptionSandbox = 1 << NWEnvironmentSandbox,
     NWEnvironmentOptionProduction = 1 << NWEnvironmentProduction,

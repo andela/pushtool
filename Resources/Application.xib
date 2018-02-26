@@ -159,7 +159,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="600" height="300"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <value key="minSize" type="size" width="500" height="200"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
@@ -233,7 +233,7 @@
                         </popUpButtonCell>
                     </popUpButton>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EnU-aP-5PD">
-                        <rect key="frame" x="464" y="177" width="118" height="24"/>
+                        <rect key="frame" x="456" y="177" width="126" height="24"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Olm-G5-Man">
                             <font key="font" metaFont="system"/>
                             <segments>
@@ -270,7 +270,7 @@
                         <rect key="frame" x="20" y="45" width="560" height="130"/>
                         <clipView key="contentView" id="e4e-ov-ymY">
                             <rect key="frame" x="1" y="1" width="558" height="128"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" allowsNonContiguousLayout="YES" textCompletion="NO" id="ad5-lb-L5u">
                                     <rect key="frame" x="0.0" y="0.0" width="558" height="128"/>
@@ -321,7 +321,7 @@
                         <rect key="frame" x="20" y="45" width="560" height="130"/>
                         <clipView key="contentView" id="uaF-sl-etn">
                             <rect key="frame" x="1" y="1" width="558" height="128"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="pi6-RR-ayT">
                                     <rect key="frame" x="0.0" y="0.0" width="558" height="128"/>
@@ -403,7 +403,7 @@
                 </constraints>
             </view>
         </window>
-        <customObject id="kaW-YJ-UA5" customClass="NWAppDelegate">
+        <customObject id="kaW-YJ-UA5" customClass="AppDelegate" customModule="PushTool" customModuleProvider="target">
             <connections>
                 <outlet property="_certificatePopup" destination="aJR-Gv-8Xr" id="A43-MU-5mS"/>
                 <outlet property="_countField" destination="gQs-Aa-IJi" id="miX-ao-hNk"/>

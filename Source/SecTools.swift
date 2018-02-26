@@ -54,7 +54,7 @@ public class SecTools : NSObject {
             return .any
             
         default:
-            return .none
+            return .sandbox
         }
     }
     
@@ -62,7 +62,7 @@ public class SecTools : NSObject {
         
         guard
             let certificate: NWCertificateRef = try? self.certificate(withIdentity: identity as NWIdentityRef) as NWCertificateRef
-            else { return .none }
+            else { return .sandbox }
         
         return self.environmentOptions(forCertificate: certificate)
     }

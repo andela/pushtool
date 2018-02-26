@@ -68,10 +68,10 @@ public class SecTools : NSObject {
     }
     
     #if os(macOS)
-    public class func expiration(withCertificate certificate: Any) -> Date {
+    public class func expiration(withCertificate certificate: Any) -> Date? {
         
         return self.value(withCertificate: certificate as NWCertificateRef,
-                          key: kSecOIDInvalidityDate) as! Date
+                          key: kSecOIDInvalidityDate) as? Date
     }
     #endif
 

@@ -107,8 +107,8 @@ public class PusherViewController: UIViewController {
         do {
             let pkcs12 = try Data(contentsOf: url)
             
-            let ids = try NWSecTools.identities(withPKCS12Data: pkcs12,
-                                                password: pkcs12Password) as [NWIdentityRef]
+            let ids = try SecTools.identities(withPKCS12Data: pkcs12,
+                                              password: pkcs12Password) as [NWIdentityRef]
             
             if ids.isEmpty {
                 
@@ -120,7 +120,7 @@ public class PusherViewController: UIViewController {
             for identity in ids {
                 
                 guard
-                    let certificate = try? NWSecTools.certificate(withIdentity: identity)
+                    let certificate = try? SecTools.certificate(withIdentity: identity)
                     
                     //NWLogWarn(@"Unable to import p12 file: %@", error.localizedDescription);
                     
@@ -153,7 +153,7 @@ public class PusherViewController: UIViewController {
     
     private func preferredEnvironment(forCertificate certificate: NWCertificateRef) -> NWEnvironment {
         
-        let environmentOptions: NWEnvironmentOptions = NWSecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: NWEnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
         
         if environmentOptions == .none {
             
@@ -267,7 +267,7 @@ public class PusherViewController: UIViewController {
     
     private func enableButtons(forCertificate certificate: NWCertificateRef, environment: NWEnvironment) {
         
-        let environmentOptions: NWEnvironmentOptions = NWSecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: NWEnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
         let shouldEnableEnvButton: Bool = environmentOptions == .any
         let shouldSelectSandboxEnv: Bool = environment == .sandbox
         

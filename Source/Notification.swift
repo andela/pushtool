@@ -4,13 +4,10 @@ import Foundation
 public class Notification: NSObject {
 
     public var addExpiration: Bool
-    //public var expiration: Date?        // should be computed property (if needed)
     public var expirationStamp: UInt
     public var identifier: UInt
-    //public var payload: String          // should be computed property (if needed)
     public var payloadData: Data
     public var priority: UInt
-    //public var token: String            // should be computed property (if needed)
     public var tokenData: Data
 
     private let deviceTokenSize: UInt = 32
@@ -135,18 +132,9 @@ public class Notification: NSObject {
 
     private static func filter(_ hex: String) -> String {
 
-        let hexToLowerCase = hex.lowercased()
-        var result = String()
-
-        for index in 0..<hex.count {
-            let charIndex = hexToLowerCase.index(hexToLowerCase.startIndex,
-                                                 offsetBy: index)
-            let char = hexToLowerCase[charIndex]
-            if (char == "a" && char <= "f") || (char >= "0" && char <= "9") {
-
-                result.append(char)
-            }
-        }
+        let result = hex.lowercased().filter({ (char) -> Bool in
+            (char >= "a" && char <= "f") || (char >= "0" && char <= "9")
+        })
 
         return result
     }

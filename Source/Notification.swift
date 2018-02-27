@@ -4,13 +4,13 @@ import Foundation
 public class Notification: NSObject {
 
     public var addExpiration: Bool
-    public var expiration: Date?        // should be computed property (if needed)
+    //public var expiration: Date?        // should be computed property (if needed)
     public var expirationStamp: UInt
     public var identifier: UInt
-    public var payload: String          // should be computed property (if needed)
+    //public var payload: String          // should be computed property (if needed)
     public var payloadData: Data
     public var priority: UInt
-    public var token: String            // should be computed property (if needed)
+    //public var token: String            // should be computed property (if needed)
     public var tokenData: Data
 
     private let deviceTokenSize: UInt = 32
@@ -22,30 +22,23 @@ public class Notification: NSObject {
                 identifier: UInt,
                 expiration: Date?,
                 priority: UInt) {
-        self.payload = payload
-        self.payloadData = ???
-        self.token = token
-        self.tokenData = ???
-        self.identifier = identifier
-        self.expiration = expiration
-        self.expirationStamp = 0
-        self.priority = priority
-        self.addExpiration = false
-    }
+        if let expiration = expiration {
+            self.addExpiration = true
+            self.expirationStamp = UInt(expiration.timeIntervalSince1970)
+        } else {
+            self.addExpiration = false
+            self.expirationStamp = 0
+        }
 
-//    public init(payloadData: Data,
-//                tokenData: Data,
-//                identifier: UInt,
-//                expirationStamp: UInt,
-//                addExpiration: Bool,
-//                priority: UInt) {
-//        self.payloadData = payloadData
-//        self.tokenData = tokenData
-//        self.identifier = identifier
-//        self.expirationStamp = expirationStamp
-//        self.addExpiration = addExpiration
-//        self.priority = priority
-//    }
+        self.identifier = identifier
+        self.payloadData = payload.data(using: .utf8) ?? Data()
+        self.priority = priority
+
+        let normal = Notification.filter(token)
+        let trunk = normal.count >= 64 ? String(normal.prefix(64)) : ""
+
+        self.tokenData = Notification.data(fromHex: trunk)
+    }
 
     public class func data(fromHex hex: String) -> Data {
 
@@ -82,22 +75,21 @@ public class Notification: NSObject {
 
         result.append(&command, length: 1)
 
-        if let tokenData = self.tokenData as NSData? {
+        let tokenData = self.tokenData as NSData
 
-            length += UInt32(tokenData.length)
-            append(to: result,
-                   identifier: 1,
-                   bytes: tokenData.bytes,
-                   length: tokenData.length)
-        }
+        length += UInt32(tokenData.length)
+        append(to: result,
+               identifier: 1,
+               bytes: tokenData.bytes,
+               length: tokenData.length)
 
-        if let payloadData = self.payloadData as NSData? {
-            length += UInt32(payloadData.length)
-            append(to: result,
-                   identifier: 2,
-                   bytes: payloadData.bytes,
-                   length: payloadData.length)
-        }
+        let payloadData = self.payloadData as NSData
+
+        length += UInt32(payloadData.length)
+        append(to: result,
+               identifier: 2,
+               bytes: payloadData.bytes,
+               length: payloadData.length)
 
         if identifier != 0 {
             length += UInt32(4)
@@ -139,6 +131,24 @@ public class Notification: NSObject {
         buffer.append(&id, length: 1)
         buffer.append(&len, length: 2)
         buffer.append(bytes, length: length)
+    }
+
+    private static func filter(_ hex: String) -> String {
+
+        let hexToLowerCase = hex.lowercased()
+        var result = String()
+
+        for index in 0..<hex.count {
+            let charIndex = hexToLowerCase.index(hexToLowerCase.startIndex,
+                                                 offsetBy: index)
+            let char = hexToLowerCase[charIndex]
+            if (char == "a" && char <= "f") || (char >= "0" && char <= "9") {
+
+                result.append(char)
+            }
+        }
+
+        return result
     }
 }
 

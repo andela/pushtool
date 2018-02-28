@@ -46,14 +46,13 @@ public class PushFeedback : NSObject {
 
         let host = (environment == .sandbox) ? sandboxPushHost : pushHost
 
-        if let connection = NWSSLConnection(host: host,
-                                            port: UInt(pushPort),
-                                            identity: identity) {
+        let connection = NWSSLConnection(host: host,
+                                         port: UInt(pushPort),
+                                         identity: identity)
 
-            try connection.connect()
+        try connection.connect()
 
-            self.connection = connection
-        }
+        self.connection = connection
     }
 
 

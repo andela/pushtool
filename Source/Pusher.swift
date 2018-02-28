@@ -47,13 +47,12 @@ public class Pusher: NSObject {
         
         let host = (environment == .sandbox) ? sandboxPushHost : pushHost
         
-        if let connection = NWSSLConnection(host: host,
-                                            port: pushPort,
-                                            identity: identity) {
-            try connection.connect()
-            
-            self.connection = connection
-        }
+        let connection = NWSSLConnection(host: host,
+                                         port: pushPort,
+                                         identity: identity)
+        try connection.connect()
+
+        self.connection = connection
     }
     
     public func connect(withPKCS12Data data: Data,

@@ -146,34 +146,58 @@ public class SSLConnection : NSObject {
     // MARK: Private Instance Methods
     
     private func connectSocket() throws {
-//        int sock = socket(AF_INET, SOCK_STREAM, 0);
-//        if (sock < 0) {
-//            return [NWErrorUtil noWithErrorCode:kNWErrorSocketCreate reason:sock error:error];
-//        }
-//        struct sockaddr_in addr;
-//        memset(&addr, 0, sizeof(struct sockaddr_in));
-//        struct hostent *entr = gethostbyname(_host.UTF8String);
-//        if (!entr) {
-//            return [NWErrorUtil noWithErrorCode:kNWErrorSocketResolveHostName error:error];
-//        }
-//        struct in_addr host;
-//        memcpy(&host, entr->h_addr, sizeof(struct in_addr));
-//        addr.sin_addr = host;
-//        addr.sin_port = htons((u_short)_port);
-//        addr.sin_family = AF_INET;
-//        int conn = connect(sock, (struct sockaddr *)&addr, sizeof(struct sockaddr_in));
-//        if (conn < 0) {
-//            return [NWErrorUtil noWithErrorCode:kNWErrorSocketConnect reason:conn error:error];
-//        }
-//        int cntl = fcntl(sock, F_SETFL, O_NONBLOCK);
-//        if (cntl < 0) {
-//            return [NWErrorUtil noWithErrorCode:kNWErrorSocketFileControl reason:cntl error:error];
-//        }
-//        int set = 1, sopt = setsockopt(sock, SOL_SOCKET, SO_NOSIGPIPE, (void *)&set, sizeof(int));
-//        if (sopt < 0) {
-//            return [NWErrorUtil noWithErrorCode:kNWErrorSocketOptions reason:sopt error:error];
-//        }
-//        _socket = sock;
+        let sock = Darwin.socket(AF_INET, SOCK_STREAM, 0)
+
+        guard
+            sock >= 0
+            else { throw ErrorUtil.errorWithErrorCode(.socketCreate,
+                                                      reason: Int(sock)) }
+
+        guard
+            let host = host?.cString(using: .utf8),
+            let entry = gethostbyname(host)
+            else { throw ErrorUtil.errorWithErrorCode(.socketResolveHostName,
+                                                      reason: 0) }
+
+        let raw = entry.pointee.h_addr_list.withMemoryRebound(to: [UInt32].self,
+                                                              capacity: 4) { $0.pointee[0] }
+        let address = in_addr(s_addr: in_addr_t(raw))
+        let sinLength = MemoryLayout<sockaddr_in>.size
+
+        var sin = sockaddr_in(sin_len: UInt8(sinLength),
+                              sin_family: sa_family_t(AF_INET),
+                              sin_port: in_port_t(port.bigEndian),
+                              sin_addr: address,
+                              sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+
+        let conn = withUnsafePointer(to: &sin) {
+            $0.withMemoryRebound(to: sockaddr.self,
+                                 capacity: sinLength) {
+                                    Darwin.connect(sock, $0, socklen_t(sinLength))
+            }
+        }
+
+        guard
+            conn >= 0
+            else { throw ErrorUtil.errorWithErrorCode(.socketConnect,
+                                                      reason: Int(conn)) }
+
+        let cntl = Darwin.fcntl(sock, F_SETFL, O_NONBLOCK)
+
+        guard
+            cntl >= 0
+            else { throw ErrorUtil.errorWithErrorCode(.socketFileControl,
+                                                      reason: Int(cntl)) }
+
+        var set = 1
+        let sopt = Darwin.setsockopt(sock, SOL_SOCKET, SO_NOSIGPIPE, &set, 4)
+
+        guard
+            sopt >= 0
+            else { throw ErrorUtil.errorWithErrorCode(.socketOptions,
+                                                      reason: Int(sopt)) }
+
+        self.socket = sock
     }
     
     private func connectSSL() throws {
@@ -229,9 +253,12 @@ public class SSLConnection : NSObject {
         
         var status = errSSLWouldBlock
         
-        for _ in 0..<sslHandshakeTryCount
-            where status == errSSLWouldBlock {
-                status = SSLHandshake(context!)
+        for _ in 0..<sslHandshakeTryCount {
+            guard
+                status == errSSLWouldBlock
+                else { break }
+
+            status = SSLHandshake(context!)
         }
         
         switch status {
@@ -270,6 +297,10 @@ public class SSLConnection : NSObject {
             throw ErrorUtil.errorWithErrorCode(.sslHandshakeNoRootCert,
                                                reason: Int(status))
 
+        case errSSLPeerAuthCompleted:
+            throw ErrorUtil.errorWithErrorCode(.sslHandshakeServerAuthCompleted,
+                                               reason: Int(status))
+
         case errSSLPeerCertExpired:
             throw ErrorUtil.errorWithErrorCode(.sslHandshakePeerCertExpired,
                                                reason: Int(status))
@@ -281,10 +312,6 @@ public class SSLConnection : NSObject {
         case errSSLPeerCertUnknown:
             throw ErrorUtil.errorWithErrorCode(.sslHandshakePeerCertUnknown,
                                                reason: Int(status))
-
-            //case errSSLServerAuthCompleted:
-            //    throw ErrorUtil.errorWithErrorCode(.sslHandshakeServerAuthCompleted,
-            //                                       reason: Int(status))
 
         case errSSLUnknownRootCert:
             throw ErrorUtil.errorWithErrorCode(.sslHandshakeUnknownRootCert,

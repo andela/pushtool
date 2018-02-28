@@ -2,9 +2,9 @@ import Foundation
 
 public let errorReasonCodeKey: String = "NWErrorReasonCodeKey"
 
-public typealias identityRef = Any
-public typealias certificateRef = Any
-public typealias keyRef = Any
+public typealias IdentityRef = Any
+public typealias CertificateRef = Any
+public typealias KeyRef = Any
 
 @objcMembers
 public class ErrorUtil: NSObject {
@@ -62,8 +62,8 @@ public class ErrorUtil: NSObject {
     
     public static func descriptionForEnvironmentOptions(_ environmentOptions: NWEnvironmentOptions) -> String {
         switch environmentOptions {
-        case .none:
-            return "No environment";
+//        case .none:
+//            return "No environment";
             
         case .sandbox:
             return "Sandbox";
@@ -73,6 +73,8 @@ public class ErrorUtil: NSObject {
             
         case .any:
             return "Sandbox|Production";
+        default:
+            return "No environment";
         }
     }
     

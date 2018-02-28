@@ -6,27 +6,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner">
-            <connections>
-                <outlet property="_certificatePopup" destination="aJR-Gv-8Xr" id="Xb3-Fs-MxT"/>
-                <outlet property="_countField" destination="gQs-Aa-IJi" id="SFY-EK-SnL"/>
-                <outlet property="_expiryPopup" destination="imk-VN-mp1" id="mXS-SA-ROT"/>
-                <outlet property="_infoField" destination="M70-t1-JuG" id="9pn-ky-LuB"/>
-                <outlet property="_logField" destination="pi6-RR-ayT" id="FBI-Iz-Vsd"/>
-                <outlet property="_payloadField" destination="ad5-lb-L5u" id="vTt-87-yLF"/>
-                <outlet property="_priorityPopup" destination="c5v-al-Hn5" id="40z-8H-ysO"/>
-                <outlet property="_pushButton" destination="pAB-wf-piT" id="DrL-Oa-n2N"/>
-                <outlet property="_reconnectButton" destination="2E1-cP-egh" id="8Zl-4l-UPd"/>
-                <outlet property="_tokenCombo" destination="xpc-0j-elb" id="hRl-BL-h33"/>
-                <outlet property="window" destination="F0z-JX-Cv5" id="aRl-Rf-XNd"/>
-            </connections>
-        </customObject>
+        <customObject id="-2" userLabel="File's Owner"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application" customClass="NSObject">
-            <connections>
-                <outlet property="delegate" destination="kaW-YJ-UA5" id="0Xg-Lu-QoV"/>
-            </connections>
-        </customObject>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -175,7 +157,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="reconnect:" target="kaW-YJ-UA5" id="VyD-I2-NZH"/>
+                            <action selector="reconnect:" target="kaW-YJ-UA5" id="mL0-U8-t4v"/>
                         </connections>
                     </button>
                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aJR-Gv-8Xr">
@@ -190,7 +172,7 @@
                             </menu>
                         </popUpButtonCell>
                         <connections>
-                            <action selector="certificateSelected:" target="kaW-YJ-UA5" id="Asf-IM-UFv"/>
+                            <action selector="certificateSelected:" target="kaW-YJ-UA5" id="Cac-19-FtT"/>
                         </connections>
                     </popUpButton>
                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="imk-VN-mp1">
@@ -255,7 +237,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="push:" target="kaW-YJ-UA5" id="hXv-2c-nZa"/>
+                            <action selector="push:" target="kaW-YJ-UA5" id="y6q-ee-da9"/>
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M70-t1-JuG">
@@ -270,7 +252,7 @@
                         <rect key="frame" x="20" y="45" width="560" height="130"/>
                         <clipView key="contentView" id="e4e-ov-ymY">
                             <rect key="frame" x="1" y="1" width="558" height="128"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" allowsNonContiguousLayout="YES" textCompletion="NO" id="ad5-lb-L5u">
                                     <rect key="frame" x="0.0" y="0.0" width="558" height="128"/>
@@ -321,7 +303,7 @@
                         <rect key="frame" x="20" y="45" width="560" height="130"/>
                         <clipView key="contentView" id="uaF-sl-etn">
                             <rect key="frame" x="1" y="1" width="558" height="128"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="pi6-RR-ayT">
                                     <rect key="frame" x="0.0" y="0.0" width="558" height="128"/>
@@ -343,14 +325,14 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <button translatesAutoresizingMaskIntoConstraints="NO" id="hU6-Ym-KR3">
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="hU6-Ym-KR3" userLabel="Sandbox Check Box">
                         <rect key="frame" x="18" y="235" width="223" height="18"/>
                         <buttonCell key="cell" type="check" title="Should use sandbox environment" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ros-Zj-bni">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="sanboxCheckBoxDidPressed:" target="kaW-YJ-UA5" id="kzM-IO-iQv"/>
+                            <action selector="sandboxCheckBoxDidPressed:" target="kaW-YJ-UA5" id="6fb-VI-hvr"/>
                         </connections>
                     </button>
                     <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xpc-0j-elb">
@@ -361,7 +343,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </comboBoxCell>
                         <connections>
-                            <action selector="tokenSelected:" target="kaW-YJ-UA5" id="p9a-qh-3Nh"/>
+                            <action selector="tokenSelected:" target="kaW-YJ-UA5" id="T4d-M8-K6S"/>
                             <outlet property="delegate" destination="kaW-YJ-UA5" id="ZZ9-SB-ZBN"/>
                         </connections>
                     </comboBox>
@@ -403,20 +385,20 @@
                 </constraints>
             </view>
         </window>
-        <customObject id="kaW-YJ-UA5" customClass="NWAppDelegate">
+        <customObject id="kaW-YJ-UA5" customClass="AppDelegate" customModule="PushTool" customModuleProvider="target">
             <connections>
-                <outlet property="_certificatePopup" destination="aJR-Gv-8Xr" id="A43-MU-5mS"/>
-                <outlet property="_countField" destination="gQs-Aa-IJi" id="miX-ao-hNk"/>
-                <outlet property="_expiryPopup" destination="imk-VN-mp1" id="t7w-Mt-DKL"/>
-                <outlet property="_infoField" destination="M70-t1-JuG" id="dcG-qS-Mll"/>
-                <outlet property="_logField" destination="pi6-RR-ayT" id="aq6-2Z-ytl"/>
-                <outlet property="_logScroll" destination="z4n-XE-cfI" id="qve-u7-cAW"/>
-                <outlet property="_payloadField" destination="ad5-lb-L5u" id="qbW-La-sgh"/>
-                <outlet property="_priorityPopup" destination="c5v-al-Hn5" id="6zL-7L-7t3"/>
-                <outlet property="_pushButton" destination="pAB-wf-piT" id="ndY-Uh-dgS"/>
-                <outlet property="_reconnectButton" destination="2E1-cP-egh" id="4CL-8O-MKG"/>
-                <outlet property="_sanboxCheckBox" destination="hU6-Ym-KR3" id="9Zb-UH-d23"/>
-                <outlet property="_tokenCombo" destination="xpc-0j-elb" id="f1o-6I-zGl"/>
+                <outlet property="certificatePopup" destination="aJR-Gv-8Xr" id="08r-3H-Qpn"/>
+                <outlet property="countField" destination="gQs-Aa-IJi" id="NkM-VI-ebI"/>
+                <outlet property="expiryPopup" destination="imk-VN-mp1" id="o9r-xr-Vqa"/>
+                <outlet property="infoField" destination="M70-t1-JuG" id="vt1-uM-bpe"/>
+                <outlet property="logField" destination="pi6-RR-ayT" id="qRy-QM-LzF"/>
+                <outlet property="logScroll" destination="z4n-XE-cfI" id="MSQ-2M-pQg"/>
+                <outlet property="payloadField" destination="ad5-lb-L5u" id="Uun-c0-dG9"/>
+                <outlet property="priorityPopup" destination="c5v-al-Hn5" id="K9R-TM-eGD"/>
+                <outlet property="pushButton" destination="pAB-wf-piT" id="5eh-re-9AR"/>
+                <outlet property="reconnectButton" destination="2E1-cP-egh" id="RLg-Zz-YzZ"/>
+                <outlet property="sandboxCheckBox" destination="hU6-Ym-KR3" id="B08-E1-IRp"/>
+                <outlet property="tokenCombo" destination="xpc-0j-elb" id="dLa-M3-S9T"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="a4g-51-daC"/>
             </connections>
         </customObject>

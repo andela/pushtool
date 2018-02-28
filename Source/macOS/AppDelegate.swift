@@ -2,7 +2,7 @@ import AppKit
 import Foundation
 
 @NSApplicationMain
-//@objcMembers
+@objcMembers
 public class AppDelegate : NSObject, NSApplicationDelegate {
     
     @IBOutlet var certificatePopup: NSPopUpButton!
@@ -70,12 +70,16 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     // MARK: Private Instance methods
     
     private func addToken(_ token: String, certificate: NWCertificateRef) -> Bool {
-        guard var tokens = self.tokens(withCertificate: certificate, create: true)
+        guard
+            var tokens = self.tokens(withCertificate: certificate,
+                                     create: true)
             else { return false }
+
         if token.count > 0 {
             tokens.append(token)
             return true
         }
+
         return false
     }
     
@@ -89,7 +93,8 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         loadConfig()
         updateCertificatePopup()
         
-        guard let payload = config["payload"] as? String
+        guard
+            let payload = config["payload"] as? String
             else { return }
         
         payloadField.string = payload.count > 0 ? payload : ""
@@ -109,16 +114,21 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     }
     
     private func addTokenAndUpdateCombo() {
-        guard let cert = selectedCertificate
+        guard
+            let cert = selectedCertificate
             else { return }
+
         let added: Bool = addToken("\(tokenCombo)", certificate: cert)
+
         if added {
             updateTokenCombo()
         }
     }
     
     private func configFileURL() -> URL? {
-        let libraryURL: URL? = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last
+        let libraryURL: URL? = FileManager.default.urls(for: .libraryDirectory,
+                                                        in: .userDomainMask).last
+
         guard
             let configURL: URL = libraryURL?.appendingPathComponent("PushTool", isDirectory: true)
             else { return nil }
@@ -127,7 +137,10 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         // MARK: help needed
         let exists: Any?
 
-        exists = try? FileManager.default.createDirectory(at: configURL, withIntermediateDirectories: true, attributes: nil)
+        exists = try? FileManager.default.createDirectory(at: configURL,
+                                                          withIntermediateDirectories: true,
+                                                          attributes: nil)
+
         //NWLogWarnIfError(error);
         if let _ = exists {
             let result: URL? = configURL.appendingPathComponent("config.plist")
@@ -167,7 +180,11 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             let pair = certificateIdentityPairs[index - 1]
             let certificate = pair[0] as NWCertificateRef
             let identity = pair[1] as NWIdentityRef
-            selectCertificate(certificate, identity: identity, environment: preferredEnvironment(for: certificate))
+
+            selectCertificate(certificate,
+                              identity: identity,
+                              environment: preferredEnvironment(for: certificate))
+
             tokenCombo.isEnabled = true
             loadSelectedToken()
         }
@@ -194,7 +211,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     }
     
     private func feedback() {
-        serial?.async(execute: {() -> Void in
+        serial?.async {
             guard
                 let certificate: NWCertificateRef = self.selectedCertificate
                 else {
@@ -205,32 +222,41 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             //NWEnvironment environment = [self selectedEnvironmentForCertificate:certificate];
             //NSString *summary = [NWSecTools summaryWithCertificate:certificate];
             //NWLogInfo(@"Connecting to feedback service..  (%@ %@)", summary, descriptionForEnvironent(environment));
-            
-            let identity: NWIdentityRef = try SecTools.keychainIdentity(withCertificate: certificate) as NWIdentityRef
-            guard
-                let feedback = try? PushFeedback.connect(withIdentity: identity, environment: self.selectedEnvironment(for: certificate))
-                else {
-                    //NWLogWarn(@"Unable to connect to feedback service: %@", error.localizedDescription);
-                    return
+
+            let feedback: PushFeedback
+
+            do {
+                let identity = try SecTools.keychainIdentity(withCertificate: certificate)
+
+                feedback = try PushFeedback.connect(withIdentity: identity as NWIdentityRef,
+                                                    environment: self.selectedEnvironment(for: certificate))
+            } catch {
+                //NWLogWarn(@"Unable to connect to feedback service: %@", error.localizedDescription);
+                return
             }
+
             //NWLogInfo(@"Reading feedback service..  (%@ %@)", summary, descriptionForEnvironent(environment));
-            
-            let pairs = try feedback.readTokenDatePairs(withMax: 1000)
-            if pairs.isEmpty {
+
+            let pairs: [Any]
+
+            do {
+                pairs = try feedback.readTokenDatePairs(withMax: 1000)
+            } catch {
                 //NWLogWarn(@"Unable to read feedback: %@", error.localizedDescription);
                 return
             }
+
             //for (NSArray *pair in pairs) {
             //NWLogInfo(@"token: %@  date: %@", pair[0], pair[1]);
             //}
+
             if pairs.count != 0 {
                 //NWLogInfo(@"Feedback service returned %i device tokens, see logs for details", (int)pairs.count);
             }
             else {
                 //NWLogInfo(@"Feedback service returned zero device tokens");
             }
-            
-            } as! @convention(block) () -> Void)
+        }
     }
     
     private func identifier(withCertificate certificate: NWCertificateRef) -> String {
@@ -246,10 +272,12 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         panel.canChooseDirectories = false
         panel.allowsMultipleSelection = true
         panel.allowedFileTypes = ["p12"]
+
         panel.begin { result in
             if result.rawValue != NSFileHandlingPanelOKButton {
                 return
             }
+
             var pairs: [[Any]] = []
             
             for url: URL in panel.urls {
@@ -262,30 +290,40 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                 alert.informativeText = ""
                 
                 let input = NSSecureTextField(frame: NSMakeRect(0, 0, 200, 24))
+
                 alert.accessoryView = input
+
                 let button: NSApplication.ModalResponse = alert.runModal()
+
                 if button.rawValue != NSApplication.ModalResponse.alertFirstButtonReturn.rawValue {
                     return
                 }
                 
                 let password = "\(input)" as NSString
+
                 guard
                     let data = try? Data(contentsOf: url)
                     else { return }
+
                 var ids: [Any]?
+
                 do {
-                    ids = try SecTools.identities(withPKCS12Data: data, password: password as String!)
+                    ids = try SecTools.identities(withPKCS12Data: data,
+                                                  password: password as String!)
                 } catch let error as NSError {
                     if !(password.length == 0) && error.code == NWError.pkcs12Password.rawValue {
-                        ids = try? SecTools.identities(withPKCS12Data: data, password: "")
+                        ids = try? SecTools.identities(withPKCS12Data: data,
+                                                       password: "")
                     }
                 }
+
                 guard
                     let identities = ids
                     else {
                         //NWLogWarn(@"Unable to read p12 file: %@", error.localizedDescription);
                         return
                 }
+
                 for identity: IdentityRef in identities {
                     let certificate: NWCertificateRef
 
@@ -299,12 +337,15 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                     pairs.append([certificate, identity])
                 }
             }
-            if pairs.count == 0 {
+
+            if pairs.isEmpty {
                 //NWLogWarn(@"Unable to import p12 file: no push certificates found");
                 return
             }
+
             //NWLogInfo(@"Imported %i certificate%@", (int)pairs.count, pairs.count == 1 ? @"" : @"s");
             let index: Int = self.certificateIdentityPairs.count
+
             self.certificateIdentityPairs = self.certificateIdentityPairs + pairs
             self.updateCertificatePopup()
             self.connectWithCertificate(at: index + 1)
@@ -358,7 +399,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         certificateIdentityPairs = certificateIdentityPairs + pairs
     }
     
-    private func notification(_ notification: NWNotification) throws {
+    private func notification(_ notification: Notification) throws {
         DispatchQueue.main.async(execute: {() -> Void in
             //NSLog(@"failed notification: %@ %@ %lu %lu %lu", notification.payload, notification.token, notification.identifier, notification.expires, notification.priority);
             //NWLogWarn(@"Notification error: %@", error.localizedDescription);
@@ -383,11 +424,11 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         //NWLogInfo(@"Pushing..");
         
         serial?.async {
-            let notification = NWNotification(payload: payload,
-                                              token: token,
-                                              identifier: 0,
-                                              expiration: expiry,
-                                              priority: UInt(priority))
+            let notification = Notification(payload: payload,
+                                            token: token,
+                                            identifier: 0,
+                                            expiration: expiry,
+                                            priority: UInt(priority))
 
             do {
                 try self.hub?.pushNotification(notification, autoReconnect: true)
@@ -396,7 +437,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
                 self.serial?.asyncAfter(deadline: popTime) {
                     do {
-                        var failed: NWNotification? = nil
+                        var failed: Notification? = nil
 
                         try self.hub?.readFailed(&failed,
                                                  autoReconnect: true)
@@ -408,7 +449,6 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
                     _ = self.hub?.trimIdentifiers()
                 }
-
             } catch {
                 //NWLogWarn(@"Unable to push: %@", error.localizedDescription);
             }
@@ -630,10 +670,11 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     }
     
     private func selectTokenAndUpdateCombo() {
-        guard let selectedCertificate = selectedCertificate
+        guard
+            let cert = selectedCertificate
             else { return }
 
-        let selected: Bool = selectToken("\(tokenCombo)", certificate: selectedCertificate)
+        let selected = selectToken("\(tokenCombo)", certificate: cert)
 
         if selected {
             updateTokenCombo()
@@ -642,12 +683,12 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     
     private func tokens(withCertificate certificate: NWCertificateRef,
                         create: Bool) -> [AnyHashable]? {
-        guard let cert = selectedCertificate
+        guard
+            let cert = selectedCertificate
             else { return nil }
 
-        let environment: NWEnvironment = selectedEnvironment(for: cert)
-        let summary: String = SecTools.summary(withCertificate: certificate)
-        
+        let environment = selectedEnvironment(for: cert)
+        let summary = SecTools.summary(withCertificate: certificate)
         let identifier: String?
 
         if environment == .sandbox {
@@ -689,52 +730,6 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             tokenCombo.addItems(withObjectValues: tokenValue)
         }
     }
-    
-    //    private func migrateOldConfigurationIfNeeded() {
-    //        let libraryURL: URL? = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last
-    //        let configURL: URL? = libraryURL?.appendingPathComponent("PushTool", isDirectory: true)
-    //        let newURL: URL? = configURL?.appendingPathComponent("config.plist")
-    //        let oldURL: URL? = configURL?.appendingPathComponent("configuration.plist")
-    //        if let aPath = newURL?.path {
-    //            if FileManager.default.fileExists(atPath: aPath) {
-    //                return
-    //            }
-    //        }
-    //        if let aPath = oldURL?.path {
-    //            if !FileManager.default.fileExists(atPath: aPath) {
-    //                return
-    //            }
-    //        }
-    //        var old = [AnyHashable: Any](contentsOf: oldURL)
-    //        var identifiers = [:]
-    //        for d: [AnyHashable: Any] in old["tokens"] {
-    //            for identifier: String in d["identifiers"] {
-    //                for token: [Any] in d["development"] {
-    //                    var key = "\(identifier)-sandbox"
-    //                    if !identifiers[key] {
-    //                        identifiers[key] = [].mutableCopy
-    //                    }
-    //                    identifiers[key].append(token)
-    //                }
-    //                for token: [Any] in d["production"] {
-    //                    var key: String = identifier
-    //                    if !identifiers[key] {
-    //                        identifiers[key] = [].mutableCopy
-    //                    }
-    //                    identifiers[key].append(token)
-    //                }
-    //            }
-    //        }
-    //        var new:[String: Any] = [:]
-    //        new["payload"] = old["payload"]
-    //        new["identifiers"] = identifiers
-    //        (new as NSDictionary).write(to: newURL, atomically: false)
-    //        var error: Error? = nil
-    //        try FileManager.default.removeItem(at: oldURL)
-    //        //NWLogWarnIfError(error);
-    //
-    //        //NWLogWarnIfError(error);
-    //    }
     
     //- (void)log:(NSString *)message warning:(BOOL)warning
     //{

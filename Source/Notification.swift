@@ -48,12 +48,7 @@ public class Notification: NSObject {
         return stringValue
     }
 
-    public func data(with type: NWNotificationType) -> Data {
-        return dataWithType2()
-    }
-
-    private func dataWithType2() -> Data {
-
+    public func data() -> Data {
         var expires: UInt32 = UInt32(expirationStamp).bigEndian
         var identifier: UInt32 = UInt32(self.identifier).bigEndian
         var priority = self.priority
@@ -123,12 +118,7 @@ public class Notification: NSObject {
     }
 
     private static func filter(_ hex: String) -> String {
-
-        let result = hex.lowercased().filter({ (char) -> Bool in
-            (char >= "a" && char <= "f") || (char >= "0" && char <= "9")
-        })
-
-        return result
+        return hex.lowercased().filter { "0123456789abcdef".contains($0) }
     }
 }
 

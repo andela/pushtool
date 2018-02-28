@@ -73,7 +73,7 @@ public class Pusher: NSObject {
     
     public func pushNotification(_ notification: Notification,
                                  type: NWNotificationType) throws {
-        let data = notification.data(with: .type2)
+        let data = notification.data()
         
         guard let connection = self.connection
             else { return  }

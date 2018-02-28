@@ -1,5 +1,4 @@
 #import "NWAppDelegate.h"
-#import "NWNotification.h"
 
 #import "PushTool-Swift.h"
 
@@ -24,7 +23,7 @@
     NSArray *_certificateIdentityPairs;
     NSUInteger _lastSelectedIndex;
     NWCertificateRef _selectedCertificate;
-    
+
     dispatch_queue_t _serial;
 }
 
@@ -35,13 +34,13 @@
 {
     //NWLogInfo(@"Application did finish launching");
     _serial = dispatch_queue_create("NWAppDelegate", DISPATCH_QUEUE_SERIAL);
-    
+
     _certificateIdentityPairs = @[];
     [self loadCertificatesFromKeychain];
     [self migrateOldConfigurationIfNeeded];
     [self loadConfig];
     [self updateCertificatePopup];
-    
+
     NSString *payload = [_config valueForKey:@"payload"];
     _payloadField.string = payload.length ? payload : @"";
     _payloadField.font = [NSFont fontWithName:@"Monaco" size:10];
@@ -104,7 +103,7 @@
     }
 }
 
-- (void)notification:(NWNotification *)notification didFailWithError:(NSError *)error
+- (void)notification:(Notification *)notification didFailWithError:(NSError *)error
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         //NSLog(@"failed notification: %@ %@ %lu %lu %lu", notification.payload, notification.token, notification.identifier, notification.expires, notification.priority);
@@ -284,7 +283,7 @@
 - (NWEnvironment)preferredEnvironmentForCertificate:(NWCertificateRef)certificate
 {
     NWEnvironmentOptions environmentOptions = [SecTools environmentOptionsForCertificate:certificate];
-    
+
     return (environmentOptions & NWEnvironmentOptionSandbox) ? NWEnvironmentSandbox : NWEnvironmentProduction;
 }
 
@@ -323,7 +322,7 @@
 - (void)enableButtonsForCertificate:(NWCertificateRef)certificate environment:(NWEnvironment)environment
 {
     NWEnvironmentOptions environmentOptions = [SecTools environmentOptionsForCertificate:certificate];
-    
+
     BOOL shouldEnableEnvButton = (environmentOptions == NWEnvironmentOptionAny);
     BOOL shouldSelectSandboxEnv = (environment == NWEnvironmentSandbox);
 
@@ -337,19 +336,19 @@
 {
     if (_hub) {
         [_hub disconnect]; _hub = nil;
-        
+
         [self disableButtons];
         //NWLogInfo(@"Disconnected from APN");
     }
-    
+
     _selectedCertificate = certificate;
     [self updateTokenCombo];
-    
+
     if (certificate) {
-        
+
         //NSString *summary = [SecTools summaryWithCertificate:certificate];
         //NWLogInfo(@"Connecting to APN...  (%@ %@)", summary, descriptionForEnvironent(environment));
-        
+
         dispatch_async(_serial, ^{
             NSError *error = nil;
             NWIdentityRef ident = identity ?: [SecTools keychainIdentityWithCertificate:certificate error:&error];
@@ -358,7 +357,7 @@
                 if (hub) {
                     //NWLogInfo(@"Connected  (%@ %@)", summary, descriptionForEnvironent(environment));
                     _hub = hub;
-                    
+
                     [self enableButtonsForCertificate:certificate environment:environment];
                 } else {
                     //NWLogWarn(@"Unable to connect: %@", error.localizedDescription);
@@ -374,9 +373,9 @@
 {
     //NSString *summary = [SecTools summaryWithCertificate:_selectedCertificate];
     NWEnvironment environment = [self selectedEnvironmentForCertificate:_selectedCertificate];
-    
+
     //NWLogInfo(@"Reconnecting to APN...(%@ %@)", summary, descriptionForEnvironent(environment));
-    
+
     [self selectCertificate:_selectedCertificate identity:nil  environment:environment];
 }
 
@@ -388,14 +387,14 @@
     NSUInteger priority = self.selectedPriority;
     //NWLogInfo(@"Pushing..");
     dispatch_async(_serial, ^{
-        NWNotification *notification = [[NWNotification alloc] initWithPayload:payload token:token identifier:0 expiration:expiry priority:priority];
+        Notification *notification = [[Notification alloc] initWithPayload:payload token:token identifier:0 expiration:expiry priority:priority];
         NSError *error = nil;
         BOOL pushed = [_hub pushNotification:notification autoReconnect:YES error:&error];
         if (pushed) {
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
             dispatch_after(popTime, _serial, ^(void){
                 NSError *error = nil;
-                NWNotification *failed = nil;
+                Notification *failed = nil;
                 BOOL read = [_hub readFailed:&failed autoReconnect:YES error:&error];
                 if (read) {
                     //if (!failed) NWLogInfo(@"Payload has been pushed");

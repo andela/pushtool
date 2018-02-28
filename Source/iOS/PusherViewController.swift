@@ -248,7 +248,7 @@ public class PusherViewController: UIViewController {
         })
     }
     
-    private func notification(_ notification: NWNotification) throws {
+    private func notification(_ notification: Notification) throws {
         
         DispatchQueue.main.sync(execute: {() -> Void in
             
@@ -281,7 +281,7 @@ public class PusherViewController: UIViewController {
 
 extension PusherViewController : HubDelegate {
     
-    public func notification(_ notification: NWNotification?, didFailWithError error: Error) {
+    public func notification(_ notification: Notification?, didFailWithError error: Error) {
     }
     
 }

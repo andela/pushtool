@@ -2,7 +2,7 @@ import Foundation
 
 @objc
 public protocol HubDelegate : NSObjectProtocol {
-    func notification(_ notification: NWNotification?,
+    func notification(_ notification: Notification?,
                       didFailWithError error: Error)
 }
 
@@ -84,7 +84,7 @@ public class Hub: NSObject {
         pusher.disconnect()
     }
 
-    public func pushNotification(_ notification: NWNotification,
+    public func pushNotification(_ notification: Notification,
                                  autoReconnect reconnect: Bool) throws {
 
         if notification.identifier == 0 {
@@ -109,7 +109,7 @@ public class Hub: NSObject {
         notificationForIdentifier[notification.identifier] = (notification, Date())
     }
 
-    public func pushNotifications(_ notifications: [NWNotification]) -> UInt {
+    public func pushNotifications(_ notifications: [Notification]) -> UInt {
         var fails: UInt  = 0
 
         for notification in notifications {
@@ -126,7 +126,7 @@ public class Hub: NSObject {
 
     public func pushPayload(_ payload: String,
                             token: String) -> UInt {
-        let notification = NWNotification(payload: payload,
+        let notification = Notification(payload: payload,
                                           token: token,
                                           identifier: 0,
                                           expiration: nil,
@@ -137,7 +137,7 @@ public class Hub: NSObject {
 
     public func pushPayload(_ payload: String,
                             tokens: [String]) -> UInt {
-        let notifications = tokens.map { NWNotification(payload: payload,
+        let notifications = tokens.map { Notification(payload: payload,
                                                         token: $0,
                                                         identifier: 0,
                                                         expiration: nil,
@@ -148,7 +148,7 @@ public class Hub: NSObject {
 
     public func pushPayloads(_ payloads: [String],
                              token: String) -> UInt  {
-        let notifications = payloads.map { NWNotification(payload: $0,
+        let notifications = payloads.map { Notification(payload: $0,
                                                           token: token,
                                                           identifier: 0,
                                                           expiration: nil,
@@ -174,7 +174,7 @@ public class Hub: NSObject {
         return UInt(count)
     }
 
-    public func readFailed(_ notifications: AutoreleasingUnsafeMutablePointer<NWNotification?>?,
+    public func readFailed(_ notifications: AutoreleasingUnsafeMutablePointer<Notification?>?,
                            autoReconnect reconnect: Bool) throws  {
         let identifier:UInt = 0
         var apnError: NSError? = nil
@@ -183,7 +183,7 @@ public class Hub: NSObject {
         try pusher.readFailedIdentifier(&id, apnError: &apnError)
 
         if let apnError = apnError {
-            let notification: NWNotification? = notificationForIdentifier[identifier]?.0
+            let notification: Notification? = notificationForIdentifier[identifier]?.0
 
             delegate?.notification(notification, didFailWithError: apnError)
 
@@ -199,7 +199,7 @@ public class Hub: NSObject {
         var failed: [Any] = []
 
         for _ in 0..<max {
-            var notification: NWNotification? = nil
+            var notification: Notification? = nil
             try readFailed(&notification, autoReconnect: reconnect)
 
             if notification == nil {
@@ -239,6 +239,6 @@ public class Hub: NSObject {
 
     // MARK: Private Instance Properties
 
-    private var notificationForIdentifier: [UInt: (NWNotification, Date)] = [:]
+    private var notificationForIdentifier: [UInt: (Notification, Date)] = [:]
 
 }

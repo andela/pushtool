@@ -13,7 +13,6 @@ public class Notification: NSObject {
     private let deviceTokenSize: UInt = 32
     private let payloadMaxSize: UInt = 256
 
-
     public init(payload: String,
                 token: String,
                 identifier: UInt,
@@ -38,14 +37,7 @@ public class Notification: NSObject {
     }
 
     public class func data(fromHex hex: String) -> Data {
-
-        var result = Data()
-
-        hex.utf8.forEach { (scalarValue) in
-            var scalarUInt8 = UInt8(scalarValue)
-            result.append(&scalarUInt8, count: 1)
-        }
-        return result
+        return Data(hexEncoded: hex) ?? Data()
     }
 
     public class func hex(from data: Data) -> String {
@@ -62,8 +54,8 @@ public class Notification: NSObject {
 
     private func dataWithType2() -> Data {
 
-        var expires: UInt32 = UInt32(expirationStamp)
-        var identifier: UInt32 = UInt32(self.identifier)
+        var expires: UInt32 = UInt32(expirationStamp).bigEndian
+        var identifier: UInt32 = UInt32(self.identifier).bigEndian
         var priority = self.priority
         let result = NSMutableData()
 
@@ -71,10 +63,10 @@ public class Notification: NSObject {
         var length: UInt32 = 0
 
         result.append(&command, length: 1)
+        result.append(&length, length: 4)
 
         let tokenData = self.tokenData as NSData
 
-        length += UInt32(tokenData.length)
         append(to: result,
                identifier: 1,
                bytes: tokenData.bytes,
@@ -82,14 +74,12 @@ public class Notification: NSObject {
 
         let payloadData = self.payloadData as NSData
 
-        length += UInt32(payloadData.length)
         append(to: result,
                identifier: 2,
                bytes: payloadData.bytes,
                length: payloadData.length)
 
         if identifier != 0 {
-            length += UInt32(4)
             append(to: result,
                    identifier: 3,
                    bytes: &identifier,
@@ -97,23 +87,25 @@ public class Notification: NSObject {
         }
 
         if (addExpiration) {
-            length += UInt32(4)
             append(to: result,
-                   identifier:4,
-                   bytes:&expires,
+                   identifier: 4,
+                   bytes: &expires,
                    length: 4)
 
         }
 
         if priority != 0 {
-            length += UInt32(1)
-            append(to:result,
-                   identifier:5 ,
-                   bytes:&priority,
-                   length:1)
+            append(to: result,
+                   identifier: 5 ,
+                   bytes: &priority,
+                   length: 1)
         }
 
-        result.append(&length, length: 4)
+        length = UInt32(result.length - 5).bigEndian
+
+        result.replaceBytes(in: NSMakeRange(1, 4),
+                            withBytes: &length,
+                            length: 4)
 
         return result as Data
     }
@@ -123,7 +115,7 @@ public class Notification: NSObject {
                         bytes: UnsafeRawPointer,
                         length: Int) {
         var id = UInt8(identifier)
-        var len = UInt16(length)
+        var len = UInt16(length).bigEndian
 
         buffer.append(&id, length: 1)
         buffer.append(&len, length: 2)
@@ -148,5 +140,61 @@ extension Data {
 
     func string(as encoding: String.Encoding) -> String? {
         return String(data: self, encoding: encoding)
+    }
+
+    public init?(hexEncoded hexData: Data) {
+
+        // Convert 0 ... 9, a ... f, A ...F to their decimal value,
+        // return nil for all other input characters
+        func decodeDigit(_ digit: UInt8) -> UInt8? {
+
+            switch digit {
+
+            case 0x30 ... 0x39:
+                return UInt8(digit - 0x30)
+
+            case 0x41 ... 0x46:
+                return UInt8(digit - 0x41 + 10)
+
+            case 0x61 ... 0x66:
+                return UInt8(digit - 0x61 + 10)
+
+            default:
+                return nil
+
+            }
+
+        }
+
+        let inCount = hexData.count
+
+        guard (inCount & 1) == 0    // must be even
+            else { return nil }
+
+        self.init(capacity: inCount >> 1)
+
+        var index = 0
+
+        while index < inCount {
+
+            guard let digitHi = decodeDigit(hexData[index]),
+                let digitLo = decodeDigit(hexData[index + 1])
+                else { return nil }
+
+            append(UInt8((digitHi << 4) | digitLo))
+
+            index += 2
+        }
+    }
+
+    public init?(hexEncoded hexString: String) {
+        guard let hexData: Data = hexString.data(using: .utf8)
+            else { return nil }
+
+        self.init(hexEncoded: hexData)
+    }
+
+    public func hexEncodedString() -> String {
+        return map { String(format: "%02hhx", $0) }.joined()
     }
 }

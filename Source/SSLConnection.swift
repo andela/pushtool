@@ -336,11 +336,86 @@ public class SSLConnection : NSObject {
 private func readSSL(_ connection: SSLConnectionRef,
                      _ data: UnsafeMutableRawPointer,
                      _ length: UnsafeMutablePointer<Int>) -> OSStatus {
-    return errSecSuccess
+    let fd = connection.load(as: Int32.self)
+    let len = length.pointee
+
+    length.pointee = 0
+
+    var read = 0
+    var rcvd = 0
+
+    while read < len {
+        rcvd = Darwin.recv(fd,
+                           data.advanced(by: read),
+                           len - read,
+                           0)
+
+        if rcvd <= 0 {
+            break
+        }
+
+        read += rcvd
+    }
+
+    length.pointee = read
+
+    if rcvd > 0 || len != 0 {
+        return errSecSuccess
+    }
+
+    if rcvd != 0 {
+        return errSSLClosedGraceful
+    }
+
+    switch errno {
+    case EAGAIN:
+        return errSSLWouldBlock
+
+    case ECONNRESET:
+        return errSSLClosedAbort
+
+    default:
+        return errSecIO
+    }
 }
 
 private func writeSSL(_ connection: SSLConnectionRef,
                       _ data: UnsafeRawPointer,
                       _ length: UnsafeMutablePointer<Int>) -> OSStatus {
-    return errSecSuccess
+    let fd = connection.load(as: Int32.self)
+    let len = length.pointee
+
+    length.pointee = 0
+
+    var sent = 0
+    var wrtn = 0
+
+    while sent < len {
+        wrtn = Darwin.write(fd,
+                            data.advanced(by: sent),
+                            len - sent)
+
+        if wrtn <= 0 {
+            break
+        }
+
+        sent += wrtn
+    }
+
+    length.pointee = sent
+
+    if wrtn > 0 || len != 0 {
+        return errSecSuccess
+    }
+
+    switch errno {
+    case EAGAIN:
+        return errSSLWouldBlock
+
+    case EPIPE:
+        return errSSLClosedAbort
+
+    default:
+        return errSecIO
+    }
 }

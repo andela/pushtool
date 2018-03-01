@@ -738,27 +738,27 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
 extension AppDelegate: LoggerDelegate {
     public func log(message: String, warning: Bool) {
-        DispatchQueue.main.async {
-
-            self.infoField.textColor = warning ? .red : .black
-            self.infoField.stringValue = message
-
-            if (!message.isEmpty) {
-                var attributes: [NSAttributedStringKey: Any] = [:]
-
-                if let length = self.logField.textStorage?.length,
-                    let color = self.infoField.textColor,
-                    let font = NSFont(name: "Monaco", size: 10) {
-
-                    attributes = [NSAttributedStringKey.foregroundColor: color,
-                                  NSAttributedStringKey.font: font]
-                    let string = NSAttributedString(string: message, attributes: attributes)
-                    self.logField.textStorage?.append(string)
-                    self.logField.textStorage?.mutableString.append("/n")
-                    self.logField.scrollRangeToVisible(NSMakeRange(length - 1, 1))
-                }
-            }
-        }
+//        DispatchQueue.main.async {
+//
+//            self.infoField.textColor = warning ? .red : .black
+//            self.infoField.stringValue = message
+//
+//            if (!message.isEmpty) {
+//                var attributes: [NSAttributedStringKey: Any] = [:]
+//
+//                if let length = self.logField.textStorage?.length,
+//                    let color = self.infoField.textColor,
+//                    let font = NSFont(name: "Monaco", size: 10) {
+//
+//                    attributes = [NSAttributedStringKey.foregroundColor: color,
+//                                  NSAttributedStringKey.font: font]
+//                    let string = NSAttributedString(string: message, attributes: attributes)
+//                    self.logField.textStorage?.append(string)
+//                    self.logField.textStorage?.mutableString.append("/n")
+//                    self.logField.scrollRangeToVisible(NSMakeRange(length - 1, 1))
+//                }
+//            }
+//        }
     }
 }
 

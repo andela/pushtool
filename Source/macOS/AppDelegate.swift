@@ -32,7 +32,10 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     // MARK: Public Instance methods
 
     public func applicationDidFinishLaunching(_ notification: Foundation.Notification) {
-        //NWLogInfo(@"Application did finish launching");
+        Logger.delegate = self
+
+        Logger.logInfo("Application did finish launching")
+
         serial = DispatchQueue(label: "AppDelegate")
 
         certificateIdentityPairs = []
@@ -230,7 +233,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                 feedback = try PushFeedback.connect(withIdentity: identity as NWIdentityRef,
                                                     environment: self.selectedEnvironment(for: certificate))
             } catch {
-                //NWLogWarn(@"Unable to connect to feedback service: %@", error.localizedDescription);
+                Logger.logWarn("Unable to connect to feedback service: \(error.localizedDescription)")
                 return
             }
 
@@ -731,14 +734,16 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             tokenCombo.addItems(withObjectValues: tokenValue)
         }
     }
+}
 
-    func log(message: String, warning: Bool) {
+extension AppDelegate: LoggerDelegate {
+    public func log(message: String, warning: Bool) {
         DispatchQueue.main.async {
 
             self.infoField.textColor = warning ? .red : .black
             self.infoField.stringValue = message
-            if (!message.isEmpty) {
 
+            if (!message.isEmpty) {
                 var attributes: [NSAttributedStringKey: Any] = [:]
 
                 if let length = self.logField.textStorage?.length,
@@ -747,43 +752,14 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
                     attributes = [NSAttributedStringKey.foregroundColor: color,
                                   NSAttributedStringKey.font: font]
-                     let string = NSAttributedString(string: message, attributes: attributes)
+                    let string = NSAttributedString(string: message, attributes: attributes)
                     self.logField.textStorage?.append(string)
                     self.logField.textStorage?.mutableString.append("/n")
-                      self.logField.scrollRangeToVisible(NSMakeRange(length - 1, 1))
+                    self.logField.scrollRangeToVisible(NSMakeRange(length - 1, 1))
                 }
             }
         }
     }
-
-    //static void NWPusherPrinter(NWLContext context, CFStringRef message, void *info) {
-    //    BOOL warning = context.tag && strncmp(context.tag, "warn", 5) == 0;
-    //    id delegate = NSApplication.sharedApplication.delegate;
-    //    [delegate log:(__bridge NSString *)message warning:warning];
-    //}
-
-    static func pusherPrinter( ) {
-
-    }
-
-}
-//typedef struct {
-//    const char *tag;
-//    const char *lib;
-//    const char *file;
-//    int line;
-//    const char *function;
-//    double time;
-//} NWLContext;
-
-
-struct Context {
-    let tag: Character?
-    let lib: Character?
-    let file: Character?
-    let line: Int?
-    let function: Character?
-    let time: Double
 }
 
 extension AppDelegate: HubDelegate {

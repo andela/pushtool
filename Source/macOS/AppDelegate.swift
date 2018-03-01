@@ -31,8 +31,38 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     
     // MARK: Public Instance methods
     
+    public func applicationDidFinishLaunching(_ notification: Foundation.Notification) {
+        //NWLogInfo(@"Application did finish launching");
+        serial = DispatchQueue(label: "AppDelegate")
+        
+        certificateIdentityPairs = []
+        loadCertificatesFromKeychain()
+        //migrateOldConfigurationIfNeeded()
+        loadConfig()
+        updateCertificatePopup()
+        
+        guard
+            let payload = config["payload"] as? String
+            else { return }
+        
+        payloadField.string = payload.count > 0 ? payload : ""
+        payloadField.font = NSFont(name: "Monaco", size: 10)
+        payloadField.enabledTextCheckingTypes = NSTextCheckingTypes(0)
+        logField.enabledTextCheckingTypes = NSTextCheckingTypes(0)
+        
+        updatePayloadCounter()
+    }
+    
     public func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
+    }
+    
+    public func applicationWillTerminate(_ notification: Foundation.Notification) {
+        saveConfig()
+        hub?.disconnect()
+        hub?.delegate = nil
+        hub = nil
+        //NWLogInfo(@"Application will terminate");
     }
     
     @IBAction func certificateSelected(_ sender: NSPopUpButton) {
@@ -83,36 +113,6 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         return false
     }
     
-    public func applicationDidFinishLaunching(_ notification: Foundation.Notification) {
-        //NWLogInfo(@"Application did finish launching");
-        serial = DispatchQueue(label: "AppDelegate")
-        
-        certificateIdentityPairs = []
-        loadCertificatesFromKeychain()
-        //migrateOldConfigurationIfNeeded()
-        loadConfig()
-        updateCertificatePopup()
-        
-        guard
-            let payload = config["payload"] as? String
-            else { return }
-        
-        payloadField.string = payload.count > 0 ? payload : ""
-        payloadField.font = NSFont(name: "Monaco", size: 10)
-        payloadField.enabledTextCheckingTypes = NSTextCheckingTypes(0)
-        logField.enabledTextCheckingTypes = NSTextCheckingTypes(0)
-
-        updatePayloadCounter()
-    }
-    
-    public func applicationWillTerminate(_ notification: Foundation.Notification) {
-        saveConfig()
-        hub?.disconnect()
-        hub?.delegate = nil
-        hub = nil
-        //NWLogInfo(@"Application will terminate");
-    }
-    
     private func addTokenAndUpdateCombo() {
         guard
             let cert = selectedCertificate
@@ -133,8 +133,6 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             let configURL: URL = libraryURL?.appendingPathComponent("PushTool", isDirectory: true)
             else { return nil }
 
-
-        // MARK: help needed
         let exists: Any?
 
         exists = try? FileManager.default.createDirectory(at: configURL,

@@ -14,7 +14,7 @@ public class SecTools: NSObject {
                                             data as CFData)
     }
 
-    public class func certificate(withIdentity identity: NWIdentityRef?) throws -> NWCertificateRef {
+    public class func certificate(withIdentity identity: IdentityRef?) throws -> CertificateRef {
         var cert: SecCertificate?
         var status: OSStatus
 
@@ -33,7 +33,7 @@ public class SecTools: NSObject {
         return certificate
     }
 
-    public class func environmentOptions(forCertificate certificate: NWCertificateRef) -> NWEnvironmentOptions {
+    public class func environmentOptions(forCertificate certificate: CertificateRef) -> EnvironmentOptions {
 
         switch (self.type(withCertificate: certificate,
                           summary: nil) ) {
@@ -57,10 +57,10 @@ public class SecTools: NSObject {
         }
     }
 
-    public class func environmentOptions(forIdentity identity: Any) -> NWEnvironmentOptions {
+    public class func environmentOptions(forIdentity identity: Any) -> EnvironmentOptions {
 
         guard
-            let certificate: NWCertificateRef = try? self.certificate(withIdentity: identity as NWIdentityRef) as NWCertificateRef
+            let certificate: CertificateRef = try? self.certificate(withIdentity: identity as IdentityRef) as CertificateRef
             else { return .sandbox }
 
         return self.environmentOptions(forCertificate: certificate)
@@ -69,7 +69,7 @@ public class SecTools: NSObject {
     #if os(macOS)
     public class func expiration(withCertificate certificate: Any) -> Date? {
 
-        return self.value(withCertificate: certificate as NWCertificateRef,
+        return self.value(withCertificate: certificate as CertificateRef,
                           key: kSecOIDInvalidityDate) as? Date
     }
     #endif
@@ -87,19 +87,19 @@ public class SecTools: NSObject {
                                                  password: password)
             else { return [] }
 
-        var ids: [NWIdentityRef] = []
+        var ids: [IdentityRef] = []
 
         for dict in dicts {
             guard
                 let identity = dict[kSecImportItemIdentity]
                 else { continue }
 
-            let certificate = try self.certificate(withIdentity: identity as NWIdentityRef)
+            let certificate = try self.certificate(withIdentity: identity as IdentityRef)
 
             if isPushCertificate(certificate) {
                 _ = try self.key(withIdentity: identity)
 
-                ids.append(identity as NWIdentityRef)
+                ids.append(identity as IdentityRef)
             }
         }
 
@@ -163,7 +163,7 @@ public class SecTools: NSObject {
         return result
     }
 
-    public class func isPushCertificate(_ certificate: NWCertificateRef) -> Bool {
+    public class func isPushCertificate(_ certificate: CertificateRef) -> Bool {
         switch (self.type(withCertificate: certificate,
                           summary: nil)) {
         case .iosDevelopment,
@@ -196,7 +196,7 @@ public class SecTools: NSObject {
             throw ErrorUtil.errorWithErrorCode(.identityCopyPrivateKey, reason: Int(status))
         }
 
-        guard let keyRef: NWKeyRef = key
+        guard let keyRef: KeyRef = key
             else { throw ErrorUtil.errorWithErrorCode(.identityCopyPrivateKey,
                                                       reason: Int(status)) }
 
@@ -204,11 +204,11 @@ public class SecTools: NSObject {
     }
 
     @objc(keychainCertificatesWithError:)
-    public class func keychainCertificates() throws -> [NWCertificateRef] {
+    public class func keychainCertificates() throws -> [CertificateRef] {
 
         let candidates = try self.allKeychainCertificates()
 
-        var certificates: [NWCertificateRef] = []
+        var certificates: [CertificateRef] = []
 
         certificates = candidates.filter {
             self.isPushCertificate($0)
@@ -243,7 +243,7 @@ public class SecTools: NSObject {
     }
     #endif
 
-    public class func summary(withCertificate certificate: NWCertificateRef) -> String {
+    public class func summary(withCertificate certificate: CertificateRef) -> String {
         var result: NSString?
 
         _ = self.type(withCertificate: certificate,
@@ -255,8 +255,8 @@ public class SecTools: NSObject {
         return resultValue as String
     }
 
-    public class func type(withCertificate certificate: NWCertificateRef,
-                           summary: AutoreleasingUnsafeMutablePointer<NSString?>?) -> NWCertType {
+    public class func type(withCertificate certificate: CertificateRef,
+                           summary: AutoreleasingUnsafeMutablePointer<NSString?>?) -> CertType {
 
         if summary != nil {
             summary?.pointee = nil
@@ -264,9 +264,9 @@ public class SecTools: NSObject {
 
         let name: String? = self.plainSummary(withCertificate: certificate)
 
-        for type in NWCertType.none.rawValue...NWCertType.unknown.rawValue {
+        for type in CertType.none.rawValue...CertType.unknown.rawValue {
             guard
-                let certType = NWCertType(rawValue: type),
+                let certType = CertType(rawValue: type),
                 let prefix = self.prefix(withCertType: certType),
                 let name = name,
                 name.hasPrefix(prefix)
@@ -350,7 +350,7 @@ public class SecTools: NSObject {
         }
     }
 
-    private class func allKeychainCertificates() throws -> [NWCertificateRef] {
+    private class func allKeychainCertificates() throws -> [CertificateRef] {
 
         let options = [kSecClass: kSecClassCertificate,
                        kSecMatchLimit: kSecMatchLimitAll]
@@ -362,7 +362,7 @@ public class SecTools: NSObject {
         status = SecItemCopyMatching(options as CFDictionary, &certs)
 
         guard
-            let certificates = certs as? [NWCertificateRef],
+            let certificates = certs as? [CertificateRef],
             status == errSecSuccess
             else {
                 throw ErrorUtil.errorWithErrorCode(.keychainCopyMatching, reason: Int(status))
@@ -371,7 +371,7 @@ public class SecTools: NSObject {
         return certificates
     }
 
-    private class func plainSummary(withCertificate certificate: NWCertificateRef?) -> String? {
+    private class func plainSummary(withCertificate certificate: CertificateRef?) -> String? {
         guard
             let cert = certificate,
             let summary = SecCertificateCopySubjectSummary(cert as! SecCertificate) as String?
@@ -379,7 +379,7 @@ public class SecTools: NSObject {
         return summary
     }
 
-    private class func prefix(withCertType certType: NWCertType) -> String? {
+    private class func prefix(withCertType certType: CertType) -> String? {
         switch certType {
         case .iosDevelopment:
             return "Apple Development IOS Push Services: "
@@ -414,7 +414,7 @@ public class SecTools: NSObject {
     }
 
     #if os(macOS)
-    private class func value(withCertificate certificate: NWCertificateRef,
+    private class func value(withCertificate certificate: CertificateRef,
                              key: AnyHashable) -> Any? {
         let values = self.values(withCertificate: certificate,
                                  keys: [key])

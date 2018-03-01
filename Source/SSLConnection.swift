@@ -14,7 +14,7 @@ public class SSLConnection: NSObject {
 
     public init(host: String?,
                 port: UInt,
-                identity: NWIdentityRef?) {
+                identity: IdentityRef?) {
         self.identity = identity
         self.host = host
         self.port = port
@@ -24,7 +24,7 @@ public class SSLConnection: NSObject {
     // MARK: Public Instance Properties
 
     public var host: String?
-    public var identity: NWIdentityRef?
+    public var identity: IdentityRef?
     public var port: UInt
 
     // MARK: Public Instance Methods

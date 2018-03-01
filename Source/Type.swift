@@ -11,7 +11,7 @@ public class ErrorUtil: NSObject {
 
     // MARK: Public Type Methods
 
-    public static func descriptionForCertType(_ type: NWCertType) -> String {
+    public static func descriptionForCertType(_ type: CertType) -> String {
         switch type {
         case .none:
             return "none"
@@ -44,7 +44,7 @@ public class ErrorUtil: NSObject {
         }
     }
 
-    public static func descriptionForEnvironment(_ environment: NWEnvironment) -> String {
+    public static func descriptionForEnvironment(_ environment: Environment) -> String {
         switch environment {
         case .none:
             return "none"
@@ -60,10 +60,8 @@ public class ErrorUtil: NSObject {
         }
     }
 
-    public static func descriptionForEnvironmentOptions(_ environmentOptions: NWEnvironmentOptions) -> String {
+    public static func descriptionForEnvironmentOptions(_ environmentOptions: EnvironmentOptions) -> String {
         switch environmentOptions {
-//        case .none:
-//            return "No environment";
 
         case .sandbox:
             return "Sandbox"
@@ -89,7 +87,7 @@ public class ErrorUtil: NSObject {
         var info = [NSLocalizedDescriptionKey: description]
 
         if reason != 0 {
-            info[NWErrorReasonCodeKey] = "\(reason)"
+            info[errorReasonCodeKey] = "\(reason)"
         }
 
         return NSError(domain: "PusherErrorDomain",

@@ -218,6 +218,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		473D77C0F3C51B0DA4B34E8ECB776E49 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				FB6C28D74201C0A3B40E9B18638495B7 /* .gitignore */,
+				30403D9FD79A1147A989E3ABDDE6AA42 /* .swiftlint.yml */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
 		5D44DE4A16580C2624CF506C05146E70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,15 +313,6 @@
 				B1D116BD7DFDFD66849644CDAAEE17CA /* Source */,
 				DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */,
 			);
-			sourceTree = "<group>";
-		};
-		473D77C0F3C51B0DA4B34E8ECB776E49 /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				FB6C28D74201C0A3B40E9B18638495B7 /* .gitignore */,
-				30403D9FD79A1147A989E3ABDDE6AA42 /* .swiftlint.yml */,
-			);
-			name = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -608,7 +608,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
@@ -624,7 +624,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = "Resources/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
@@ -639,7 +639,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = "Resources/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_MODULE_NAME = PushTool;
@@ -672,7 +672,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = "Resources/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_MODULE_NAME = PushTool;

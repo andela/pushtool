@@ -5,8 +5,8 @@ public class Pusher: NSObject {
 
     // MARK: Public Type Methods
 
-    public class func connect(withIdentity identity: NWIdentityRef,
-                              environment: NWEnvironment) throws -> Pusher {
+    public class func connect(withIdentity identity: IdentityRef,
+                              environment: Environment) throws -> Pusher {
         let pusher = Pusher()
 
         try pusher.connect(withIdentity: identity,
@@ -17,7 +17,7 @@ public class Pusher: NSObject {
 
     public class func connect(withPKCS12Data data: Data,
                               password: String,
-                              environment: NWEnvironment) throws -> Pusher {
+                              environment: Environment) throws -> Pusher {
         let pusher = Pusher()
 
         try pusher.connect(withPKCS12Data: data,
@@ -33,8 +33,8 @@ public class Pusher: NSObject {
 
     // MARK: Public Instance Methods
 
-    public func connect(withIdentity identity: NWIdentityRef,
-                        environment: NWEnvironment) throws {
+    public func connect(withIdentity identity: IdentityRef,
+                        environment: Environment) throws {
         self.connection?.disconnect()
 
         var environment = environment
@@ -57,9 +57,9 @@ public class Pusher: NSObject {
 
     public func connect(withPKCS12Data data: Data,
                         password: String,
-                        environment: NWEnvironment) throws {
-        let identity: NWIdentityRef = try SecTools.identities(withPKCS12Data: data,
-                                                              password: password) as NWIdentityRef
+                        environment: Environment) throws {
+        let identity: IdentityRef = try SecTools.identities(withPKCS12Data: data,
+                                                              password: password) as IdentityRef
 
         try connect(withIdentity: identity,
                     environment: environment)
@@ -70,8 +70,7 @@ public class Pusher: NSObject {
         self.connection = nil
     }
 
-    public func pushNotification(_ notification: Notification,
-                                 type: NWNotificationType) throws {
+    public func pushNotification(_ notification: Notification) throws {
         let data = notification.data()
 
         guard let connection = self.connection
@@ -97,8 +96,7 @@ public class Pusher: NSObject {
                                           expiration: nil,
                                           priority: 0)
 
-        try self.pushNotification(notification,
-                                  type: .type2)
+        try self.pushNotification(notification)
     }
 
     public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<Int>,

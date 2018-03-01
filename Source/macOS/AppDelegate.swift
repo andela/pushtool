@@ -64,33 +64,33 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         //NWLogInfo(@"Application will terminate");
     }
     
-    @IBAction func certificateSelected(_ sender: NSPopUpButton) {
+    @IBAction private func certificateSelected(_ sender: NSPopUpButton) {
         connectWithCertificate(at: certificatePopup.indexOfSelectedItem)
     }
     
-    @IBAction func readFeedback(_ sender: Any) {
+    @IBAction private func readFeedback(_ sender: Any) {
         feedback()
     }
     
-    @IBAction func reconnect(_ sender: NSButton) {
+    @IBAction private func reconnect(_ sender: NSButton) {
         reconnect()
     }
     
-    @IBAction func sandboxCheckBoxDidPressed(_ sender: NSButton) {
+    @IBAction private func sandboxCheckBoxDidPressed(_ sender: NSButton) {
         if (selectedCertificate != nil) {
             reconnect()
         }
     }
     
-    @IBAction func selectOutput(_ sender: NSSegmentedControl) {
+    @IBAction private func selectOutput(_ sender: NSSegmentedControl) {
         logScroll.isHidden = sender.selectedSegment != 1
     }
     
-    @IBAction func tokenSelected(_ sender: NSComboBox) {
+    @IBAction private func tokenSelected(_ sender: NSComboBox) {
         selectTokenAndUpdateCombo()
     }
     
-    @IBAction func push(_ sender: NSButton) {
+    @IBAction private func push(_ sender: NSButton) {
         addTokenAndUpdateCombo()
         push()
         upPayloadTextIndex()
@@ -117,7 +117,8 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             let cert = selectedCertificate
             else { return }
 
-        let added: Bool = addToken("\(tokenCombo)", certificate: cert)
+        let added: Bool = addToken(tokenCombo.stringValue,
+                                   certificate: cert)
 
         if added {
             updateTokenCombo()
@@ -415,7 +416,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     
     private func push() {
         let payload: String = payloadField.string
-        let token = "\(tokenCombo)"
+        let token = tokenCombo.stringValue
         let expiry: Date? = selectedExpiry()
         let priority: Int = selectedPriority()
         //NWLogInfo(@"Pushing..");
@@ -496,10 +497,11 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             return 0
         }
     }
-    
+
+    @objc
     private func textDidChange(_ notification: Foundation.Notification) {
-        if let textField = notification.object as? NSTextField,
-            textField == payloadField {
+        if let textView = notification.object as? NSTextView,
+            textView === payloadField {
             updatePayloadCounter()
         }
     }
@@ -539,7 +541,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             try JSONSerialization.jsonObject(with: payload.data(using: .utf8) ?? Data(),
                                              options: [])
 
-            countField.stringValue = ""
+            countField.stringValue = "\(payload.count)"
             countField.textColor = payload.count > 256 ? NSColor.red : NSColor.darkGray
         } catch {
             countField.stringValue = "malformed \(payload.count)"
@@ -580,7 +582,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         //NWLogInfo(@"Reconnecting to APN...(%@ %@)", summary, descriptionForEnvironent(environment));
 
         selectCertificate(cert,
-                          identity: NSNull(),
+                          identity: nil,
                           environment: environment)
     }
     
@@ -626,11 +628,12 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             
             serial?.async {
                 guard
-                    let ident: NWIdentityRef = identity
+                    let ident = identity ?? (try? SecTools.keychainIdentity(withCertificate: certificate))
                     else { return }
-                
+
+
                 let hub = try? Hub.connect(with: self,
-                                           identity: ident,
+                                           identity: ident as NWIdentityRef,
                                            environment: environment)
 
                 DispatchQueue.main.async {

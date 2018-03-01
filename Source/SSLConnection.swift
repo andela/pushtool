@@ -154,25 +154,25 @@ public class SSLConnection : NSObject {
                                                       reason: Int(sock)) }
 
         guard
-            let host = host?.cString(using: .utf8),
-            let entry = gethostbyname(host)
+            let hostName = host?.cString(using: .utf8),
+            let hostEntry = gethostbyname(hostName)?.pointee,
+            let hostAddressList = hostEntry.h_addr_list?.pointee
             else { throw ErrorUtil.errorWithErrorCode(.socketResolveHostName,
                                                       reason: 0) }
 
-        let raw = entry.pointee.h_addr_list.withMemoryRebound(to: [UInt32].self,
-                                                              capacity: 4) { $0.pointee[0] }
-        let address = in_addr(s_addr: in_addr_t(raw))
+        let hostAddress = hostAddressList.withMemoryRebound(to: in_addr.self,
+                                                            capacity: 1) { $0.pointee }
         let sinLength = MemoryLayout<sockaddr_in>.size
 
         var sin = sockaddr_in(sin_len: UInt8(sinLength),
                               sin_family: sa_family_t(AF_INET),
-                              sin_port: in_port_t(port.bigEndian),
-                              sin_addr: address,
+                              sin_port: in_port_t(port).bigEndian,
+                              sin_addr: hostAddress,
                               sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
 
         let conn = withUnsafePointer(to: &sin) {
             $0.withMemoryRebound(to: sockaddr.self,
-                                 capacity: sinLength) {
+                                 capacity: 1) {
                                     Darwin.connect(sock, $0, socklen_t(sinLength))
             }
         }
@@ -250,15 +250,21 @@ public class SSLConnection : NSObject {
     }
 
     private func handshakeSSL() throws {
-        
+        guard
+            let context = self.context
+            else { throw ErrorUtil.errorWithErrorCode(.sslHandshakeFail,
+                                                      reason: 0) }
+
         var status = errSSLWouldBlock
         
         for _ in 0..<sslHandshakeTryCount {
+            status = SSLHandshake(context)
+
+            print("Handshake status = \(status)")
+
             guard
                 status == errSSLWouldBlock
                 else { break }
-
-            status = SSLHandshake(context!)
         }
         
         switch status {

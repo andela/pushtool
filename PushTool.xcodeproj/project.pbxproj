@@ -41,8 +41,6 @@
 		D33F67563375169E6EE2CD19E813FD32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */; };
 		78B1D800C4E75CD8709A157B3EDA0D4C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */; };
 		798E13F5F3427DED881ADBEE3FC3BE49 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */; };
-		3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
-		6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
 		10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
 		620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
 		4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A48939C7B38170911247110839411 /* Notification.swift */; };
@@ -126,8 +124,6 @@
 		2A098A9029478E788A8002819FDCF342 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
 		B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWSSLConnection.h; sourceTree = "<group>"; };
-		87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWSSLConnection.m; sourceTree = "<group>"; };
 		9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWType.h; sourceTree = "<group>"; };
 		A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWType.m; sourceTree = "<group>"; };
 		D94A48939C7B38170911247110839411 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -241,8 +237,6 @@
 				049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */,
 				E75F0A205C77E96099A9E06389415C77 /* Hub.swift */,
 				C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */,
-				2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */,
-				87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */,
 				9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */,
 				A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */,
 				D94A48939C7B38170911247110839411 /* Notification.swift */,
@@ -440,7 +434,6 @@
 				717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */,
 				4ABB3B770AC0B392A89477B0B198F7C8 /* Hub.swift in Sources */,
 				798E13F5F3427DED881ADBEE3FC3BE49 /* Logger.swift in Sources */,
-				3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */,
 				620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */,
 				4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */,
 				5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */,
@@ -463,7 +456,6 @@
 				F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */,
 				B991EC6388CB9D72A43B33DC03D32256 /* Hub.swift in Sources */,
 				78B1D800C4E75CD8709A157B3EDA0D4C /* Logger.swift in Sources */,
-				6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */,
 				10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */,
 				FC0A678E18435EFF9410A285556A5C2E /* Notification.swift in Sources */,
 				11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */,

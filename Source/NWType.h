@@ -219,14 +219,14 @@ NSString * descriptionForCertType(NWCertType type);
 
 /** @name Helpers */
 
-/** Assigns the error with provided code and associated description, for returning `NO`. */
-+ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason;
-+ (BOOL)noWithErrorCode:(NWError)code error:(NSError **)error;
-+ (BOOL)noWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError **)error;
-
-/** Assigns the error with provided code and associated description, for returning `nil`. */
-+ (id)nilWithErrorCode:(NWError)code error:(NSError **)error;
-+ (id)nilWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError **)error;
+///** Assigns the error with provided code and associated description, for returning `NO`. */
+//+ (NSError *)errorWithErrorCode:(NWError)code reason:(NSInteger)reason;
+//+ (BOOL)noWithErrorCode:(NWError)code error:(NSError **)error;
+//+ (BOOL)noWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError **)error;
+//
+///** Assigns the error with provided code and associated description, for returning `nil`. */
+//+ (id)nilWithErrorCode:(NWError)code error:(NSError **)error;
+//+ (id)nilWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError **)error;
 
 @end
 

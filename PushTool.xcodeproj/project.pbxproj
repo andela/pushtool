@@ -23,6 +23,7 @@
 
 /* Begin PBXBuildFile section */
 		C56D9547F9EC2490F0AC70B52E72F792 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D298BB86B2BF7751DC7C9C6D3936FB3 /* AppDelegate.swift */; };
+		ABCB519E2A42297B53B541583ED79F8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */; };
 		18B38194738A167BF5725EFA71E598B5 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */; };
 		36D54B2CC763F636A6F5C8721EC3DA72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
 		9FFD9865D421E2102537DDBE315C7628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
@@ -106,6 +107,7 @@
 
 /* Begin PBXFileReference section */
 		3D298BB86B2BF7751DC7C9C6D3936FB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A347CF633AC3D0CDE521B7D62A20A804 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
 		9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		B3EA69D9A11D66C1B6C7FB838B5CF84C /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */,
 				778E9B636B19F655FFA72B659C33A07C /* PusherViewController.swift */,
 			);
 			path = iOS;
@@ -423,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABCB519E2A42297B53B541583ED79F8B /* AppDelegate.swift in Sources */,
 				A914E512BF63EF2708D511E40497FF16 /* CertType.swift in Sources */,
 				A402D98B56FE9CFCB3E9E70FD98A37B7 /* Environment.swift in Sources */,
 				717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */,

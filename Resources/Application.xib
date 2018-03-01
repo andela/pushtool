@@ -8,7 +8,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="-3" userLabel="Application">
+            <connections>
+                <outlet property="delegate" destination="kaW-YJ-UA5" id="S2q-If-eAx"/>
+            </connections>
+        </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -252,7 +256,7 @@
                         <rect key="frame" x="20" y="45" width="560" height="130"/>
                         <clipView key="contentView" id="e4e-ov-ymY">
                             <rect key="frame" x="1" y="1" width="558" height="128"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" allowsNonContiguousLayout="YES" textCompletion="NO" id="ad5-lb-L5u">
                                     <rect key="frame" x="0.0" y="0.0" width="558" height="128"/>
@@ -303,7 +307,7 @@
                         <rect key="frame" x="20" y="45" width="560" height="130"/>
                         <clipView key="contentView" id="uaF-sl-etn">
                             <rect key="frame" x="1" y="1" width="558" height="128"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="pi6-RR-ayT">
                                     <rect key="frame" x="0.0" y="0.0" width="558" height="128"/>

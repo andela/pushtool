@@ -4,7 +4,6 @@ import Foundation
 @NSApplicationMain
 @objcMembers
 public class AppDelegate : NSObject, NSApplicationDelegate {
-    
     @IBOutlet var certificatePopup: NSPopUpButton!
     @IBOutlet var countField: NSTextField!
     @IBOutlet var expiryPopup: NSPopUpButton!
@@ -180,7 +179,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             let identity = pair[1] as NWIdentityRef
 
             selectCertificate(certificate,
-                              identity: identity,
+                              identity: identity is NSNull ? nil : identity,
                               environment: preferredEnvironment(for: certificate))
 
             tokenCombo.isEnabled = true
@@ -353,7 +352,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     private func loadConfig() {
         guard
             let url = configFileURL(),
-            let tmpConfig = NSDictionary(contentsOf: url) as? [AnyHashable : [AnyHashable : Any]]
+            let tmpConfig = NSDictionary(contentsOf: url) as? [AnyHashable : Any]
             else { return }
         
         config = tmpConfig
@@ -525,9 +524,8 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             let type: String = ErrorUtil.descriptionForCertType(certType)
             let date: Date? = SecTools.expiration(withCertificate: certificate)
             let expire = "  [\((date != nil) ? formatter.string(from: date!) : "expired")]"
-            // summary = @"com.example.app";
 
-            certificatePopup.addItem(withTitle: "\(hasIdentity ? "imported: " : "")\(String(describing: summary)) (\(type) \(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions)))\(expire)\(suffix)")
+            certificatePopup.addItem(withTitle: "\(hasIdentity ? "imported: " : "")\(summary ?? "") (\(type) \(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions)))\(expire)\(suffix)")
 
             suffix += " "
         }
@@ -622,17 +620,16 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         selectedCertificate = certificate
         updateTokenCombo()
         
-        if certificate?.boolValue ?? false {
+        if let cert = certificate {
             //NSString *summary = [NWSecTools summaryWithCertificate:certificate];
             //NWLogInfo(@"Connecting to APN...  (%@ %@)", summary, descriptionForEnvironent(environment));
             
             serial?.async {
                 guard
-                    let ident: NWIdentityRef = identity,
-                    let cert = certificate
+                    let ident: NWIdentityRef = identity
                     else { return }
                 
-                let hub = try? Hub.connect(with: self as? HubDelegate,
+                let hub = try? Hub.connect(with: self,
                                            identity: ident,
                                            environment: environment)
 
@@ -752,3 +749,12 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     
 }
 
+extension AppDelegate: HubDelegate {
+    public func notification(_ notification: Notification?,
+                             didFailWithError error: Error) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            //NSLog(@"failed notification: %@ %@ %lu %lu %lu", notification.payload, notification.token, notification.identifier, notification.expires, notification.priority);
+//            NWLogWarn(@"Notification error: %@", error.localizedDescription);
+//            });
+    }
+}

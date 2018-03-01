@@ -277,15 +277,17 @@ public class SecTools : NSObject {
                 name.hasPrefix(prefix)
                 else { continue }
             
-            if summary != nil {
-                summary?.pointee = name as NSString
+            if let summary = summary {
+                summary.pointee = name.dropFirst(prefix.count) as NSString
             }
+
             return  certType
             
         }
-        if summary != nil,
-           let name = name {
-            summary?.pointee = name as NSString
+
+        if let summary = summary,
+            let name = name {
+            summary.pointee = name as NSString
         }
         
         return .unknown

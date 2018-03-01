@@ -217,10 +217,14 @@ public class SSLConnection : NSObject {
             else { throw ErrorUtil.errorWithErrorCode(.sslIOFuncs,
                                                       reason: Int(setio)) }
 
-        var connection = socket
+        let connection = UnsafeMutableRawPointer.allocate(bytes: 4,
+                                                          alignedTo: 4)
+
+        connection.storeBytes(of: socket,
+                              as: Int32.self)
 
         let setconn = SSLSetConnection(context,
-                                       &connection)
+                                       connection)
         
         guard
             setconn == errSecSuccess
@@ -350,6 +354,8 @@ private func readSSL(_ connection: SSLConnectionRef,
     var read = 0
     var rcvd = 0
 
+    print("Attempting to read \(len) byte(s) from socket \(fd) ...")
+
     while read < len {
         rcvd = Darwin.recv(fd,
                            data.advanced(by: read),
@@ -366,21 +372,26 @@ private func readSSL(_ connection: SSLConnectionRef,
     length.pointee = read
 
     if rcvd > 0 || len != 0 {
+        print("... success")
         return errSecSuccess
     }
 
     if rcvd != 0 {
+        print("... connection closed gracefully")
         return errSSLClosedGraceful
     }
 
     switch errno {
     case EAGAIN:
+        print("... waiting for I/O")
         return errSSLWouldBlock
 
     case ECONNRESET:
+        print("... connection closed due to error")
         return errSSLClosedAbort
 
     default:
+        print("... I/O error")
         return errSecIO
     }
 }
@@ -395,6 +406,8 @@ private func writeSSL(_ connection: SSLConnectionRef,
 
     var sent = 0
     var wrtn = 0
+
+    print("Attempting to write \(len) byte(s) to socket \(fd) ...")
 
     while sent < len {
         wrtn = Darwin.write(fd,
@@ -411,17 +424,21 @@ private func writeSSL(_ connection: SSLConnectionRef,
     length.pointee = sent
 
     if wrtn > 0 || len != 0 {
+        print("... success")
         return errSecSuccess
     }
 
     switch errno {
     case EAGAIN:
+        print("... waiting for I/O")
         return errSSLWouldBlock
 
     case EPIPE:
+        print("... connection closed due to error")
         return errSSLClosedAbort
 
     default:
+        print("... I/O error")
         return errSecIO
     }
 }

@@ -45,6 +45,15 @@ public class SSLConnection : NSObject {
     public func disconnect() {
         if let context = self.context {
             SSLClose(context)
+
+            self.context = nil
+        }
+
+        if let connection = rawConnection {
+            connection.deallocate(bytes: 4,
+                                  alignedTo: 4)
+
+            rawConnection = nil
         }
 
         if socket >= 0 {
@@ -141,6 +150,7 @@ public class SSLConnection : NSObject {
     private let sslHandshakeTryCount = 1 << 26
 
     private var context: SSLContext?
+    private var rawConnection: UnsafeMutableRawPointer?
     private var socket: Int32
     
     // MARK: Private Instance Methods
@@ -223,6 +233,8 @@ public class SSLConnection : NSObject {
         connection.storeBytes(of: socket,
                               as: Int32.self)
 
+        rawConnection = connection
+
         let setconn = SSLSetConnection(context,
                                        connection)
         
@@ -263,8 +275,6 @@ public class SSLConnection : NSObject {
         
         for _ in 0..<sslHandshakeTryCount {
             status = SSLHandshake(context)
-
-            print("Handshake status = \(status)")
 
             guard
                 status == errSSLWouldBlock
@@ -346,52 +356,45 @@ public class SSLConnection : NSObject {
 private func readSSL(_ connection: SSLConnectionRef,
                      _ data: UnsafeMutableRawPointer,
                      _ length: UnsafeMutablePointer<Int>) -> OSStatus {
-    let fd = connection.load(as: Int32.self)
-    let len = length.pointee
+    let socket = connection.load(as: Int32.self)
+    let dataLength = length.pointee
 
     length.pointee = 0
 
-    var read = 0
-    var rcvd = 0
+    var rcvdLength = 0
+    var rcvdTotal = 0
 
-    print("Attempting to read \(len) byte(s) from socket \(fd) ...")
-
-    while read < len {
-        rcvd = Darwin.recv(fd,
-                           data.advanced(by: read),
-                           len - read,
+    while rcvdTotal < dataLength {
+        rcvdLength = Darwin.recv(socket,
+                           data.advanced(by: rcvdTotal),
+                           dataLength - rcvdTotal,
                            0)
 
-        if rcvd <= 0 {
-            break
-        }
+        guard
+            rcvdLength > 0
+            else { break }
 
-        read += rcvd
+        rcvdTotal += rcvdLength
     }
 
-    length.pointee = read
+    length.pointee = rcvdTotal
 
-    if rcvd > 0 || len != 0 {
-        print("... success")
+    if rcvdLength > 0 || dataLength == 0 {
         return errSecSuccess
     }
 
-    if rcvd != 0 {
-        print("... connection closed gracefully")
+    if rcvdLength == 0 {
         return errSSLClosedGraceful
     }
 
     switch errno {
     case EAGAIN:
-        print("... waiting for I/O")
         return errSSLWouldBlock
 
     case ECONNRESET:
-        print("... connection closed due to error")
         return errSSLClosedAbort
 
     default:
-        print("... I/O error")
         return errSecIO
     }
 }
@@ -399,46 +402,41 @@ private func readSSL(_ connection: SSLConnectionRef,
 private func writeSSL(_ connection: SSLConnectionRef,
                       _ data: UnsafeRawPointer,
                       _ length: UnsafeMutablePointer<Int>) -> OSStatus {
-    let fd = connection.load(as: Int32.self)
-    let len = length.pointee
+    let socket = connection.load(as: Int32.self)
+    let dataLength = length.pointee
 
     length.pointee = 0
 
-    var sent = 0
-    var wrtn = 0
+    var sentLength = 0
+    var sentTotal = 0
 
-    print("Attempting to write \(len) byte(s) to socket \(fd) ...")
+    while sentTotal < dataLength {
+        sentLength = Darwin.send(socket,
+                                 data.advanced(by: sentTotal),
+                                 dataLength - sentTotal,
+                                 0)
 
-    while sent < len {
-        wrtn = Darwin.write(fd,
-                            data.advanced(by: sent),
-                            len - sent)
+        guard
+            sentLength > 0
+            else { break }
 
-        if wrtn <= 0 {
-            break
-        }
-
-        sent += wrtn
+        sentTotal += sentLength
     }
 
-    length.pointee = sent
+    length.pointee = sentTotal
 
-    if wrtn > 0 || len != 0 {
-        print("... success")
+    if sentLength > 0 || dataLength == 0 {
         return errSecSuccess
     }
 
     switch errno {
     case EAGAIN:
-        print("... waiting for I/O")
         return errSSLWouldBlock
 
     case EPIPE:
-        print("... connection closed due to error")
         return errSSLClosedAbort
 
     default:
-        print("... I/O error")
         return errSecIO
     }
 }

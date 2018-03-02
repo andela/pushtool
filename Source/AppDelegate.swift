@@ -10,7 +10,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet private var infoField: NSTextField!
     @IBOutlet private var logField: NSTextView!
     @IBOutlet private var logScroll: NSScrollView!
-    @IBOutlet private var payloadField: NSTextView!
+    @IBOutlet private var payloadView: NSTextView!
     @IBOutlet private var priorityPopup: NSPopUpButton!
     @IBOutlet private var pushButton: NSButton!
     @IBOutlet private var tokenCombo: NSComboBox!
@@ -44,9 +44,10 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let payload = config["payload"] as? String
             else { return }
 
-        payloadField.string = !payload.isEmpty ? payload : ""
-        payloadField.font = NSFont(name: "Monaco", size: 10)
-        payloadField.enabledTextCheckingTypes = NSTextCheckingTypes(0)
+        payloadView.string = payload.count > 0 ? payload : ""
+        payloadView.font = NSFont(name: "Monaco", size: 10)
+        payloadView.enabledTextCheckingTypes = NSTextCheckingTypes(0)
+
         logField.enabledTextCheckingTypes = NSTextCheckingTypes(0)
 
         updatePayloadCounter()
@@ -162,7 +163,6 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         if index == 0 {
             certificatePopup.selectItem(at: 0)
             lastSelectedIndex = 0
-
             selectCertificate(nil,
                               identity: nil,
                               environment: Environment.sandbox)
@@ -394,7 +394,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func push() {
-        let payload: String = payloadField.string
+        let payload: String = payloadView.string
         let token = tokenCombo.stringValue
         let expiry: Date? = selectedExpiry()
         let priority: Int = selectedPriority()
@@ -480,7 +480,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     @objc
     private func textDidChange(_ notification: Foundation.Notification) {
         if let textView = notification.object as? NSTextView,
-            textView === payloadField {
+            textView === payloadView {
             updatePayloadCounter()
         }
     }
@@ -518,7 +518,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func updatePayloadCounter() {
-        let payload: String = payloadField.string
+        let payload: String = payloadView.string
 
         do {
             try JSONSerialization.jsonObject(with: payload.data(using: .utf8) ?? Data(),
@@ -533,7 +533,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func upPayloadTextIndex() {
-        let payload: String = payloadField.string
+        let payload: String = payloadView.string
         var range: NSRange = (payload as NSString).range(of: "\\([0-9]+\\)", options: .regularExpression)
 
         if range.location != NSNotFound {
@@ -544,7 +544,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let value = Int((payload as NSString).substring(with: range)) ?? 0 + 1
             let after: String = (payload as NSString).substring(from: range.location + range.length)
 
-            payloadField.string = "\(before)\(value)\(after)"
+            payloadView.string = "\(before)\(value)\(after)"
         }
     }
 

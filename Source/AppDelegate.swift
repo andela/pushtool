@@ -295,7 +295,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                 } catch let error as NSError {
                     if !password.isEmpty && error.code == PushError.pkcs12Password.rawValue {
                         ids = try? SecTools.identities(withPKCS12Data: data,
-                                                       password: "")
+                                                       password: nil)
                     }
                 }
 

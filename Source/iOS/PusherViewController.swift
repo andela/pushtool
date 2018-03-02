@@ -75,9 +75,8 @@ public class PusherViewController: UIViewController {
         infoLabel.font = infoLabel.font.withSize(12.0)
         infoLabel.numberOfLines = 0
         view.addSubview(infoLabel)
-        
-        //NWLogInfo(@"Connect with Apple's Push Notification service");
-        
+
+        Logger.logInfo("Connect with Apple's Push Notification service")
         loadCertificate()
         
     }
@@ -111,9 +110,8 @@ public class PusherViewController: UIViewController {
                                               password: pkcs12Password) as [NWIdentityRef]
             
             if ids.isEmpty {
-                
-                //NWLogWarn(@"Unable to read p12 file: %@", error.localizedDescription);
-                
+
+                Logger.logWarn("Unable to read p12 file")
                 return
             }
             
@@ -121,10 +119,7 @@ public class PusherViewController: UIViewController {
                 
                 guard
                     let certificate = try? SecTools.certificate(withIdentity: identity)
-                    
-                    //NWLogWarn(@"Unable to import p12 file: %@", error.localizedDescription);
-                    
-                    else { return }
+                else { Logger.logWarn("Unable to import p12 file"); return }
                 
                 self.identity = identity
                 self.certificate = certificate as NWCertificateRef
@@ -186,16 +181,16 @@ public class PusherViewController: UIViewController {
         disableButtons()
         hub?.disconnect()
         hub = nil
-        
-        //NWLogInfo(@"Disconnected");
+
+        Logger.logInfo("Disconnected")
         
     }
     
     private func connect(to environment: NWEnvironment) {
         
         disconnect()
-        
-        //NWLogInfo(@"Connecting..");
+
+        Logger.logInfo("Connecting...")
         
         guard let identity = identity else { return }
         guard let hubInstance = try? Hub.connect(with: self,
@@ -206,17 +201,15 @@ public class PusherViewController: UIViewController {
         DispatchQueue.main.async(execute: {[weak self]() -> Void in
             
             if (self?.hub != nil) {
-                
-                //NWLogInfo(@"Connected to APN: %@ (%@)", summary, descriptionForEnvironent(environment));
-                
+
+                Logger.logInfo("Connected to APN...")
                 self?.hub = hubInstance
                 self?.connectButton?.setTitle("Disconnect", for: .normal)
                 
             }
             else{
-                
-                //NWLogWarn(@"Unable to connect: %@", error.localizedDescription);
-                
+
+                Logger.logWarn("Unable to connect")
                 guard let certificate =  self?.certificate else { return }
                 self?.enableButtons(forCertificate: certificate,
                                     environment: environment)
@@ -230,9 +223,8 @@ public class PusherViewController: UIViewController {
         
         let payload = "{\"aps\":{\"alert\":\"%@\",\"badge\":1,\"sound\":\"default\"}}"
         let token = String(deviceToken)
-        
-        // NWLogInfo(@"Pushing..");
-        
+
+        Logger.logInfo("Pushing...")
         serial?.async(execute: {[weak self]() -> Void in
             
             let _ = self?.hub?.pushPayload(payload, token: token)
@@ -251,10 +243,8 @@ public class PusherViewController: UIViewController {
     private func notification(_ notification: Notification) throws {
         
         DispatchQueue.main.sync(execute: {() -> Void in
-            
-            // NSLog(@"failed notification: %@ %@ %lu %lu %lu", notification.payload, notification.token, notification.identifier, notification.expires, notification.priority);
-            // NWLogWarn(@"Notification error: %@", error.localizedDescription);
-            
+            Logger.logInfo("failed notification: \(notification.payload), \(notification.token), \(notification.identifier), \(String(describing: notification.expires)), \(notification.priority)")
+
         })
     }
     

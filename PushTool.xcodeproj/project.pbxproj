@@ -22,8 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		C56D9547F9EC2490F0AC70B52E72F792 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D298BB86B2BF7751DC7C9C6D3936FB3 /* AppDelegate.swift */; };
 		ABCB519E2A42297B53B541583ED79F8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */; };
+		C56D9547F9EC2490F0AC70B52E72F792 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D298BB86B2BF7751DC7C9C6D3936FB3 /* AppDelegate.swift */; };
 		18B38194738A167BF5725EFA71E598B5 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */; };
 		36D54B2CC763F636A6F5C8721EC3DA72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
 		9FFD9865D421E2102537DDBE315C7628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
@@ -39,6 +39,8 @@
 		4ABB3B770AC0B392A89477B0B198F7C8 /* Hub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F0A205C77E96099A9E06389415C77 /* Hub.swift */; };
 		B991EC6388CB9D72A43B33DC03D32256 /* Hub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F0A205C77E96099A9E06389415C77 /* Hub.swift */; };
 		D33F67563375169E6EE2CD19E813FD32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */; };
+		78B1D800C4E75CD8709A157B3EDA0D4C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */; };
+		798E13F5F3427DED881ADBEE3FC3BE49 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */; };
 		3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
 		6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
 		10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
@@ -121,6 +123,7 @@
 		FF54DF503E2C7FB2BCC5E072C470C676 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		2A098A9029478E788A8002819FDCF342 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
 		B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWSSLConnection.h; sourceTree = "<group>"; };
 		87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWSSLConnection.m; sourceTree = "<group>"; };
 		9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWType.h; sourceTree = "<group>"; };
@@ -234,6 +237,7 @@
 				5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */,
 				049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */,
 				E75F0A205C77E96099A9E06389415C77 /* Hub.swift */,
+				C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */,
 				2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */,
 				87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */,
 				9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */,
@@ -431,6 +435,7 @@
 				A402D98B56FE9CFCB3E9E70FD98A37B7 /* Environment.swift in Sources */,
 				717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */,
 				4ABB3B770AC0B392A89477B0B198F7C8 /* Hub.swift in Sources */,
+				798E13F5F3427DED881ADBEE3FC3BE49 /* Logger.swift in Sources */,
 				3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */,
 				620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */,
 				4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */,
@@ -452,6 +457,7 @@
 				9B3B6748BDD9319E08404E2221ED1531 /* Environment.swift in Sources */,
 				F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */,
 				B991EC6388CB9D72A43B33DC03D32256 /* Hub.swift in Sources */,
+				78B1D800C4E75CD8709A157B3EDA0D4C /* Logger.swift in Sources */,
 				6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */,
 				10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */,
 				FC0A678E18435EFF9410A285556A5C2E /* Notification.swift in Sources */,

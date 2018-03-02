@@ -3,12 +3,16 @@ import Foundation
 @objcMembers
 public class Notification: NSObject {
 
-    public var addExpiration: Bool
-    public var expirationStamp: UInt
+    public let addExpiration: Bool
+    public let expirationStamp: UInt
+    public let payloadData: Data
+    public let priority: UInt
+    public let tokenData: Data
+    public let payload: String
+    public let token: String
+    public let expires: Date?
+    
     public var identifier: UInt
-    public var payloadData: Data
-    public var priority: UInt
-    public var tokenData: Data
 
     private let deviceTokenSize: UInt = 32
     private let payloadMaxSize: UInt = 256
@@ -29,6 +33,9 @@ public class Notification: NSObject {
         self.identifier = identifier
         self.payloadData = payload.data(using: .utf8) ?? Data()
         self.priority = priority
+        self.payload = payload
+        self.token = token
+        self.expires = expiration
 
         let normal = Notification.filter(token)
         let trunk = normal.count >= 64 ? String(normal.prefix(64)) : ""

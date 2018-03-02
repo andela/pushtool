@@ -4,45 +4,45 @@
 
 NSString * const NWErrorReasonCodeKey = @"NWErrorReasonCodeKey";
 
-//NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptions)
-//{
-//    switch (environmentOptions) {
-//        case NWEnvironmentOptionNone: return @"No environment";
-//        case NWEnvironmentOptionSandbox: return @"Sandbox";
-//        case NWEnvironmentOptionProduction: return @"Production";
-//        case NWEnvironmentOptionAny: return @"Sandbox|Production";
-//    }
-//    return nil;
-//}
-//
-//NSString * descriptionForEnvironent(NWEnvironment environment)
-//{
-//    switch (environment) {
-//        case NWEnvironmentNone: return @"none";
-//        case NWEnvironmentProduction: return @"production";
-//        case NWEnvironmentSandbox: return @"sandbox";
-//        case NWEnvironmentAuto: return @"auto";
-//    }
-//    return nil;
-//}
-//
-//NSString * descriptionForCertType(NWCertType type)
-//{
-//    switch (type) {
-//        case kNWCertTypeNone: return @"none";
-//        case kNWCertTypeIOSDevelopment:
-//        case kNWCertTypeIOSProduction: return @"iOS";
-//        case kNWCertTypeMacDevelopment:
-//        case kNWCertTypeMacProduction: return @"macOS";
-//        case kNWCertTypeSimplified: return @"All";
-//        case kNWCertTypeWebProduction: return @"Website";
-//        case kNWCertTypeVoIPServices: return @"VoIP";
-//        case kNWCertTypeWatchKitServices: return @"WatchKit";
-//        case kNWCertTypePasses: return @"Pass";
-//        case kNWCertTypeUnknown: return @"unknown";
-//    }
-//    return nil;
-//}
+NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptions)
+{
+    switch (environmentOptions) {
+        case NWEnvironmentOptionNone: return @"No environment";
+        case NWEnvironmentOptionSandbox: return @"Sandbox";
+        case NWEnvironmentOptionProduction: return @"Production";
+        case NWEnvironmentOptionAny: return @"Sandbox|Production";
+    }
+    return nil;
+}
+
+NSString * descriptionForEnvironment(NWEnvironment environment)
+{
+    switch (environment) {
+        case NWEnvironmentNone: return @"none";
+        case NWEnvironmentProduction: return @"production";
+        case NWEnvironmentSandbox: return @"sandbox";
+        case NWEnvironmentAuto: return @"auto";
+    }
+    return nil;
+}
+
+NSString * descriptionForCertType(NWCertType type)
+{
+    switch (type) {
+        case kNWCertTypeNone: return @"none";
+        case kNWCertTypeIOSDevelopment:
+        case kNWCertTypeIOSProduction: return @"iOS";
+        case kNWCertTypeMacDevelopment:
+        case kNWCertTypeMacProduction: return @"macOS";
+        case kNWCertTypeSimplified: return @"All";
+        case kNWCertTypeWebProduction: return @"Website";
+        case kNWCertTypeVoIPServices: return @"VoIP";
+        case kNWCertTypeWatchKitServices: return @"WatchKit";
+        case kNWCertTypePasses: return @"Pass";
+        case kNWCertTypeUnknown: return @"unknown";
+    }
+    return nil;
+}
 
 @implementation NWErrorUtil
 

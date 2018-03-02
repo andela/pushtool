@@ -76,8 +76,8 @@ public class PushFeedback : NSObject {
         connection?.disconnect()
     }
 
-    public func readTokenDatePairs(withMax max: Int) throws -> [Any] {
-        var pairs: [Any] = []
+    public func readTokenDatePairs(withMax max: Int) throws -> [[Any]] {
+        var pairs: [[Any]] = []
 
         for _ in 0..<max {
             let (token, date) = try readToken()

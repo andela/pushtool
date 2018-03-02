@@ -3,7 +3,7 @@ import Foundation
 
 @NSApplicationMain
 @objcMembers
-public class AppDelegate : NSObject, NSApplicationDelegate {
+public class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var certificatePopup: NSPopUpButton!
     @IBOutlet var countField: NSTextField!
     @IBOutlet var expiryPopup: NSPopUpButton!
@@ -26,7 +26,6 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     private var lastSelectedIndex: Int = 0
     private var selectedCertificate: NWCertificateRef?
     private var serial: DispatchQueue?
-
 
     // MARK: Public Instance methods
 
@@ -167,8 +166,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                               environment: NWEnvironment.sandbox)
             tokenCombo.isEnabled = false
             loadSelectedToken()
-        }
-        else if index <= certificateIdentityPairs.count {
+        } else if index <= certificateIdentityPairs.count {
             certificatePopup.selectItem(at: index)
             lastSelectedIndex = index
             let pair = certificateIdentityPairs[index - 1]
@@ -181,8 +179,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
             tokenCombo.isEnabled = true
             loadSelectedToken()
-        }
-        else {
+        } else {
             certificatePopup.selectItem(at: lastSelectedIndex)
             importIdentity()
         }
@@ -229,7 +226,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             let pairs: [[Any]]
 
             do {
-                pairs = try feedback.readTokenDatePairs(withMax: 1000)
+                pairs = try feedback.readTokenDatePairs(withMax: 1_000)
             } catch {
 
                 Logger.logWarn("Unable to read feedback: \(error.localizedDescription)"); return }
@@ -238,8 +235,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
             if pairs.count != 0 {
                 Logger.logInfo("Feedback service returned \(pairs.count) device tokens, see logs for details")
-            }
-            else {
+            } else {
                 Logger.logInfo("Feedback service returned zero device tokens")
             }
         }
@@ -275,7 +271,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                 alert.informativeText = ""
                 alert.messageText = text
 
-                let input = NSSecureTextField(frame: NSMakeRect(0, 0, 200, 24))
+                let input = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
 
                 alert.accessoryView = input
 
@@ -336,7 +332,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     private func loadConfig() {
         guard
             let url = configFileURL(),
-            let tmpConfig = NSDictionary(contentsOf: url) as? [AnyHashable : Any]
+            let tmpConfig = NSDictionary(contentsOf: url) as? [AnyHashable: Any]
             else { return }
 
         config = tmpConfig
@@ -429,7 +425,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                 }
             } catch {
 
-                Logger.logWarn("Unable to push: \(error.localizedDescription)");
+                Logger.logWarn("Unable to push: \(error.localizedDescription)")
             }
         }
     }
@@ -451,10 +447,10 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             return Date(timeIntervalSince1970: 300)
 
         case 4:
-            return Date(timeIntervalSinceNow: 3600)
+            return Date(timeIntervalSinceNow: 3_600)
 
         case 5:
-            return Date(timeIntervalSinceNow: 86400)
+            return Date(timeIntervalSinceNow: 86_400)
 
         case 6:
             return Date(timeIntervalSince1970: 1)
@@ -599,7 +595,6 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
         Logger.logInfo("Disconnected from APN")
 
-
         selectedCertificate = certificate
         updateTokenCombo()
 
@@ -615,7 +610,6 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                     let ident = identity ?? (try? SecTools.keychainIdentity(withCertificate: certificate))
                     else { return }
 
-
                 let hub = try? Hub.connect(with: self,
                                            identity: ident as NWIdentityRef,
                                            environment: environment)
@@ -627,8 +621,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                         self.hub = hub
                         self.enableButtons(forCertificate: cert,
                                            environment: environment)
-                    }
-                    else {
+                    } else {
                         Logger.logWarn("Unable to connect")
                         hub?.disconnect()
                         self.certificatePopup.selectItem(at: 0)

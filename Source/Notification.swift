@@ -11,7 +11,7 @@ public class Notification: NSObject {
     public let payload: String
     public let token: String
     public let expires: Date?
-    
+
     public var identifier: UInt
 
     private let deviceTokenSize: UInt = 32
@@ -50,7 +50,7 @@ public class Notification: NSObject {
     public class func hex(from data: Data) -> String {
 
         guard let stringValue = data.utf8String
-            else { return ""}
+            else { return "" }
 
         return stringValue
     }
@@ -105,7 +105,7 @@ public class Notification: NSObject {
 
         length = UInt32(result.length - 5).bigEndian
 
-        result.replaceBytes(in: NSMakeRange(1, 4),
+        result.replaceBytes(in: NSRange(location: 1, length: 4),
                             withBytes: &length,
                             length: 4)
 

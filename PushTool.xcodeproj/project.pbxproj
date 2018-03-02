@@ -45,6 +45,7 @@
 		620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
 		4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A48939C7B38170911247110839411 /* Notification.swift */; };
 		FC0A678E18435EFF9410A285556A5C2E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A48939C7B38170911247110839411 /* Notification.swift */; };
+		7D4C1C95C0C563F82F4C8F67308E4392 /* Pods_PushTool_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CF8CB5236D5FBC636BCB45BC031428 /* Pods_PushTool_macOS.framework */; };
 		11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */; };
 		5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */; };
 		7A01DAA5CE5CF36769A54C76383FF325 /* PushFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */; };
@@ -65,6 +66,7 @@
 		037EDD2B43689B7E1D73F243A6A3B079 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */; };
 		827A6E0369D3A6D0D2E2DB64CC8B38DE /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */; };
 		D594D2C57D2060F8FC035DC54EF88BE7 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */; };
+		A234AE3AB8850E69381F9DA446B28277 /* update_info_plist.sh in Resources */ = {isa = PBXBuildFile; fileRef = 77442DF4E80141BF3230BFC4B0ED1352 /* update_info_plist.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +129,9 @@
 		9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWType.h; sourceTree = "<group>"; };
 		A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWType.m; sourceTree = "<group>"; };
 		D94A48939C7B38170911247110839411 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		9A239E24DE4604145B321179DACD569D /* Pods-PushTool-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushTool-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PushTool-macOS/Pods-PushTool-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		4A6487E0A251BF77A7A737E06A2582F1 /* Pods-PushTool-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushTool-macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PushTool-macOS/Pods-PushTool-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		81CF8CB5236D5FBC636BCB45BC031428 /* Pods_PushTool_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PushTool_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C47112F945765EE38CC31701B993A93 /* ProjectBase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectBase.xcconfig; sourceTree = "<group>"; };
 		E73FD753D1D6F5D6A6FD912629D760A5 /* ProjectDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectDebug.xcconfig; sourceTree = "<group>"; };
 		7FE967AD886F7ABEC622BFD6EA3C4E74 /* ProjectRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectRelease.xcconfig; sourceTree = "<group>"; };
@@ -147,6 +152,7 @@
 		32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		57ABB956A0E29E7BE34F8E2929F84168 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		617DFE0F3282328E69EF62966C6AF7AF /* uniquify_projects.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uniquify_projects.sh; sourceTree = "<group>"; };
+		77442DF4E80141BF3230BFC4B0ED1352 /* update_info_plist.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = update_info_plist.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C30CF126968AB86A7ED80E2DE35CF2C /* Cocoa.framework in Frameworks */,
+				7D4C1C95C0C563F82F4C8F67308E4392 /* Pods_PushTool_macOS.framework in Frameworks */,
 				6315D14787C83D5942AE5C222A84A5D7 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +205,15 @@
 			path = BuildSettings;
 			sourceTree = "<group>";
 		};
+		2E2B6724251035F8BF8F82D3F7A65C80 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9A239E24DE4604145B321179DACD569D /* Pods-PushTool-macOS.debug.xcconfig */,
+				4A6487E0A251BF77A7A737E06A2582F1 /* Pods-PushTool-macOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5D44DE4A16580C2624CF506C05146E70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +221,7 @@
 				68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */,
 				E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */,
 				7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */,
+				81CF8CB5236D5FBC636BCB45BC031428 /* Pods_PushTool_macOS.framework */,
 				658F71FE87626920A3229836F8D66988 /* Security.framework */,
 				32C51810266B72B3D5775CF12A959D56 /* UIKit.framework */,
 			);
@@ -215,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				617DFE0F3282328E69EF62966C6AF7AF /* uniquify_projects.sh */,
+				77442DF4E80141BF3230BFC4B0ED1352 /* update_info_plist.sh */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -274,6 +292,7 @@
 			children = (
 				24D45C6454E9422DE49CFB5DFA08E9C5 /* BuildSettings */,
 				5D44DE4A16580C2624CF506C05146E70 /* Frameworks */,
+				2E2B6724251035F8BF8F82D3F7A65C80 /* Pods */,
 				BD1A693E3C4E73479A4A3D5AEF4097A4 /* Products */,
 				2206F44DF98982671F92BA11E890CBFC /* Resources */,
 				7F2F4D2B9D6E791D51F2E2E57C727D0E /* Scripts */,
@@ -289,11 +308,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F59CEEC7908DD4287B7D12D6C97D0AB5 /* Build configuration list for PBXNativeTarget "PushTool-macOS" */;
 			buildPhases = (
+				AACE585490DF6C3F9DB473B89FDD8427 /* [CP] Check Pods Manifest.lock */,
 				EE6EE39BD3E632CAA082C4F29D7FC47A /* Sources */,
 				9AE06B970D4186889FC07B4E6CFFB4AD /* Frameworks */,
 				CE59149861910180EE0331862A0F758E /* Resources */,
 				4D077E4E9DCD95B06485AA50A86C7C52 /* Embed Frameworks */,
 				478C12A43B54CAC2B66BB940DB8AA7C2 /* Update Info Plist */,
+				35776A347CB14A93E0ADA1C490191018 /* [CP] Embed Pods Frameworks */,
+				CB737B72B42ED72017006B8EEE8F2B2B /* [CP] Copy Pods Resources */,
+				2E3A738F26FAC9515FF79E86E1A9BC0C /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -386,12 +409,28 @@
 				9FFD9865D421E2102537DDBE315C7628 /* Assets.xcassets in Resources */,
 				E231C0FE439040506E058213AF107332 /* README.md in Resources */,
 				D594D2C57D2060F8FC035DC54EF88BE7 /* config.plist in Resources */,
+				A234AE3AB8850E69381F9DA446B28277 /* update_info_plist.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		35776A347CB14A93E0ADA1C490191018 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PushTool-macOS/Pods-PushTool-macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		478C12A43B54CAC2B66BB940DB8AA7C2 /* Update Info Plist */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -405,6 +444,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}\"/Scripts/update_info_plist.sh\n";
+			showEnvVarsInLog = 0;
+		};
+		AACE585490DF6C3F9DB473B89FDD8427 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PushTool-macOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB737B72B42ED72017006B8EEE8F2B2B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PushTool-macOS/Pods-PushTool-macOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2E3A738F26FAC9515FF79E86E1A9BC0C /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}\"/SwiftLint/swiftlint autocorrect\n\"${PODS_ROOT}\"/SwiftLint/swiftlint\n";
 			showEnvVarsInLog = 0;
 		};
 		FCCD46FE997D8EBF70CBD8CB93D84992 /* Update Info Plist */ = {
@@ -501,6 +588,7 @@
 		};
 		593FBB12A0158EFD2499034CB061AF6C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A239E24DE4604145B321179DACD569D /* Pods-PushTool-macOS.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -516,6 +604,7 @@
 		};
 		6BDC67F08D1321AB83D2C8E33434DFC5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A6487E0A251BF77A7A737E06A2582F1 /* Pods-PushTool-macOS.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;

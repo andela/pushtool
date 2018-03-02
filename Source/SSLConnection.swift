@@ -2,8 +2,8 @@ import Foundation
 import Security
 
 @objcMembers
-public class SSLConnection : NSObject {
-    
+public class SSLConnection: NSObject {
+
     // MARK: Public Initializers
 
     public override convenience init() {
@@ -22,13 +22,13 @@ public class SSLConnection : NSObject {
     }
 
     // MARK: Public Instance Properties
-    
+
     public var host: String?
     public var identity: NWIdentityRef?
     public var port: UInt
 
     // MARK: Public Instance Methods
-    
+
     public func connect() throws {
         disconnect()
 
@@ -41,7 +41,7 @@ public class SSLConnection : NSObject {
             throw error
         }
     }
-    
+
     public func disconnect() {
         if let context = self.context {
             SSLClose(context)
@@ -62,22 +62,22 @@ public class SSLConnection : NSObject {
             socket = -1
         }
     }
-    
+
     public func read(_ data: NSMutableData,
                      length: UnsafeMutablePointer<UInt>) throws {
         guard
             let context = self.context
             else { return }
-        
+
         var processed = Int(0)
 
         let status = SSLRead(context,
                              data.mutableBytes,
                              data.length,
                              &processed)
-        
+
         length.pointee = UInt(processed)
-        
+
         switch (status) {
         case errSecIO:
             throw ErrorUtil.errorWithErrorCode(.readDroppedByServer,
@@ -100,27 +100,27 @@ public class SSLConnection : NSObject {
                                                reason: Int(status))
         }
     }
-    
+
     public func write(_ data: NSData,
                       length: UnsafeMutablePointer<UInt>) throws {
         guard
             let context = self.context
             else { return }
-        
+
         var processed = Int(0)
 
         let status = SSLWrite(context,
                               data.bytes,
                               data.length,
                               &processed)
-        
+
         length.pointee = UInt(processed)
 
         switch (status) {
         case errSecIO:
             throw ErrorUtil.errorWithErrorCode(.writeDroppedByServer,
                                                reason: Int(status))
-            
+
         case errSecSuccess,
              errSSLWouldBlock:
             break
@@ -128,17 +128,17 @@ public class SSLConnection : NSObject {
         case errSSLClosedAbort:
             throw ErrorUtil.errorWithErrorCode(.writeClosedAbort,
                                                reason: Int(status))
-            
+
         case errSSLClosedGraceful:
             throw ErrorUtil.errorWithErrorCode(.writeClosedGraceful,
                                                reason: Int(status))
-            
+
         default:
             throw ErrorUtil.errorWithErrorCode(.writeFail,
                                                reason: Int(status))
         }
     }
-    
+
     // MARK: Deinitializer
 
     deinit {
@@ -146,15 +146,15 @@ public class SSLConnection : NSObject {
     }
 
     // MARK: Private Instance Properties
-    
+
     private let sslHandshakeTryCount = 1 << 26
 
     private var context: SSLContext?
     private var rawConnection: UnsafeMutableRawPointer?
     private var socket: Int32
-    
+
     // MARK: Private Instance Methods
-    
+
     private func connectSocket() throws {
         let sock = Darwin.socket(AF_INET, SOCK_STREAM, 0)
 
@@ -209,7 +209,7 @@ public class SSLConnection : NSObject {
 
         self.socket = sock
     }
-    
+
     private func connectSSL() throws {
         guard
             let context = SSLCreateContext(nil,
@@ -237,7 +237,7 @@ public class SSLConnection : NSObject {
 
         let setconn = SSLSetConnection(context,
                                        connection)
-        
+
         guard
             setconn == errSecSuccess
             else { throw ErrorUtil.errorWithErrorCode(.sslConnection,
@@ -272,7 +272,7 @@ public class SSLConnection : NSObject {
                                                       reason: 0) }
 
         var status = errSSLWouldBlock
-        
+
         for _ in 0..<sslHandshakeTryCount {
             status = SSLHandshake(context)
 
@@ -280,7 +280,7 @@ public class SSLConnection : NSObject {
                 status == errSSLWouldBlock
                 else { break }
         }
-        
+
         switch status {
         case errSecAuthFailed:
             throw ErrorUtil.errorWithErrorCode(.sslAuthFailed,
@@ -344,7 +344,6 @@ public class SSLConnection : NSObject {
         case errSSLXCertChainInvalid:
             throw ErrorUtil.errorWithErrorCode(.sslHandshakeXCertChainInvalid,
                                                reason: Int(status))
-
 
         default:
             throw ErrorUtil.errorWithErrorCode(.sslHandshakeFail,

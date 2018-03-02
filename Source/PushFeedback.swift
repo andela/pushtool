@@ -1,11 +1,11 @@
 import Foundation
 
 @objcMembers
-public class PushFeedback : NSObject {
+public class PushFeedback: NSObject {
 
     public var connection: SSLConnection?
     public let pushHost = "feedback.push.apple.com"
-    public let pushPort = 2196
+    public let pushPort = 2_196
     public let sandboxPushHost = "feedback.sandbox.push.apple.com"
     public let tokenMaxSize = 32
 
@@ -55,7 +55,6 @@ public class PushFeedback : NSObject {
         self.connection = connection
     }
 
-
     public func connect(withPKCS12Data data: Data,
                         password: String?,
                         environment: NWEnvironment) throws {
@@ -104,13 +103,13 @@ public class PushFeedback : NSObject {
 
         var time: UInt32 = 0
 
-        data.getBytes(&time, range: NSMakeRange(0, 4))
+        data.getBytes(&time, range: NSRange(location: 0, length: 4))
 
         let date = Date(timeIntervalSince1970: TimeInterval(time))
 
         var len: UInt16 = 0
 
-        data.getBytes(&len, range: NSMakeRange(4, 2))
+        data.getBytes(&len, range: NSRange(location: 4, length: 2))
 
         let tokenLength = Int(len)
 

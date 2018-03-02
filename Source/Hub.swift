@@ -1,7 +1,7 @@
 import Foundation
 
 @objc
-public protocol HubDelegate : NSObjectProtocol {
+public protocol HubDelegate: NSObjectProtocol {
     func notification(_ notification: Notification?,
                       didFailWithError error: Error)
 }
@@ -47,7 +47,7 @@ public class Hub: NSObject {
 
     // MARK: Public Initializers
 
-    public convenience init(delegate: HubDelegate?)  {
+    public convenience init(delegate: HubDelegate?) {
         self.init(pusher: Pusher(),
                   delegate: delegate)
     }
@@ -110,7 +110,7 @@ public class Hub: NSObject {
     }
 
     public func pushNotifications(_ notifications: [Notification]) -> UInt {
-        var fails: UInt  = 0
+        var fails: UInt = 0
 
         for notification in notifications {
             do {
@@ -147,7 +147,7 @@ public class Hub: NSObject {
     }
 
     public func pushPayloads(_ payloads: [String],
-                             token: String) -> UInt  {
+                             token: String) -> UInt {
         let notifications = payloads.map { Notification(payload: $0,
                                                           token: token,
                                                           identifier: 0,
@@ -158,11 +158,11 @@ public class Hub: NSObject {
     }
 
     public func readFailed() -> UInt {
-        var failed:[Any]? = nil
+        var failed: [Any]? = nil
 
         do {
             try readFailed(&failed,
-                           max: 1000,
+                           max: 1_000,
                            autoReconnect: true)
         } catch {
             return 0
@@ -175,8 +175,8 @@ public class Hub: NSObject {
     }
 
     public func readFailed(_ notifications: AutoreleasingUnsafeMutablePointer<Notification?>?,
-                           autoReconnect reconnect: Bool) throws  {
-        let identifier:UInt = 0
+                           autoReconnect reconnect: Bool) throws {
+        let identifier: UInt = 0
         var apnError: NSError? = nil
         var id = Int(identifier)
 
@@ -214,7 +214,7 @@ public class Hub: NSObject {
             notifications = failed
         }
 
-        let _ = trimIdentifiers()
+        _ = trimIdentifiers()
     }
 
     public func reconnect() throws {
@@ -225,7 +225,7 @@ public class Hub: NSObject {
         let oldBefore = Date(timeIntervalSinceNow: -feedbackSpan)
 
         let filteredIdentifiers = notificationForIdentifier.filter { element in
-            let (_ , date) = element.1
+            let (_, date) = element.1
             return oldBefore.compare(date) == .orderedDescending
         }
 

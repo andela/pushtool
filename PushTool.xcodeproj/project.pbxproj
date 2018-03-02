@@ -22,6 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C7C58D65085E07896BD5217D608AE123 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FB6C28D74201C0A3B40E9B18638495B7 /* .gitignore */; };
+		DEFD30160CB8155F39C920ADB019FF47 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 30403D9FD79A1147A989E3ABDDE6AA42 /* .swiftlint.yml */; };
 		ABCB519E2A42297B53B541583ED79F8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */; };
 		C56D9547F9EC2490F0AC70B52E72F792 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D298BB86B2BF7751DC7C9C6D3936FB3 /* AppDelegate.swift */; };
 		18B38194738A167BF5725EFA71E598B5 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */; };
@@ -110,6 +112,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FB6C28D74201C0A3B40E9B18638495B7 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		30403D9FD79A1147A989E3ABDDE6AA42 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		3D298BB86B2BF7751DC7C9C6D3936FB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9320C56A06E97BC5082C7655DFDEDB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A347CF633AC3D0CDE521B7D62A20A804 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -291,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				24D45C6454E9422DE49CFB5DFA08E9C5 /* BuildSettings */,
+				473D77C0F3C51B0DA4B34E8ECB776E49 /* Configuration */,
 				5D44DE4A16580C2624CF506C05146E70 /* Frameworks */,
 				2E2B6724251035F8BF8F82D3F7A65C80 /* Pods */,
 				BD1A693E3C4E73479A4A3D5AEF4097A4 /* Products */,
@@ -299,6 +304,15 @@
 				B1D116BD7DFDFD66849644CDAAEE17CA /* Source */,
 				DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */,
 			);
+			sourceTree = "<group>";
+		};
+		473D77C0F3C51B0DA4B34E8ECB776E49 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				FB6C28D74201C0A3B40E9B18638495B7 /* .gitignore */,
+				30403D9FD79A1147A989E3ABDDE6AA42 /* .swiftlint.yml */,
+			);
+			name = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +419,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7C58D65085E07896BD5217D608AE123 /* .gitignore in Resources */,
+				DEFD30160CB8155F39C920ADB019FF47 /* .swiftlint.yml in Resources */,
 				18B38194738A167BF5725EFA71E598B5 /* Application.xib in Resources */,
 				9FFD9865D421E2102537DDBE315C7628 /* Assets.xcassets in Resources */,
 				E231C0FE439040506E058213AF107332 /* README.md in Resources */,
@@ -416,6 +432,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2E3A738F26FAC9515FF79E86E1A9BC0C /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}\"/SwiftLint/swiftlint autocorrect\n\"${PODS_ROOT}\"/SwiftLint/swiftlint\n";
+			showEnvVarsInLog = 0;
+		};
 		35776A347CB14A93E0ADA1C490191018 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -477,21 +508,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PushTool-macOS/Pods-PushTool-macOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2E3A738F26FAC9515FF79E86E1A9BC0C /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}\"/SwiftLint/swiftlint autocorrect\n\"${PODS_ROOT}\"/SwiftLint/swiftlint\n";
 			showEnvVarsInLog = 0;
 		};
 		FCCD46FE997D8EBF70CBD8CB93D84992 /* Update Info Plist */ = {

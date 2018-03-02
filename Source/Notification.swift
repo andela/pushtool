@@ -3,15 +3,17 @@ import Foundation
 @objcMembers
 public class Notification: NSObject {
 
-    public var addExpiration: Bool
-    public var expirationStamp: UInt
+    public let addExpiration: Bool
+    public let expirationStamp: UInt
+    public let payloadData: Data
+    public let priority: UInt
+    public let tokenData: Data
+    public let payload: String
+    public let token: String
+    public let expires: Date?
+    
     public var identifier: UInt
-    public var payloadData: Data
-    public var priority: UInt
-    public var tokenData: Data
-    public var payload: String
-    public var token: String
-    public var expires: Date?
+
     private let deviceTokenSize: UInt = 32
     private let payloadMaxSize: UInt = 256
 

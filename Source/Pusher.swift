@@ -29,7 +29,7 @@ public class Pusher: NSObject {
     
     // MARK: Public Instance Properties
     
-    public var connection: NWSSLConnection?
+    public var connection: SSLConnection?
     
     // MARK: Public Instance Methods
     
@@ -47,13 +47,12 @@ public class Pusher: NSObject {
         
         let host = (environment == .sandbox) ? sandboxPushHost : pushHost
         
-        if let connection = NWSSLConnection(host: host,
-                                            port: pushPort,
-                                            identity: identity) {
-            try connection.connect()
-            
-            self.connection = connection
-        }
+        let connection = SSLConnection(host: host,
+                                       port: pushPort,
+                                       identity: identity)
+        try connection.connect()
+
+        self.connection = connection
     }
     
     public func connect(withPKCS12Data data: Data,
@@ -80,7 +79,7 @@ public class Pusher: NSObject {
         
         var length: UInt = 0
         
-        try connection.write(data,
+        try connection.write(data as NSData,
                              length: &length)
         
         if length != data.count {
@@ -106,18 +105,17 @@ public class Pusher: NSObject {
                                      apnError: NSErrorPointer) throws {
         
         identifier.pointee = 0
-        
-        let dataLength = UInt8.bitWidth * 2 + UInt32.bitWidth
-        
-        let data = NSMutableData(length: dataLength)
+
+        var length = UInt(UInt8.bitWidth * 2 + UInt32.bitWidth)
+        let data = NSMutableData(length: Int(length)) ?? NSMutableData()
         
         try self.connection?.read(data,
-                                  length: identifier)
+                                  length: &length)
         
         var command: UInt8 = 0
         
-        data?.getBytes(&command,
-                       range: NSMakeRange(0, 1))
+        data.getBytes(&command,
+                      range: NSMakeRange(0, 1))
         
         if command != 8 {
             throw ErrorUtil.errorWithErrorCode(.pushResponseCommand,
@@ -126,13 +124,13 @@ public class Pusher: NSObject {
         
         var status: UInt8 = 0
         
-        data?.getBytes(&status,
-                       range: NSMakeRange(1, 1))
+        data.getBytes(&status,
+                      range: NSMakeRange(1, 1))
         
         var ID: UInt32 = 0
         
-        data?.getBytes(&ID,
-                       range: NSMakeRange(2, 4))
+        data.getBytes(&ID,
+                      range: NSMakeRange(2, 4))
         
         identifier.pointee = Int(ID.bigEndian)
         

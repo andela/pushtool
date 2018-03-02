@@ -164,10 +164,7 @@ public class SecTools : NSObject {
         return result
     }
     
-    public class func isPushCertificate(_ certificate: NWCertificateRef) -> Bool {
-
-        print("Checking certificate \(certificate)")
-        
+    public class func isPushCertificate(_ certificate: NWCertificateRef) -> Bool {        
         switch (self.type(withCertificate: certificate,
                           summary: nil)) {
         case .iosDevelopment,

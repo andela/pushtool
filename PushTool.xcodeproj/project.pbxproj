@@ -41,8 +41,6 @@
 		D33F67563375169E6EE2CD19E813FD32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */; };
 		78B1D800C4E75CD8709A157B3EDA0D4C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */; };
 		798E13F5F3427DED881ADBEE3FC3BE49 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */; };
-		3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
-		6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */; };
 		10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
 		620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */; };
 		4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A48939C7B38170911247110839411 /* Notification.swift */; };
@@ -56,6 +54,8 @@
 		00416D616191F6FE7D9E6A1F4B2B4B10 /* PusherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778E9B636B19F655FFA72B659C33A07C /* PusherViewController.swift */; };
 		4A502FC03236A7A9857082B9EBDEA522 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		E231C0FE439040506E058213AF107332 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
+		7136FA89037FB2330CD1A68AA424DA54 /* SSLConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F6BD645B697A446E130DBD6A1047DA /* SSLConnection.swift */; };
+		F85066C85E5CDD1C27920709172606C2 /* SSLConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F6BD645B697A446E130DBD6A1047DA /* SSLConnection.swift */; };
 		4B28467FC05ECD408923D0C39BCC4F19 /* SecTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F5369E55852A49894F76692217563 /* SecTools.swift */; };
 		B4EAF08DDE6A95460F408DEDFB81A65B /* SecTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F5369E55852A49894F76692217563 /* SecTools.swift */; };
 		6315D14787C83D5942AE5C222A84A5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
@@ -124,8 +124,6 @@
 		2A098A9029478E788A8002819FDCF342 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
 		B9D6BB0726A865898814717EF07E73F5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWSSLConnection.h; sourceTree = "<group>"; };
-		87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWSSLConnection.m; sourceTree = "<group>"; };
 		9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NWType.h; sourceTree = "<group>"; };
 		A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NWType.m; sourceTree = "<group>"; };
 		D94A48939C7B38170911247110839411 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -142,6 +140,7 @@
 		891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pusher.swift; sourceTree = "<group>"; };
 		778E9B636B19F655FFA72B659C33A07C /* PusherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherViewController.swift; sourceTree = "<group>"; };
 		DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		F2F6BD645B697A446E130DBD6A1047DA /* SSLConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLConnection.swift; sourceTree = "<group>"; };
 		493F5369E55852A49894F76692217563 /* SecTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecTools.swift; sourceTree = "<group>"; };
 		658F71FE87626920A3229836F8D66988 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
@@ -238,8 +237,6 @@
 				049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */,
 				E75F0A205C77E96099A9E06389415C77 /* Hub.swift */,
 				C004DF75664FAAF463C11BDDD9339C56 /* Logger.swift */,
-				2B70ACCDBE5C13C9C58B65E3CAB57945 /* NWSSLConnection.h */,
-				87BF2248470B313F145E11D3821C487E /* NWSSLConnection.m */,
 				9ABAD78AA630C80C39E92024A8DB2756 /* NWType.h */,
 				A9EE9CCB51ABFB0501D49781CE5C5171 /* NWType.m */,
 				D94A48939C7B38170911247110839411 /* Notification.swift */,
@@ -247,6 +244,7 @@
 				82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */,
 				140F5B21E58BEC6B88A66E65DF5C4C4D /* PushTool-Bridging-Header.h */,
 				891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */,
+				F2F6BD645B697A446E130DBD6A1047DA /* SSLConnection.swift */,
 				493F5369E55852A49894F76692217563 /* SecTools.swift */,
 				1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */,
 			);
@@ -436,13 +434,13 @@
 				717DD6BF104390DA4CC541A5540EA809 /* EnvironmentOptions.swift in Sources */,
 				4ABB3B770AC0B392A89477B0B198F7C8 /* Hub.swift in Sources */,
 				798E13F5F3427DED881ADBEE3FC3BE49 /* Logger.swift in Sources */,
-				3660BAE560740B47D84DEB1EFE72A915 /* NWSSLConnection.m in Sources */,
 				620BBAAE6847C33628B5BB94279D735A /* NWType.m in Sources */,
 				4841FEE227A3C40336C1F774963E21BB /* Notification.swift in Sources */,
 				5D70C80E7D707496CBEBAA7A5B4FDF75 /* PushError.swift in Sources */,
 				7A01DAA5CE5CF36769A54C76383FF325 /* PushFeedback.swift in Sources */,
 				27FB77F9807A29E312E18DFCF5456812 /* Pusher.swift in Sources */,
 				00416D616191F6FE7D9E6A1F4B2B4B10 /* PusherViewController.swift in Sources */,
+				F85066C85E5CDD1C27920709172606C2 /* SSLConnection.swift in Sources */,
 				B4EAF08DDE6A95460F408DEDFB81A65B /* SecTools.swift in Sources */,
 				BF9FA9B727985DFF910A43EC6E4B964D /* Type.swift in Sources */,
 			);
@@ -458,12 +456,12 @@
 				F4A35FCE0407DEB0D2D8A9A5602F0336 /* EnvironmentOptions.swift in Sources */,
 				B991EC6388CB9D72A43B33DC03D32256 /* Hub.swift in Sources */,
 				78B1D800C4E75CD8709A157B3EDA0D4C /* Logger.swift in Sources */,
-				6D3D8756626AA0DA596A72AFBF104CA5 /* NWSSLConnection.m in Sources */,
 				10D51C043DB1F76833C717D13BBE38C0 /* NWType.m in Sources */,
 				FC0A678E18435EFF9410A285556A5C2E /* Notification.swift in Sources */,
 				11DE77AD06C997404BEC9F9D1D05025B /* PushError.swift in Sources */,
 				E0AF842A33E8C3A1A33B1B8728B4B7BF /* PushFeedback.swift in Sources */,
 				123BBCE517D6D5EF48C46861046EEA1F /* Pusher.swift in Sources */,
+				7136FA89037FB2330CD1A68AA424DA54 /* SSLConnection.swift in Sources */,
 				4B28467FC05ECD408923D0C39BCC4F19 /* SecTools.swift in Sources */,
 				A753C6A26F38B04BD364B1EF50CA719B /* Type.swift in Sources */,
 			);

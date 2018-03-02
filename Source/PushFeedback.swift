@@ -3,7 +3,7 @@ import Foundation
 @objcMembers
 public class PushFeedback : NSObject {
 
-    public var connection: NWSSLConnection?
+    public var connection: SSLConnection?
     public let pushHost = "feedback.push.apple.com"
     public let pushPort = 2196
     public let sandboxPushHost = "feedback.sandbox.push.apple.com"
@@ -46,14 +46,13 @@ public class PushFeedback : NSObject {
 
         let host = (environment == .sandbox) ? sandboxPushHost : pushHost
 
-        if let connection = NWSSLConnection(host: host,
-                                            port: UInt(pushPort),
-                                            identity: identity) {
+        let connection = SSLConnection(host: host,
+                                       port: UInt(pushPort),
+                                       identity: identity)
 
-            try connection.connect()
+        try connection.connect()
 
-            self.connection = connection
-        }
+        self.connection = connection
     }
 
 
@@ -72,8 +71,8 @@ public class PushFeedback : NSObject {
     }
 
     public func disconnect() {
-        connection = NWSSLConnection()
         connection?.disconnect()
+        connection = nil
     }
 
     public func readTokenDatePairs(withMax max: Int) throws -> [[Any]] {
@@ -94,7 +93,7 @@ public class PushFeedback : NSObject {
             let data = NSMutableData(length: (UInt8.bitWidth * 2 + UInt32.bitWidth + tokenMaxSize))
             else { return (Data(), Date()) }
 
-        var length = 0
+        var length: UInt = 0
 
         try connection?.read(data, length: &length)
 
@@ -119,7 +118,7 @@ public class PushFeedback : NSObject {
             throw ErrorUtil.errorWithErrorCode(.feedbackTokenLength, reason: tokenLength)
         }
 
-        let token = data.subdata(with: NSMakeRange(6, length - 6))
+        let token = data.subdata(with: NSMakeRange(6, Int(length - 6)))
 
         return (token, date)
     }

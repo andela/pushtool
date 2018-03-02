@@ -129,28 +129,28 @@ NSString * descriptionForCertType(NWCertType type)
 
 #pragma mark - Helpers
 
-+ (BOOL)noWithErrorCode:(NWError)code error:(NSError *__autoreleasing *)error
-{
-    return [self noWithErrorCode:code reason:0 error:error];
-}
-
-+ (BOOL)noWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError *__autoreleasing *)error
-{
-    NSAssert(code != kNWErrorNone, @"code != kNWErrorNone");
-    if (error) *error = [ErrorUtil errorWithErrorCode:code reason:reason];
-    return NO;
-}
-
-+ (id)nilWithErrorCode:(NWError)code error:(NSError *__autoreleasing *)error
-{
-    return [self nilWithErrorCode:code reason:0 error:error];
-}
-
-+ (id)nilWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError *__autoreleasing *)error
-{
-    NSAssert(code != kNWErrorNone, @"code != kNWErrorNone");
-    if (error) *error = [ErrorUtil errorWithErrorCode:code reason:reason];
-    return nil;
-}
+//+ (BOOL)noWithErrorCode:(NWError)code error:(NSError *__autoreleasing *)error
+//{
+//    return [self noWithErrorCode:code reason:0 error:error];
+//}
+//
+//+ (BOOL)noWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError *__autoreleasing *)error
+//{
+//    NSAssert(code != kNWErrorNone, @"code != kNWErrorNone");
+//    if (error) *error = [ErrorUtil errorWithErrorCode:code reason:reason];
+//    return NO;
+//}
+//
+//+ (id)nilWithErrorCode:(NWError)code error:(NSError *__autoreleasing *)error
+//{
+//    return [self nilWithErrorCode:code reason:0 error:error];
+//}
+//
+//+ (id)nilWithErrorCode:(NWError)code reason:(NSInteger)reason error:(NSError *__autoreleasing *)error
+//{
+//    NSAssert(code != kNWErrorNone, @"code != kNWErrorNone");
+//    if (error) *error = [ErrorUtil errorWithErrorCode:code reason:reason];
+//    return nil;
+//}
 
 @end

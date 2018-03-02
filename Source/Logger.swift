@@ -28,6 +28,4 @@ public class Logger {
                          warning: true)
         }
     }
-
-    private static var buffer: [(String, Bool)] = []
 }

@@ -730,15 +730,17 @@ extension AppDelegate: LoggerDelegate {
 
                     attributes = [NSAttributedStringKey.foregroundColor: color,
                                   NSAttributedStringKey.font: font]
-                    let string = NSAttributedString(string: message, attributes: attributes)
+
+                    let string = NSAttributedString(string: message,
+                                                    attributes: attributes)
+
                     self.logField.textStorage?.append(string)
-                    self.logField.textStorage?.mutableString.append("/n")
+                    self.logField.textStorage?.mutableString.append("\n")
 
                     if let length = self.logField.textStorage?.length {
 
                         self.logField.scrollRangeToVisible(NSMakeRange(length - 1, 1))
                     }
-
                 }
             }
         }

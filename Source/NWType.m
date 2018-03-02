@@ -15,7 +15,7 @@ NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptio
     return nil;
 }
 
-NSString * descriptionForEnvironent(NWEnvironment environment)
+NSString * descriptionForEnvironment(NWEnvironment environment)
 {
     switch (environment) {
         case NWEnvironmentNone: return @"none";

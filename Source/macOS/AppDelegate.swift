@@ -1,6 +1,5 @@
 import AppKit
 import Foundation
-import os
 
 @NSApplicationMain
 @objcMembers
@@ -33,14 +32,12 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
     public func applicationDidFinishLaunching(_ notification: Foundation.Notification) {
         Logger.delegate = self
-
         Logger.logInfo("Application did finish launching")
 
         serial = DispatchQueue(label: "AppDelegate")
 
         certificateIdentityPairs = []
         loadCertificatesFromKeychain()
-        //migrateOldConfigurationIfNeeded()
         loadConfig()
         updateCertificatePopup()
 
@@ -65,7 +62,8 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         hub?.disconnect()
         hub?.delegate = nil
         hub = nil
-        //NWLogInfo(@"Application will terminate");
+
+        Logger.logInfo("Application will terminate")
     }
 
     @IBAction private func certificateSelected(_ sender: NSPopUpButton) {
@@ -143,7 +141,6 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                                                           withIntermediateDirectories: true,
                                                           attributes: nil)
 
-        //NWLogWarnIfError(error);
         if let _ = exists {
             let result: URL? = configURL.appendingPathComponent("config.plist")
             if let aPath = result?.path {
@@ -152,7 +149,6 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                     if let aURL = defaultURL, let aResult = result {
                         try? FileManager.default.copyItem(at: aURL, to: aResult)
                     }
-                    //NWLogWarnIfError(error);
                 }
             }
             return result!
@@ -161,15 +157,11 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
     }
 
-    private func controlTextDidChange(_ obj: Notification) {
-        //    if (notification.object == _tokenCombo) [self something];
-    }
-
     private func connectWithCertificate(at index: Int) {
         if index == 0 {
             certificatePopup.selectItem(at: 0)
             lastSelectedIndex = 0
-            //MARK:  not sure...
+
             selectCertificate(nil,
                               identity: nil,
                               environment: NWEnvironment.sandbox)
@@ -216,14 +208,11 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         serial?.async {
             guard
                 let certificate: NWCertificateRef = self.selectedCertificate
-                else {
-                    //NWLogWarn(@"Unable to connect to feedback service: no certificate selected");
-                    return
-            }
+                else { Logger.logWarn("Unable to connect to feedback service: no certificate selected"); return }
 
-            //NWEnvironment environment = [self selectedEnvironmentForCertificate:certificate];
-            //NSString *summary = [NWSecTools summaryWithCertificate:certificate];
-            //NWLogInfo(@"Connecting to feedback service..  (%@ %@)", summary, descriptionForEnvironent(environment));
+            let summary = SecTools.summary(withCertificate: certificate)
+            let environment = self.selectedEnvironment(for: certificate)
+            Logger.logInfo("Connecting to feedback service... \(summary), \(descriptionForEnvironment(environment))")
 
             let feedback: PushFeedback
 
@@ -233,30 +222,25 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                 feedback = try PushFeedback.connect(withIdentity: identity as NWIdentityRef,
                                                     environment: self.selectedEnvironment(for: certificate))
             } catch {
-                Logger.logWarn("Unable to connect to feedback service: \(error.localizedDescription)")
-                return
-            }
 
-            //NWLogInfo(@"Reading feedback service..  (%@ %@)", summary, descriptionForEnvironent(environment));
+                Logger.logWarn("Unable to connect to feedback service: \(error.localizedDescription)"); return }
 
-            let pairs: [Any]
+            Logger.logInfo("Reading feedback service... \(summary), \(descriptionForEnvironment(environment))")
+            let pairs: [[Any]]
 
             do {
                 pairs = try feedback.readTokenDatePairs(withMax: 1000)
             } catch {
-                //NWLogWarn(@"Unable to read feedback: %@", error.localizedDescription);
-                return
-            }
 
-            //for (NSArray *pair in pairs) {
-            //NWLogInfo(@"token: %@  date: %@", pair[0], pair[1]);
-            //}
+                Logger.logWarn("Unable to read feedback: \(error.localizedDescription)"); return }
+
+            pairs.forEach({ Logger.logInfo("token: \($0[0]), date: \($0[1])") })
 
             if pairs.count != 0 {
-                //NWLogInfo(@"Feedback service returned %i device tokens, see logs for details", (int)pairs.count);
+                Logger.logInfo("Feedback service returned \(pairs.count) device tokens, see logs for details")
             }
             else {
-                //NWLogInfo(@"Feedback service returned zero device tokens");
+                Logger.logInfo("Feedback service returned zero device tokens")
             }
         }
     }
@@ -283,13 +267,13 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             var pairs: [[Any]] = []
 
             for url: URL in panel.urls {
-                let text = "Enter password for \(url.lastPathComponent)"
                 let alert = NSAlert()
+                let text = "Enter password for \(url.lastPathComponent)"
 
-                alert.messageText = text
                 alert.addButton(withTitle: "OK")
                 alert.addButton(withTitle: "Cancel")
                 alert.informativeText = ""
+                alert.messageText = text
 
                 let input = NSSecureTextField(frame: NSMakeRect(0, 0, 200, 24))
 
@@ -321,10 +305,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
                 guard
                     let identities = ids
-                    else {
-                        //NWLogWarn(@"Unable to read p12 file: %@", error.localizedDescription);
-                        return
-                }
+                    else { Logger.logWarn("Unable to read p12 file"); return }
 
                 for identity: IdentityRef in identities {
                     let certificate: NWCertificateRef
@@ -332,20 +313,18 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                     do {
                         certificate = try SecTools.certificate(withIdentity: identity as NWIdentityRef) as NWCertificateRef
                     } catch {
-                        //NWLogWarn(@"Unable to import p12 file: %@", error.localizedDescription);
-                        return
-                    }
+
+                        Logger.logWarn("Unable to import p12 file"); return }
 
                     pairs.append([certificate, identity])
                 }
             }
 
             if pairs.isEmpty {
-                //NWLogWarn(@"Unable to import p12 file: no push certificates found");
-                return
-            }
 
-            //NWLogInfo(@"Imported %i certificate%@", (int)pairs.count, pairs.count == 1 ? @"" : @"s");
+                Logger.logWarn("Unable to import p12 file: no push certificates found"); return }
+
+            Logger.logInfo("Impored \(pairs.count) certificate\(pairs.count == 1 ? "":"s")")
             let index: Int = self.certificateIdentityPairs.count
 
             self.certificateIdentityPairs = self.certificateIdentityPairs + pairs
@@ -361,7 +340,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             else { return }
 
         config = tmpConfig
-        //NWLogInfo(@"Loaded config from %@", url.path);
+        Logger.logInfo("Loaded config from \(url.path)")
     }
 
     private func loadCertificatesFromKeychain() {
@@ -370,15 +349,11 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         do {
             certs = try SecTools.keychainCertificates()
         } catch {
-            print(error)
-        }
-
-        if certs.isEmpty {
-            //NWLogWarn(@"Unable to access keychain: %@", error.localizedDescription);
+            Logger.logWarn("Unable to access keychain: \(error.localizedDescription)")
         }
 
         if certs.count == 0 {
-            //NWLogWarn(@"No push certificates in keychain.");
+            Logger.logWarn("No push certificates in keychain.")
         }
 
         certs = certs.sorted(by: {(_ a: CertificateRef, _ b: CertificateRef) -> Bool in
@@ -403,8 +378,9 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
     private func notification(_ notification: Notification) throws {
         DispatchQueue.main.async(execute: {() -> Void in
-            //NSLog(@"failed notification: %@ %@ %lu %lu %lu", notification.payload, notification.token, notification.identifier, notification.expires, notification.priority);
-            //NWLogWarn(@"Notification error: %@", error.localizedDescription);
+
+            Logger.logInfo("failed notification: \(notification.payload), \(notification.token), \(notification.identifier), \(String(describing: notification.expires)), \(notification.priority)")
+
         })
     }
 
@@ -415,7 +391,6 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             else { return }
 
         tokenCombo.stringValue = token.last as? String ?? ""
-        // _tokenCombo.stringValue = @"552fff0a65b154eb209e9dc91201025da1a4a413dd2ad6d3b51e9b33b90c977a my iphone";
     }
 
     private func push() {
@@ -423,7 +398,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
         let token = tokenCombo.stringValue
         let expiry: Date? = selectedExpiry()
         let priority: Int = selectedPriority()
-        //NWLogInfo(@"Pushing..");
+        Logger.logInfo("Pushing...")
 
         serial?.async {
             let notification = Notification(payload: payload,
@@ -444,15 +419,17 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
                         try self.hub?.readFailed(&failed,
                                                  autoReconnect: true)
 
-                        //if (!failed) NWLogInfo(@"Payload has been pushed");
+                        Logger.logInfo("Payload has been pushed")
                     } catch {
-                        //NWLogWarn(@"Unable to read: %@", error.localizedDescription);
+
+                        Logger.logWarn("Unable to read: \(error.localizedDescription)")
                     }
 
                     _ = self.hub?.trimIdentifiers()
                 }
             } catch {
-                //NWLogWarn(@"Unable to push: %@", error.localizedDescription);
+
+                Logger.logWarn("Unable to push: \(error.localizedDescription)");
             }
         }
     }
@@ -462,6 +439,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     }
 
     private func selectedExpiry() -> Date? {
+
         switch expiryPopup.indexOfSelectedItem {
         case 1:
             return Date(timeIntervalSince1970: 0)
@@ -490,6 +468,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
     }
 
     private func selectedPriority() -> Int {
+
         switch priorityPopup.indexOfSelectedItem {
         case 1:
             return 5
@@ -504,6 +483,7 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
     @objc
     private func textDidChange(_ notification: Foundation.Notification) {
+
         if let textView = notification.object as? NSTextView,
             textView === payloadField {
             updatePayloadCounter()
@@ -580,14 +560,10 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
             let cert = selectedCertificate
             else { return }
 
-        //NSString *summary = [NWSecTools summaryWithCertificate:_selectedCertificate];
         let environment: NWEnvironment = selectedEnvironment(for: cert)
-
-        //NWLogInfo(@"Reconnecting to APN...(%@ %@)", summary, descriptionForEnvironent(environment));
-
         selectCertificate(cert,
                           identity: nil,
-                          environment: environment)
+                          environment: environment, message: "Reconnecting to APN...")
     }
 
     private func removeToken(_ token: String, certificate: NWCertificateRef) -> Bool {
@@ -615,22 +591,24 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
     private func selectCertificate(_ certificate: NWCertificateRef?,
                                    identity: NWIdentityRef?,
-                                   environment: NWEnvironment) {
+                                   environment: NWEnvironment, message: String? = nil) {
         self.hub?.disconnect()
         self.hub = nil
 
         disableButtons()
 
-        //NWLogInfo(@"Disconnected from APN");
-//        os_log("This is additional info that may be helpful for troubleshooting.", log: OSLog.default, type: .info)
+        Logger.logInfo("Disconnected from APN")
 
 
         selectedCertificate = certificate
         updateTokenCombo()
 
         if let cert = certificate {
-            //NSString *summary = [NWSecTools summaryWithCertificate:certificate];
-//            NWLogInfo(@"Connecting to APN...  (%@ %@)", summary, descriptionForEnvironent(environment));
+
+            let environment: NWEnvironment = selectedEnvironment(for: cert)
+            let summary = SecTools.summary(withCertificate: cert)
+
+            Logger.logInfo("\(message ?? "Connecting to APN..."), \(summary), \(descriptionForEnvironment(environment)) ")
 
             serial?.async {
                 guard
@@ -644,13 +622,14 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
                 DispatchQueue.main.async {
                     if (hub != nil) {
-                        //NWLogInfo(@"Connected  (%@ %@)", summary, descriptionForEnvironent(environment));
+
+                        Logger.logInfo("Connected \(summary), \(descriptionForEnvironment(environment)) ")
                         self.hub = hub
                         self.enableButtons(forCertificate: cert,
                                            environment: environment)
                     }
                     else {
-                        //NWLogWarn(@"Unable to connect: %@", error.localizedDescription);
+                        Logger.logWarn("Unable to connect")
                         hub?.disconnect()
                         self.certificatePopup.selectItem(at: 0)
                     }
@@ -738,36 +717,43 @@ public class AppDelegate : NSObject, NSApplicationDelegate {
 
 extension AppDelegate: LoggerDelegate {
     public func log(message: String, warning: Bool) {
-//        DispatchQueue.main.async {
-//
-//            self.infoField.textColor = warning ? .red : .black
-//            self.infoField.stringValue = message
-//
-//            if (!message.isEmpty) {
-//                var attributes: [NSAttributedStringKey: Any] = [:]
-//
-//                if let length = self.logField.textStorage?.length,
-//                    let color = self.infoField.textColor,
-//                    let font = NSFont(name: "Monaco", size: 10) {
-//
-//                    attributes = [NSAttributedStringKey.foregroundColor: color,
-//                                  NSAttributedStringKey.font: font]
-//                    let string = NSAttributedString(string: message, attributes: attributes)
-//                    self.logField.textStorage?.append(string)
-//                    self.logField.textStorage?.mutableString.append("/n")
-//                    self.logField.scrollRangeToVisible(NSMakeRange(length - 1, 1))
-//                }
-//            }
-//        }
+        DispatchQueue.main.async {
+
+            self.infoField.textColor = warning ? .red : .black
+            self.infoField.stringValue = message
+
+            if (!message.isEmpty) {
+                var attributes: [NSAttributedStringKey: Any] = [:]
+
+                if let color = self.infoField.textColor,
+                    let font = NSFont(name: "Monaco", size: 10) {
+
+                    attributes = [NSAttributedStringKey.foregroundColor: color,
+                                  NSAttributedStringKey.font: font]
+                    let string = NSAttributedString(string: message, attributes: attributes)
+                    self.logField.textStorage?.append(string)
+                    self.logField.textStorage?.mutableString.append("/n")
+
+                    if let length = self.logField.textStorage?.length {
+
+                        self.logField.scrollRangeToVisible(NSMakeRange(length - 1, 1))
+                    }
+
+                }
+            }
+        }
     }
 }
 
 extension AppDelegate: HubDelegate {
     public func notification(_ notification: Notification?,
                              didFailWithError error: Error) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            //NSLog(@"failed notification: %@ %@ %lu %lu %lu", notification.payload, notification.token, notification.identifier, notification.expires, notification.priority);
-//            NWLogWarn(@"Notification error: %@", error.localizedDescription);
-//            });
+        DispatchQueue.main.async {
+
+            if let notification = notification {
+                Logger.logInfo("failed notification: \(notification.payload), \(notification.token), \(notification.identifier), \(String(describing: notification.expires)), \(notification.priority)")
+                Logger.logWarn("Notification error: \(error.localizedDescription)")
+            }
+        }
     }
 }

@@ -213,7 +213,7 @@ extern NSString * const NWErrorReasonCodeKey;
 
 /** Returns string for given environment, for logging purposes */
 NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptions);
-NSString * descriptionForEnvironent(NWEnvironment environment);
+NSString * descriptionForEnvironment(NWEnvironment environment);
 NSString * descriptionForCertType(NWCertType type);
 @interface NWErrorUtil : NSObject
 

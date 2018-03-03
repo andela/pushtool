@@ -44,7 +44,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let payload = config["payload"] as? String
             else { return }
 
-        payloadView.string = payload.count > 0 ? payload : ""
+        payloadView.string = !payload.isEmpty ? payload : ""
         payloadView.font = NSFont(name: "Monaco", size: 10)
         payloadView.enabledTextCheckingTypes = NSTextCheckingTypes(0)
 
@@ -142,15 +142,17 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                                                           attributes: nil)
 
         if exists != nil {
-            let result: URL? = configURL.appendingPathComponent("config.plist")
+            guard
+                let result: URL? = configURL.appendingPathComponent("config.plist"),
+                let aPath = result?.path
+                else { return nil }
 
-            if let aPath = result?.path {
-                if !FileManager.default.fileExists(atPath: aPath) {
-                    let defaultURL: URL? = Bundle.main.url(forResource: "config", withExtension: "plist")
-                    if let aURL = defaultURL, let aResult = result {
-                        try? FileManager.default.copyItem(at: aURL, to: aResult)
-                    }
+            if !FileManager.default.fileExists(atPath: aPath) {
+                let defaultURL: URL? = Bundle.main.url(forResource: "config", withExtension: "plist")
+                if let aURL = defaultURL, let aResult = result {
+                    try? FileManager.default.copyItem(at: aURL, to: aResult)
                 }
+
             }
 
             return result

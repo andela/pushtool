@@ -140,6 +140,7 @@
 		6F6FC2AB9998AD38A53EAD639B99A4E9 /* PushError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushError.swift; sourceTree = "<group>"; };
 		82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushFeedback.swift; sourceTree = "<group>"; };
 		11BC446A9ED8212EEFAB971FA6A7923D /* PushTool-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PushTool-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		26EE374E977D325FEBEE94DB52531272 /* PushTool-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PushTool-iOS.entitlements"; sourceTree = "<group>"; };
 		94F64BD810C0552FD0A4C14CCF70C3ED /* PushTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pusher.swift; sourceTree = "<group>"; };
 		778E9B636B19F655FFA72B659C33A07C /* PusherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherViewController.swift; sourceTree = "<group>"; };
@@ -303,6 +304,7 @@
 				2206F44DF98982671F92BA11E890CBFC /* Resources */,
 				7F2F4D2B9D6E791D51F2E2E57C727D0E /* Scripts */,
 				B1D116BD7DFDFD66849644CDAAEE17CA /* Source */,
+				26EE374E977D325FEBEE94DB52531272 /* PushTool-iOS.entitlements */,
 				DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */,
 			);
 			sourceTree = "<group>";
@@ -373,6 +375,11 @@
 					F2A43D4759A09338023CC0184E226C68 = {
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -627,9 +634,10 @@
 		A9236675585E336471A0DAFBB7D35177 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "PushTool-iOS.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = YT3VFVK232;
 				INFOPLIST_FILE = "Resources/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_MODULE_NAME = PushTool;
@@ -660,9 +668,10 @@
 		E5976D8F29E1A8FB03392B7AC1878D83 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "PushTool-iOS.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7688PWZMS6;
+				DEVELOPMENT_TEAM = YT3VFVK232;
 				INFOPLIST_FILE = "Resources/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_MODULE_NAME = PushTool;

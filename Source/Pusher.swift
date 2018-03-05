@@ -59,7 +59,7 @@ public class Pusher: NSObject {
                         password: String,
                         environment: Environment) throws {
         let identity: IdentityRef = try SecTools.identities(withPKCS12Data: data,
-                                                              password: password) as IdentityRef
+                                                            password: password) as IdentityRef
 
         try connect(withIdentity: identity,
                     environment: environment)
@@ -91,10 +91,10 @@ public class Pusher: NSObject {
                             token: String,
                             identifier: UInt) throws {
         let notification = Notification(payload: payload,
-                                          token: token,
-                                          identifier: identifier,
-                                          expiration: nil,
-                                          priority: 0)
+                                        token: token,
+                                        identifier: identifier,
+                                        expiration: nil,
+                                        priority: 0)
 
         try self.pushNotification(notification)
     }
@@ -103,34 +103,42 @@ public class Pusher: NSObject {
                                      apnError: NSErrorPointer) throws {
 
         identifier.pointee = 0
+        apnError?.pointee = nil
 
-        var length = UInt(UInt8.bitWidth * 2 + UInt32.bitWidth)
-        let data = NSMutableData(length: Int(length)) ?? NSMutableData()
+        let length = UInt((UInt8.bitWidth * 2) / 8 + (UInt32.bitWidth) / 8 )
+        let data = NSMutableData(length: Int(length))
 
-        try self.connection?.read(data,
-                                  length: &length)
+        if let data = data {
+            var len: UInt = 0
+            try self.connection?.read(data,
+                                      length: &len)
+
+            if len == 0 {
+                return
+            }
+        }
 
         var command: UInt8 = 0
 
-        data.getBytes(&command,
-                      range: NSRange(location: 0, length: 1))
+        data?.getBytes(&command,
+                       range: NSRange(location: 0, length: 1))
 
         if command != 8 {
             throw ErrorUtil.errorWithErrorCode(.pushResponseCommand,
-                                                 reason: Int(command))
+                                               reason: Int(command))
         }
 
         var status: UInt8 = 0
 
-        data.getBytes(&status,
-                      range: NSRange(location: 1, length: 1))
+        data?.getBytes(&status,
+                       range: NSRange(location: 1, length: 1))
 
-        var ID: UInt32 = 0
+        var ident: UInt32 = 0
 
-        data.getBytes(&ID,
-                      range: NSRange(location: 2, length: 4))
+        data?.getBytes(&ident,
+                       range: NSRange(location: 2, length: 4))
 
-        identifier.pointee = Int(ID.bigEndian)
+        identifier.pointee = Int(UInt32(bigEndian: ident))
 
         apnError?.pointee = error(for: Int(status))
     }

@@ -406,7 +406,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             do {
                 try self.hub?.pushNotification(notification, autoReconnect: true)
 
-                let popTime = DispatchTime.now() + Double(Int(1.0 * Double(NSEC_PER_SEC)))
+                let popTime = DispatchTime.now() + 1.0
 
                 self.serial?.asyncAfter(deadline: popTime) {
                     do {

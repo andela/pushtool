@@ -7,33 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		366BCEB6A33DC1FA1302998761091426 /* Pods-PushTool-macOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 350099A2CC8CF32484188B08E60E9A9A /* Pods-PushTool-macOS-dummy.m */; };
-		5E9BD0220C8C9A861A091C40EB76EA6A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
-		88D1CA6C10BB759EE4D9FFA079186B13 /* Pods-PushTool-macOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6336D5AC0C98587207A56DC1056C3E8B /* Pods-PushTool-macOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE51427E2A52B263FDF09E41C421630E /* Pods-PushTool-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 645DD56990424450F284DB4FB633F144 /* Pods-PushTool-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E944BA5E9432C8247F601941725890E6 /* Pods-PushTool-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF65DD3717B17552CF71E657652B286 /* Pods-PushTool-dummy.m */; };
+		F3FCE07A8563C07BBB69485726A2DDF7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03AD48E466D2F867D2B9841ACA9D38CE /* Pods_PushTool_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PushTool_macOS.framework; path = "Pods-PushTool-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1FE60AA0EE31001ABC4747FF31DBD86C /* Pods-PushTool-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PushTool-macOS.release.xcconfig"; sourceTree = "<group>"; };
-		290C17A754586E962D48B55510E36108 /* Pods-PushTool-macOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PushTool-macOS-resources.sh"; sourceTree = "<group>"; };
-		350099A2CC8CF32484188B08E60E9A9A /* Pods-PushTool-macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PushTool-macOS-dummy.m"; sourceTree = "<group>"; };
-		6336D5AC0C98587207A56DC1056C3E8B /* Pods-PushTool-macOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PushTool-macOS-umbrella.h"; sourceTree = "<group>"; };
-		6CFD5103E5E1B3C3E1785AC4A571CD10 /* Pods-PushTool-macOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PushTool-macOS-acknowledgements.markdown"; sourceTree = "<group>"; };
-		6DB0F5CBD20E85AF3E84D0D6ABB63652 /* Pods-PushTool-macOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PushTool-macOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		7503A5AAE7D841DC9CDC5F25FFDBE386 /* Pods-PushTool-macOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PushTool-macOS.modulemap"; sourceTree = "<group>"; };
+		0232803D9DEEDD0FDB601B0B0F9EC87F /* Pods-PushTool-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PushTool-frameworks.sh"; sourceTree = "<group>"; };
+		2D73DEC04270F88D4CE2EA296DD5C25C /* Pods-PushTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PushTool.debug.xcconfig"; sourceTree = "<group>"; };
+		41F3EC5A3A1903C4F7499F28B4EB7DDC /* Pods-PushTool-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PushTool-acknowledgements.markdown"; sourceTree = "<group>"; };
+		645DD56990424450F284DB4FB633F144 /* Pods-PushTool-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PushTool-umbrella.h"; sourceTree = "<group>"; };
+		7164F4AD87BECB056455B221DB3AFB7E /* Pods-PushTool-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PushTool-acknowledgements.plist"; sourceTree = "<group>"; };
+		7F24A5D847E8B1CEDC52A0CEF1C2A644 /* Pods-PushTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PushTool.release.xcconfig"; sourceTree = "<group>"; };
+		8E462CF3A6DCFB07DC0327885BC921FB /* Pods-PushTool-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PushTool-resources.sh"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		D700BC8AF8B2EA198631BE583ED788F0 /* Pods-PushTool-macOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PushTool-macOS-frameworks.sh"; sourceTree = "<group>"; };
+		9BF65DD3717B17552CF71E657652B286 /* Pods-PushTool-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PushTool-dummy.m"; sourceTree = "<group>"; };
+		ADEE205DF9C1982E6303359508765D59 /* Pods_PushTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PushTool.framework; path = "Pods-PushTool.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA5B8473BBF25AEEB95D8AA2028610FA /* Pods-PushTool.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PushTool.modulemap"; sourceTree = "<group>"; };
 		DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		E5474DF1930D8DF0A780C17E9DF01887 /* Pods-PushTool-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PushTool-macOS.debug.xcconfig"; sourceTree = "<group>"; };
-		F334D1EBA6C7C085A0DEF7A3F7349940 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6982CC17F5CAFD5BBC35A01DCDC54E1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4C404949F6165133305225E5B8FDE88E /* Frameworks */ = {
+		9C876A56BF0D5888B34227752300C376 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E9BD0220C8C9A861A091C40EB76EA6A /* Cocoa.framework in Frameworks */,
+				F3FCE07A8563C07BBB69485726A2DDF7 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +48,24 @@
 			path = SwiftLint;
 			sourceTree = "<group>";
 		};
+		336BE4FD8E6E439D7AB5ABA5DE7CDDDD /* Pods-PushTool */ = {
+			isa = PBXGroup;
+			children = (
+				E6982CC17F5CAFD5BBC35A01DCDC54E1 /* Info.plist */,
+				DA5B8473BBF25AEEB95D8AA2028610FA /* Pods-PushTool.modulemap */,
+				41F3EC5A3A1903C4F7499F28B4EB7DDC /* Pods-PushTool-acknowledgements.markdown */,
+				7164F4AD87BECB056455B221DB3AFB7E /* Pods-PushTool-acknowledgements.plist */,
+				9BF65DD3717B17552CF71E657652B286 /* Pods-PushTool-dummy.m */,
+				0232803D9DEEDD0FDB601B0B0F9EC87F /* Pods-PushTool-frameworks.sh */,
+				8E462CF3A6DCFB07DC0327885BC921FB /* Pods-PushTool-resources.sh */,
+				645DD56990424450F284DB4FB633F144 /* Pods-PushTool-umbrella.h */,
+				2D73DEC04270F88D4CE2EA296DD5C25C /* Pods-PushTool.debug.xcconfig */,
+				7F24A5D847E8B1CEDC52A0CEF1C2A644 /* Pods-PushTool.release.xcconfig */,
+			);
+			name = "Pods-PushTool";
+			path = "Target Support Files/Pods-PushTool";
+			sourceTree = "<group>";
+		};
 		39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -56,30 +74,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3DAA8084BE8C1EED32A07140C1FE42AF /* Products */ = {
+		624A776E58746DD6A681002F0E87C350 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				03AD48E466D2F867D2B9841ACA9D38CE /* Pods_PushTool_macOS.framework */,
+				336BE4FD8E6E439D7AB5ABA5DE7CDDDD /* Pods-PushTool */,
 			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		484C5F4B757691085A8D0BB87E996D1A /* Pods-PushTool-macOS */ = {
-			isa = PBXGroup;
-			children = (
-				F334D1EBA6C7C085A0DEF7A3F7349940 /* Info.plist */,
-				7503A5AAE7D841DC9CDC5F25FFDBE386 /* Pods-PushTool-macOS.modulemap */,
-				6CFD5103E5E1B3C3E1785AC4A571CD10 /* Pods-PushTool-macOS-acknowledgements.markdown */,
-				6DB0F5CBD20E85AF3E84D0D6ABB63652 /* Pods-PushTool-macOS-acknowledgements.plist */,
-				350099A2CC8CF32484188B08E60E9A9A /* Pods-PushTool-macOS-dummy.m */,
-				D700BC8AF8B2EA198631BE583ED788F0 /* Pods-PushTool-macOS-frameworks.sh */,
-				290C17A754586E962D48B55510E36108 /* Pods-PushTool-macOS-resources.sh */,
-				6336D5AC0C98587207A56DC1056C3E8B /* Pods-PushTool-macOS-umbrella.h */,
-				E5474DF1930D8DF0A780C17E9DF01887 /* Pods-PushTool-macOS.debug.xcconfig */,
-				1FE60AA0EE31001ABC4747FF31DBD86C /* Pods-PushTool-macOS.release.xcconfig */,
-			);
-			name = "Pods-PushTool-macOS";
-			path = "Target Support Files/Pods-PushTool-macOS";
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -88,8 +88,8 @@
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */,
 				9758CC519AE2C57A9659FFC01AAD26F9 /* Pods */,
-				3DAA8084BE8C1EED32A07140C1FE42AF /* Products */,
-				B6EE2A632DC117A0721F3CAA59CFC11D /* Targets Support Files */,
+				BE8F4A049E124939454993B6DA15E49D /* Products */,
+				624A776E58746DD6A681002F0E87C350 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,12 +101,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		B6EE2A632DC117A0721F3CAA59CFC11D /* Targets Support Files */ = {
+		BE8F4A049E124939454993B6DA15E49D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				484C5F4B757691085A8D0BB87E996D1A /* Pods-PushTool-macOS */,
+				ADEE205DF9C1982E6303359508765D59 /* Pods_PushTool.framework */,
 			);
-			name = "Targets Support Files";
+			name = Products;
 			sourceTree = "<group>";
 		};
 		FA7AC8429882A95AA0810A9DCDED54FF /* OS X */ = {
@@ -120,32 +120,32 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		E6720845C99B979C7B34F957C1C0CC0D /* Headers */ = {
+		B6320B52691C40421CC78B77750AB45C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88D1CA6C10BB759EE4D9FFA079186B13 /* Pods-PushTool-macOS-umbrella.h in Headers */,
+				BE51427E2A52B263FDF09E41C421630E /* Pods-PushTool-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		58BADA2A2DEC85AC910DAD9D9D368E23 /* Pods-PushTool-macOS */ = {
+		E92A350DF48A9D9BA81E92BB0D3C5B0F /* Pods-PushTool */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 858379A258CD320F31FEE30F3CBE9D0C /* Build configuration list for PBXNativeTarget "Pods-PushTool-macOS" */;
+			buildConfigurationList = 826B1A43E852BB868779FFA96650B12F /* Build configuration list for PBXNativeTarget "Pods-PushTool" */;
 			buildPhases = (
-				5712DDA27403FF37679EC06985C8F8D0 /* Sources */,
-				4C404949F6165133305225E5B8FDE88E /* Frameworks */,
-				E6720845C99B979C7B34F957C1C0CC0D /* Headers */,
+				DD84D273D7E36A9FDEBBD2E3E5405070 /* Sources */,
+				9C876A56BF0D5888B34227752300C376 /* Frameworks */,
+				B6320B52691C40421CC78B77750AB45C /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-PushTool-macOS";
-			productName = "Pods-PushTool-macOS";
-			productReference = 03AD48E466D2F867D2B9841ACA9D38CE /* Pods_PushTool_macOS.framework */;
+			name = "Pods-PushTool";
+			productName = "Pods-PushTool";
+			productReference = ADEE205DF9C1982E6303359508765D59 /* Pods_PushTool.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -165,21 +165,21 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 3DAA8084BE8C1EED32A07140C1FE42AF /* Products */;
+			productRefGroup = BE8F4A049E124939454993B6DA15E49D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58BADA2A2DEC85AC910DAD9D9D368E23 /* Pods-PushTool-macOS */,
+				E92A350DF48A9D9BA81E92BB0D3C5B0F /* Pods-PushTool */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5712DDA27403FF37679EC06985C8F8D0 /* Sources */ = {
+		DD84D273D7E36A9FDEBBD2E3E5405070 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				366BCEB6A33DC1FA1302998761091426 /* Pods-PushTool-macOS-dummy.m in Sources */,
+				E944BA5E9432C8247F601941725890E6 /* Pods-PushTool-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,9 +249,9 @@
 			};
 			name = Debug;
 		};
-		BB519E136FBAC5C52ABB73158B200FA4 /* Release */ = {
+		9037DD307074BF3A73BDF132705FAB54 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1FE60AA0EE31001ABC4747FF31DBD86C /* Pods-PushTool-macOS.release.xcconfig */;
+			baseConfigurationReference = 7F24A5D847E8B1CEDC52A0CEF1C2A644 /* Pods-PushTool.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -265,17 +265,17 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-PushTool-macOS/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-PushTool/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = "Target Support Files/Pods-PushTool-macOS/Pods-PushTool-macOS.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-PushTool/Pods-PushTool.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_PushTool_macOS;
+				PRODUCT_NAME = Pods_PushTool;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -341,9 +341,9 @@
 			};
 			name = Release;
 		};
-		D8D4C3F9D4DF61EDF1AD9BBEF53596C1 /* Debug */ = {
+		C89D43F0BBA666734EF940946A36E0BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5474DF1930D8DF0A780C17E9DF01887 /* Pods-PushTool-macOS.debug.xcconfig */;
+			baseConfigurationReference = 2D73DEC04270F88D4CE2EA296DD5C25C /* Pods-PushTool.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -357,17 +357,17 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-PushTool-macOS/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-PushTool/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = "Target Support Files/Pods-PushTool-macOS/Pods-PushTool-macOS.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-PushTool/Pods-PushTool.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_PushTool_macOS;
+				PRODUCT_NAME = Pods_PushTool;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -387,11 +387,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		858379A258CD320F31FEE30F3CBE9D0C /* Build configuration list for PBXNativeTarget "Pods-PushTool-macOS" */ = {
+		826B1A43E852BB868779FFA96650B12F /* Build configuration list for PBXNativeTarget "Pods-PushTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D8D4C3F9D4DF61EDF1AD9BBEF53596C1 /* Debug */,
-				BB519E136FBAC5C52ABB73158B200FA4 /* Release */,
+				C89D43F0BBA666734EF940946A36E0BB /* Debug */,
+				9037DD307074BF3A73BDF132705FAB54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

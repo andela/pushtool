@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_PushTool_macOSVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_PushTool_macOSVersionString[];
+FOUNDATION_EXPORT double Pods_PushToolVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_PushToolVersionString[];
 

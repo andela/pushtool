@@ -1,7 +1,7 @@
 PushTool
 ======
 
-*OS X and iOS application and framework to play with the Apple Push Notification service (APNs)*
+*OS X application and framework to play with the Apple Push Notification service (APNs)*
 
 <img src="Resources/Assets.xcassets/osx1.imageset/osx1.png" alt="PushTool OS X" width="612"/>
 

@@ -12,8 +12,6 @@ Testing push notifications for your iOS or Mac app can be a pain. You might cons
 
 That's why I made *PushTool*. It is a Mac and iPhone app for sending push notifications *directly* to the *Apple Push Notification Service*. No need to set up a server or create an account online. You only need the SSL certificate and a device token to start pushing directly from your Mac, or even from an iPhone! PushTool has detailed error reporting and logs, which are very helpful with verifying your setup.
 
-PushTool comes with a small framework for both OS X and iOS. It provides various tools for sending notifications programmatically. On OS X it can use the keychain to retrieve push certificates and keys. PushTool can also be used without keychain, using a PKCS #12 file. If you want to get a better understanding of how push notifications work, then this framework is a good place to start and play around.
-
 
 Features
 --------
@@ -26,13 +24,6 @@ Mac OS X application for sending push notifications through the APN service:
 - Automatic configuration for *sandbox*
 - Reports *detailed error messages* returned by APNs
 - Reads from *feedback service*
-
-OS X and iOS framework for sending pushes from your own application:
-- Modular, no dependencies, use what you like
-- Fully documented source code
-- Detailed error handling
-- iOS compatible, so you can also push directly from your iPhone :o
-- Demo applications for both platforms
 
 
 Getting started
@@ -387,19 +378,3 @@ If nothing is delivered to the device then check:
 - Does the push call succeed? Isn't there any negative response from the push server or feedback server? Both `[PushTool pushPayload:payload token:token identifier:rand() error:&error]` and `[PushTool readFailedIdentifier:&identifier apnError:&apnError error:&error]` should return `YES`, but wait a second between pushing and reading. Also try to connect to the feedback service to read feedback.
 
 Consult Apple's documentation for more troubleshooting tips: [Troubleshooting Push Notifications](https://developer.apple.com/library/mac/technotes/tn2265/_index.html)
-
-Build with Xcode
-----------------
-The source comes with an Xcode project file that should take care of building the OS X and iOS demo applications. Alternatively you can also build `PushTool.app` from the commandline with `xcodebuild`:
-
-    xcodebuild -project PushTool.xcodeproj -target PushToolMac -configuration Release clean install
-
-After a successful build, `PushTool.app` can be found in the `build` folder of the project.
-
-Documentation
--------------
-Documentation generated and installed using *appledoc* by running from the project root:
-
-    appledoc .
-
-See the [appledoc documentation](http://gentlebytes.com/appledoc/) for more info.

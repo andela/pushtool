@@ -66,13 +66,11 @@ public class SecTools: NSObject {
         return self.environmentOptions(forCertificate: certificate)
     }
 
-    #if os(macOS)
     public class func expiration(withCertificate certificate: Any) -> Date? {
 
         return self.value(withCertificate: certificate as CertificateRef,
                           key: kSecOIDInvalidityDate) as? Date
     }
-    #endif
 
     public class func identities(withPKCS12Data pkcs12: Data,
                                  password: String) throws -> [Any] {
@@ -217,7 +215,6 @@ public class SecTools: NSObject {
         return certificates
     }
 
-    #if os(macOS)
     public class func keychainIdentity(withCertificate certificate: Any?) throws -> Any {
         var ident: SecIdentity?
 
@@ -241,7 +238,6 @@ public class SecTools: NSObject {
 
         return id
     }
-    #endif
 
     public class func summary(withCertificate certificate: CertificateRef) -> String {
         var result: NSString?
@@ -288,7 +284,6 @@ public class SecTools: NSObject {
         return .unknown
     }
 
-    #if os(macOS)
     public class func values(withCertificate certificate: Any,
                              keys: [Any]) -> [AnyHashable: [AnyHashable: Any]]? {
         var error: Unmanaged<CFError>?
@@ -298,7 +293,6 @@ public class SecTools: NSObject {
 
         return result
     }
-    #endif
 
     // MARK: Private Instance Methods
 
@@ -413,7 +407,6 @@ public class SecTools: NSObject {
         }
     }
 
-    #if os(macOS)
     private class func value(withCertificate certificate: CertificateRef,
                              key: AnyHashable) -> Any? {
         let values = self.values(withCertificate: certificate,
@@ -421,5 +414,4 @@ public class SecTools: NSObject {
 
         return values?[key]?[kSecPropertyKeyValue]
     }
-    #endif
 }

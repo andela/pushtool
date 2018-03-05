@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F5F682EA203DB530005D829F"
-               BuildableName = "PushTool"
+               BlueprintIdentifier = "4C4F333727553ED96B2BD9E5327CD5F5"
+               BuildableName = "PushTool.app"
                BlueprintName = "PushTool"
                ReferencedContainer = "container:PushTool.xcodeproj">
             </BuildableReference>
@@ -30,6 +30,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "4C4F333727553ED96B2BD9E5327CD5F5"
+            BuildableName = "PushTool.app"
+            BlueprintName = "PushTool"
+            ReferencedContainer = "container:PushTool.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -44,15 +53,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5F682EA203DB530005D829F"
-            BuildableName = "PushTool"
+            BlueprintIdentifier = "4C4F333727553ED96B2BD9E5327CD5F5"
+            BuildableName = "PushTool.app"
             BlueprintName = "PushTool"
             ReferencedContainer = "container:PushTool.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -62,15 +72,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5F682EA203DB530005D829F"
-            BuildableName = "PushTool"
+            BlueprintIdentifier = "4C4F333727553ED96B2BD9E5327CD5F5"
+            BuildableName = "PushTool.app"
             BlueprintName = "PushTool"
             ReferencedContainer = "container:PushTool.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

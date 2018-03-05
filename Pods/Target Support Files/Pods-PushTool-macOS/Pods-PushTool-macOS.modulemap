@@ -1,6 +1,0 @@
-framework module Pods_PushTool_macOS {
-  umbrella header "Pods-PushTool-macOS-umbrella.h"
-
-  export *
-  module * { export * }
-}

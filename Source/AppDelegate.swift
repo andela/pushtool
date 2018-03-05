@@ -402,6 +402,8 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         let priority: Int = selectedPriority()
         Logger.logInfo("Pushing...")
 
+        saveConfig()
+
         serial?.async {
             let notification = Notification(payload: payload,
                                             token: token,
@@ -582,7 +584,10 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func saveConfig() {
         guard
-            let url = configFileURL()
+            let url = configFileURL(),
+            let cert = selectedCertificate,
+            let tokens = self.tokens(withCertificate: cert, create: false),
+            let tokenValue = (tokens as NSArray?)?.reverseObjectEnumerator().allObjects
             else { return }
 
         if !config.isEmpty {

@@ -88,9 +88,9 @@ public class PusherViewController: UIViewController {
     private var sandboxSwitch: UISwitch!
     private var textField: UITextField!
 
-    private var certificate: NWCertificateRef?
+    private var certificate: CertificateRef?
     private var hub: Hub?
-    private var identity: NWIdentityRef?
+    private var identity: IdentityRef?
     private var index: Int = 0
     private var serial: DispatchQueue?
 
@@ -106,7 +106,7 @@ public class PusherViewController: UIViewController {
             let pkcs12 = try Data(contentsOf: url)
 
             let ids = try SecTools.identities(withPKCS12Data: pkcs12,
-                                              password: pkcs12Password) as [NWIdentityRef]
+                                              password: pkcs12Password) as [IdentityRef]
 
             if ids.isEmpty {
 
@@ -121,7 +121,7 @@ public class PusherViewController: UIViewController {
                 else { Logger.logWarn("Unable to import p12 file"); return }
 
                 self.identity = identity
-                self.certificate = certificate as NWCertificateRef
+                self.certificate = certificate as CertificateRef
             }
         } catch {
             print(error)
@@ -138,15 +138,15 @@ public class PusherViewController: UIViewController {
         }
     }
 
-    private func selectedEnvironment(forCertificate certificate: NWCertificateRef) -> NWEnvironment {
+    private func selectedEnvironment(forCertificate certificate: CertificateRef) -> Environment {
 
         return (sandboxSwitch.isOn ? .sandbox : .production)
 
     }
 
-    private func preferredEnvironment(forCertificate certificate: NWCertificateRef) -> NWEnvironment {
+    private func preferredEnvironment(forCertificate certificate: CertificateRef) -> Environment {
 
-        let environmentOptions: NWEnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
 
         if environmentOptions == .none {
 
@@ -169,7 +169,7 @@ public class PusherViewController: UIViewController {
         }
         guard let certificate = self.certificate else { return }
 
-        let preferredEnvironment: NWEnvironment = self.preferredEnvironment(forCertificate: certificate)
+        let preferredEnvironment: Environment = self.preferredEnvironment(forCertificate: certificate)
         connect(to: preferredEnvironment)
     }
 
@@ -183,7 +183,7 @@ public class PusherViewController: UIViewController {
 
     }
 
-    private func connect(to environment: NWEnvironment) {
+    private func connect(to environment: Environment) {
 
         disconnect()
 
@@ -251,9 +251,9 @@ public class PusherViewController: UIViewController {
         sandboxSwitch?.isEnabled = false
     }
 
-    private func enableButtons(forCertificate certificate: NWCertificateRef, environment: NWEnvironment) {
+    private func enableButtons(forCertificate certificate: CertificateRef, environment: Environment) {
 
-        let environmentOptions: NWEnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
         let shouldEnableEnvButton: Bool = environmentOptions == .any
         let shouldSelectSandboxEnv: Bool = environment == .sandbox
 

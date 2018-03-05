@@ -9,8 +9,8 @@ public class PushFeedback: NSObject {
     public let sandboxPushHost = "feedback.sandbox.push.apple.com"
     public let tokenMaxSize = 32
 
-    public class func connect(withIdentity identity: NWIdentityRef,
-                              environment: NWEnvironment) throws -> PushFeedback {
+    public class func connect(withIdentity identity: IdentityRef,
+                              environment: Environment) throws -> PushFeedback {
         let feedback = PushFeedback()
 
         try feedback.connect(withIdentity: identity,
@@ -21,7 +21,7 @@ public class PushFeedback: NSObject {
 
     public class func connect(withPKCS12Data data: Data,
                               password: String?,
-                              environment: NWEnvironment) throws -> PushFeedback {
+                              environment: Environment) throws -> PushFeedback {
         let feedback = PushFeedback()
 
         try feedback.connect(withPKCS12Data: data,
@@ -31,8 +31,8 @@ public class PushFeedback: NSObject {
         return feedback
     }
 
-    public func connect(withIdentity identity: NWIdentityRef,
-                        environment: NWEnvironment) throws {
+    public func connect(withIdentity identity: IdentityRef,
+                        environment: Environment) throws {
 
         self.connection?.disconnect()
 
@@ -57,12 +57,12 @@ public class PushFeedback: NSObject {
 
     public func connect(withPKCS12Data data: Data,
                         password: String?,
-                        environment: NWEnvironment) throws {
+                        environment: Environment) throws {
 
         guard
             let password = password,
             let identity = try SecTools.identity(withPKCS12Data: data,
-                                                 password: password) as NWIdentityRef?
+                                                 password: password) as IdentityRef?
             else { return }
 
         try connect(withIdentity: identity,

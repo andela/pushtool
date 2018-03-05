@@ -12,8 +12,8 @@ public class Hub: NSObject {
     // MARK: Public Class Methods
 
     public class func connect(with delegate: HubDelegate?,
-                              identity: NWIdentityRef,
-                              environment: NWEnvironment) throws -> Hub {
+                              identity: IdentityRef,
+                              environment: Environment) throws -> Hub {
 
         let hub = Hub(delegate: delegate)
 
@@ -26,7 +26,7 @@ public class Hub: NSObject {
     public class func connect(with delegate: HubDelegate?,
                               pkcs12Data data: Data,
                               password: String,
-                              environment: NWEnvironment) throws -> Hub {
+                              environment: Environment) throws -> Hub {
 
         let hub = Hub(delegate: delegate)
 
@@ -43,7 +43,7 @@ public class Hub: NSObject {
     public var feedbackSpan: TimeInterval
     public var index: UInt
     public var pusher: Pusher
-    public var type: NWNotificationType
+//    public var type: Notification
 
     // MARK: Public Initializers
 
@@ -59,13 +59,13 @@ public class Hub: NSObject {
         self.feedbackSpan = 30
         self.pusher = pusher
         self.delegate = delegate
-        self.type = .type2
+//        self.type = .type
     }
 
     // MARK: Public Instance Methods
 
-    public func connect(withIdentity identity: NWIdentityRef,
-                        environment: NWEnvironment) throws {
+    public func connect(withIdentity identity: IdentityRef,
+                        environment: Environment) throws {
 
         try pusher.connect(withIdentity: identity,
                            environment: environment)
@@ -73,7 +73,7 @@ public class Hub: NSObject {
 
     public func connect(withPKCS12Data data: Data,
                         password: String,
-                        environment: NWEnvironment) throws {
+                        environment: Environment) throws {
 
         try pusher.connect(withPKCS12Data: data,
                            password: password,
@@ -94,7 +94,7 @@ public class Hub: NSObject {
         }
 
         do {
-            try pusher.pushNotification(notification, type: type)
+            try pusher.pushNotification(notification)
         } catch {
             delegate?.notification(notification,
                                    didFailWithError: error)

@@ -24,7 +24,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     private var config: [AnyHashable: Any] = [:]
     private var hub: Hub?
     private var lastSelectedIndex: Int = 0
-    private var selectedCertificate: NWCertificateRef?
+    private var selectedCertificate: CertificateRef?
     private var serial: DispatchQueue?
 
     // MARK: Public Instance methods
@@ -99,7 +99,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: Private Instance methods
 
-    private func addToken(_ token: String, certificate: NWCertificateRef) -> Bool {
+    private func addToken(_ token: String, certificate: CertificateRef) -> Bool {
         guard
             var tokens = self.tokens(withCertificate: certificate,
                                      create: true)
@@ -163,15 +163,15 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
             selectCertificate(nil,
                               identity: nil,
-                              environment: NWEnvironment.sandbox)
+                              environment: Environment.sandbox)
             tokenCombo.isEnabled = false
             loadSelectedToken()
         } else if index <= certificateIdentityPairs.count {
             certificatePopup.selectItem(at: index)
             lastSelectedIndex = index
             let pair = certificateIdentityPairs[index - 1]
-            let certificate = pair[0] as NWCertificateRef
-            let identity = pair[1] as NWIdentityRef
+            let certificate = pair[0] as CertificateRef
+            let identity = pair[1] as IdentityRef
 
             selectCertificate(certificate,
                               identity: identity is NSNull ? nil : identity,
@@ -191,8 +191,8 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         sandboxCheckBox.isEnabled = false
     }
 
-    private func enableButtons(forCertificate certificate: NWCertificateRef, environment: NWEnvironment) {
-        let environmentOptions: NWEnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+    private func enableButtons(forCertificate certificate: CertificateRef, environment: Environment) {
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
         let shouldEnableEnvButton: Bool = environmentOptions == .any
         let shouldSelectSandboxEnv: Bool = environment == .sandbox
         pushButton.isEnabled = true
@@ -204,25 +204,25 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     private func feedback() {
         serial?.async {
             guard
-                let certificate: NWCertificateRef = self.selectedCertificate
+                let certificate: CertificateRef = self.selectedCertificate
                 else { Logger.logWarn("Unable to connect to feedback service: no certificate selected"); return }
 
             let summary = SecTools.summary(withCertificate: certificate)
             let environment = self.selectedEnvironment(for: certificate)
-            Logger.logInfo("Connecting to feedback service... \(summary), \(descriptionForEnvironment(environment))")
+            Logger.logInfo("Connecting to feedback service... \(summary), \(ErrorUtil.descriptionForEnvironment(environment))")
 
             let feedback: PushFeedback
 
             do {
                 let identity = try SecTools.keychainIdentity(withCertificate: certificate)
 
-                feedback = try PushFeedback.connect(withIdentity: identity as NWIdentityRef,
+                feedback = try PushFeedback.connect(withIdentity: identity as IdentityRef,
                                                     environment: self.selectedEnvironment(for: certificate))
             } catch {
 
                 Logger.logWarn("Unable to connect to feedback service: \(error.localizedDescription)"); return }
 
-            Logger.logInfo("Reading feedback service... \(summary), \(descriptionForEnvironment(environment))")
+            Logger.logInfo("Reading feedback service... \(summary), \(ErrorUtil.descriptionForEnvironment(environment))")
             let pairs: [[Any]]
 
             do {
@@ -241,8 +241,8 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func identifier(withCertificate certificate: NWCertificateRef) -> String {
-        let environmentOptions: NWEnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+    private func identifier(withCertificate certificate: CertificateRef) -> String {
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
         let summary: String = SecTools.summary(withCertificate: certificate)
 
         return "\(summary)-\(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions))"
@@ -293,7 +293,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                     ids = try SecTools.identities(withPKCS12Data: data,
                                                   password: password as String!)
                 } catch let error as NSError {
-                    if !(password.length == 0) && error.code == NWError.pkcs12Password.rawValue {
+                    if !(password.length == 0) && error.code == PushError.pkcs12Password.rawValue {
                         ids = try? SecTools.identities(withPKCS12Data: data,
                                                        password: "")
                     }
@@ -304,10 +304,10 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                     else { Logger.logWarn("Unable to read p12 file"); return }
 
                 for identity: IdentityRef in identities {
-                    let certificate: NWCertificateRef
+                    let certificate: CertificateRef
 
                     do {
-                        certificate = try SecTools.certificate(withIdentity: identity as NWIdentityRef) as NWCertificateRef
+                        certificate = try SecTools.certificate(withIdentity: identity as IdentityRef) as CertificateRef
                     } catch {
 
                         Logger.logWarn("Unable to import p12 file"); return }
@@ -353,13 +353,13 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         certs = certs.sorted(by: {(_ a: CertificateRef, _ b: CertificateRef) -> Bool in
-            let envOptionsA: NWEnvironmentOptions = SecTools.environmentOptions(forCertificate: a as NWCertificateRef)
-            let envOptionsB: NWEnvironmentOptions = SecTools.environmentOptions(forCertificate: b as NWCertificateRef)
+            let envOptionsA: EnvironmentOptions = SecTools.environmentOptions(forCertificate: a as CertificateRef)
+            let envOptionsB: EnvironmentOptions = SecTools.environmentOptions(forCertificate: b as CertificateRef)
             if envOptionsA != envOptionsB {
                 return envOptionsA.rawValue < envOptionsB.rawValue
             }
-            let aname: String = SecTools.summary(withCertificate: a as NWCertificateRef)
-            let bname: String = SecTools.summary(withCertificate: b as NWCertificateRef)
+            let aname: String = SecTools.summary(withCertificate: a as CertificateRef)
+            let bname: String = SecTools.summary(withCertificate: b as CertificateRef)
             return aname < bname
         })
 
@@ -430,7 +430,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func selectedEnvironment(for certificate: NWCertificateRef) -> NWEnvironment {
+    private func selectedEnvironment(for certificate: CertificateRef) -> Environment {
         return sandboxCheckBox.state == .on ? .sandbox : .production
     }
 
@@ -498,11 +498,11 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         formatter.timeStyle = .short
 
         for pair: [Any] in certificateIdentityPairs {
-            let certificate = pair[0] as NWCertificateRef
+            let certificate = pair[0] as CertificateRef
             let hasIdentity: Bool = !(pair[1] is NSNull)
-            let environmentOptions: NWEnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
             var summary: NSString? = nil
-            let certType: NWCertType = SecTools.type(withCertificate: certificate, summary: &summary)
+            let certType: CertType = SecTools.type(withCertificate: certificate, summary: &summary)
             let type: String = ErrorUtil.descriptionForCertType(certType)
             let date: Date? = SecTools.expiration(withCertificate: certificate)
             let expire = "  [\((date != nil) ? formatter.string(from: date!) : "expired")]"
@@ -545,10 +545,10 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func preferredEnvironment(for certificate: NWCertificateRef) -> NWEnvironment {
-        let environmentOptions: NWEnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+    private func preferredEnvironment(for certificate: CertificateRef) -> Environment {
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
 
-        return environmentOptions.contains(.sandbox) ? .sandbox : .production
+        return environmentOptions == .sandbox ? .sandbox : .production
     }
 
     private func reconnect() {
@@ -556,13 +556,13 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let cert = selectedCertificate
             else { return }
 
-        let environment: NWEnvironment = selectedEnvironment(for: cert)
+        let environment: Environment = selectedEnvironment(for: cert)
         selectCertificate(cert,
                           identity: nil,
                           environment: environment, message: "Reconnecting to APN...")
     }
 
-    private func removeToken(_ token: String, certificate: NWCertificateRef) -> Bool {
+    private func removeToken(_ token: String, certificate: CertificateRef) -> Bool {
         guard
             var tokens = self.tokens(withCertificate: certificate, create: false)
             else { return false }
@@ -585,9 +585,10 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func selectCertificate(_ certificate: NWCertificateRef?,
-                                   identity: NWIdentityRef?,
-                                   environment: NWEnvironment, message: String? = nil) {
+    private func selectCertificate(_ certificate: CertificateRef?,
+                                   identity: IdentityRef?,
+                                   environment: Environment,
+                                   message: String? = nil) {
         self.hub?.disconnect()
         self.hub = nil
 
@@ -600,10 +601,10 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
         if let cert = certificate {
 
-            let environment: NWEnvironment = selectedEnvironment(for: cert)
+            let environment: Environment = selectedEnvironment(for: cert)
             let summary = SecTools.summary(withCertificate: cert)
 
-            Logger.logInfo("\(message ?? "Connecting to APN..."), \(summary), \(descriptionForEnvironment(environment)) ")
+            Logger.logInfo("\(message ?? "Connecting to APN..."), \(summary), \(ErrorUtil.descriptionForEnvironment(environment)) ")
 
             serial?.async {
                 guard
@@ -611,13 +612,13 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                     else { return }
 
                 let hub = try? Hub.connect(with: self,
-                                           identity: ident as NWIdentityRef,
+                                           identity: ident as IdentityRef,
                                            environment: environment)
 
                 DispatchQueue.main.async {
                     if (hub != nil) {
 
-                        Logger.logInfo("Connected \(summary), \(descriptionForEnvironment(environment)) ")
+                        Logger.logInfo("Connected \(summary), \(ErrorUtil.descriptionForEnvironment(environment)) ")
                         self.hub = hub
                         self.enableButtons(forCertificate: cert,
                                            environment: environment)
@@ -631,7 +632,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func selectToken(_ token: String, certificate: NWCertificateRef) -> Bool {
+    private func selectToken(_ token: String, certificate: CertificateRef) -> Bool {
         guard
             var tokens = self.tokens(withCertificate: certificate, create: true)
             else { return false }
@@ -657,7 +658,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func tokens(withCertificate certificate: NWCertificateRef,
+    private func tokens(withCertificate certificate: CertificateRef,
                         create: Bool) -> [AnyHashable]? {
         guard
             let cert = selectedCertificate

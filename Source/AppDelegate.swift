@@ -135,30 +135,22 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                                                                     isDirectory: true)
             else { return nil }
 
-        let exists: Any?
+        guard
+            (try? FileManager.default.createDirectory(at: configURL,
+                                                      withIntermediateDirectories: true,
+                                                      attributes: nil)) != nil
+            else { return nil }
 
-        exists = try? FileManager.default.createDirectory(at: configURL,
-                                                          withIntermediateDirectories: true,
-                                                          attributes: nil)
+        let result = configURL.appendingPathComponent("config.plist")
 
-        if exists != nil {
-            guard
-                let result: URL? = configURL.appendingPathComponent("config.plist"),
-                let aPath = result?.path
-                else { return nil }
-
-            if !FileManager.default.fileExists(atPath: aPath) {
-                let defaultURL: URL? = Bundle.main.url(forResource: "config", withExtension: "plist")
-                if let aURL = defaultURL, let aResult = result {
-                    try? FileManager.default.copyItem(at: aURL, to: aResult)
-                }
-
-            }
-
-            return result
+        if !FileManager.default.fileExists(atPath: result.path),
+            let defaultURL = Bundle.main.url(forResource: "config",
+                                             withExtension: "plist") {
+            try? FileManager.default.copyItem(at: defaultURL,
+                                              to: result)
         }
 
-        return nil
+        return result
     }
 
     private func connectWithCertificate(at index: Int) {
@@ -739,7 +731,8 @@ extension AppDelegate: LoggerDelegate {
                     self.logField.textStorage?.mutableString.append("\n")
 
                     if let length = self.logField.textStorage?.length {
-                        self.logField.scrollRangeToVisible(NSRange(location: length - 1, length: 1))
+                        self.logField.scrollRangeToVisible(NSRange(location: length - 1,
+                                                                   length: 1))
                     }
                 }
             }

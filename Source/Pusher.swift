@@ -104,16 +104,19 @@ public class Pusher: NSObject {
 
         identifier.pointee = 0
 
-        var length = UInt(UInt8.bitWidth * 2 + UInt32.bitWidth)
-        let data = NSMutableData(length: Int(length)) ?? NSMutableData()
+        var length = UInt((UInt8.bitWidth * 2) / 8 + (UInt32.bitWidth) / 8 )
+        let data = NSMutableData(length: Int(length))
 
-        try self.connection?.read(data,
-                                  length: &length)
+        if let data = data {
+            var len: UInt = 0
+            try self.connection?.read(data,
+                                      length: &len)
+        }
 
         var command: UInt8 = 0
 
-        data.getBytes(&command,
-                      range: NSRange(location: 0, length: 1))
+        data?.getBytes(&command,
+                           range: NSRange(location: 0, length: 1))
 
         if command != 8 {
             throw ErrorUtil.errorWithErrorCode(.pushResponseCommand,
@@ -122,12 +125,12 @@ public class Pusher: NSObject {
 
         var status: UInt8 = 0
 
-        data.getBytes(&status,
+        data?.getBytes(&status,
                       range: NSRange(location: 1, length: 1))
 
         var ID: UInt32 = 0
 
-        data.getBytes(&ID,
+        data?.getBytes(&ID,
                       range: NSRange(location: 2, length: 4))
 
         identifier.pointee = Int(ID.bigEndian)

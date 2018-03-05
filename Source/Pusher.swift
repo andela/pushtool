@@ -133,12 +133,12 @@ public class Pusher: NSObject {
         data?.getBytes(&status,
                        range: NSRange(location: 1, length: 1))
 
-        var ID: UInt32 = 0
+        var ident: UInt32 = 0
 
-        data?.getBytes(&ID,
+        data?.getBytes(&ident,
                        range: NSRange(location: 2, length: 4))
 
-        identifier.pointee = Int(ID.bigEndian)
+        identifier.pointee = Int(UInt32(bigEndian: ident))
 
         apnError?.pointee = error(for: Int(status))
     }

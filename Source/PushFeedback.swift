@@ -33,7 +33,6 @@ public class PushFeedback: NSObject {
 
     public func connect(withIdentity identity: IdentityRef,
                         environment: Environment) throws {
-
         self.connection?.disconnect()
 
         var environment = environment
@@ -58,7 +57,6 @@ public class PushFeedback: NSObject {
     public func connect(withPKCS12Data data: Data,
                         password: String?,
                         environment: Environment) throws {
-
         guard
             let password = password,
             let identity = try SecTools.identity(withPKCS12Data: data,
@@ -87,43 +85,44 @@ public class PushFeedback: NSObject {
     }
 
     private func readTokenData() throws -> (Data, Date) {
+        let dataSize = (UInt8.bitWidth * 2 + UInt32.bitWidth + tokenMaxSize) / 8
 
         guard
-            let data = NSMutableData(length: (UInt8.bitWidth * 2 + UInt32.bitWidth + tokenMaxSize))
+            let data = NSMutableData(length: dataSize)
             else { return (Data(), Date()) }
 
         var length: UInt = 0
 
         try connection?.read(data, length: &length)
 
-        if (length != data.length) {
-           throw ErrorUtil.errorWithErrorCode(.feedbackLength,
-                                           reason: Int(length))
+        if length != data.length {
+            throw ErrorUtil.errorWithErrorCode(.feedbackLength,
+                                               reason: Int(length))
         }
 
         var time: UInt32 = 0
 
         data.getBytes(&time, range: NSRange(location: 0, length: 4))
 
-        let date = Date(timeIntervalSince1970: TimeInterval(time))
+        let date = Date(timeIntervalSince1970: TimeInterval(UInt32(bigEndian: time)))
 
         var len: UInt16 = 0
 
         data.getBytes(&len, range: NSRange(location: 4, length: 2))
 
-        let tokenLength = Int(len)
+        let tokenLength = Int(UInt16(bigEndian: len))
 
         if tokenLength != tokenMaxSize {
             throw ErrorUtil.errorWithErrorCode(.feedbackTokenLength, reason: tokenLength)
         }
 
-        let token = data.subdata(with: NSMakeRange(6, Int(length - 6)))
+        let token = data.subdata(with: NSRange(location: 6,
+                                               length: Int(length - 6)))
 
         return (token, date)
     }
 
     private func readToken() throws -> (String, Date) {
-
         let (data, date) = try readTokenData()
 
         return (Notification.hex(from: data), date)

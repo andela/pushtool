@@ -14,8 +14,7 @@ public class Hub: NSObject {
     public class func connect(with delegate: HubDelegate?,
                               identity: IdentityRef,
                               environment: Environment) throws -> Hub {
-
-        let hub = Hub(delegate: delegate)
+                let hub = Hub(delegate: delegate)
 
         try hub.connect(withIdentity: identity,
                         environment: environment)
@@ -27,8 +26,7 @@ public class Hub: NSObject {
                               pkcs12Data data: Data,
                               password: String,
                               environment: Environment) throws -> Hub {
-
-        let hub = Hub(delegate: delegate)
+                let hub = Hub(delegate: delegate)
 
         try hub.connect(withPKCS12Data: data,
                         password: password,
@@ -43,7 +41,8 @@ public class Hub: NSObject {
     public var feedbackSpan: TimeInterval
     public var index: UInt
     public var pusher: Pusher
-//    public var type: Notification
+
+    // public var type: Notification
 
     // MARK: Public Initializers
 
@@ -54,19 +53,18 @@ public class Hub: NSObject {
 
     public init(pusher: Pusher,
                 delegate: HubDelegate?) {
-
         self.index = 1
         self.feedbackSpan = 30
         self.pusher = pusher
         self.delegate = delegate
-//        self.type = .type
+
+        // self.type = .type
     }
 
     // MARK: Public Instance Methods
 
     public func connect(withIdentity identity: IdentityRef,
                         environment: Environment) throws {
-
         try pusher.connect(withIdentity: identity,
                            environment: environment)
     }
@@ -74,7 +72,6 @@ public class Hub: NSObject {
     public func connect(withPKCS12Data data: Data,
                         password: String,
                         environment: Environment) throws {
-
         try pusher.connect(withPKCS12Data: data,
                            password: password,
                            environment: environment)
@@ -86,8 +83,7 @@ public class Hub: NSObject {
 
     public func pushNotification(_ notification: Notification,
                                  autoReconnect reconnect: Bool) throws {
-
-        if notification.identifier == 0 {
+                if notification.identifier == 0 {
             notification.identifier = index
 
             index += 1
@@ -127,10 +123,10 @@ public class Hub: NSObject {
     public func pushPayload(_ payload: String,
                             token: String) -> UInt {
         let notification = Notification(payload: payload,
-                                          token: token,
-                                          identifier: 0,
-                                          expiration: nil,
-                                          priority: 0)
+                                        token: token,
+                                        identifier: 0,
+                                        expiration: nil,
+                                        priority: 0)
 
         return self.pushNotifications([notification])
     }
@@ -138,10 +134,11 @@ public class Hub: NSObject {
     public func pushPayload(_ payload: String,
                             tokens: [String]) -> UInt {
         let notifications = tokens.map { Notification(payload: payload,
-                                                        token: $0,
-                                                        identifier: 0,
-                                                        expiration: nil,
-                                                        priority: 0) }
+                                                      token: $0,
+                                                      identifier: 0,
+                                                      expiration: nil,
+                                                      priority: 0)
+        }
 
         return self.pushNotifications(notifications)
     }
@@ -149,16 +146,17 @@ public class Hub: NSObject {
     public func pushPayloads(_ payloads: [String],
                              token: String) -> UInt {
         let notifications = payloads.map { Notification(payload: $0,
-                                                          token: token,
-                                                          identifier: 0,
-                                                          expiration: nil,
-                                                          priority: 0) }
+                                                        token: token,
+                                                        identifier: 0,
+                                                        expiration: nil,
+                                                        priority: 0)
+        }
 
         return pushNotifications(notifications)
     }
 
     public func readFailed() -> UInt {
-        var failed: [Any]? = nil
+        var failed: [Any]?
 
         do {
             try readFailed(&failed,
@@ -177,7 +175,7 @@ public class Hub: NSObject {
     public func readFailed(_ notifications: AutoreleasingUnsafeMutablePointer<Notification?>?,
                            autoReconnect reconnect: Bool) throws {
         let identifier: UInt = 0
-        var apnError: NSError? = nil
+        var apnError: NSError?
         var id = Int(identifier)
 
         try pusher.readFailedIdentifier(&id, apnError: &apnError)
@@ -199,12 +197,13 @@ public class Hub: NSObject {
         var failed: [Any] = []
 
         for _ in 0..<max {
-            var notification: Notification? = nil
+            var notification: Notification?
             try readFailed(&notification, autoReconnect: reconnect)
 
             if notification == nil {
                 break
             }
+
             if let aNotification = notification {
                 failed.append(aNotification)
             }
@@ -234,11 +233,10 @@ public class Hub: NSObject {
             notificationForIdentifier.removeValue(forKey: key)
         }
 
-        return old.count > 0
+        return !old.isEmpty
     }
 
     // MARK: Private Instance Properties
 
     private var notificationForIdentifier: [UInt: (Notification, Date)] = [:]
-
 }

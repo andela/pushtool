@@ -34,7 +34,6 @@ public class SecTools: NSObject {
     }
 
     public class func environmentOptions(forCertificate certificate: CertificateRef) -> EnvironmentOptions {
-
         switch (self.type(withCertificate: certificate,
                           summary: nil) ) {
         case .iosDevelopment,
@@ -58,7 +57,6 @@ public class SecTools: NSObject {
     }
 
     public class func environmentOptions(forIdentity identity: Any) -> EnvironmentOptions {
-
         guard
             let certificate: CertificateRef = try? self.certificate(withIdentity: identity as IdentityRef) as CertificateRef
             else { return .sandbox }
@@ -67,14 +65,12 @@ public class SecTools: NSObject {
     }
 
     public class func expiration(withCertificate certificate: Any) -> Date? {
-
         return self.value(withCertificate: certificate as CertificateRef,
                           key: kSecOIDInvalidityDate) as? Date
     }
 
     public class func identities(withPKCS12Data pkcs12: Data,
                                  password: String) throws -> [Any] {
-
         guard
             !pkcs12.isEmpty
             else { throw ErrorUtil.errorWithErrorCode(.pkcs12EmptyData,
@@ -106,11 +102,10 @@ public class SecTools: NSObject {
 
     public class func identity(withPKCS12Data pkcs12: Data,
                                password: String) throws -> Any {
-
         let identities = try self.identities(withPKCS12Data: pkcs12,
                                              password: password)
 
-        if identities.count == 0 {
+        if identities.isEmpty {
             throw ErrorUtil.errorWithErrorCode(.pkcs12NoItems, reason: 0)
         }
 
@@ -122,7 +117,6 @@ public class SecTools: NSObject {
     }
 
     public class func inspectIdentity(_ identity: Any?) -> [AnyHashable: Any]? {
-
         guard let id = identity
             else { return nil }
 
@@ -144,7 +138,6 @@ public class SecTools: NSObject {
         }
 
         var key: SecKey?
-
         let keystat: OSStatus = SecIdentityCopyPrivateKey(identity as! SecIdentity,
                                                           &key)
 
@@ -203,7 +196,6 @@ public class SecTools: NSObject {
 
     @objc(keychainCertificatesWithError:)
     public class func keychainCertificates() throws -> [CertificateRef] {
-
         let candidates = try self.allKeychainCertificates()
 
         var certificates: [CertificateRef] = []
@@ -248,12 +240,12 @@ public class SecTools: NSObject {
         guard let resultValue = result else {
             return ""
         }
+
         return resultValue as String
     }
 
     public class func type(withCertificate certificate: CertificateRef,
                            summary: AutoreleasingUnsafeMutablePointer<NSString?>?) -> CertType {
-
         if summary != nil {
             summary?.pointee = nil
         }
@@ -273,7 +265,6 @@ public class SecTools: NSObject {
             }
 
             return  certType
-
         }
 
         if let summary = summary,
@@ -289,8 +280,8 @@ public class SecTools: NSObject {
         var error: Unmanaged<CFError>?
 
         let result = SecCertificateCopyValues(certificate as! SecCertificate,
-                                              keys as CFArray, &error) as? [AnyHashable: [AnyHashable: Any]]
-
+                                              keys as CFArray,
+                                              &error) as? [AnyHashable: [AnyHashable: Any]]
         return result
     }
 
@@ -321,7 +312,6 @@ public class SecTools: NSObject {
         }
 
         switch status {
-
         case errSecDecode:
             throw ErrorUtil.errorWithErrorCode(.pkcs12Decode,
                                                reason: Int(status))
@@ -345,11 +335,10 @@ public class SecTools: NSObject {
     }
 
     private class func allKeychainCertificates() throws -> [CertificateRef] {
-
         let options = [kSecClass: kSecClassCertificate,
                        kSecMatchLimit: kSecMatchLimitAll]
 
-        var certs: CFTypeRef? = nil
+        var certs: CFTypeRef?
 
         var status: OSStatus
 

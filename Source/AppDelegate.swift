@@ -149,6 +149,8 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                     }
                 }
             }
+
+            return result
         }
 
         return nil

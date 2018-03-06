@@ -365,6 +365,15 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         certificateIdentityPairs += pairs
     }
 
+    private func loadSelectedToken() {
+        guard
+            let cert = selectedCertificate,
+            let token = tokens(withCertificate: cert, create: true)
+            else { return }
+
+        tokenCombo.stringValue = token.last as? String ?? ""
+    }
+
     private func notification(_ notification: Notification) throws {
         DispatchQueue.main.async {() -> Void in
             let infoString = """
@@ -378,13 +387,34 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func loadSelectedToken() {
+    private func preferredEnvironment(for certificate: CertificateRef) -> Environment {
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+
+        return environmentOptions == .sandbox ? .sandbox : .production
+    }
+
+    private func reconnect() {
         guard
-            let cert = selectedCertificate,
-            let token = tokens(withCertificate: cert, create: true)
+            let cert = selectedCertificate
             else { return }
 
-        tokenCombo.stringValue = token.last as? String ?? ""
+        let environment: Environment = selectedEnvironment(for: cert)
+        selectCertificate(cert,
+                          identity: nil,
+                          environment: environment,
+                          message: "Reconnecting to APN...")
+    }
+
+    private func removeToken(_ token: String, certificate: CertificateRef) -> Bool {
+        guard
+            var tokens = self.tokens(withCertificate: certificate, create: false)
+            else { return false }
+
+        while let elementIndex = tokens.index(of: token) {
+            tokens.remove(at: elementIndex)
+        }
+
+        return true
     }
 
     private func push() {
@@ -473,114 +503,14 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    @objc
-    private func textDidChange(_ notification: Foundation.Notification) {
-        if let textView = notification.object as? NSTextView,
-            textView === payloadView {
-            updatePayloadCounter()
-        }
-    }
-
-    private func updateCertificatePopup() {
-        var suffix = " "
-
-        certificatePopup.removeAllItems()
-        certificatePopup.addItem(withTitle: "Select Push Certificate")
-
-        let formatter = DateFormatter()
-
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-
-        for pair: [Any] in certificateIdentityPairs {
-            let certificate = pair[0] as CertificateRef
-            let hasIdentity: Bool = !(pair[1] is NSNull)
-            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
-            var summary: NSString?
-            let certType: CertType = SecTools.type(withCertificate: certificate, summary: &summary)
-            let type: String = ErrorUtil.descriptionForCertType(certType)
-            let date: Date? = SecTools.expiration(withCertificate: certificate)
-            let expire = "  [\((date != nil) ? formatter.string(from: date ?? Date()) : "expired")]"
-
-            certificatePopup.addItem(withTitle: """
-                \(hasIdentity ? "imported: " : "")\(summary ?? "") \
-                (\(type)\(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions)))\(expire)\(suffix)
-                """)
-
-            suffix += " "
-        }
-
-        certificatePopup.addItem(withTitle: "Import PKCS #12 file (.p12)...")
-    }
-
-    private func updatePayloadCounter() {
-        let payload: String = payloadView.string
-
-        do {
-            try JSONSerialization.jsonObject(with: payload.data(using: .utf8) ?? Data(),
-                                             options: [])
-
-            countField.stringValue = "\(payload.count)"
-            countField.textColor = payload.count > 256 ? NSColor.red : NSColor.darkGray
-        } catch {
-            countField.stringValue = "malformed \(payload.count)"
-            countField.textColor = NSColor.red
-        }
-    }
-
-    private func upPayloadTextIndex() {
-        let payload: String = payloadView.string
-        var range: NSRange = (payload as NSString).range(of: "\\([0-9]+\\)", options: .regularExpression)
-
-        if range.location != NSNotFound {
-            range.location += 1
-            range.length -= 2
-
-            let before: String = (payload as NSString).substring(to: range.location)
-            let value = Int((payload as NSString).substring(with: range)) ?? 0 + 1
-            let after: String = (payload as NSString).substring(from: range.location + range.length)
-
-            payloadView.string = "\(before)\(value)\(after)"
-        }
-    }
-
-    private func preferredEnvironment(for certificate: CertificateRef) -> Environment {
-        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
-
-        return environmentOptions == .sandbox ? .sandbox : .production
-    }
-
-    private func reconnect() {
-        guard
-            let cert = selectedCertificate
-            else { return }
-
-        let environment: Environment = selectedEnvironment(for: cert)
-        selectCertificate(cert,
-                          identity: nil,
-                          environment: environment,
-                          message: "Reconnecting to APN...")
-    }
-
-    private func removeToken(_ token: String, certificate: CertificateRef) -> Bool {
-        guard
-            var tokens = self.tokens(withCertificate: certificate, create: false)
-            else { return false }
-
-        while let elementIndex = tokens.index(of: token) {
-            tokens.remove(at: elementIndex)
-        }
-
-        return true
-    }
-
     private func saveConfig() {
         guard
             let url = configFileURL(),
             let cert = selectedCertificate,
-            let tokens = self.tokens(withCertificate: cert, create: false),
-            let tokenValue = (tokens as NSArray?)?.reverseObjectEnumerator().allObjects
+            let id = try? SecTools.keychainIdentity(withCertificate: cert)
             else { return }
+
+        config["\(id)"] = tokenCombo.stringValue
 
         if !config.isEmpty {
             (config as NSDictionary).write(to: url,
@@ -659,6 +589,13 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    private func textDidChange(_ notification: Foundation.Notification) {
+        if let textView = notification.object as? NSTextView,
+            textView === payloadView {
+            updatePayloadCounter()
+        }
+    }
+
     private func tokens(withCertificate certificate: CertificateRef,
                         create: Bool) -> [AnyHashable]? {
         guard
@@ -695,18 +632,79 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         return (result as? [AnyHashable]) ?? [AnyHashable]()
     }
 
+    private func updateCertificatePopup() {
+        var suffix = " "
+
+        certificatePopup.removeAllItems()
+        certificatePopup.addItem(withTitle: "Select Push Certificate")
+
+        let formatter = DateFormatter()
+
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+
+        for pair: [Any] in certificateIdentityPairs {
+            let certificate = pair[0] as CertificateRef
+            let hasIdentity: Bool = !(pair[1] is NSNull)
+            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+            var summary: NSString?
+            let certType: CertType = SecTools.type(withCertificate: certificate, summary: &summary)
+            let type: String = ErrorUtil.descriptionForCertType(certType)
+            let date: Date? = SecTools.expiration(withCertificate: certificate)
+            let expire = "  [\((date != nil) ? formatter.string(from: date!) : "expired")]"
+
+            certificatePopup.addItem(withTitle: "\(hasIdentity ? "imported: " : "")\(summary ?? "") (\(type) \(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions)))\(expire)\(suffix)")
+
+            suffix += " "
+        }
+
+        certificatePopup.addItem(withTitle: "Import PKCS #12 file (.p12)...")
+    }
+
+    private func updatePayloadCounter() {
+        let payload: String = payloadView.string
+
+        do {
+            try JSONSerialization.jsonObject(with: payload.data(using: .utf8) ?? Data(),
+                                             options: [])
+
+            countField.stringValue = "\(payload.count)"
+            countField.textColor = payload.count > 256 ? NSColor.red : NSColor.darkGray
+        } catch {
+            countField.stringValue = "malformed \(payload.count)"
+            countField.textColor = NSColor.red
+        }
+    }
+
+    private func upPayloadTextIndex() {
+        let payload: String = payloadView.string
+        var range: NSRange = (payload as NSString).range(of: "\\([0-9]+\\)", options: .regularExpression)
+
+        if range.location != NSNotFound {
+            range.location += 1
+            range.length -= 2
+
+            let before: String = (payload as NSString).substring(to: range.location)
+            let value = Int((payload as NSString).substring(with: range)) ?? 0 + 1
+            let after: String = (payload as NSString).substring(from: range.location + range.length)
+
+            payloadView.string = "\(before)\(value)\(after)"
+        }
+    }
+
     private func updateTokenCombo() {
         tokenCombo.removeAllItems()
 
         guard
             let cert = selectedCertificate,
+            let id = try? SecTools.keychainIdentity(withCertificate: cert),
             let tokens = self.tokens(withCertificate: cert, create: false),
             let tokenValue = (tokens as NSArray?)?.reverseObjectEnumerator().allObjects
             else { return }
 
-        if !tokens.isEmpty {
-            tokenCombo.addItems(withObjectValues: tokenValue)
-        }
+        tokenCombo.stringValue = "config[] as! String"
+
+//        tokenCombo.addItems(withObjectValues: tokenValue)
     }
 }
 

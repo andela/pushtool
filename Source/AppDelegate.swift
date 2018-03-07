@@ -129,7 +129,9 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     private func configFileURL() -> URL? {
         let libraryURL: URL? = FileManager.default.urls(for: .libraryDirectory,
                                                         in: .userDomainMask).last
-        guard let configURL: URL = libraryURL?.appendingPathComponent("PushTool", isDirectory: true)
+        guard
+            let configURL: URL = libraryURL?.appendingPathComponent("PushTool",
+                                                                    isDirectory: true)
             else { return nil }
 
         let exists: Any?

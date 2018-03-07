@@ -117,7 +117,8 @@ public class SecTools: NSObject {
     }
 
     public class func inspectIdentity(_ identity: Any?) -> [AnyHashable: Any]? {
-        guard case let id as SecIdentity = identity
+        guard
+            case let id as SecIdentity = identity
             else { return nil }
 
         var result: [AnyHashable: Any] = [:]
@@ -358,6 +359,7 @@ public class SecTools: NSObject {
             case let cert as SecCertificate = certificate,
             let summary = SecCertificateCopySubjectSummary(cert) as String?
             else { return nil }
+
         return summary
     }
 

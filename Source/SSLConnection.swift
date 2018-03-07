@@ -83,9 +83,9 @@ public class SSLConnection: NSObject {
             throw ErrorUtil.errorWithErrorCode(.readDroppedByServer,
                                                reason: Int(status))
 
-            //        case errSecSuccess,
-            //             errSSLWouldBlock:
-            //            break
+        case errSecSuccess,
+             errSSLWouldBlock:
+            return
 
         case errSSLClosedAbort:
             throw ErrorUtil.errorWithErrorCode(.readClosedAbort,
@@ -121,9 +121,9 @@ public class SSLConnection: NSObject {
             throw ErrorUtil.errorWithErrorCode(.writeDroppedByServer,
                                                reason: Int(status))
 
-            //        case errSecSuccess,
-            //             errSSLWouldBlock:
-            //            break
+        case errSecSuccess,
+             errSSLWouldBlock:
+            return
 
         case errSSLClosedAbort:
             throw ErrorUtil.errorWithErrorCode(.writeClosedAbort,

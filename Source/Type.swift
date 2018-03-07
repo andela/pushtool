@@ -62,7 +62,6 @@ public class ErrorUtil: NSObject {
 
     public static func descriptionForEnvironmentOptions(_ environmentOptions: EnvironmentOptions) -> String {
         switch environmentOptions {
-
         case .sandbox:
             return "Sandbox"
 

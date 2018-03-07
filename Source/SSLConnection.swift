@@ -78,14 +78,14 @@ public class SSLConnection: NSObject {
 
         length.pointee = UInt(processed)
 
-        switch (status) {
+        switch status {
         case errSecIO:
             throw ErrorUtil.errorWithErrorCode(.readDroppedByServer,
                                                reason: Int(status))
 
         case errSecSuccess,
              errSSLWouldBlock:
-            break
+            return
 
         case errSSLClosedAbort:
             throw ErrorUtil.errorWithErrorCode(.readClosedAbort,
@@ -116,14 +116,14 @@ public class SSLConnection: NSObject {
 
         length.pointee = UInt(processed)
 
-        switch (status) {
+        switch status {
         case errSecIO:
             throw ErrorUtil.errorWithErrorCode(.writeDroppedByServer,
                                                reason: Int(status))
 
         case errSecSuccess,
              errSSLWouldBlock:
-            break
+            return
 
         case errSSLClosedAbort:
             throw ErrorUtil.errorWithErrorCode(.writeClosedAbort,
@@ -365,9 +365,9 @@ private func readSSL(_ connection: SSLConnectionRef,
 
     while rcvdTotal < dataLength {
         rcvdLength = Darwin.recv(socket,
-                           data.advanced(by: rcvdTotal),
-                           dataLength - rcvdTotal,
-                           0)
+                                 data.advanced(by: rcvdTotal),
+                                 dataLength - rcvdTotal,
+                                 0)
 
         guard
             rcvdLength > 0

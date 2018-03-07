@@ -101,7 +101,6 @@ public class Pusher: NSObject {
 
     public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<Int>,
                                      apnError: NSErrorPointer) throws {
-
         identifier.pointee = 0
         apnError?.pointee = nil
 

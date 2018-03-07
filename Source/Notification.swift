@@ -2,7 +2,6 @@ import Foundation
 
 @objcMembers
 public class Notification: NSObject {
-
     public let addExpiration: Bool
     public let expirationStamp: UInt
     public let payloadData: Data
@@ -48,7 +47,6 @@ public class Notification: NSObject {
     }
 
     public class func hex(from data: Data) -> String {
-
         guard let stringValue = data.utf8String
             else { return "" }
 
@@ -88,12 +86,11 @@ public class Notification: NSObject {
                    length: 4)
         }
 
-        if (addExpiration) {
+        if addExpiration {
             append(to: result,
                    identifier: 4,
                    bytes: &expires,
                    length: 4)
-
         }
 
         if priority != 0 {
@@ -130,7 +127,6 @@ public class Notification: NSObject {
 }
 
 extension Data {
-
     var utf8String: String? {
         return string(as: .utf8)
     }
@@ -140,13 +136,10 @@ extension Data {
     }
 
     public init?(hexEncoded hexData: Data) {
-
         // Convert 0 ... 9, a ... f, A ...F to their decimal value,
         // return nil for all other input characters
         func decodeDigit(_ digit: UInt8) -> UInt8? {
-
             switch digit {
-
             case 0x30 ... 0x39:
                 return UInt8(digit - 0x30)
 
@@ -158,9 +151,7 @@ extension Data {
 
             default:
                 return nil
-
             }
-
         }
 
         let inCount = hexData.count
@@ -173,7 +164,6 @@ extension Data {
         var index = 0
 
         while index < inCount {
-
             guard let digitHi = decodeDigit(hexData[index]),
                 let digitLo = decodeDigit(hexData[index + 1])
                 else { return nil }

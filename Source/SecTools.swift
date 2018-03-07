@@ -354,7 +354,7 @@ public class SecTools: NSObject {
         return certificates
     }
 
-    private class func plainSummary(withCertificate certificate: CertificateRef?) -> String? {
+    public class func plainSummary(withCertificate certificate: CertificateRef?) -> String? {
         guard
             case let cert as SecCertificate = certificate,
             let summary = SecCertificateCopySubjectSummary(cert) as String?

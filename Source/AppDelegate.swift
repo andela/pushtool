@@ -127,6 +127,24 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    private func configKey(for certificate: CertificateRef,
+                           in environment: Environment) -> String? {
+        guard
+            let summary = SecTools.plainSummary(withCertificate: certificate)
+            else { return nil }
+
+        switch environment {
+        case .production:
+            return "\(summary)-production"
+
+        case .sandbox:
+            return "\(summary)-sandbox"
+
+        default:
+            return nil
+        }
+    }
+
     private func configFileURL() -> URL? {
         let libraryURL: URL? = FileManager.default.urls(for: .libraryDirectory,
                                                         in: .userDomainMask).last
@@ -507,15 +525,14 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         guard
             let url = configFileURL(),
             let cert = selectedCertificate,
-            let id = try? SecTools.keychainIdentity(withCertificate: cert)
+            let key = configKey(for: cert,
+                                in: selectedEnvironment(for: cert))
             else { return }
 
-        config["\(id)"] = tokenCombo.stringValue
+        config[key] = tokenCombo.stringValue
 
-        if !config.isEmpty {
-            (config as NSDictionary).write(to: url,
-                                           atomically: false)
-        }
+        (config as NSDictionary).write(to: url,
+                                       atomically: false)
     }
 
     private func selectCertificate(_ certificate: CertificateRef?,
@@ -604,7 +621,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
         let environment = selectedEnvironment(for: cert)
         let summary = SecTools.summary(withCertificate: certificate)
-        let identifier: String?
+        let identifier: String
 
         if environment == .sandbox {
             identifier = "\(summary)-sandbox"
@@ -615,18 +632,18 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         var result: Any?
 
         guard
-            var config = config["identifiers"] as? [AnyHashable: Any],
-            let id = identifier
+            //            NSArray *result = _config[@"identifiers"][identifier];
+            var config = config[identifier] as? [AnyHashable: Any]
             else { return nil }
 
-        result = config[id]
+        result = config[identifier]
 
         if create && (result != nil) {
-            result = config[id]
+            result = config[identifier]
         }
 
         if !(result is [AnyHashable]) {
-            result = config[id] = result
+            result = config[identifier] = result
         }
 
         return (result as? [AnyHashable]) ?? [AnyHashable]()
@@ -698,14 +715,12 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
         guard
             let cert = selectedCertificate,
-            let id = try? SecTools.keychainIdentity(withCertificate: cert),
-            let tokens = self.tokens(withCertificate: cert, create: false),
-            let tokenValue = (tokens as NSArray?)?.reverseObjectEnumerator().allObjects
+            let key = configKey(for: cert,
+                                in: selectedEnvironment(for: cert)),
+            let currentToken = config[key] as? String
             else { return }
 
-        tokenCombo.stringValue = "config[] as! String"
-
-//        tokenCombo.addItems(withObjectValues: tokenValue)
+        tokenCombo.stringValue = currentToken
     }
 }
 

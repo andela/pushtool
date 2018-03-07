@@ -651,9 +651,10 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let certType: CertType = SecTools.type(withCertificate: certificate, summary: &summary)
             let type: String = ErrorUtil.descriptionForCertType(certType)
             let date: Date? = SecTools.expiration(withCertificate: certificate)
-            let expire = "  [\((date != nil) ? formatter.string(from: date!) : "expired")]"
+            let expire = "  [\((date != nil) ? formatter.string(from: date ?? Date()) : "expired")]"
 
-            certificatePopup.addItem(withTitle: "\(hasIdentity ? "imported: " : "")\(summary ?? "") (\(type) \(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions)))\(expire)\(suffix)")
+            certificatePopup.addItem(withTitle: "\(hasIdentity ? "imported: " : "")\(summary ?? "")"
+                + " (\(type) \(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions)))\(expire)\(suffix)")
 
             suffix += " "
         }

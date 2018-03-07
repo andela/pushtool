@@ -71,7 +71,6 @@ public class SecTools: NSObject {
 
     public class func identities(withPKCS12Data pkcs12: Data,
                                  password: String?) throws -> [Any] {
-
         guard
             !pkcs12.isEmpty
             else { throw ErrorUtil.errorWithErrorCode(.pkcs12EmptyData,

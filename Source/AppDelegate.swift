@@ -281,7 +281,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                     return
                 }
 
-                let password = "\(input)" as NSString
+                let password = input.stringValue
 
                 guard
                     let data = try? Data(contentsOf: url)
@@ -291,9 +291,9 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
                 do {
                     ids = try SecTools.identities(withPKCS12Data: data,
-                                                  password: password as String!)
+                                                  password: password)
                 } catch let error as NSError {
-                    if !(password.length == 0) && error.code == PushError.pkcs12Password.rawValue {
+                    if !password.isEmpty && error.code == PushError.pkcs12Password.rawValue {
                         ids = try? SecTools.identities(withPKCS12Data: data,
                                                        password: "")
                     }

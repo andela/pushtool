@@ -18,8 +18,8 @@ public class SecTools: NSObject {
         var cert: SecCertificate?
         var status: OSStatus
 
-        if let id = identity {
-            status = SecIdentityCopyCertificate(id as! SecIdentity, &cert)
+        if case let id as SecIdentity = identity {
+            status = SecIdentityCopyCertificate(id, &cert)
         } else {
             status = errSecParam
         }
@@ -117,13 +117,13 @@ public class SecTools: NSObject {
     }
 
     public class func inspectIdentity(_ identity: Any?) -> [AnyHashable: Any]? {
-        guard let id = identity
+        guard case let id as SecIdentity = identity
             else { return nil }
 
         var result: [AnyHashable: Any] = [:]
         var certificate: SecCertificate?
 
-        let certstat: OSStatus = SecIdentityCopyCertificate(id as! SecIdentity,
+        let certstat: OSStatus = SecIdentityCopyCertificate(id,
                                                             &certificate)
 
         result["has_certificate"] = certificate != nil
@@ -138,8 +138,7 @@ public class SecTools: NSObject {
         }
 
         var key: SecKey?
-        let keystat: OSStatus = SecIdentityCopyPrivateKey(identity as! SecIdentity,
-                                                          &key)
+        let keystat: OSStatus = SecIdentityCopyPrivateKey(id, &key)
 
         result["has_key"] = key != nil
 
@@ -177,8 +176,8 @@ public class SecTools: NSObject {
         var key: SecKey?
         var status: OSStatus
 
-        if let id = identity {
-            status = SecIdentityCopyPrivateKey(id as! SecIdentity, &key)
+        if case let id as SecIdentity = identity {
+            status = SecIdentityCopyPrivateKey(id, &key)
         } else {
             status = errSecParam
         }
@@ -212,9 +211,9 @@ public class SecTools: NSObject {
 
         var status: OSStatus
 
-        if let cert = certificate {
+        if case let cert as SecCertificate = certificate {
             status = SecIdentityCreateWithCertificate(nil,
-                                                      cert as! SecCertificate,
+                                                      cert,
                                                       &ident)
         } else {
             status = errSecParam
@@ -356,8 +355,8 @@ public class SecTools: NSObject {
 
     private class func plainSummary(withCertificate certificate: CertificateRef?) -> String? {
         guard
-            let cert = certificate,
-            let summary = SecCertificateCopySubjectSummary(cert as! SecCertificate) as String?
+            case let cert as SecCertificate = certificate,
+            let summary = SecCertificateCopySubjectSummary(cert) as String?
             else { return nil }
         return summary
     }

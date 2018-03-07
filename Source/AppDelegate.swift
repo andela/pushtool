@@ -505,12 +505,8 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let expire = "  [\((date != nil) ? formatter.string(from: date ?? Date()) : "expired")]"
 
             certificatePopup.addItem(withTitle: """
-                \(hasIdentity ? "imported: " : "")
-                \(summary ?? "")
-                (\(type)
-                \(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions)))
-                \(expire)
-                \(suffix)
+                \(hasIdentity ? "imported: " : "")\(summary ?? "") \
+                (\(type)\(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions)))\(expire)\(suffix)
                 """)
 
             suffix += " "

@@ -363,14 +363,6 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func visibleTextField() -> NSControl? {
-        if let inputField = inputDiscreet, inputField.isHidden {
-            return inputNonDiscreet
-        }
-
-        return inputDiscreet
-    }
-
     private func loadConfig() {
         guard
             let url = configFileURL(),
@@ -754,6 +746,14 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             else { return }
 
         tokenCombo.stringValue = currentToken
+    }
+
+    private func visibleTextField() -> NSControl? {
+        if let inputField = inputDiscreet, inputField.isHidden {
+            return inputNonDiscreet
+        }
+
+        return inputDiscreet
     }
 }
 

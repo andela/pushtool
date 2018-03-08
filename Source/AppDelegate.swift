@@ -379,6 +379,27 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    private func obtainPassword(for url: URL) -> String? {
+        let alert = NSAlert()
+
+        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: "Cancel")
+        alert.informativeText = ""
+        alert.messageText = "Enter the password for “\(url.lastPathComponent)”:"
+
+        let textField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+
+        alert.accessoryView = textField
+
+        let button: NSApplication.ModalResponse = alert.runModal()
+
+        guard
+            button.rawValue == NSApplication.ModalResponse.alertFirstButtonReturn.rawValue
+            else { return nil }
+
+        return textField.stringValue
+    }
+
     private func preferredEnvironment(for certificate: CertificateRef) -> Environment {
         let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
 

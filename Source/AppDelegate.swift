@@ -223,7 +223,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
             let summary = SecTools.summary(withCertificate: certificate)
             let environment = self.selectedEnvironment(for: certificate)
-            Logger.logInfo("Connecting to feedback service... \(summary), \(ErrorUtil.descriptionForEnvironment(environment))")
+            Logger.logInfo("Connecting to feedback service... \(summary), \(environment.description)")
 
             let feedback: PushFeedback
 
@@ -235,7 +235,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             } catch {
                 Logger.logWarn("Unable to connect to feedback service: \(error.localizedDescription)"); return }
 
-            Logger.logInfo("Reading feedback service... \(summary), \(ErrorUtil.descriptionForEnvironment(environment))")
+            Logger.logInfo("Reading feedback service... \(summary), \(environment.description)")
             let pairs: [[Any]]
 
             do {
@@ -257,7 +257,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
         let summary: String = SecTools.summary(withCertificate: certificate)
 
-        return "\(summary)-\(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions))"
+        return "\(summary)-\(environmentOptions.description)"
     }
 
     private func importIdentity() {
@@ -553,7 +553,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let environment: Environment = selectedEnvironment(for: cert)
             let summary = SecTools.summary(withCertificate: cert)
 
-            Logger.logInfo("\(message ?? "Connecting to APN..."), \(summary), \(ErrorUtil.descriptionForEnvironment(environment)) ")
+            Logger.logInfo("\(message ?? "Connecting to APN..."), \(summary), \(environment.description) ")
 
             serial?.async {
                 guard
@@ -566,7 +566,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
                 DispatchQueue.main.async {
                     if hub != nil {
-                        Logger.logInfo("Connected \(summary), \(ErrorUtil.descriptionForEnvironment(environment)) ")
+                        Logger.logInfo("Connected \(summary), \(environment.description) ")
                         self.hub = hub
                         self.enableButtons(forCertificate: cert,
                                            environment: environment)

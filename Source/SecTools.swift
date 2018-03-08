@@ -252,9 +252,8 @@ public class SecTools: NSObject {
 
         let name: String? = self.plainSummary(withCertificate: certificate)
 
-        for type in CertType.none.rawValue...CertType.unknown.rawValue {
+        for certType in CertType.allTypes {
             guard
-                let certType = CertType(rawValue: type),
                 let prefix = self.prefix(withCertType: certType),
                 let name = name,
                 name.hasPrefix(prefix)
@@ -277,12 +276,15 @@ public class SecTools: NSObject {
 
     public class func values(withCertificate certificate: Any,
                              keys: [Any]) -> [AnyHashable: [AnyHashable: Any]]? {
+        guard
+            case let cert as SecCertificate = certificate
+            else { return nil }
+
         var error: Unmanaged<CFError>?
 
-        let result = SecCertificateCopyValues(certificate as! SecCertificate,
-                                              keys as CFArray,
-                                              &error) as? [AnyHashable: [AnyHashable: Any]]
-        return result
+        return SecCertificateCopyValues(cert,
+                                        keys as CFArray,
+                                        &error) as? [AnyHashable: [AnyHashable: Any]]
     }
 
     // MARK: Private Instance Methods

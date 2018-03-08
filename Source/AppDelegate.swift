@@ -223,7 +223,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
             let summary = SecTools.summary(withCertificate: certificate)
             let environment = self.selectedEnvironment(for: certificate)
-            Logger.logInfo("Connecting to feedback service... \(summary), \(ErrorUtil.descriptionForEnvironment(environment))")
+            Logger.logInfo("Connecting to feedback service... \(summary), \(environment)")
 
             let feedback: PushFeedback
 
@@ -235,7 +235,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             } catch {
                 Logger.logWarn("Unable to connect to feedback service: \(error.localizedDescription)"); return }
 
-            Logger.logInfo("Reading feedback service... \(summary), \(ErrorUtil.descriptionForEnvironment(environment))")
+            Logger.logInfo("Reading feedback service... \(summary), \(environment)")
             let pairs: [[Any]]
 
             do {
@@ -257,7 +257,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
         let summary: String = SecTools.summary(withCertificate: certificate)
 
-        return "\(summary)-\(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions))"
+        return "\(summary)-\(environmentOptions)"
     }
 
     private func importIdentity() {
@@ -365,12 +365,14 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         certs = certs.sorted {(_ optA: CertificateRef, _ optB: CertificateRef) -> Bool in
             let envOptionsA: EnvironmentOptions = SecTools.environmentOptions(forCertificate: optA as CertificateRef)
             let envOptionsB: EnvironmentOptions = SecTools.environmentOptions(forCertificate: optB as CertificateRef)
+
             if envOptionsA != envOptionsB {
-                return envOptionsA.rawValue < envOptionsB.rawValue
+                return envOptionsA < envOptionsB
             }
 
             let aname: String = SecTools.summary(withCertificate: optA as CertificateRef)
             let bname: String = SecTools.summary(withCertificate: optB as CertificateRef)
+
             return aname < bname
         }
 
@@ -553,7 +555,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let environment: Environment = selectedEnvironment(for: cert)
             let summary = SecTools.summary(withCertificate: cert)
 
-            Logger.logInfo("\(message ?? "Connecting to APN..."), \(summary), \(ErrorUtil.descriptionForEnvironment(environment)) ")
+            Logger.logInfo("\(message ?? "Connecting to APN..."), \(summary), \(environment) ")
 
             serial?.async {
                 guard
@@ -566,7 +568,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
                 DispatchQueue.main.async {
                     if hub != nil {
-                        Logger.logInfo("Connected \(summary), \(ErrorUtil.descriptionForEnvironment(environment)) ")
+                        Logger.logInfo("Connected \(summary), \(environment) ")
                         self.hub = hub
                         self.enableButtons(forCertificate: cert,
                                            environment: environment)
@@ -666,12 +668,11 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
             var summary: NSString?
             let certType: CertType = SecTools.type(withCertificate: certificate, summary: &summary)
-            let type: String = ErrorUtil.descriptionForCertType(certType)
             let date: Date? = SecTools.expiration(withCertificate: certificate)
             let expire = "  [\((date != nil) ? formatter.string(from: date ?? Date()) : "expired")]"
 
             certificatePopup.addItem(withTitle: "\(hasIdentity ? "imported: " : "")\(summary ?? "")"
-                + " (\(type) \(ErrorUtil.descriptionForEnvironmentOptions(environmentOptions)))\(expire)\(suffix)")
+                + " (\(certType) \(environmentOptions))\(expire)\(suffix)")
 
             suffix += " "
         }

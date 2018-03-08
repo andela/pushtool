@@ -95,8 +95,7 @@ public class PushFeedback: NSObject {
         try connection?.read(data, length: &length)
 
         if length != data.length {
-            throw ErrorUtil.errorWithErrorCode(.feedbackLength,
-                                               reason: Int(length))
+            throw PushError.feedbackLength
         }
 
         var time: UInt32 = 0
@@ -112,7 +111,7 @@ public class PushFeedback: NSObject {
         let tokenLength = Int(UInt16(bigEndian: len))
 
         if tokenLength != tokenMaxSize {
-            throw ErrorUtil.errorWithErrorCode(.feedbackTokenLength, reason: tokenLength)
+            throw PushError.feedbackTokenLength
         }
 
         let token = data.subdata(with: NSRange(location: 6,

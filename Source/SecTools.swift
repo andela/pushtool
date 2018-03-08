@@ -27,8 +27,7 @@ public class SecTools: NSObject {
         guard
             let certificate = cert,
             status == errSecSuccess
-            else { throw ErrorUtil.errorWithErrorCode(.identityCopyCertificate,
-                                                      reason: Int(status)) }
+            else { throw PushError.identityCopyCertificate }
 
         return certificate
     }
@@ -221,11 +220,11 @@ public class SecTools: NSObject {
         }
 
         if status != errSecSuccess {
-            throw ErrorUtil.errorWithErrorCode(.keychainItemNotFound, reason: 0)
+            throw PushError.keychainItemNotFound
         }
 
         guard let id = ident  else {
-            throw ErrorUtil.errorWithErrorCode(.keychainCreateIdentity, reason: 0)
+            throw PushError.keychainCreateIdentity
         }
 
         return id

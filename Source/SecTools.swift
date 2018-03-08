@@ -70,7 +70,7 @@ public class SecTools: NSObject {
     }
 
     public class func identities(withPKCS12Data pkcs12: Data,
-                                 password: String) throws -> [Any] {
+                                 password: String?) throws -> [Any] {
         guard
             !pkcs12.isEmpty
             else { throw ErrorUtil.errorWithErrorCode(.pkcs12EmptyData,
@@ -354,7 +354,7 @@ public class SecTools: NSObject {
         return certificates
     }
 
-    private class func plainSummary(withCertificate certificate: CertificateRef?) -> String? {
+    public class func plainSummary(withCertificate certificate: CertificateRef?) -> String? {
         guard
             case let cert as SecCertificate = certificate,
             let summary = SecCertificateCopySubjectSummary(cert) as String?

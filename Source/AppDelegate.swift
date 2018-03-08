@@ -26,6 +26,8 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     private var lastSelectedIndex: Int = 0
     private var selectedCertificate: CertificateRef?
     private var serial: DispatchQueue?
+    private var inputDiscreet: NSSecureTextField?
+    private var inputNonDiscreet: NSTextField?
 
     // MARK: Public Instance methods
 
@@ -261,6 +263,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func importIdentity() {
+
         let panel = NSOpenPanel()
         panel.canChooseFiles = true
         panel.canChooseDirectories = false
@@ -283,9 +286,27 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                 alert.informativeText = ""
                 alert.messageText = text
 
-                let input = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+                self.inputDiscreet = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+                self.inputNonDiscreet = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
 
-                alert.accessoryView = input
+                let checkBox = NSButton(frame: NSRect(x: 202, y: 3, width: 120, height: 18))
+                checkBox.setButtonType(.switch)
+                checkBox.title = "Show password"
+                checkBox.action = #selector(self.swapTextInputFields)
+
+                let passswordInputViewFrame = NSRect(x: 0, y: 0, width: 330, height: 26)
+
+                let passwordInputView = NSView(frame: passswordInputViewFrame)
+                guard let inputSecure = self.inputDiscreet,
+                    let inputNotSecure = self.inputNonDiscreet
+                    else { return }
+
+                passwordInputView.addSubview(inputSecure)
+                passwordInputView.addSubview(inputNotSecure)
+                passwordInputView.addSubview(checkBox)
+                inputNotSecure.isHidden = true
+
+                alert.accessoryView = passwordInputView
 
                 let button: NSApplication.ModalResponse = alert.runModal()
 
@@ -293,6 +314,9 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                     return
                 }
 
+                let visibleInputField = self.visibleTextField()
+                guard let input = visibleInputField
+                    else { return }
                 let password = input.stringValue
 
                 guard
@@ -337,6 +361,14 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             self.updateCertificatePopup()
             self.connectWithCertificate(at: index + 1)
         }
+    }
+
+    private func visibleTextField() -> NSControl? {
+        if let inputField = inputDiscreet, inputField.isHidden {
+            return inputNonDiscreet
+        }
+
+        return inputDiscreet
     }
 
     private func loadConfig() {
@@ -770,5 +802,32 @@ extension AppDelegate: HubDelegate {
                 Logger.logWarn("Notification error: \(error.localizedDescription)")
             }
         }
+    }
+}
+
+extension AppDelegate {
+    @objc
+    private func swapTextInputFields(_ sender: NSButton) {
+        switch sender.state.rawValue {
+        case 0:
+            if let text = inputNonDiscreet?.stringValue {
+                inputDiscreet?.stringValue = text
+            }
+
+            inputDiscreet?.isHidden = false
+            inputNonDiscreet?.isHidden = true
+        case 1:
+            if let text = inputDiscreet?.stringValue {
+                inputNonDiscreet?.stringValue = text
+            }
+
+            inputDiscreet?.isHidden = true
+            inputNonDiscreet?.isHidden = false
+        default:
+            inputDiscreet?.isHidden = false
+            inputNonDiscreet?.isHidden = true
+        }
+
+        print("Changing Checkbox", sender.state.rawValue)
     }
 }

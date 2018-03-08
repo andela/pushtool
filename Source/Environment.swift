@@ -1,12 +1,12 @@
-public enum Environment: Int {
+public enum Environment {
     case none
     case sandbox
     case production
     case auto
 }
 
-extension Environment {
-    var description: String {
+extension Environment: CustomStringConvertible {
+    public var description: String {
         switch self {
         case .none:
             return "none"

@@ -5,8 +5,15 @@ public enum EnvironmentOptions: Int {
     case any
 }
 
-extension EnvironmentOptions {
-    var description: String {
+extension EnvironmentOptions: Comparable {
+    public static func < (lhs: EnvironmentOptions,
+                          rhs: EnvironmentOptions) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
+
+extension EnvironmentOptions: CustomStringConvertible {
+    public var description: String {
         switch self {
         case .sandbox:
             return "Sandbox"
@@ -16,6 +23,7 @@ extension EnvironmentOptions {
 
         case .any:
             return "Sandbox|Production"
+
         default:
             return "No environment"
         }

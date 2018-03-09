@@ -396,11 +396,12 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             ids = try SecTools.identities(withPKCS12Data: data,
                                           password: password)
-        } catch let error as NSError {
-            if !password.isEmpty && error.code == PushError.pkcs12Password.rawValue {
+        } catch let error as PushError {
+            if !password.isEmpty && error == .pkcs12Password {
                 ids = try? SecTools.identities(withPKCS12Data: data,
                                                password: nil)
             }
+        } catch {
         }
 
         return ids

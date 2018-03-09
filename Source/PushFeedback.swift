@@ -57,8 +57,8 @@ public class PushFeedback {
                         environment: Environment) throws {
         guard
             let password = password,
-            let identity = try SecTools.identity(withPKCS12Data: data,
-                                                 password: password) as IdentityRef?
+            let identity = try SecIdentityTools.identity(withPKCS12Data: data,
+                                                         password: password) as IdentityRef?
             else { return }
 
         try connect(withIdentity: identity,

@@ -48,8 +48,7 @@ public class SSLConnection {
         }
 
         if let connection = rawConnection {
-            connection.deallocate(bytes: 4,
-                                  alignedTo: 4)
+            connection.deallocate()
 
             rawConnection = nil
         }
@@ -209,8 +208,8 @@ public class SSLConnection {
             setio == errSecSuccess
             else { throw PushError.sslIOFuncs }
 
-        let connection = UnsafeMutableRawPointer.allocate(bytes: 4,
-                                                          alignedTo: 4)
+        let connection = UnsafeMutableRawPointer.allocate(byteCount: 4,
+                                                          alignment: 4)
 
         connection.storeBytes(of: socket,
                               as: Int32.self)
@@ -259,62 +258,7 @@ public class SSLConnection {
                 else { break }
         }
 
-        try throwIfHandshakeSSLError(status)
-    }
-
-    private func throwIfHandshakeSSLError(_ status: OSStatus) throws {
-        switch status {
-        case errSecAuthFailed:
-            throw PushError.sslAuthFailed
-
-        case errSecInDarkWake:
-            throw PushError.sslInDarkWake
-
-        case errSecIO:
-            throw PushError.sslDroppedByServer
-
-        case errSecSuccess:
-            break
-
-        case errSSLCertExpired:
-            throw PushError.sslHandshakeCertExpired
-
-        case errSSLClientCertRequested:
-            throw PushError.sslHandshakeClientCertRequested
-
-        case errSSLClosedAbort:
-            throw PushError.sslHandshakeClosedAbort
-
-        case errSSLInternal:
-            throw PushError.sslHandshakeInternalError
-
-        case errSSLNoRootCert:
-            throw PushError.sslHandshakeNoRootCert
-
-        case errSSLPeerAuthCompleted:
-            throw PushError.sslHandshakeServerAuthCompleted
-
-        case errSSLPeerCertExpired:
-            throw PushError.sslHandshakePeerCertExpired
-
-        case errSSLPeerCertRevoked:
-            throw PushError.sslHandshakePeerCertRevoked
-
-        case errSSLPeerCertUnknown:
-            throw PushError.sslHandshakePeerCertUnknown
-
-        case errSSLUnknownRootCert:
-            throw PushError.sslHandshakeUnknownRootCert
-
-        case errSSLWouldBlock:
-            throw PushError.sslHandshakeTimeout
-
-        case errSSLXCertChainInvalid:
-            throw PushError.sslHandshakeXCertChainInvalid
-
-        default:
-            throw PushError.sslHandshakeFail
-        }
+        try SSLError.throwIfHandshakeSSLError(status)
     }
 }
 

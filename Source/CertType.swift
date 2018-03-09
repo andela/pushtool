@@ -59,4 +59,38 @@ extension CertType: CustomStringConvertible {
             return "unknown"
         }
     }
+
+    public var prefix: String? {
+        switch self {
+        case .iosDevelopment:
+            return "Apple Development IOS Push Services: "
+
+        case .iosProduction:
+            return "Apple Production IOS Push Services: "
+
+        case .macDevelopment:
+            return "Apple Development Mac Push Services: "
+
+        case .macProduction:
+            return "Apple Production Mac Push Services: "
+
+        case .simplified:
+            return "Apple Push Services: "
+
+        case .webProduction:
+            return "Website Push ID: "
+
+        case .voIPServices:
+            return "VoIP Services: "
+
+        case .watchKitServices:
+            return "WatchKit Services: "
+
+        case .passes:
+            return "Pass Type ID: "
+
+        default:
+            return nil
+        }
+    }
 }

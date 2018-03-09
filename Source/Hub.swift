@@ -24,7 +24,7 @@ public class Hub {
                               pkcs12Data data: Data,
                               password: String,
                               environment: Environment) throws -> Hub {
-                let hub = Hub(delegate: delegate)
+        let hub = Hub(delegate: delegate)
 
         try hub.connect(withPKCS12Data: data,
                         password: password,
@@ -166,6 +166,10 @@ public class Hub {
         return UInt(count)
     }
 
+    // TODO: refactor to use signature:
+    //
+    //      public func readFailed(autoReconnect: Bool) throws -> Notification? {}
+
     public func readFailed(_ notifications: AutoreleasingUnsafeMutablePointer<Notification?>?,
                            autoReconnect reconnect: Bool) throws {
         let identifier: UInt = 0
@@ -184,6 +188,8 @@ public class Hub {
             }
         }
     }
+
+    // TODO: refactor signature to something less ugly
 
     public func readFailed(_ notifications: inout [Any]?,
                            max: Int,

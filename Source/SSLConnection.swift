@@ -61,6 +61,10 @@ public class SSLConnection {
         }
     }
 
+    // TODO: refactor to have this signature:
+    //
+    //       public func read(_ data: NSMutableData) throws -> UInt {}
+
     public func read(_ data: NSMutableData,
                      length: UnsafeMutablePointer<UInt>) throws {
         guard
@@ -94,6 +98,10 @@ public class SSLConnection {
             throw PushError.readFail
         }
     }
+
+    // TODO: refactor to have this signature:
+    //
+    //       public func write(_ data: NSData) throws -> UInt {}
 
     public func write(_ data: NSData,
                       length: UnsafeMutablePointer<UInt>) throws {

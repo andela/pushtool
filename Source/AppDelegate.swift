@@ -836,6 +836,7 @@ extension AppDelegate {
 
             inputDiscreet?.isHidden = true
             inputNonDiscreet?.isHidden = false
+
         default:
             inputDiscreet?.isHidden = false
             inputNonDiscreet?.isHidden = true

@@ -26,8 +26,8 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     private var lastSelectedIndex: Int = 0
     private var selectedCertificate: CertificateRef?
     private var serial: DispatchQueue?
-    private var inputDiscreet: NSSecureTextField?
-    private var inputNonDiscreet: NSTextField?
+    private var inputDiscreet: NSSecureTextField? = NSSecureTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
+    private var inputNonDiscreet: NSTextField? = NSTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
 
     // MARK: Public Instance methods
 
@@ -263,80 +263,28 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func importIdentity() {
-
         let panel = NSOpenPanel()
+
         panel.canChooseFiles = true
         panel.canChooseDirectories = false
         panel.allowsMultipleSelection = true
         panel.allowedFileTypes = ["p12"]
 
         panel.begin { result in
-            if result.rawValue != NSFileHandlingPanelOKButton {
-                return
-            }
+            guard
+                result.rawValue == NSFileHandlingPanelOKButton
+                else { return }
 
             var pairs: [[Any]] = []
 
             for url: URL in panel.urls {
-                let alert = NSAlert()
-                let text = "Enter password for \(url.lastPathComponent)"
-
-                alert.addButton(withTitle: "OK")
-                alert.addButton(withTitle: "Cancel")
-                alert.informativeText = ""
-                alert.messageText = text
-
-                self.inputDiscreet = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-                self.inputNonDiscreet = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-
-                let checkBox = NSButton(frame: NSRect(x: 202, y: 3, width: 120, height: 18))
-                checkBox.setButtonType(.switch)
-                checkBox.title = "Show password"
-                checkBox.action = #selector(self.swapTextInputFields)
-
-                let passswordInputViewFrame = NSRect(x: 0, y: 0, width: 330, height: 26)
-
-                let passwordInputView = NSView(frame: passswordInputViewFrame)
-                guard let inputSecure = self.inputDiscreet,
-                    let inputNotSecure = self.inputNonDiscreet
-                    else { return }
-
-                passwordInputView.addSubview(inputSecure)
-                passwordInputView.addSubview(inputNotSecure)
-                passwordInputView.addSubview(checkBox)
-                inputNotSecure.isHidden = true
-
-                alert.accessoryView = passwordInputView
-
-                let button: NSApplication.ModalResponse = alert.runModal()
-
-                if button.rawValue != NSApplication.ModalResponse.alertFirstButtonReturn.rawValue {
-                    return
-                }
-
-                let visibleInputField = self.visibleTextField()
-                guard let input = visibleInputField
-                    else { return }
-                let password = input.stringValue
+                guard
+                    let password = self.obtainPassword(for: url)
+                    else { continue }
 
                 guard
-                    let data = try? Data(contentsOf: url)
-                    else { return }
-
-                var ids: [Any]?
-
-                do {
-                    ids = try SecTools.identities(withPKCS12Data: data,
-                                                  password: password)
-                } catch let error as NSError {
-                    if !password.isEmpty && error.code == PushError.pkcs12Password.rawValue {
-                        ids = try? SecTools.identities(withPKCS12Data: data,
-                                                       password: nil)
-                    }
-                }
-
-                guard
-                    let identities = ids
+                    let identities = self.readIdentities(from: url,
+                                                         password: password)
                     else { Logger.logWarn("Unable to read p12 file"); return }
 
                 for identity: IdentityRef in identities {
@@ -435,6 +383,27 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
 
         return environmentOptions == .sandbox ? .sandbox : .production
+    }
+
+    private func readIdentities(from url: URL,
+                                password: String) -> [Any]? {
+        guard
+            let data = try? Data(contentsOf: url)
+            else { return nil }
+
+        var ids: [Any]?
+
+        do {
+            ids = try SecTools.identities(withPKCS12Data: data,
+                                          password: password)
+        } catch let error as NSError {
+            if !password.isEmpty && error.code == PushError.pkcs12Password.rawValue {
+                ids = try? SecTools.identities(withPKCS12Data: data,
+                                               password: nil)
+            }
+        }
+
+        return ids
     }
 
     private func reconnect() {
@@ -747,14 +716,6 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
         tokenCombo.stringValue = currentToken
     }
-
-    private func visibleTextField() -> NSControl? {
-        if let inputField = inputDiscreet, inputField.isHidden {
-            return inputNonDiscreet
-        }
-
-        return inputDiscreet
-    }
 }
 
 extension AppDelegate: LoggerDelegate {
@@ -806,17 +767,70 @@ extension AppDelegate: HubDelegate {
 }
 
 extension AppDelegate {
+    private func obtainPassword(for url: URL) -> String? {
+        let alert = NSAlert()
+        let text = "Enter password for \(url.lastPathComponent)"
+
+        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: "Cancel")
+        alert.informativeText = ""
+        alert.messageText = text
+
+        self.inputDiscreet = NSSecureTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
+        self.inputNonDiscreet = NSTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
+
+        let label = NSTextField(frame: NSRect(x: 0, y: 23, width: 65, height: 18))
+        label.drawsBackground = false
+        label.isBezeled = false
+        label.isEditable = false
+        label.isSelectable = false
+        label.stringValue = "Password: "
+
+        let checkBox = NSButton(frame: NSRect(x: 65, y: 1, width: 120, height: 18))
+        checkBox.action = #selector(self.swapTextInputFields)
+        checkBox.setButtonType(.switch)
+        checkBox.title = "Show password"
+
+        let passwordInputView = NSView(frame: NSRect(x: 0, y: 0, width: 330, height: 48))
+
+        guard let inputSecure = self.inputDiscreet,
+            let inputNotSecure = self.inputNonDiscreet
+            else { return nil }
+
+        passwordInputView.addSubview(inputSecure)
+        passwordInputView.addSubview(inputNotSecure)
+        passwordInputView.addSubview(checkBox)
+        passwordInputView.addSubview(label)
+
+        self.inputNonDiscreet?.isHidden = true
+
+        alert.accessoryView = passwordInputView
+
+        let button: NSApplication.ModalResponse = alert.runModal()
+
+        if button.rawValue != NSApplication.ModalResponse.alertFirstButtonReturn.rawValue {
+            return nil
+        }
+
+        let visibleInputField = self.visibleInputField()
+        guard let input = visibleInputField
+            else { return nil }
+
+        return input.stringValue
+    }
+
     @objc
     private func swapTextInputFields(_ sender: NSButton) {
-        switch sender.state.rawValue {
-        case 0:
+        switch sender.state {
+        case .off :
             if let text = inputNonDiscreet?.stringValue {
                 inputDiscreet?.stringValue = text
             }
 
             inputDiscreet?.isHidden = false
             inputNonDiscreet?.isHidden = true
-        case 1:
+
+        case .on:
             if let text = inputDiscreet?.stringValue {
                 inputNonDiscreet?.stringValue = text
             }
@@ -827,7 +841,13 @@ extension AppDelegate {
             inputDiscreet?.isHidden = false
             inputNonDiscreet?.isHidden = true
         }
+    }
 
-        print("Changing Checkbox", sender.state.rawValue)
+    private func visibleInputField() -> NSControl? {
+        if let inputField = inputDiscreet, inputField.isHidden {
+            return inputNonDiscreet
+        }
+
+        return inputDiscreet
     }
 }

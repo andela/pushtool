@@ -122,6 +122,6 @@ public class PushFeedback {
     private func readToken() throws -> (String, Date) {
         let (data, date) = try readTokenData()
 
-        return (Notification.hex(from: data), date)
+        return (data.hexEncodedString(), date)
     }
 }

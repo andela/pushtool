@@ -82,8 +82,7 @@ public class Pusher: NSObject {
                              length: &length)
 
         if length != data.count {
-            throw ErrorUtil.errorWithErrorCode(.pushWriteFail,
-                                               reason: Int(length))
+            throw PushError.pushWriteFail
         }
     }
 
@@ -100,7 +99,7 @@ public class Pusher: NSObject {
     }
 
     public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<Int>,
-                                     apnError: NSErrorPointer) throws {
+                                     apnError: ErrorPointer) throws {
         identifier.pointee = 0
         apnError?.pointee = nil
 
@@ -123,8 +122,7 @@ public class Pusher: NSObject {
                        range: NSRange(location: 0, length: 1))
 
         if command != 8 {
-            throw ErrorUtil.errorWithErrorCode(.pushResponseCommand,
-                                               reason: Int(command))
+            throw PushError.pushResponseCommand
         }
 
         var status: UInt8 = 0
@@ -139,7 +137,7 @@ public class Pusher: NSObject {
 
         identifier.pointee = Int(UInt32(bigEndian: ident))
 
-        apnError?.pointee = error(for: Int(status))
+        apnError?.pointee = error(for: Int(status)) as NSError
     }
 
     public func reconnect() throws {
@@ -154,47 +152,37 @@ public class Pusher: NSObject {
 
     // MARK: Private Instance Methods
 
-    private func error(for status: Int) -> NSError {
+    private func error(for status: Int) -> PushError {
         switch status {
         case 1:
-            return ErrorUtil.errorWithErrorCode(.apnProcessing,
-                                                reason: status)
+            return PushError.apnProcessing
 
         case 2:
-            return ErrorUtil.errorWithErrorCode(.apnMissingDeviceToken,
-                                                reason: status)
+            return PushError.apnMissingDeviceToken
 
         case 3:
-            return ErrorUtil.errorWithErrorCode(.apnMissingTopic,
-                                                reason: status)
+            return PushError.apnMissingTopic
 
         case 4:
-            return ErrorUtil.errorWithErrorCode(.apnMissingPayload,
-                                                reason: status)
+            return PushError.apnMissingPayload
 
         case 5:
-            return ErrorUtil.errorWithErrorCode(.apnInvalidTokenSize,
-                                                reason: status)
+            return PushError.apnInvalidTokenSize
 
         case 6:
-            return ErrorUtil.errorWithErrorCode(.apnInvalidTopicSize,
-                                                reason: status)
+            return PushError.apnInvalidTopicSize
 
         case 7:
-            return ErrorUtil.errorWithErrorCode(.apnInvalidPayloadSize,
-                                                reason: status)
+            return PushError.apnInvalidPayloadSize
 
         case 8:
-            return ErrorUtil.errorWithErrorCode(.apnInvalidTokenContent,
-                                                reason: status)
+            return PushError.apnInvalidTokenContent
 
         case 10:
-            return ErrorUtil.errorWithErrorCode(.apnShutdown,
-                                                reason: status)
+            return PushError.apnShutdown
 
         default:
-            return ErrorUtil.errorWithErrorCode(.apnUnknownErrorCode,
-                                                reason: status)
+            return PushError.apnUnknownErrorCode
         }
     }
 }

@@ -1,5 +1,3 @@
-import Foundation
-
 public protocol LoggerDelegate: class {
     func log(message: String,
              warning: Bool)

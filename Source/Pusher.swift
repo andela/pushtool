@@ -1,7 +1,6 @@
 import Foundation
 
-@objcMembers
-public class Pusher: NSObject {
+public class Pusher {
 
     // MARK: Public Type Methods
 

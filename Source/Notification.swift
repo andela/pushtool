@@ -1,7 +1,6 @@
 import Foundation
 
-@objcMembers
-public class Notification: NSObject {
+public class Notification {
     public let addExpiration: Bool
     public let expirationStamp: UInt
     public let payloadData: Data

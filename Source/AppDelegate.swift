@@ -769,31 +769,34 @@ extension AppDelegate: HubDelegate {
 extension AppDelegate {
     private func obtainPassword(for url: URL) -> String? {
         let alert = NSAlert()
-        let text = "Enter password for \(url.lastPathComponent)"
+        let text = "Enter password for “\(url.lastPathComponent)”:"
 
         alert.addButton(withTitle: "OK")
         alert.addButton(withTitle: "Cancel")
         alert.informativeText = ""
         alert.messageText = text
 
-        self.inputDiscreet = NSSecureTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
-        self.inputNonDiscreet = NSTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
+        self.inputDiscreet = NSSecureTextField(frame: NSRect(x: 70, y: 25, width: 200, height: 24))
+        self.inputNonDiscreet = NSTextField(frame: NSRect(x: 70, y: 25, width: 200, height: 24))
 
-        let label = NSTextField(frame: NSRect(x: 0, y: 23, width: 65, height: 18))
+        let label = NSTextField(frame: NSRect(x: 0, y: 30, width: 65, height: 18))
+
         label.drawsBackground = false
         label.isBezeled = false
         label.isEditable = false
         label.isSelectable = false
-        label.stringValue = "Password: "
+        label.stringValue = "Password:"
 
-        let checkBox = NSButton(frame: NSRect(x: 65, y: 1, width: 120, height: 18))
+        let checkBox = NSButton(frame: NSRect(x: 70, y: 4, width: 120, height: 18))
+
         checkBox.action = #selector(self.swapTextInputFields)
         checkBox.setButtonType(.switch)
         checkBox.title = "Show password"
 
-        let passwordInputView = NSView(frame: NSRect(x: 0, y: 0, width: 330, height: 48))
+        let passwordInputView = NSView(frame: NSRect(x: 0, y: 0, width: 330, height: 64))
 
-        guard let inputSecure = self.inputDiscreet,
+        guard
+            let inputSecure = self.inputDiscreet,
             let inputNotSecure = self.inputNonDiscreet
             else { return nil }
 
@@ -812,11 +815,7 @@ extension AppDelegate {
             return nil
         }
 
-        let visibleInputField = self.visibleInputField()
-        guard let input = visibleInputField
-            else { return nil }
-
-        return input.stringValue
+        return visibleInputField()?.stringValue
     }
 
     @objc

@@ -1,12 +1,10 @@
 import Foundation
-import Security
 
-@objcMembers
-public class SSLConnection: NSObject {
+public class SSLConnection {
 
     // MARK: Public Initializers
 
-    public override convenience init() {
+    public convenience init() {
         self.init(host: nil,
                   port: 0,
                   identity: nil)
@@ -261,6 +259,10 @@ public class SSLConnection: NSObject {
                 else { break }
         }
 
+        try throwIfHandshakeSSLError(status)
+    }
+
+    private func throwIfHandshakeSSLError(_ status: OSStatus) throws {
         switch status {
         case errSecAuthFailed:
             throw PushError.sslAuthFailed

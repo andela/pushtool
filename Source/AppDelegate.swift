@@ -2,7 +2,6 @@ import AppKit
 import Foundation
 
 @NSApplicationMain
-@objcMembers
 public class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet private var certificatePopup: NSPopUpButton!
     @IBOutlet private var countField: NSTextField!

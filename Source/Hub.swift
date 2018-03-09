@@ -1,13 +1,11 @@
 import Foundation
 
-@objc
-public protocol HubDelegate: NSObjectProtocol {
+public protocol HubDelegate: class {
     func notification(_ notification: Notification?,
                       didFailWithError error: Error)
 }
 
-@objcMembers
-public class Hub: NSObject {
+public class Hub {
 
     // MARK: Public Class Methods
 
@@ -42,8 +40,6 @@ public class Hub: NSObject {
     public var index: UInt
     public var pusher: Pusher
 
-    // public var type: Notification
-
     // MARK: Public Initializers
 
     public convenience init(delegate: HubDelegate?) {
@@ -57,8 +53,6 @@ public class Hub: NSObject {
         self.feedbackSpan = 30
         self.pusher = pusher
         self.delegate = delegate
-
-        // self.type = .type
     }
 
     // MARK: Public Instance Methods
@@ -83,7 +77,7 @@ public class Hub: NSObject {
 
     public func pushNotification(_ notification: Notification,
                                  autoReconnect reconnect: Bool) throws {
-                if notification.identifier == 0 {
+        if notification.identifier == 0 {
             notification.identifier = index
 
             index += 1
@@ -200,13 +194,10 @@ public class Hub: NSObject {
             var notification: Notification?
             try readFailed(&notification, autoReconnect: reconnect)
 
-            if notification == nil {
-                break
-            }
-
-            if let aNotification = notification {
-                failed.append(aNotification)
-            }
+            guard
+                let aNotification = notification
+                else { break }
+            failed.append(aNotification)
         }
 
         if let nonNilNotifications = notifications, !nonNilNotifications.isEmpty {

@@ -1,7 +1,6 @@
 import Foundation
 
-@objcMembers
-public class PushFeedback: NSObject {
+public class PushFeedback {
     public var connection: SSLConnection?
     public let pushHost = "feedback.push.apple.com"
     public let pushPort = 2_196

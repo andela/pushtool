@@ -1,11 +1,11 @@
 import Foundation
 
-public protocol HubDelegate: NSObjectProtocol {
+public protocol HubDelegate: class {
     func notification(_ notification: Notification?,
                       didFailWithError error: Error)
 }
 
-public class Hub: NSObject {
+public class Hub {
 
     // MARK: Public Class Methods
 
@@ -77,7 +77,7 @@ public class Hub: NSObject {
 
     public func pushNotification(_ notification: Notification,
                                  autoReconnect reconnect: Bool) throws {
-                if notification.identifier == 0 {
+        if notification.identifier == 0 {
             notification.identifier = index
 
             index += 1

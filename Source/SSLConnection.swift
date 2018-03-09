@@ -244,7 +244,25 @@ public class SSLConnection {
         self.context = context
     }
 
-    private func handshakeSSLError(with status: OSStatus) throws {
+    private func handshakeSSL() throws {
+        guard
+            let context = self.context
+            else { throw PushError.sslHandshakeFail }
+
+        var status = errSSLWouldBlock
+
+        for _ in 0..<sslHandshakeTryCount {
+            status = SSLHandshake(context)
+
+            guard
+                status == errSSLWouldBlock
+                else { break }
+        }
+
+        try throwIfHandshakeSSLError(status)
+    }
+
+    private func throwIfHandshakeSSLError(_ status: OSStatus) throws {
         switch status {
         case errSecAuthFailed:
             throw PushError.sslAuthFailed
@@ -297,24 +315,6 @@ public class SSLConnection {
         default:
             throw PushError.sslHandshakeFail
         }
-    }
-
-    private func handshakeSSL() throws {
-        guard
-            let context = self.context
-            else { throw PushError.sslHandshakeFail }
-
-        var status = errSSLWouldBlock
-
-        for _ in 0..<sslHandshakeTryCount {
-            status = SSLHandshake(context)
-
-            guard
-                status == errSSLWouldBlock
-                else { break }
-        }
-
-        try handshakeSSLError(with: status)
     }
 }
 

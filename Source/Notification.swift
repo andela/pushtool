@@ -41,11 +41,11 @@ public class Notification {
         self.tokenData = Notification.data(fromHex: trunk)
     }
 
-    public class func data(fromHex hex: String) -> Data {
+    public static func data(fromHex hex: String) -> Data {
         return Data(hexEncoded: hex) ?? Data()
     }
 
-    public class func hex(from data: Data) -> String {
+    public static func hex(from data: Data) -> String {
         guard let stringValue = data.utf8String
             else { return "" }
 

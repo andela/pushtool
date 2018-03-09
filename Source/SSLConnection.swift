@@ -80,24 +80,20 @@ public class SSLConnection: NSObject {
 
         switch status {
         case errSecIO:
-            throw ErrorUtil.errorWithErrorCode(.readDroppedByServer,
-                                               reason: Int(status))
+            throw PushError.readDroppedByServer
 
         case errSecSuccess,
              errSSLWouldBlock:
             return
 
         case errSSLClosedAbort:
-            throw ErrorUtil.errorWithErrorCode(.readClosedAbort,
-                                               reason: Int(status))
+            throw PushError.readClosedAbort
 
         case errSSLClosedGraceful:
-            throw ErrorUtil.errorWithErrorCode(.readClosedGraceful,
-                                               reason: Int(status))
+            throw PushError.readClosedGraceful
 
         default:
-            throw ErrorUtil.errorWithErrorCode(.readFail,
-                                               reason: Int(status))
+            throw PushError.readFail
         }
     }
 
@@ -118,24 +114,19 @@ public class SSLConnection: NSObject {
 
         switch status {
         case errSecIO:
-            throw ErrorUtil.errorWithErrorCode(.writeDroppedByServer,
-                                               reason: Int(status))
+            throw PushError.writeDroppedByServer
 
         case errSecSuccess,
              errSSLWouldBlock:
             return
 
         case errSSLClosedAbort:
-            throw ErrorUtil.errorWithErrorCode(.writeClosedAbort,
-                                               reason: Int(status))
+            throw PushError.writeClosedAbort
 
         case errSSLClosedGraceful:
-            throw ErrorUtil.errorWithErrorCode(.writeClosedGraceful,
-                                               reason: Int(status))
-
+            throw PushError.writeClosedGraceful
         default:
-            throw ErrorUtil.errorWithErrorCode(.writeFail,
-                                               reason: Int(status))
+            throw PushError.writeFail
         }
     }
 
@@ -160,15 +151,13 @@ public class SSLConnection: NSObject {
 
         guard
             sock >= 0
-            else { throw ErrorUtil.errorWithErrorCode(.socketCreate,
-                                                      reason: Int(sock)) }
+            else { throw PushError.socketCreate }
 
         guard
             let hostName = host?.cString(using: .utf8),
             let hostEntry = gethostbyname(hostName)?.pointee,
             let hostAddressList = hostEntry.h_addr_list?.pointee
-            else { throw ErrorUtil.errorWithErrorCode(.socketResolveHostName,
-                                                      reason: 0) }
+            else { throw PushError.socketResolveHostName }
 
         let hostAddress = hostAddressList.withMemoryRebound(to: in_addr.self,
                                                             capacity: 1) { $0.pointee }
@@ -189,23 +178,20 @@ public class SSLConnection: NSObject {
 
         guard
             conn >= 0
-            else { throw ErrorUtil.errorWithErrorCode(.socketConnect,
-                                                      reason: Int(conn)) }
+            else { throw PushError.socketConnect }
 
         let cntl = Darwin.fcntl(sock, F_SETFL, O_NONBLOCK)
 
         guard
             cntl >= 0
-            else { throw ErrorUtil.errorWithErrorCode(.socketFileControl,
-                                                      reason: Int(cntl)) }
+            else { throw PushError.socketFileControl }
 
         var set = 1
         let sopt = Darwin.setsockopt(sock, SOL_SOCKET, SO_NOSIGPIPE, &set, 4)
 
         guard
             sopt >= 0
-            else { throw ErrorUtil.errorWithErrorCode(.socketOptions,
-                                                      reason: Int(sopt)) }
+            else { throw PushError.socketOptions }
 
         self.socket = sock
     }
@@ -215,8 +201,7 @@ public class SSLConnection: NSObject {
             let context = SSLCreateContext(nil,
                                            .clientSide,
                                            .streamType)
-            else { throw ErrorUtil.errorWithErrorCode(.sslContext,
-                                                      reason: 0) }
+            else { throw PushError.sslContext }
 
         let setio = SSLSetIOFuncs(context,
                                   readSSL,
@@ -224,8 +209,7 @@ public class SSLConnection: NSObject {
 
         guard
             setio == errSecSuccess
-            else { throw ErrorUtil.errorWithErrorCode(.sslIOFuncs,
-                                                      reason: Int(setio)) }
+            else { throw PushError.sslIOFuncs }
 
         let connection = UnsafeMutableRawPointer.allocate(bytes: 4,
                                                           alignedTo: 4)
@@ -240,8 +224,7 @@ public class SSLConnection: NSObject {
 
         guard
             setconn == errSecSuccess
-            else { throw ErrorUtil.errorWithErrorCode(.sslConnection,
-                                                      reason: Int(setconn)) }
+            else { throw PushError.sslConnection }
 
         if let host = host?.cString(using: .utf8) {
             let setpeer = SSLSetPeerDomainName(context,
@@ -250,8 +233,7 @@ public class SSLConnection: NSObject {
 
             guard
                 setpeer == errSecSuccess
-                else { throw ErrorUtil.errorWithErrorCode(.sslPeerDomainName,
-                                                          reason: Int(setpeer)) }
+                else { throw PushError.sslPeerDomainName }
         }
 
         let setcert = SSLSetCertificate(context,
@@ -259,8 +241,7 @@ public class SSLConnection: NSObject {
 
         guard
             setcert == errSecSuccess
-            else { throw ErrorUtil.errorWithErrorCode(.sslCertificate,
-                                                      reason: Int(setcert)) }
+            else { throw PushError.sslCertificate }
 
         self.context = context
     }
@@ -268,8 +249,7 @@ public class SSLConnection: NSObject {
     private func handshakeSSL() throws {
         guard
             let context = self.context
-            else { throw ErrorUtil.errorWithErrorCode(.sslHandshakeFail,
-                                                      reason: 0) }
+            else { throw PushError.sslHandshakeFail }
 
         var status = errSSLWouldBlock
 
@@ -283,71 +263,55 @@ public class SSLConnection: NSObject {
 
         switch status {
         case errSecAuthFailed:
-            throw ErrorUtil.errorWithErrorCode(.sslAuthFailed,
-                                               reason: Int(status))
+            throw PushError.sslAuthFailed
 
         case errSecInDarkWake:
-            throw ErrorUtil.errorWithErrorCode(.sslInDarkWake,
-                                               reason: Int(status))
+            throw PushError.sslInDarkWake
 
         case errSecIO:
-            throw ErrorUtil.errorWithErrorCode(.sslDroppedByServer,
-                                               reason: Int(status))
+            throw PushError.sslDroppedByServer
 
         case errSecSuccess:
             break
 
         case errSSLCertExpired:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakeCertExpired,
-                                               reason: Int(status))
+            throw PushError.sslHandshakeCertExpired
 
         case errSSLClientCertRequested:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakeClientCertRequested,
-                                               reason: Int(status))
+            throw PushError.sslHandshakeClientCertRequested
 
         case errSSLClosedAbort:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakeClosedAbort,
-                                               reason: Int(status))
+            throw PushError.sslHandshakeClosedAbort
 
         case errSSLInternal:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakeInternalError,
-                                               reason: Int(status))
+            throw PushError.sslHandshakeInternalError
 
         case errSSLNoRootCert:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakeNoRootCert,
-                                               reason: Int(status))
+            throw PushError.sslHandshakeNoRootCert
 
         case errSSLPeerAuthCompleted:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakeServerAuthCompleted,
-                                               reason: Int(status))
+            throw PushError.sslHandshakeServerAuthCompleted
 
         case errSSLPeerCertExpired:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakePeerCertExpired,
-                                               reason: Int(status))
+            throw PushError.sslHandshakePeerCertExpired
 
         case errSSLPeerCertRevoked:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakePeerCertRevoked,
-                                               reason: Int(status))
+            throw PushError.sslHandshakePeerCertRevoked
 
         case errSSLPeerCertUnknown:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakePeerCertUnknown,
-                                               reason: Int(status))
+            throw PushError.sslHandshakePeerCertUnknown
 
         case errSSLUnknownRootCert:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakeUnknownRootCert,
-                                               reason: Int(status))
+            throw PushError.sslHandshakeUnknownRootCert
 
         case errSSLWouldBlock:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakeTimeout,
-                                               reason: Int(status))
+            throw PushError.sslHandshakeTimeout
 
         case errSSLXCertChainInvalid:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakeXCertChainInvalid,
-                                               reason: Int(status))
+            throw PushError.sslHandshakeXCertChainInvalid
 
         default:
-            throw ErrorUtil.errorWithErrorCode(.sslHandshakeFail,
-                                               reason: Int(status))
+            throw PushError.sslHandshakeFail
         }
     }
 }

@@ -72,8 +72,7 @@ public class SecTools: NSObject {
                                  password: String?) throws -> [Any] {
         guard
             !pkcs12.isEmpty
-            else { throw ErrorUtil.errorWithErrorCode(.pkcs12EmptyData,
-                                                      reason: 0) }
+            else { throw PushError.pkcs12EmptyData }
 
         guard
             let dicts = try self.allIdentitities(withPKCS12Data: pkcs12,
@@ -105,11 +104,11 @@ public class SecTools: NSObject {
                                              password: password)
 
         if identities.isEmpty {
-            throw ErrorUtil.errorWithErrorCode(.pkcs12NoItems, reason: 0)
+            throw PushError.pkcs12NoItems
         }
 
         if identities.count > 1 {
-            throw ErrorUtil.errorWithErrorCode(.pkcs12MultipleItems, reason: 0)
+            throw PushError.pkcs12MultipleItems
         }
 
         return identities.last as Any
@@ -183,12 +182,11 @@ public class SecTools: NSObject {
         }
 
         if status != errSecSuccess {
-            throw ErrorUtil.errorWithErrorCode(.identityCopyPrivateKey, reason: Int(status))
+            throw PushError.identityCopyPrivateKey
         }
 
         guard let keyRef: KeyRef = key
-            else { throw ErrorUtil.errorWithErrorCode(.identityCopyPrivateKey,
-                                                      reason: Int(status)) }
+            else { throw PushError.identityCopyPrivateKey }
 
         return keyRef
     }
@@ -314,24 +312,18 @@ public class SecTools: NSObject {
 
         switch status {
         case errSecDecode:
-            throw ErrorUtil.errorWithErrorCode(.pkcs12Decode,
-                                               reason: Int(status))
+            throw PushError.pkcs12Decode
 
         case errSecAuthFailed:
-            throw ErrorUtil.errorWithErrorCode(.pkcs12AuthFailed,
-                                               reason: Int(status))
+            throw PushError.pkcs12AuthFailed
 
         case errSecPkcs12VerifyFailure:
-            throw ErrorUtil.errorWithErrorCode(.pkcs12Password,
-                                               reason: Int(status))
+            throw PushError.pkcs12Password
 
         case errSecPassphraseRequired:
-            throw ErrorUtil.errorWithErrorCode(.pkcs12PasswordRequired,
-                                               reason: Int(status))
-
+            throw PushError.pkcs12PasswordRequired
         default:
-            throw ErrorUtil.errorWithErrorCode(.pkcs12Import,
-                                               reason: Int(status))
+            throw PushError.pkcs12Import
         }
     }
 
@@ -349,7 +341,7 @@ public class SecTools: NSObject {
             let certificates = certs as? [CertificateRef],
             status == errSecSuccess
             else {
-                throw ErrorUtil.errorWithErrorCode(.keychainCopyMatching, reason: Int(status))
+                throw PushError.keychainCopyMatching
         }
 
         return certificates

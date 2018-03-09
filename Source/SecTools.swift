@@ -106,7 +106,6 @@ public class SecTools {
         return keyRef
     }
 
-    @objc(keychainCertificatesWithError:)
     public class func keychainCertificates() throws -> [CertificateRef] {
         let candidates = try self.allKeychainCertificates()
 

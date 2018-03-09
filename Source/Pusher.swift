@@ -97,6 +97,10 @@ public class Pusher {
         try self.pushNotification(notification)
     }
 
+    // TODO: refactor to have signature:
+    //
+    //      public func readFailedIdentifier() throws -> (Int, Error) {}
+
     public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<Int>,
                                      apnError: ErrorPointer) throws {
         identifier.pointee = 0

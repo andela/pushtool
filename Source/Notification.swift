@@ -118,6 +118,8 @@ public class Notification {
     }
 }
 
+// TODO: make this extension public; move into new Data+Extensions.swift file
+
 extension Data {
     var utf8String: String? {
         return string(as: .utf8)
@@ -128,17 +130,19 @@ extension Data {
     }
 
     public init?(hexEncoded hexData: Data) {
+        //
         // Convert 0 ... 9, a ... f, A ...F to their decimal value,
         // return nil for all other input characters
+        //
         func decodeDigit(_ digit: UInt8) -> UInt8? {
             switch digit {
-            case 0x30 ... 0x39:
+            case 0x30...0x39:
                 return UInt8(digit - 0x30)
 
-            case 0x41 ... 0x46:
+            case 0x41...0x46:
                 return UInt8(digit - 0x41 + 10)
 
-            case 0x61 ... 0x66:
+            case 0x61...0x66:
                 return UInt8(digit - 0x61 + 10)
 
             default:

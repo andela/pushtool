@@ -288,7 +288,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func enableButtons(forCertificate certificate: CertificateRef, environment: Environment) {
-        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
         let shouldEnableEnvButton: Bool = environmentOptions == .any
         let shouldSelectSandboxEnv: Bool = environment == .sandbox
         pushButton.isEnabled = true
@@ -298,7 +298,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func identifier(withCertificate certificate: CertificateRef) -> String {
-        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
         let summary: String = SecTools.summary(with: certificate)
 
         return "\(summary)-\(environmentOptions)"
@@ -327,7 +327,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func preferredEnvironment(for certificate: CertificateRef) -> Environment {
-        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
 
         return environmentOptions == .sandbox ? .sandbox : .production
     }

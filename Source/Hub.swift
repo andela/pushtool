@@ -59,14 +59,14 @@ public class Hub {
 
     public func connect(withIdentity identity: IdentityRef,
                         environment: Environment) throws {
-        try pusher.connect(withIdentity: identity,
+        try pusher.connect(with: identity,
                            environment: environment)
     }
 
     public func connect(withPKCS12Data data: Data,
                         password: String,
                         environment: Environment) throws {
-        try pusher.connect(withPKCS12Data: data,
+        try pusher.connect(with: data,
                            password: password,
                            environment: environment)
     }

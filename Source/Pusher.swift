@@ -2,37 +2,13 @@ import Foundation
 
 public class Pusher {
 
-    // MARK: Public Type Methods
-
-    public class func connect(withIdentity identity: IdentityRef,
-                              environment: Environment) throws -> Pusher {
-        let pusher = Pusher()
-
-        try pusher.connect(withIdentity: identity,
-                           environment: environment)
-
-        return pusher
-    }
-
-    public class func connect(withPKCS12Data data: Data,
-                              password: String,
-                              environment: Environment) throws -> Pusher {
-        let pusher = Pusher()
-
-        try pusher.connect(withPKCS12Data: data,
-                           password: password,
-                           environment: environment)
-
-        return pusher
-    }
-
     // MARK: Public Instance Properties
 
     public var connection: SSLConnection?
 
     // MARK: Public Instance Methods
 
-    public func connect(withIdentity identity: IdentityRef,
+    public func connect(with identity: IdentityRef,
                         environment: Environment) throws {
         self.connection?.disconnect()
 
@@ -54,13 +30,13 @@ public class Pusher {
         self.connection = connection
     }
 
-    public func connect(withPKCS12Data data: Data,
+    public func connect(with data: Data,
                         password: String,
                         environment: Environment) throws {
         let identity: IdentityRef = try SecIdentityTools.identities(with: data,
                                                                     password: password) as IdentityRef
 
-        try connect(withIdentity: identity,
+        try connect(with: identity,
                     environment: environment)
     }
 

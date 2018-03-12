@@ -3,9 +3,7 @@ import Foundation
 public class Notification {
     public let addExpiration: Bool
     public let expirationStamp: UInt
-    public let payloadData: Data
     public let priority: UInt
-    public let tokenData: Data
     public let payload: String
     public let token: String
     public let expires: Date?
@@ -29,19 +27,13 @@ public class Notification {
         }
 
         self.identifier = identifier
-        self.payloadData = payload.data(using: .utf8) ?? Data()
         self.priority = priority
         self.payload = payload
         self.token = token
         self.expires = expiration
-
-        let normal = Notification.filter(token)
-        let trunk = normal.count >= 64 ? String(normal.prefix(64)) : ""
-
-        self.tokenData = Notification.data(fromHex: trunk)
     }
 
-    private static func data(fromHex hex: String) -> Data {
+    private static func data(from hex: String) -> Data {
         return Data(hexEncoded: hex) ?? Data()
     }
 
@@ -49,7 +41,9 @@ public class Notification {
         var expires: UInt32 = UInt32(expirationStamp).bigEndian
         var identifier: UInt32 = UInt32(self.identifier).bigEndian
         var priority = self.priority
+        let normal = Notification.filter(token)
         let result = NSMutableData()
+        let trunk = normal.count >= 64 ? String(normal.prefix(64)) : ""
 
         var command: UInt8 = 2
         var length: UInt32 = 0
@@ -57,15 +51,13 @@ public class Notification {
         result.append(&command, length: 1)
         result.append(&length, length: 4)
 
-        let tokenData = self.tokenData as NSData
-
+        let tokenData = Notification.data(from: trunk) as NSData
         append(to: result,
                identifier: 1,
                bytes: tokenData.bytes,
                length: tokenData.length)
 
-        let payloadData = self.payloadData as NSData
-
+        let payloadData = (payload.data(using: .utf8) ?? Data()) as NSData
         append(to: result,
                identifier: 2,
                bytes: payloadData.bytes,
@@ -115,69 +107,5 @@ public class Notification {
 
     private static func filter(_ hex: String) -> String {
         return hex.lowercased().filter { "0123456789abcdef".contains($0) }
-    }
-}
-
-// TODO: make this extension public; move into new Data+Extensions.swift file
-
-extension Data {
-    var utf8String: String? {
-        return string(as: .utf8)
-    }
-
-    func string(as encoding: String.Encoding) -> String? {
-        return String(data: self, encoding: encoding)
-    }
-
-    public init?(hexEncoded hexData: Data) {
-        //
-        // Convert 0 ... 9, a ... f, A ...F to their decimal value,
-        // return nil for all other input characters
-        //
-        func decodeDigit(_ digit: UInt8) -> UInt8? {
-            switch digit {
-            case 0x30...0x39:
-                return UInt8(digit - 0x30)
-
-            case 0x41...0x46:
-                return UInt8(digit - 0x41 + 10)
-
-            case 0x61...0x66:
-                return UInt8(digit - 0x61 + 10)
-
-            default:
-                return nil
-            }
-        }
-
-        let inCount = hexData.count
-
-        guard (inCount & 1) == 0    // must be even
-            else { return nil }
-
-        self.init(capacity: inCount >> 1)
-
-        var index = 0
-
-        while index < inCount {
-            guard let digitHi = decodeDigit(hexData[index]),
-                let digitLo = decodeDigit(hexData[index + 1])
-                else { return nil }
-
-            append(UInt8((digitHi << 4) | digitLo))
-
-            index += 2
-        }
-    }
-
-    public init?(hexEncoded hexString: String) {
-        guard let hexData: Data = hexString.data(using: .utf8)
-            else { return nil }
-
-        self.init(hexEncoded: hexData)
-    }
-
-    public func hexEncodedString() -> String {
-        return map { String(format: "%02hhx", $0) }.joined()
     }
 }

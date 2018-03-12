@@ -119,7 +119,7 @@ public class Hub {
         let notification = Notification(payload: payload,
                                         token: token,
                                         identifier: 0,
-                                        expiration: nil,
+                                        expires: nil,
                                         priority: 0)
 
         return self.pushNotifications([notification])
@@ -130,7 +130,7 @@ public class Hub {
         let notifications = tokens.map { Notification(payload: payload,
                                                       token: $0,
                                                       identifier: 0,
-                                                      expiration: nil,
+                                                      expires: nil,
                                                       priority: 0)
         }
 
@@ -142,7 +142,7 @@ public class Hub {
         let notifications = payloads.map { Notification(payload: $0,
                                                         token: token,
                                                         identifier: 0,
-                                                        expiration: nil,
+                                                        expires: nil,
                                                         priority: 0)
         }
 

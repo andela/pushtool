@@ -91,7 +91,7 @@ public class PushFeedback {
 
         var length: UInt = 0
 
-        try connection?.read(data, length: &length)
+        try connection?.read(data as Data, length: &length)
 
         if length != data.length {
             throw PushError.feedbackLength

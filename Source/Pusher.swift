@@ -57,8 +57,8 @@ public class Pusher {
     public func connect(withPKCS12Data data: Data,
                         password: String,
                         environment: Environment) throws {
-        let identity = try SecIdentityTools.identities(withPKCS12Data: data,
-                                                       password: password) as IdentityRef
+        let identity: IdentityRef = try SecIdentityTools.identities(with: data,
+                                                                    password: password) as IdentityRef
 
         try connect(withIdentity: identity,
                     environment: environment)

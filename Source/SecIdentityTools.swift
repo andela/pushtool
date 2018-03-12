@@ -1,7 +1,7 @@
 import Foundation
 
 public struct SecIdentityTools {
-    private static func allIdentitities(withPKCS12Data pkc12: Data?,
+    private static func allIdentitities(with pkc12: Data?,
                                         password: String?) throws -> [[AnyHashable: Any]]? {
         var options: [AnyHashable: Any] = [:]
 
@@ -43,9 +43,9 @@ public struct SecIdentityTools {
         }
     }
 
-    public static func identity(withPKCS12Data pkcs12: Data,
+    public static func identity(with pkcs12: Data,
                                 password: String) throws -> Any {
-        let identities = try self.identities(withPKCS12Data: pkcs12,
+        let identities = try self.identities(with: pkcs12,
                                              password: password)
 
         if identities.isEmpty {
@@ -59,14 +59,14 @@ public struct SecIdentityTools {
         return identities.last as Any
     }
 
-    public static func identities(withPKCS12Data pkcs12: Data,
+    public static func identities(with pkcs12: Data,
                                   password: String?) throws -> [Any] {
         guard
             !pkcs12.isEmpty
             else { throw PushError.pkcs12EmptyData }
 
         guard
-            let dicts = try self.allIdentitities(withPKCS12Data: pkcs12,
+            let dicts = try self.allIdentitities(with: pkcs12,
                                                  password: password)
             else { return [] }
 
@@ -77,7 +77,7 @@ public struct SecIdentityTools {
                 let identity = dict[kSecImportItemIdentity]
                 else { continue }
 
-            let certificate = try SecTools.certificate(withIdentity: identity as IdentityRef)
+            let certificate = try SecTools.certificate(with: identity as IdentityRef)
 
             if SecTools.isPushCertificate(certificate) {
                 _ = try SecTools.key(withIdentity: identity)

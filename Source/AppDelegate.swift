@@ -17,16 +17,19 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet private var sandboxCheckBox: NSButton!
     @IBOutlet private var window: NSWindow!
 
+    // MARK: Internal Instance Properties
+
+    internal var certificateIdentityPairs: [[Any]] = []
+    internal var config: [AnyHashable: Any] = [:]
+    internal var inputDiscreet: NSSecureTextField? = NSSecureTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
+    internal var inputNonDiscreet: NSTextField? = NSTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
+    internal var selectedCertificate: CertificateRef?
+    internal var serial: DispatchQueue?
+
     // MARK: Private Instance Properties
 
-    private var certificateIdentityPairs: [[Any]] = []
-    private var config: [AnyHashable: Any] = [:]
     private var hub: Hub?
     private var lastSelectedIndex: Int = 0
-    private var selectedCertificate: CertificateRef?
-    private var serial: DispatchQueue?
-    private var inputDiscreet: NSSecureTextField? = NSSecureTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
-    private var inputNonDiscreet: NSTextField? = NSTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
 
     // MARK: Public Instance methods
 
@@ -65,6 +68,134 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         hub = nil
 
         Logger.logInfo("Application will terminate")
+    }
+
+    public func connectWithCertificate(at index: Int) {
+        if index == 0 {
+            certificatePopup.selectItem(at: 0)
+            lastSelectedIndex = 0
+            selectCertificate(nil,
+                              identity: nil,
+                              environment: Environment.sandbox)
+            tokenCombo.isEnabled = false
+            loadSelectedToken()
+        } else if index <= certificateIdentityPairs.count {
+            certificatePopup.selectItem(at: index)
+            lastSelectedIndex = index
+            let pair = certificateIdentityPairs[index - 1]
+            let certificate = pair[0] as CertificateRef
+            let identity = pair[1] as IdentityRef
+
+            selectCertificate(certificate,
+                              identity: identity is NSNull ? nil : identity,
+                              environment: preferredEnvironment(for: certificate))
+
+            tokenCombo.isEnabled = true
+            loadSelectedToken()
+        } else {
+            certificatePopup.selectItem(at: lastSelectedIndex)
+            importIdentity()
+        }
+    }
+
+    public func readIdentities(from url: URL,
+                               password: String) -> [Any]? {
+        guard
+            let data = try? Data(contentsOf: url)
+            else { return nil }
+
+        var ids: [Any]?
+
+        do {
+            ids = try SecIdentityTools.identities(withPKCS12Data: data,
+                                                  password: password)
+        } catch let error as PushError {
+            if !password.isEmpty && error == .pkcs12Password {
+                ids = try? SecIdentityTools.identities(withPKCS12Data: data,
+                                                       password: nil)
+            }
+        } catch {
+        }
+
+        return ids
+    }
+
+    public func selectCertificate(_ certificate: CertificateRef?,
+                                  identity: IdentityRef?,
+                                  environment: Environment,
+                                  message: String? = nil) {
+        self.hub?.disconnect()
+        self.hub = nil
+
+        disableButtons()
+
+        Logger.logInfo("Disconnected from APN")
+
+        selectedCertificate = certificate
+        updateTokenCombo()
+
+        if let cert = certificate {
+            let environment: Environment = selectedEnvironment(for: cert)
+            let summary = SecTools.summary(withCertificate: cert)
+
+            Logger.logInfo("\(message ?? "Connecting to APN..."), \(summary), \(environment) ")
+
+            serial?.async {
+                guard
+                    let ident = identity ?? (try? SecTools.keychainIdentity(withCertificate: certificate))
+                    else { return }
+
+                let hub = try? Hub.connect(with: self,
+                                           identity: ident as IdentityRef,
+                                           environment: environment)
+
+                DispatchQueue.main.async {
+                    if hub != nil {
+                        Logger.logInfo("Connected \(summary), \(environment) ")
+                        self.hub = hub
+                        self.enableButtons(forCertificate: cert,
+                                           environment: environment)
+                    } else {
+                        Logger.logWarn("Unable to connect")
+                        hub?.disconnect()
+                        self.certificatePopup.selectItem(at: 0)
+                    }
+                }
+            }
+        }
+    }
+
+    public func selectedEnvironment(for certificate: CertificateRef) -> Environment {
+        return sandboxCheckBox.state == .on ? .sandbox : .production
+    }
+
+    public func updateCertificatePopup() {
+        var suffix = " "
+
+        certificatePopup.removeAllItems()
+        certificatePopup.addItem(withTitle: "Select Push Certificate")
+
+        let formatter = DateFormatter()
+
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+
+        for pair: [Any] in certificateIdentityPairs {
+            let certificate = pair[0] as CertificateRef
+            let hasIdentity: Bool = !(pair[1] is NSNull)
+            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+            var summary: NSString?
+            let certType: CertType = SecTools.type(withCertificate: certificate, summary: &summary)
+            let date: Date? = SecTools.expiration(withCertificate: certificate)
+            let expire = "  [\((date != nil) ? formatter.string(from: date ?? Date()) : "expired")]"
+
+            certificatePopup.addItem(withTitle: "\(hasIdentity ? "imported: " : "")\(summary ?? "")"
+                + " (\(certType) \(environmentOptions))\(expire)\(suffix)")
+
+            suffix += " "
+        }
+
+        certificatePopup.addItem(withTitle: "Import PKCS #12 file (.p12)...")
     }
 
     @IBAction private func certificateSelected(_ sender: NSPopUpButton) {
@@ -146,60 +277,6 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func configFileURL() -> URL? {
-        let libraryURL: URL? = FileManager.default.urls(for: .libraryDirectory,
-                                                        in: .userDomainMask).last
-        guard
-            let configURL: URL = libraryURL?.appendingPathComponent("PushTool",
-                                                                    isDirectory: true)
-            else { return nil }
-
-        guard
-            (try? FileManager.default.createDirectory(at: configURL,
-                                                      withIntermediateDirectories: true,
-                                                      attributes: nil)) != nil
-            else { return nil }
-
-        let result = configURL.appendingPathComponent("config.plist")
-
-        if !FileManager.default.fileExists(atPath: result.path),
-            let defaultURL = Bundle.main.url(forResource: "config",
-                                             withExtension: "plist") {
-            try? FileManager.default.copyItem(at: defaultURL,
-                                              to: result)
-        }
-
-        return result
-    }
-
-    private func connectWithCertificate(at index: Int) {
-        if index == 0 {
-            certificatePopup.selectItem(at: 0)
-            lastSelectedIndex = 0
-            selectCertificate(nil,
-                              identity: nil,
-                              environment: Environment.sandbox)
-            tokenCombo.isEnabled = false
-            loadSelectedToken()
-        } else if index <= certificateIdentityPairs.count {
-            certificatePopup.selectItem(at: index)
-            lastSelectedIndex = index
-            let pair = certificateIdentityPairs[index - 1]
-            let certificate = pair[0] as CertificateRef
-            let identity = pair[1] as IdentityRef
-
-            selectCertificate(certificate,
-                              identity: identity is NSNull ? nil : identity,
-                              environment: preferredEnvironment(for: certificate))
-
-            tokenCombo.isEnabled = true
-            loadSelectedToken()
-        } else {
-            certificatePopup.selectItem(at: lastSelectedIndex)
-            importIdentity()
-        }
-    }
-
     private func disableButtons() {
         pushButton.isEnabled = false
         reconnectButton.isEnabled = false
@@ -216,144 +293,11 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         sandboxCheckBox.state = shouldSelectSandboxEnv ? .on : .off
     }
 
-    private func feedback() {
-        serial?.async {
-            guard
-                let certificate: CertificateRef = self.selectedCertificate
-                else { Logger.logWarn("Unable to connect to feedback service: no certificate selected"); return }
-
-            let summary = SecTools.summary(withCertificate: certificate)
-            let environment = self.selectedEnvironment(for: certificate)
-            Logger.logInfo("Connecting to feedback service... \(summary), \(environment)")
-
-            let feedback: PushFeedback
-
-            do {
-                let identity = try SecTools.keychainIdentity(withCertificate: certificate)
-
-                feedback = try PushFeedback.connect(withIdentity: identity as IdentityRef,
-                                                    environment: self.selectedEnvironment(for: certificate))
-            } catch {
-                Logger.logWarn("Unable to connect to feedback service: \(error.localizedDescription)"); return }
-
-            Logger.logInfo("Reading feedback service... \(summary), \(environment)")
-            let pairs: [[Any]]
-
-            do {
-                pairs = try feedback.readTokenDatePairs(withMax: 1_000)
-            } catch {
-                Logger.logWarn("Unable to read feedback: \(error.localizedDescription)"); return }
-
-            pairs.forEach { Logger.logInfo("token: \($0[0]), date: \($0[1])") }
-
-            if !pairs.isEmpty {
-                Logger.logInfo("Feedback service returned \(pairs.count) device tokens, see logs for details")
-            } else {
-                Logger.logInfo("Feedback service returned zero device tokens")
-            }
-        }
-    }
-
     private func identifier(withCertificate certificate: CertificateRef) -> String {
         let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
         let summary: String = SecTools.summary(withCertificate: certificate)
 
         return "\(summary)-\(environmentOptions)"
-    }
-
-    private func importIdentity() {
-        let panel = NSOpenPanel()
-
-        panel.canChooseFiles = true
-        panel.canChooseDirectories = false
-        panel.allowsMultipleSelection = true
-        panel.allowedFileTypes = ["p12"]
-
-        panel.begin { result in
-            guard
-                result.rawValue == NSFileHandlingPanelOKButton
-                else { return }
-
-            var pairs: [[Any]] = []
-
-            for url: URL in panel.urls {
-                guard
-                    let password = self.obtainPassword(for: url)
-                    else { continue }
-
-                guard
-                    let identities = self.readIdentities(from: url,
-                                                         password: password)
-                    else { Logger.logWarn("Unable to read p12 file"); return }
-
-                for identity: IdentityRef in identities {
-                    let certificate: CertificateRef
-
-                    do {
-                        certificate = try SecTools.certificate(withIdentity: identity as IdentityRef) as CertificateRef
-                    } catch {
-                        Logger.logWarn("Unable to import p12 file"); return }
-
-                    pairs.append([certificate, identity])
-                }
-            }
-
-            if pairs.isEmpty {
-                Logger.logWarn("Unable to import p12 file: no push certificates found"); return }
-
-            Logger.logInfo("Impored \(pairs.count) certificate\(pairs.count == 1 ? "":"s")")
-            let index: Int = self.certificateIdentityPairs.count
-
-            self.certificateIdentityPairs += pairs
-            self.updateCertificatePopup()
-            self.connectWithCertificate(at: index + 1)
-        }
-    }
-
-    private func loadConfig() {
-        guard
-            let url = configFileURL(),
-            let tmpConfig = NSDictionary(contentsOf: url) as? [AnyHashable: Any]
-            else { return }
-
-        config = tmpConfig
-        Logger.logInfo("Loaded config from \(url.path)")
-    }
-
-    private func loadCertificatesFromKeychain() {
-        var certs: [Any] = []
-
-        do {
-            certs = try SecTools.keychainCertificates()
-        } catch {
-            Logger.logWarn("Unable to access keychain: \(error.localizedDescription)")
-        }
-
-        if certs.isEmpty {
-            Logger.logWarn("No push certificates in keychain.")
-        }
-
-        certs = certs.sorted {(_ optA: CertificateRef, _ optB: CertificateRef) -> Bool in
-            let envOptionsA: EnvironmentOptions = SecTools.environmentOptions(forCertificate: optA as CertificateRef)
-            let envOptionsB: EnvironmentOptions = SecTools.environmentOptions(forCertificate: optB as CertificateRef)
-
-            if envOptionsA != envOptionsB {
-                return envOptionsA < envOptionsB
-            }
-
-            let aname: String = SecTools.summary(withCertificate: optA as CertificateRef)
-            let bname: String = SecTools.summary(withCertificate: optB as CertificateRef)
-
-            return aname < bname
-        }
-
-        var pairs: [[Any]] = []
-
-        for c: CertificateRef in certs {
-            pairs.append([c, NSNull()])
-        }
-
-        certificateIdentityPairs += pairs
     }
 
     private func loadSelectedToken() {
@@ -382,28 +326,6 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
 
         return environmentOptions == .sandbox ? .sandbox : .production
-    }
-
-    private func readIdentities(from url: URL,
-                                password: String) -> [Any]? {
-        guard
-            let data = try? Data(contentsOf: url)
-            else { return nil }
-
-        var ids: [Any]?
-
-        do {
-            ids = try SecTools.identities(withPKCS12Data: data,
-                                          password: password)
-        } catch let error as PushError {
-            if !password.isEmpty && error == .pkcs12Password {
-                ids = try? SecTools.identities(withPKCS12Data: data,
-                                               password: nil)
-            }
-        } catch {
-        }
-
-        return ids
     }
 
     private func reconnect() {
@@ -471,10 +393,6 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func selectedEnvironment(for certificate: CertificateRef) -> Environment {
-        return sandboxCheckBox.state == .on ? .sandbox : .production
-    }
-
     private func selectedExpiry() -> Date? {
         switch expiryPopup.indexOfSelectedItem {
         case 1:
@@ -530,51 +448,6 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
                                        atomically: false)
     }
 
-    private func selectCertificate(_ certificate: CertificateRef?,
-                                   identity: IdentityRef?,
-                                   environment: Environment,
-                                   message: String? = nil) {
-        self.hub?.disconnect()
-        self.hub = nil
-
-        disableButtons()
-
-        Logger.logInfo("Disconnected from APN")
-
-        selectedCertificate = certificate
-        updateTokenCombo()
-
-        if let cert = certificate {
-            let environment: Environment = selectedEnvironment(for: cert)
-            let summary = SecTools.summary(withCertificate: cert)
-
-            Logger.logInfo("\(message ?? "Connecting to APN..."), \(summary), \(environment) ")
-
-            serial?.async {
-                guard
-                    let ident = identity ?? (try? SecTools.keychainIdentity(withCertificate: certificate))
-                    else { return }
-
-                let hub = try? Hub.connect(with: self,
-                                           identity: ident as IdentityRef,
-                                           environment: environment)
-
-                DispatchQueue.main.async {
-                    if hub != nil {
-                        Logger.logInfo("Connected \(summary), \(environment) ")
-                        self.hub = hub
-                        self.enableButtons(forCertificate: cert,
-                                           environment: environment)
-                    } else {
-                        Logger.logWarn("Unable to connect")
-                        hub?.disconnect()
-                        self.certificatePopup.selectItem(at: 0)
-                    }
-                }
-            }
-        }
-    }
-
     private func selectToken(_ token: String, certificate: CertificateRef) -> Bool {
         guard
             var tokens = self.tokens(withCertificate: certificate, create: true)
@@ -606,71 +479,6 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             textView === payloadView {
             updatePayloadCounter()
         }
-    }
-
-    private func tokens(withCertificate certificate: CertificateRef,
-                        create: Bool) -> [AnyHashable]? {
-        guard
-            let cert = selectedCertificate
-            else { return nil }
-
-        let environment = selectedEnvironment(for: cert)
-        let summary = SecTools.summary(withCertificate: certificate)
-        let identifier: String
-
-        if environment == .sandbox {
-            identifier = "\(summary)-sandbox"
-        } else {
-            identifier="\(summary)"
-        }
-
-        var result: Any?
-
-        guard
-            //            NSArray *result = _config[@"identifiers"][identifier];
-            var config = config[identifier] as? [AnyHashable: Any]
-            else { return nil }
-
-        result = config[identifier]
-
-        if create && (result != nil) {
-            result = config[identifier]
-        }
-
-        if !(result is [AnyHashable]) {
-            result = config[identifier] = result
-        }
-
-        return (result as? [AnyHashable]) ?? [AnyHashable]()
-    }
-
-    private func updateCertificatePopup() {
-        var suffix = " "
-
-        certificatePopup.removeAllItems()
-        certificatePopup.addItem(withTitle: "Select Push Certificate")
-
-        let formatter = DateFormatter()
-
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-
-        for pair: [Any] in certificateIdentityPairs {
-            let certificate = pair[0] as CertificateRef
-            let hasIdentity: Bool = !(pair[1] is NSNull)
-            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
-            var summary: NSString?
-            let certType: CertType = SecTools.type(withCertificate: certificate, summary: &summary)
-            let date: Date? = SecTools.expiration(withCertificate: certificate)
-            let expire = "  [\((date != nil) ? formatter.string(from: date ?? Date()) : "expired")]"
-
-            certificatePopup.addItem(withTitle: "\(hasIdentity ? "imported: " : "")\(summary ?? "")"
-                + " (\(certType) \(environmentOptions))\(expire)\(suffix)")
-
-            suffix += " "
-        }
-
-        certificatePopup.addItem(withTitle: "Import PKCS #12 file (.p12)...")
     }
 
     private func updatePayloadCounter() {
@@ -745,109 +553,5 @@ extension AppDelegate: LoggerDelegate {
                 }
             }
         }
-    }
-}
-
-extension AppDelegate: HubDelegate {
-    public func notification(_ notification: Notification?,
-                             didFailWithError error: Error) {
-        DispatchQueue.main.async {
-            if let notification = notification {
-                Logger.logInfo("""
-                    failed notification: \(notification.payload),
-                    \(notification.token),
-                    \(notification.identifier),
-                    \(String(describing: notification.expires)),
-                    \(notification.priority)
-                    """)
-                Logger.logWarn("Notification error: \(error.localizedDescription)")
-            }
-        }
-    }
-}
-
-extension AppDelegate {
-    private func obtainPassword(for url: URL) -> String? {
-        let alert = NSAlert()
-        let text = "Enter password for “\(url.lastPathComponent)”:"
-
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
-        alert.informativeText = ""
-        alert.messageText = text
-
-        self.inputDiscreet = NSSecureTextField(frame: NSRect(x: 70, y: 25, width: 200, height: 24))
-        self.inputNonDiscreet = NSTextField(frame: NSRect(x: 70, y: 25, width: 200, height: 24))
-
-        let label = NSTextField(frame: NSRect(x: 0, y: 30, width: 65, height: 18))
-
-        label.drawsBackground = false
-        label.isBezeled = false
-        label.isEditable = false
-        label.isSelectable = false
-        label.stringValue = "Password:"
-
-        let checkBox = NSButton(frame: NSRect(x: 70, y: 4, width: 120, height: 18))
-
-        checkBox.action = #selector(self.swapTextInputFields)
-        checkBox.setButtonType(.switch)
-        checkBox.title = "Show password"
-
-        let passwordInputView = NSView(frame: NSRect(x: 0, y: 0, width: 330, height: 64))
-
-        guard
-            let inputSecure = self.inputDiscreet,
-            let inputNotSecure = self.inputNonDiscreet
-            else { return nil }
-
-        passwordInputView.addSubview(inputSecure)
-        passwordInputView.addSubview(inputNotSecure)
-        passwordInputView.addSubview(checkBox)
-        passwordInputView.addSubview(label)
-
-        self.inputNonDiscreet?.isHidden = true
-
-        alert.accessoryView = passwordInputView
-
-        let button: NSApplication.ModalResponse = alert.runModal()
-
-        if button.rawValue != NSApplication.ModalResponse.alertFirstButtonReturn.rawValue {
-            return nil
-        }
-
-        return visibleInputField()?.stringValue
-    }
-
-    @objc
-    private func swapTextInputFields(_ sender: NSButton) {
-        switch sender.state {
-        case .off :
-            if let text = inputNonDiscreet?.stringValue {
-                inputDiscreet?.stringValue = text
-            }
-
-            inputDiscreet?.isHidden = false
-            inputNonDiscreet?.isHidden = true
-
-        case .on:
-            if let text = inputDiscreet?.stringValue {
-                inputNonDiscreet?.stringValue = text
-            }
-
-            inputDiscreet?.isHidden = true
-            inputNonDiscreet?.isHidden = false
-
-        default:
-            inputDiscreet?.isHidden = false
-            inputNonDiscreet?.isHidden = true
-        }
-    }
-
-    private func visibleInputField() -> NSControl? {
-        if let inputField = inputDiscreet, inputField.isHidden {
-            return inputNonDiscreet
-        }
-
-        return inputDiscreet
     }
 }

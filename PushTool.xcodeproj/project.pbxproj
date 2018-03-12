@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		81DF3C5E9D087F8C2B4E4046300A9B3B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FB6C28D74201C0A3B40E9B18638495B7 /* .gitignore */; };
 		F2D9F425994277D0842A0FB31F0935EA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 30403D9FD79A1147A989E3ABDDE6AA42 /* .swiftlint.yml */; };
+		62833AC3DE5EE1B0A2336A0530CDA718 /* AppDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2851D2D9A1874674F15310FE47E7827F /* AppDelegate+Extensions.swift */; };
 		AE193567D75E76CF61F13AC28A990CAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0962F03D679EF8AC82C82F3C3368B4 /* AppDelegate.swift */; };
 		B690AD243149468C288B00D71FDDEC80 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */; };
 		7E2B7E0C72C15A3456C67951A25FA156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
@@ -25,6 +26,8 @@
 		CFFE59C3FD75CE9244A729F237874C4F /* Pusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */; };
 		F7A767F9F27AFCD906C64FCA1C104CEC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */; };
 		F0FDC8711B0A90794A79DE9C4C014584 /* SSLConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F6BD645B697A446E130DBD6A1047DA /* SSLConnection.swift */; };
+		D8AE9E035E95F9984C87311877599908 /* SSLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAAAE85284C94C6A533BDB28712156B /* SSLError.swift */; };
+		B4DB089212E5E7B4267E17C70EA073FC /* SecIdentityTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5469D13B5E0974B13B73B9E29596D43 /* SecIdentityTools.swift */; };
 		EC06F5F7E1A9627FDC6A58A9938387D1 /* SecTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F5369E55852A49894F76692217563 /* SecTools.swift */; };
 		86BA76B7CAD3B167EACFCCAB234D4727 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658F71FE87626920A3229836F8D66988 /* Security.framework */; };
 		48A725C10785F415B27A44113D6F2ECE /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */; };
@@ -48,6 +51,7 @@
 /* Begin PBXFileReference section */
 		FB6C28D74201C0A3B40E9B18638495B7 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		30403D9FD79A1147A989E3ABDDE6AA42 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		2851D2D9A1874674F15310FE47E7827F /* AppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Extensions.swift"; sourceTree = "<group>"; };
 		9C0962F03D679EF8AC82C82F3C3368B4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A347CF633AC3D0CDE521B7D62A20A804 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E020A7134FAA38CB633FAD318BEC8BC8 /* Application.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 		891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pusher.swift; sourceTree = "<group>"; };
 		DFFCD34B97EB589039FA2F46C7E6F081 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		F2F6BD645B697A446E130DBD6A1047DA /* SSLConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLConnection.swift; sourceTree = "<group>"; };
+		EBAAAE85284C94C6A533BDB28712156B /* SSLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLError.swift; sourceTree = "<group>"; };
+		A5469D13B5E0974B13B73B9E29596D43 /* SecIdentityTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecIdentityTools.swift; sourceTree = "<group>"; };
 		493F5369E55852A49894F76692217563 /* SecTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecTools.swift; sourceTree = "<group>"; };
 		658F71FE87626920A3229836F8D66988 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
@@ -166,6 +172,7 @@
 		B1D116BD7DFDFD66849644CDAAEE17CA /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				2851D2D9A1874674F15310FE47E7827F /* AppDelegate+Extensions.swift */,
 				9C0962F03D679EF8AC82C82F3C3368B4 /* AppDelegate.swift */,
 				A72095B91071C6D557C03C6392C4A27D /* CertType.swift */,
 				5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */,
@@ -177,6 +184,8 @@
 				82E374DF8D0EE973C422FF62E0185B2F /* PushFeedback.swift */,
 				891FB75E76772E6DBD6B5AE5CD087511 /* Pusher.swift */,
 				F2F6BD645B697A446E130DBD6A1047DA /* SSLConnection.swift */,
+				EBAAAE85284C94C6A533BDB28712156B /* SSLError.swift */,
+				A5469D13B5E0974B13B73B9E29596D43 /* SecIdentityTools.swift */,
 				493F5369E55852A49894F76692217563 /* SecTools.swift */,
 				1FAE6CB6660E993878E18FB5F36BC3E0 /* Type.swift */,
 			);
@@ -239,7 +248,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = "";
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Andela;
 				TargetAttributes = {
 					6436C01A46910FD5B912843690E06CCB = {
@@ -368,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62833AC3DE5EE1B0A2336A0530CDA718 /* AppDelegate+Extensions.swift in Sources */,
 				AE193567D75E76CF61F13AC28A990CAD /* AppDelegate.swift in Sources */,
 				FC6221AD8155C63283EE262C9C85B68C /* CertType.swift in Sources */,
 				0B6DE2089468F8BA32E38F9F73A47BDA /* Environment.swift in Sources */,
@@ -379,6 +389,8 @@
 				3906D14BC2E4944C764FB0919266FEFA /* PushFeedback.swift in Sources */,
 				CFFE59C3FD75CE9244A729F237874C4F /* Pusher.swift in Sources */,
 				F0FDC8711B0A90794A79DE9C4C014584 /* SSLConnection.swift in Sources */,
+				D8AE9E035E95F9984C87311877599908 /* SSLError.swift in Sources */,
+				B4DB089212E5E7B4267E17C70EA073FC /* SecIdentityTools.swift in Sources */,
 				EC06F5F7E1A9627FDC6A58A9938387D1 /* SecTools.swift in Sources */,
 				48A725C10785F415B27A44113D6F2ECE /* Type.swift in Sources */,
 			);
@@ -407,6 +419,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E73FD753D1D6F5D6A6FD912629D760A5 /* ProjectDebug.xcconfig */;
 			buildSettings = {
+				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
 		};

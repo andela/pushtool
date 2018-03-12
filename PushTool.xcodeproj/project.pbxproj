@@ -15,6 +15,7 @@
 		7E2B7E0C72C15A3456C67951A25FA156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9725BE8AFC926D48D7533C2C3092D064 /* Assets.xcassets */; };
 		FC6221AD8155C63283EE262C9C85B68C /* CertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72095B91071C6D557C03C6392C4A27D /* CertType.swift */; };
 		D9772FD17EAAAFE51A6308D7BAFCE1C5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */; };
+		E10E6512970F9CD3A57A231697140A47 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BF97E40CF1A3D7A88F714F6DD22CC /* Data+Extensions.swift */; };
 		0B6DE2089468F8BA32E38F9F73A47BDA /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */; };
 		767E4C32B7E98CF92A75C5FA78989A6C /* EnvironmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */; };
 		3C95050B2DAB39B806E34999B31C860D /* Hub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F0A205C77E96099A9E06389415C77 /* Hub.swift */; };
@@ -59,6 +60,7 @@
 		A72095B91071C6D557C03C6392C4A27D /* CertType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertType.swift; sourceTree = "<group>"; };
 		68B8C88C8CCDA2336792483F1A3D39AF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E25C88EDA18E4F75C357A78A2C68CC91 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		247BF97E40CF1A3D7A88F714F6DD22CC /* Data+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentOptions.swift; sourceTree = "<group>"; };
 		7AA67947B20FF0B0AEE0F10EA2BC5E0E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -175,6 +177,7 @@
 				2851D2D9A1874674F15310FE47E7827F /* AppDelegate+Extensions.swift */,
 				9C0962F03D679EF8AC82C82F3C3368B4 /* AppDelegate.swift */,
 				A72095B91071C6D557C03C6392C4A27D /* CertType.swift */,
+				247BF97E40CF1A3D7A88F714F6DD22CC /* Data+Extensions.swift */,
 				5EF64B2B6C7FDADC99FAF94F5888CE4A /* Environment.swift */,
 				049FC01005B5DD7BA19D84C34AF8C9E2 /* EnvironmentOptions.swift */,
 				E75F0A205C77E96099A9E06389415C77 /* Hub.swift */,
@@ -380,6 +383,7 @@
 				62833AC3DE5EE1B0A2336A0530CDA718 /* AppDelegate+Extensions.swift in Sources */,
 				AE193567D75E76CF61F13AC28A990CAD /* AppDelegate.swift in Sources */,
 				FC6221AD8155C63283EE262C9C85B68C /* CertType.swift in Sources */,
+				E10E6512970F9CD3A57A231697140A47 /* Data+Extensions.swift in Sources */,
 				0B6DE2089468F8BA32E38F9F73A47BDA /* Environment.swift in Sources */,
 				767E4C32B7E98CF92A75C5FA78989A6C /* EnvironmentOptions.swift in Sources */,
 				3C95050B2DAB39B806E34999B31C860D /* Hub.swift in Sources */,

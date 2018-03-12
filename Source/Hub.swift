@@ -166,49 +166,27 @@ public class Hub {
         return UInt(count)
     }
 
-    // TODO: refactor to use signature:
-    //
-    //      public func readFailed(autoReconnect: Bool) throws -> Notification? {}
-
-    public func readFailed(_ notifications: AutoreleasingUnsafeMutablePointer<Notification?>?,
-                           autoReconnect reconnect: Bool) throws -> Notification? {
+    public func readFailed(autoReconnect reconnect: Bool) throws -> Notification? {
         let identifier: UInt = 0
-        var apnError: NSError?
-        var id = Int(identifier)
-        
-        try pusher.readFailedIdentifier(&id, apnError: &apnError)
-        
+
+        let failedIdentifier = try pusher.readFailedIdentifier()
+
+        let apnError = failedIdentifier.apnError
+
         if let apnError = apnError {
             let notification: Notification? = notificationForIdentifier[identifier]?.0
-            
+
             delegate?.notification(notification, didFailWithError: apnError)
-            
+
             if reconnect {
                 try self.reconnect()
             }
-        }
-    }
-    
-//    public func readFailed(_ notifications: AutoreleasingUnsafeMutablePointer<Notification?>?,
-//                           autoReconnect reconnect: Bool) throws {
-//        let identifier: UInt = 0
-//        var apnError: NSError?
-//        var id = Int(identifier)
-//
-//        try pusher.readFailedIdentifier(&id, apnError: &apnError)
-//
-//        if let apnError = apnError {
-//            let notification: Notification? = notificationForIdentifier[identifier]?.0
-//
-//            delegate?.notification(notification, didFailWithError: apnError)
-//
-//            if reconnect {
-//                try self.reconnect()
-//            }
-//        }
-//    }
 
-    // TODO: refactor signature to something less ugly
+            return notification
+        }
+
+        return nil
+    }
 
     public func readFailed(_ notifications: inout [Any]?,
                            max: Int,
@@ -216,8 +194,7 @@ public class Hub {
         var failed: [Any] = []
 
         for _ in 0..<max {
-            var notification: Notification?
-            try readFailed(&notification, autoReconnect: reconnect)
+            let notification: Notification? = try readFailed(autoReconnect: reconnect)
 
             guard
                 let aNotification = notification

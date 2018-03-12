@@ -379,10 +379,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
                 self.serial?.asyncAfter(deadline: popTime) {
                     do {
-                        var failed: Notification?
-
-                        try self.hub?.readFailed(&failed,
-                                                 autoReconnect: true)
+                        _ = try self.hub?.readFailed(autoReconnect: true)
 
                         Logger.logInfo("Payload has been pushed")
                     } catch {

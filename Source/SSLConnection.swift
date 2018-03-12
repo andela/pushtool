@@ -61,89 +61,45 @@ public class SSLConnection {
         }
     }
 
-    // TODO: refactor to have this signature:
-    //
-    //       public func read(_ data: NSMutableData) throws -> UInt {}
-
     public func read(_ data: NSMutableData) throws -> UInt {
         guard
             let context = self.context
             else { return 0 }
-        
+
         var processed = Int(0)
-        var dataMutable = data
-        
+
         let status = SSLRead(context,
-                             data.withUnsafeMutableBytes,
-                             data.count,
+                             data.mutableBytes,
+                             data.length,
                              &processed)
-        
-        length.pointee = UInt(processed)
-        
+
+        let length = UInt(processed)
+
         switch status {
         case errSecIO:
             throw PushError.readDroppedByServer
-            
+
         case errSecSuccess,
              errSSLWouldBlock:
-            return
-            
+            return length
+
         case errSSLClosedAbort:
             throw PushError.readClosedAbort
-            
+
         case errSSLClosedGraceful:
             throw PushError.readClosedGraceful
-            
+
         default:
             throw PushError.readFail
         }
     }
-    
-//    public func read(_ data: Data,
-//                     length: UnsafeMutablePointer<UInt>) throws {
-//        guard
-//            let context = self.context
-//            else { return }
-//
-//        var processed = Int(0)
-//        var dataMutable = data
-//
-//        let status = SSLRead(context,
-//                             data.withUnsafeMutableBytes,
-//                             data.count,
-//                             &processed)
-//
-//        length.pointee = UInt(processed)
-//
-//        switch status {
-//        case errSecIO:
-//            throw PushError.readDroppedByServer
-//
-//        case errSecSuccess,
-//             errSSLWouldBlock:
-//            return
-//
-//        case errSSLClosedAbort:
-//            throw PushError.readClosedAbort
-//
-//        case errSSLClosedGraceful:
-//            throw PushError.readClosedGraceful
-//
-//        default:
-//            throw PushError.readFail
-//        }
-//    }
 
-    // TODO: refactor to have this signature:
-    //
-    //       public func write(_ data: NSData) throws -> UInt {}
-
-    public func write(_ data: NSData,
-                      length: UnsafeMutablePointer<UInt>) throws {
+    public func write(_ data: NSData) throws -> UInt? {
         guard
             let context = self.context
-            else { return }
+            else { return nil }
 
+        var length: UInt?
         var processed = Int(0)
 
         let status = SSLWrite(context,
@@ -151,7 +107,7 @@ public class SSLConnection {
                               data.length,
                               &processed)
 
-        length.pointee = UInt(processed)
+        length = UInt(processed)
 
         switch status {
         case errSecIO:
@@ -159,7 +115,7 @@ public class SSLConnection {
 
         case errSecSuccess,
              errSSLWouldBlock:
-            return
+            return length
 
         case errSSLClosedAbort:
             throw PushError.writeClosedAbort

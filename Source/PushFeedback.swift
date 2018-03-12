@@ -89,13 +89,11 @@ public class PushFeedback {
             let data = NSMutableData(length: dataSize)
             else { return (Data(), Date()) }
 
-        var length: UInt = 0
+        let length = try connection?.read(data)
 
-        try connection?.read(data as Data, length: &length)
-
-        if length != data.length {
-            throw PushError.feedbackLength
-        }
+        guard let dataLength = length,
+            dataLength != data.length
+        else { throw PushError.feedbackLength }
 
         var time: UInt32 = 0
 
@@ -114,7 +112,7 @@ public class PushFeedback {
         }
 
         let token = data.subdata(with: NSRange(location: 6,
-                                               length: Int(length - 6)))
+                                               length: Int(dataLength - 6)))
 
         return (token, date)
     }

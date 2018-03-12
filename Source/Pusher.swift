@@ -75,12 +75,10 @@ public class Pusher {
         guard let connection = self.connection
             else { return }
 
-        var length: UInt = 0
+        let length = try connection.write(data as NSData)
 
-        try connection.write(data as NSData,
-                             length: &length)
-
-        if length != data.count {
+        if let length = length,
+            length != data.count {
             throw PushError.pushWriteFail
         }
     }
@@ -97,89 +95,39 @@ public class Pusher {
         try self.pushNotification(notification)
     }
 
-    // TODO: refactor to have signature:
-    //
-    //      public func readFailedIdentifier() throws -> (Int, Error) {}
-    
-    public func readFailedIdentifier(_ identifier: Int,
-                                     apnError: Error) throws -> (Int, Error) {
-        
+    public func readFailedIdentifier() throws -> (identifier: Int, apnError: Error?) {
         let length = UInt((UInt8.bitWidth * 2) / 8 + (UInt32.bitWidth) / 8 )
         let data = NSMutableData(length: Int(length))
-        
+
         if let data = data {
-            var len: UInt = 0
-            try self.connection?.read(data as Data,
-                                      length: &len)
-            
+            let len = try self.connection?.read(data)
+
             if len == 0 {
-                return (0, apnError)
+                return (0, nil)
             }
         }
-        
+
         var command: UInt8 = 0
-        
+
         data?.getBytes(&command,
                        range: NSRange(location: 0, length: 1))
-        
+
         if command != 8 {
             throw PushError.pushResponseCommand
         }
-        
+
         var status: UInt8 = 0
-        
+
         data?.getBytes(&status,
                        range: NSRange(location: 1, length: 1))
-        
+
         var ident: UInt32 = 0
-        
+
         data?.getBytes(&ident,
                        range: NSRange(location: 2, length: 4))
-        
+
         return (Int(UInt32(bigEndian: ident)), error(for: Int(status)) as NSError)
     }
-//
-//    public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<Int>,
-//                                     apnError: ErrorPointer) throws {
-//        identifier.pointee = 0
-//        apnError?.pointee = nil
-//
-//        let length = UInt((UInt8.bitWidth * 2) / 8 + (UInt32.bitWidth) / 8 )
-//        let data = NSMutableData(length: Int(length))
-//
-//        if let data = data {
-//            var len: UInt = 0
-//            try self.connection?.read(data,
-//                                      length: &len)
-//
-//            if len == 0 {
-//                return
-//            }
-//        }
-//
-//        var command: UInt8 = 0
-//
-//        data?.getBytes(&command,
-//                       range: NSRange(location: 0, length: 1))
-//
-//        if command != 8 {
-//            throw PushError.pushResponseCommand
-//        }
-//
-//        var status: UInt8 = 0
-//
-//        data?.getBytes(&status,
-//                       range: NSRange(location: 1, length: 1))
-//
-//        var ident: UInt32 = 0
-//
-//        data?.getBytes(&ident,
-//                       range: NSRange(location: 2, length: 4))
-//
-//        identifier.pointee = Int(UInt32(bigEndian: ident))
-//
-//        apnError?.pointee = error(for: Int(status)) as NSError
-//    }
 
     public func reconnect() throws {
         try self.connection?.connect()

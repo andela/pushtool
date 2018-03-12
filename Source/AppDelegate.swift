@@ -207,7 +207,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func enableButtons(forCertificate certificate: CertificateRef, environment: Environment) {
-        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
         let shouldEnableEnvButton: Bool = environmentOptions == .any
         let shouldSelectSandboxEnv: Bool = environment == .sandbox
         pushButton.isEnabled = true
@@ -255,7 +255,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func identifier(withCertificate certificate: CertificateRef) -> String {
-        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
         let summary: String = SecTools.summary(with: certificate)
 
         return "\(summary)-\(environmentOptions)"
@@ -334,8 +334,8 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         certs = certs.sorted {(_ optA: CertificateRef, _ optB: CertificateRef) -> Bool in
-            let envOptionsA: EnvironmentOptions = SecTools.environmentOptions(forCertificate: optA as CertificateRef)
-            let envOptionsB: EnvironmentOptions = SecTools.environmentOptions(forCertificate: optB as CertificateRef)
+            let envOptionsA: EnvironmentOptions = SecTools.environmentOptions(for: optA as CertificateRef)
+            let envOptionsB: EnvironmentOptions = SecTools.environmentOptions(for: optB as CertificateRef)
 
             if envOptionsA != envOptionsB {
                 return envOptionsA < envOptionsB
@@ -379,7 +379,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func preferredEnvironment(for certificate: CertificateRef) -> Environment {
-        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
 
         return environmentOptions == .sandbox ? .sandbox : .production
     }
@@ -655,7 +655,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         for pair: [Any] in certificateIdentityPairs {
             let certificate = pair[0] as CertificateRef
             let hasIdentity: Bool = !(pair[1] is NSNull)
-            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
 
             let result = SecTools.type(with: certificate)
 

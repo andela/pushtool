@@ -31,7 +31,7 @@ public class SecTools {
         return certificate
     }
 
-    public class func environmentOptions(forCertificate certificate: CertificateRef) -> EnvironmentOptions {
+    public class func environmentOptions(for certificate: CertificateRef) -> EnvironmentOptions {
         let result = self.type(with: certificate)
 
         switch result.certType {
@@ -60,7 +60,7 @@ public class SecTools {
             let certificate: CertificateRef = try? self.certificate(with: identity as IdentityRef) as CertificateRef
             else { return .sandbox }
 
-        return self.environmentOptions(forCertificate: certificate)
+        return self.environmentOptions(for: certificate)
     }
 
     public class func expiration(with certificate: Any) -> Date? {

@@ -65,39 +65,74 @@ public class SSLConnection {
     //
     //       public func read(_ data: NSMutableData) throws -> UInt {}
 
-    public func read(_ data: NSMutableData,
-                     length: UnsafeMutablePointer<UInt>) throws {
+    public func read(_ data: NSMutableData) throws -> UInt {
         guard
             let context = self.context
-            else { return }
-
+            else { return 0 }
+        
         var processed = Int(0)
-
+        var dataMutable = data
+        
         let status = SSLRead(context,
-                             data.mutableBytes,
-                             data.length,
+                             data.withUnsafeMutableBytes,
+                             data.count,
                              &processed)
-
+        
         length.pointee = UInt(processed)
-
+        
         switch status {
         case errSecIO:
             throw PushError.readDroppedByServer
-
+            
         case errSecSuccess,
              errSSLWouldBlock:
             return
-
+            
         case errSSLClosedAbort:
             throw PushError.readClosedAbort
-
+            
         case errSSLClosedGraceful:
             throw PushError.readClosedGraceful
-
+            
         default:
             throw PushError.readFail
         }
     }
+    
+//    public func read(_ data: Data,
+//                     length: UnsafeMutablePointer<UInt>) throws {
+//        guard
+//            let context = self.context
+//            else { return }
+//
+//        var processed = Int(0)
+//        var dataMutable = data
+//
+//        let status = SSLRead(context,
+//                             data.withUnsafeMutableBytes,
+//                             data.count,
+//                             &processed)
+//
+//        length.pointee = UInt(processed)
+//
+//        switch status {
+//        case errSecIO:
+//            throw PushError.readDroppedByServer
+//
+//        case errSecSuccess,
+//             errSSLWouldBlock:
+//            return
+//
+//        case errSSLClosedAbort:
+//            throw PushError.readClosedAbort
+//
+//        case errSSLClosedGraceful:
+//            throw PushError.readClosedGraceful
+//
+//        default:
+//            throw PushError.readFail
+//        }
+//    }
 
     // TODO: refactor to have this signature:
     //

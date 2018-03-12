@@ -171,23 +171,42 @@ public class Hub {
     //      public func readFailed(autoReconnect: Bool) throws -> Notification? {}
 
     public func readFailed(_ notifications: AutoreleasingUnsafeMutablePointer<Notification?>?,
-                           autoReconnect reconnect: Bool) throws {
+                           autoReconnect reconnect: Bool) throws -> Notification? {
         let identifier: UInt = 0
         var apnError: NSError?
         var id = Int(identifier)
-
+        
         try pusher.readFailedIdentifier(&id, apnError: &apnError)
-
+        
         if let apnError = apnError {
             let notification: Notification? = notificationForIdentifier[identifier]?.0
-
+            
             delegate?.notification(notification, didFailWithError: apnError)
-
+            
             if reconnect {
                 try self.reconnect()
             }
         }
     }
+    
+//    public func readFailed(_ notifications: AutoreleasingUnsafeMutablePointer<Notification?>?,
+//                           autoReconnect reconnect: Bool) throws {
+//        let identifier: UInt = 0
+//        var apnError: NSError?
+//        var id = Int(identifier)
+//
+//        try pusher.readFailedIdentifier(&id, apnError: &apnError)
+//
+//        if let apnError = apnError {
+//            let notification: Notification? = notificationForIdentifier[identifier]?.0
+//
+//            delegate?.notification(notification, didFailWithError: apnError)
+//
+//            if reconnect {
+//                try self.reconnect()
+//            }
+//        }
+//    }
 
     // TODO: refactor signature to something less ugly
 

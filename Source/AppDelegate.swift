@@ -183,7 +183,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         for pair: [Any] in certificateIdentityPairs {
             let certificate = pair[0] as CertificateRef
             let hasIdentity: Bool = !(pair[1] is NSNull)
-            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
 
             let result = SecTools.type(with: certificate)
 

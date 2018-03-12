@@ -129,8 +129,8 @@ extension AppDelegate {
         }
 
         certs = certs.sorted {(_ optA: CertificateRef, _ optB: CertificateRef) -> Bool in
-            let envOptionsA: EnvironmentOptions = SecTools.environmentOptions(forCertificate: optA as CertificateRef)
-            let envOptionsB: EnvironmentOptions = SecTools.environmentOptions(forCertificate: optB as CertificateRef)
+            let envOptionsA: EnvironmentOptions = SecTools.environmentOptions(for: optA as CertificateRef)
+            let envOptionsB: EnvironmentOptions = SecTools.environmentOptions(for: optB as CertificateRef)
 
             if envOptionsA != envOptionsB {
                 return envOptionsA < envOptionsB

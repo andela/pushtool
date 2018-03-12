@@ -91,7 +91,7 @@ public class Pusher {
         let notification = Notification(payload: payload,
                                         token: token,
                                         identifier: identifier,
-                                        expiration: nil,
+                                        expires: nil,
                                         priority: 0)
 
         try self.pushNotification(notification)

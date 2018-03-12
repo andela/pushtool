@@ -443,7 +443,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let notification = Notification(payload: payload,
                                             token: token,
                                             identifier: 0,
-                                            expiration: expiry,
+                                            expires: expiry,
                                             priority: UInt(priority))
 
             do {

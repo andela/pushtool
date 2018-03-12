@@ -659,8 +659,12 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let certificate = pair[0] as CertificateRef
             let hasIdentity: Bool = !(pair[1] is NSNull)
             let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
-            var summary: NSString?
-            let certType: CertType = SecTools.type(withCertificate: certificate, summary: &summary)
+
+            let result = SecTools.type(with: certificate)
+
+            let certType = result.certType
+            let summary = result.summary
+
             let date: Date? = SecTools.expiration(withCertificate: certificate)
             let expire = "  [\((date != nil) ? formatter.string(from: date ?? Date()) : "expired")]"
 

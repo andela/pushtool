@@ -32,8 +32,9 @@ public class SecTools {
     }
 
     public class func environmentOptions(forCertificate certificate: CertificateRef) -> EnvironmentOptions {
-        switch (self.type(withCertificate: certificate,
-                          summary: nil) ) {
+        let result = self.type(with: certificate)
+
+        switch (result.certType) {
         case .iosDevelopment,
              .macDevelopment:
             return .sandbox
@@ -152,8 +153,10 @@ public class SecTools {
     }
 
     public class func isPushCertificate(_ certificate: CertificateRef) -> Bool {
-        switch (self.type(withCertificate: certificate,
-                          summary: nil)) {
+
+         let result = self.type(with: certificate)
+
+        switch (result.certType) {
         case .iosDevelopment,
              .iosProduction,
              .macDevelopment,
@@ -227,23 +230,18 @@ public class SecTools {
     }
 
     public class func summary(withCertificate certificate: CertificateRef) -> String {
-        var result: NSString?
 
-        _ = self.type(withCertificate: certificate,
-                      summary: &result)
+        let result = self.type(with: certificate)
 
-        guard let resultValue = result else {
+        guard let resultValue = result.summary else {
             return ""
         }
 
-        return resultValue as String
+        return resultValue
     }
 
-    public class func type(withCertificate certificate: CertificateRef,
-                           summary: AutoreleasingUnsafeMutablePointer<NSString?>?) -> CertType {
-        if summary != nil {
-            summary?.pointee = nil
-        }
+    public class func type(with certificate: CertificateRef) -> (certType: CertType, summary: String? ) {
+        var summary: String?
 
         let name: String? = self.plainSummary(withCertificate: certificate)
 
@@ -254,19 +252,16 @@ public class SecTools {
                 name.hasPrefix(prefix)
                 else { continue }
 
-            if let summary = summary {
-                summary.pointee = name.dropFirst(prefix.count) as NSString
-            }
+                summary = String(name.dropFirst(prefix.count) )
 
-            return  certType
+            return  (certType, summary)
         }
 
-        if let summary = summary,
-            let name = name {
-            summary.pointee = name as NSString
+        if let name = name {
+            summary = name
         }
 
-        return .unknown
+        return (.unknown, summary)
     }
 
     public class func values(withCertificate certificate: Any,

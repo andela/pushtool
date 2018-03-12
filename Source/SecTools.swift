@@ -13,7 +13,7 @@ public class SecTools {
                                             data as CFData)
     }
 
-    public class func certificate(withIdentity identity: IdentityRef?) throws -> CertificateRef {
+    public class func certificate(with identity: IdentityRef?) throws -> CertificateRef {
         var cert: SecCertificate?
         var status: OSStatus
 
@@ -34,7 +34,7 @@ public class SecTools {
     public class func environmentOptions(forCertificate certificate: CertificateRef) -> EnvironmentOptions {
         let result = self.type(with: certificate)
 
-        switch (result.certType) {
+        switch result.certType {
         case .iosDevelopment,
              .macDevelopment:
             return .sandbox
@@ -57,25 +57,25 @@ public class SecTools {
 
     public class func environmentOptions(forIdentity identity: Any) -> EnvironmentOptions {
         guard
-            let certificate: CertificateRef = try? self.certificate(withIdentity: identity as IdentityRef) as CertificateRef
+            let certificate: CertificateRef = try? self.certificate(with: identity as IdentityRef) as CertificateRef
             else { return .sandbox }
 
         return self.environmentOptions(forCertificate: certificate)
     }
 
-    public class func expiration(withCertificate certificate: Any) -> Date? {
+    public class func expiration(with certificate: Any) -> Date? {
         return self.value(withCertificate: certificate as CertificateRef,
                           key: kSecOIDInvalidityDate) as? Date
     }
 
-    public class func identities(withPKCS12Data pkcs12: Data,
+    public class func identities(with pkcs12: Data,
                                  password: String?) throws -> [Any] {
         guard
             !pkcs12.isEmpty
             else { throw PushError.pkcs12EmptyData }
 
         guard
-            let dicts = try self.allIdentitities(withPKCS12Data: pkcs12,
+            let dicts = try self.allIdentitities(with: pkcs12,
                                                  password: password)
             else { return [] }
 
@@ -86,7 +86,7 @@ public class SecTools {
                 let identity = dict[kSecImportItemIdentity]
                 else { continue }
 
-            let certificate = try self.certificate(withIdentity: identity as IdentityRef)
+            let certificate = try self.certificate(with: identity as IdentityRef)
 
             if isPushCertificate(certificate) {
                 _ = try self.key(withIdentity: identity)
@@ -100,7 +100,7 @@ public class SecTools {
 
     public class func identity(withPKCS12Data pkcs12: Data,
                                password: String) throws -> Any {
-        let identities = try self.identities(withPKCS12Data: pkcs12,
+        let identities = try self.identities(with: pkcs12,
                                              password: password)
 
         if identities.isEmpty {
@@ -153,10 +153,9 @@ public class SecTools {
     }
 
     public class func isPushCertificate(_ certificate: CertificateRef) -> Bool {
-
          let result = self.type(with: certificate)
 
-        switch (result.certType) {
+        switch result.certType {
         case .iosDevelopment,
              .iosProduction,
              .macDevelopment,
@@ -205,7 +204,7 @@ public class SecTools {
         return certificates
     }
 
-    public class func keychainIdentity(withCertificate certificate: Any?) throws -> Any {
+    public class func keychainIdentity(with certificate: Any?) throws -> Any {
         var ident: SecIdentity?
 
         var status: OSStatus
@@ -229,8 +228,7 @@ public class SecTools {
         return id
     }
 
-    public class func summary(withCertificate certificate: CertificateRef) -> String {
-
+    public class func summary(with certificate: CertificateRef) -> String {
         let result = self.type(with: certificate)
 
         guard let resultValue = result.summary else {
@@ -243,11 +241,11 @@ public class SecTools {
     public class func type(with certificate: CertificateRef) -> (certType: CertType, summary: String? ) {
         var summary: String?
 
-        let name: String? = self.plainSummary(withCertificate: certificate)
+        let name: String? = self.plainSummary(with: certificate)
 
         for certType in CertType.allTypes {
             guard
-                let prefix = self.prefix(withCertType: certType),
+                let prefix = self.prefix(with: certType),
                 let name = name,
                 name.hasPrefix(prefix)
                 else { continue }
@@ -264,7 +262,7 @@ public class SecTools {
         return (.unknown, summary)
     }
 
-    public class func values(withCertificate certificate: Any,
+    public class func values(with certificate: Any,
                              keys: [Any]) -> [AnyHashable: [AnyHashable: Any]]? {
         guard
             case let cert as SecCertificate = certificate
@@ -279,7 +277,7 @@ public class SecTools {
 
     // MARK: Private Instance Methods
 
-    private class func allIdentitities(withPKCS12Data pkc12: Data?,
+    private class func allIdentitities(with pkc12: Data?,
                                        password: String?) throws -> [[AnyHashable: Any]]? {
         var options: [AnyHashable: Any] = [:]
 
@@ -340,7 +338,7 @@ public class SecTools {
         return certificates
     }
 
-    public class func plainSummary(withCertificate certificate: CertificateRef?) -> String? {
+    public class func plainSummary(with certificate: CertificateRef?) -> String? {
         guard
             case let cert as SecCertificate = certificate,
             let summary = SecCertificateCopySubjectSummary(cert) as String?
@@ -349,7 +347,7 @@ public class SecTools {
         return summary
     }
 
-    private class func prefix(withCertType certType: CertType) -> String? {
+    private class func prefix(with certType: CertType) -> String? {
         switch certType {
         case .iosDevelopment:
             return "Apple Development IOS Push Services: "
@@ -385,7 +383,7 @@ public class SecTools {
 
     private class func value(withCertificate certificate: CertificateRef,
                              key: AnyHashable) -> Any? {
-        let values = self.values(withCertificate: certificate,
+        let values = self.values(with: certificate,
                                  keys: [key])
 
         return values?[key]?[kSecPropertyKeyValue]

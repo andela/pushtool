@@ -53,8 +53,7 @@ public class Pusher {
 
         let length = try connection.write(data as NSData)
 
-        if let length = length,
-            length != data.count {
+        if length != data.count {
             throw PushError.pushWriteFail
         }
     }
@@ -102,7 +101,8 @@ public class Pusher {
         data?.getBytes(&ident,
                        range: NSRange(location: 2, length: 4))
 
-        return (Int(UInt32(bigEndian: ident)), error(for: Int(status)) as NSError)
+        return (Int(UInt32(bigEndian: ident)),
+                error(for: Int(status)) as NSError)
     }
 
     public func reconnect() throws {

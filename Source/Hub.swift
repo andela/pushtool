@@ -169,12 +169,11 @@ public class Hub {
     public func readFailed(autoReconnect reconnect: Bool) throws -> Notification? {
         let identifier: UInt = 0
 
-        let failedIdentifier = try pusher.readFailedIdentifier()
-
-        let apnError = failedIdentifier.apnError
+        let failedPair = try pusher.readFailedIdentifier()
+        let apnError = failedPair.apnError
 
         if let apnError = apnError {
-            let notification: Notification? = notificationForIdentifier[identifier]?.0
+            let notification: Notification? = notificationForIdentifier[identifier]?.notification
 
             delegate?.notification(notification, didFailWithError: apnError)
 
@@ -217,7 +216,7 @@ public class Hub {
         let oldBefore = Date(timeIntervalSinceNow: -feedbackSpan)
 
         let filteredIdentifiers = notificationForIdentifier.filter { element in
-            let (_, date) = element.1
+            let (_, date) = element.value
             return oldBefore.compare(date) == .orderedDescending
         }
 
@@ -231,5 +230,5 @@ public class Hub {
 
     // MARK: Private Instance Properties
 
-    private var notificationForIdentifier: [UInt: (Notification, Date)] = [:]
+    private var notificationForIdentifier: [UInt: (notification: Notification, date: Date)] = [:]
 }

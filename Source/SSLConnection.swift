@@ -94,12 +94,12 @@ public class SSLConnection {
         }
     }
 
-    public func write(_ data: NSData) throws -> UInt? {
+    public func write(_ data: NSData) throws -> UInt {
         guard
             let context = self.context
-            else { return nil }
+            else { return 0 }
 
-        var length: UInt?
+        var length: UInt
         var processed = Int(0)
 
         let status = SSLWrite(context,

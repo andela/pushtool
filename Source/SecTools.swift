@@ -55,9 +55,9 @@ public class SecTools {
         }
     }
 
-    public class func environmentOptions(forIdentity identity: Any) -> EnvironmentOptions {
+    public class func environmentOptions(forIdentity identity: IdentityRef) -> EnvironmentOptions {
         guard
-            let certificate: CertificateRef = try? self.certificate(with: identity as IdentityRef) as CertificateRef
+            let certificate: CertificateRef = try? self.certificate(with: identity) as CertificateRef
             else { return .sandbox }
 
         return self.environmentOptions(for: certificate)

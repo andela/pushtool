@@ -17,14 +17,14 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet private var sandboxCheckBox: NSButton!
     @IBOutlet private var window: NSWindow!
 
-    // MARK: Public Instance Properties
+    // MARK: Internal Instance Properties
 
-    public var certificateIdentityPairs: [[Any]] = []
-    public var config: [AnyHashable: Any] = [:]
-    public var inputDiscreet: NSSecureTextField? = NSSecureTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
-    public var inputNonDiscreet: NSTextField? = NSTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
-    public var selectedCertificate: CertificateRef?
-    public var serial: DispatchQueue?
+    internal var certificateIdentityPairs: [[Any]] = []
+    internal var config: [AnyHashable: Any] = [:]
+    internal var inputDiscreet: NSSecureTextField? = NSSecureTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
+    internal var inputNonDiscreet: NSTextField? = NSTextField(frame: NSRect(x: 65, y: 23, width: 200, height: 24))
+    internal var selectedCertificate: CertificateRef?
+    internal var serial: DispatchQueue?
 
     // MARK: Private Instance Properties
 

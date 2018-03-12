@@ -48,7 +48,8 @@ public class SSLConnection {
         }
 
         if let connection = rawConnection {
-            connection.deallocate()
+            connection.deallocate(bytes: 4,
+                                  alignedTo: 4)
 
             rawConnection = nil
         }
@@ -208,8 +209,8 @@ public class SSLConnection {
             setio == errSecSuccess
             else { throw PushError.sslIOFuncs }
 
-        let connection = UnsafeMutableRawPointer.allocate(byteCount: 4,
-                                                          alignment: 4)
+        let connection = UnsafeMutableRawPointer.allocate(bytes: 4,
+                                                          alignedTo: 4)
 
         connection.storeBytes(of: socket,
                               as: Int32.self)

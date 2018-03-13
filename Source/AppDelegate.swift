@@ -506,7 +506,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             range.length -= 2
 
             let before: String = (payload as NSString).substring(to: range.location)
-            let value = Int((payload as NSString).substring(with: range)) ?? 0 + 1
+            let value = (Int((payload as NSString).substring(with: range)) ?? 0) + 1
             let after: String = (payload as NSString).substring(from: range.location + range.length)
 
             payloadView.string = "\(before)\(value)\(after)"

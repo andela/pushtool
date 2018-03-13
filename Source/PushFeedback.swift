@@ -7,29 +7,29 @@ public class PushFeedback {
     public let sandboxPushHost = "feedback.sandbox.push.apple.com"
     public let tokenMaxSize = 32
 
-    public class func connect(withIdentity identity: IdentityRef,
+    public class func connect(with identity: IdentityRef,
                               environment: Environment) throws -> PushFeedback {
         let feedback = PushFeedback()
 
-        try feedback.connect(withIdentity: identity,
+        try feedback.connect(with: identity,
                              environment: environment)
 
         return feedback
     }
 
-    public class func connect(withPKCS12Data data: Data,
+    public class func connect(with data: Data,
                               password: String?,
                               environment: Environment) throws -> PushFeedback {
         let feedback = PushFeedback()
 
-        try feedback.connect(withPKCS12Data: data,
+        try feedback.connect(with: data,
                              password: password,
                              environment: environment)
 
         return feedback
     }
 
-    public func connect(withIdentity identity: IdentityRef,
+    public func connect(with identity: IdentityRef,
                         environment: Environment) throws {
         self.connection?.disconnect()
 
@@ -52,7 +52,7 @@ public class PushFeedback {
         self.connection = connection
     }
 
-    public func connect(withPKCS12Data data: Data,
+    public func connect(with data: Data,
                         password: String?,
                         environment: Environment) throws {
         guard
@@ -61,7 +61,7 @@ public class PushFeedback {
                                                          password: password) as IdentityRef?
             else { return }
 
-        try connect(withIdentity: identity,
+        try connect(with: identity,
                     environment: environment)
     }
 

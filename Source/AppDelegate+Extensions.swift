@@ -43,7 +43,7 @@ extension AppDelegate {
             do {
                 let identity = try SecTools.keychainIdentity(with: certificate)
 
-                feedback = try PushFeedback.connect(withIdentity: identity as IdentityRef,
+                feedback = try PushFeedback.connect(with: identity as IdentityRef,
                                                     environment: self.selectedEnvironment(for: certificate))
             } catch {
                 Logger.logWarn("Unable to connect to feedback service: \(error.localizedDescription)"); return }

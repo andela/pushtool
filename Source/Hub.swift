@@ -166,6 +166,7 @@ public class Hub {
         return UInt(count)
     }
 
+    @discardableResult
     public func readFailed(autoReconnect reconnect: Bool) throws -> Notification? {
         let identifier: UInt = 0
 

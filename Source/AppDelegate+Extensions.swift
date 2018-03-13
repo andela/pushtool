@@ -106,7 +106,7 @@ extension AppDelegate {
             if pairs.isEmpty {
                 Logger.logWarn("Unable to import p12 file: no push certificates found"); return }
 
-            Logger.logInfo("Impored \(pairs.count) certificate\(pairs.count == 1 ? "":"s")")
+            Logger.logInfo("Imported \(pairs.count) certificate\(pairs.count == 1 ? "":"s")")
             let index: Int = self.certificateIdentityPairs.count
 
             self.certificateIdentityPairs += pairs
@@ -128,7 +128,7 @@ extension AppDelegate {
             Logger.logWarn("No push certificates in keychain.")
         }
 
-        certs = certs.sorted {(_ optA: CertificateRef, _ optB: CertificateRef) -> Bool in
+        certs = certs.sorted { optA, optB in
             let envOptionsA: EnvironmentOptions = SecTools.environmentOptions(for: optA as CertificateRef)
             let envOptionsB: EnvironmentOptions = SecTools.environmentOptions(for: optB as CertificateRef)
 

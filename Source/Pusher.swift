@@ -2,37 +2,13 @@ import Foundation
 
 public class Pusher {
 
-    // MARK: Public Type Methods
-
-    public class func connect(withIdentity identity: IdentityRef,
-                              environment: Environment) throws -> Pusher {
-        let pusher = Pusher()
-
-        try pusher.connect(withIdentity: identity,
-                           environment: environment)
-
-        return pusher
-    }
-
-    public class func connect(withPKCS12Data data: Data,
-                              password: String,
-                              environment: Environment) throws -> Pusher {
-        let pusher = Pusher()
-
-        try pusher.connect(withPKCS12Data: data,
-                           password: password,
-                           environment: environment)
-
-        return pusher
-    }
-
     // MARK: Public Instance Properties
 
     public var connection: SSLConnection?
 
     // MARK: Public Instance Methods
 
-    public func connect(withIdentity identity: IdentityRef,
+    public func connect(with identity: IdentityRef,
                         environment: Environment) throws {
         self.connection?.disconnect()
 
@@ -54,13 +30,13 @@ public class Pusher {
         self.connection = connection
     }
 
-    public func connect(withPKCS12Data data: Data,
+    public func connect(with data: Data,
                         password: String,
                         environment: Environment) throws {
-        let identity = try SecIdentityTools.identities(withPKCS12Data: data,
-                                                       password: password) as IdentityRef
+        let identity: IdentityRef = try SecIdentityTools.identities(with: data,
+                                                                    password: password) as IdentityRef
 
-        try connect(withIdentity: identity,
+        try connect(with: identity,
                     environment: environment)
     }
 
@@ -75,10 +51,7 @@ public class Pusher {
         guard let connection = self.connection
             else { return }
 
-        var length: UInt = 0
-
-        try connection.write(data as NSData,
-                             length: &length)
+        let length = try connection.write(data as NSData)
 
         if length != data.count {
             throw PushError.pushWriteFail
@@ -91,27 +64,21 @@ public class Pusher {
         let notification = Notification(payload: payload,
                                         token: token,
                                         identifier: identifier,
-                                        expiration: nil,
+                                        expires: nil,
                                         priority: 0)
 
         try self.pushNotification(notification)
     }
 
-    public func readFailedIdentifier(_ identifier: UnsafeMutablePointer<Int>,
-                                     apnError: ErrorPointer) throws {
-        identifier.pointee = 0
-        apnError?.pointee = nil
-
+    public func readFailedIdentifier() throws -> (identifier: Int, apnError: Error?) {
         let length = UInt((UInt8.bitWidth * 2) / 8 + (UInt32.bitWidth) / 8 )
         let data = NSMutableData(length: Int(length))
 
         if let data = data {
-            var len: UInt = 0
-            try self.connection?.read(data,
-                                      length: &len)
+            let len = try self.connection?.read(data)
 
             if len == 0 {
-                return
+                return (0, nil)
             }
         }
 
@@ -134,9 +101,8 @@ public class Pusher {
         data?.getBytes(&ident,
                        range: NSRange(location: 2, length: 4))
 
-        identifier.pointee = Int(UInt32(bigEndian: ident))
-
-        apnError?.pointee = error(for: Int(status)) as NSError
+        return (Int(UInt32(bigEndian: ident)),
+                error(for: Int(status)) as NSError)
     }
 
     public func reconnect() throws {

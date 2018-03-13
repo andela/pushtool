@@ -24,7 +24,7 @@ public class Hub {
                               pkcs12Data data: Data,
                               password: String,
                               environment: Environment) throws -> Hub {
-                let hub = Hub(delegate: delegate)
+        let hub = Hub(delegate: delegate)
 
         try hub.connect(withPKCS12Data: data,
                         password: password,
@@ -59,14 +59,14 @@ public class Hub {
 
     public func connect(withIdentity identity: IdentityRef,
                         environment: Environment) throws {
-        try pusher.connect(withIdentity: identity,
+        try pusher.connect(with: identity,
                            environment: environment)
     }
 
     public func connect(withPKCS12Data data: Data,
                         password: String,
                         environment: Environment) throws {
-        try pusher.connect(withPKCS12Data: data,
+        try pusher.connect(with: data,
                            password: password,
                            environment: environment)
     }
@@ -119,7 +119,7 @@ public class Hub {
         let notification = Notification(payload: payload,
                                         token: token,
                                         identifier: 0,
-                                        expiration: nil,
+                                        expires: nil,
                                         priority: 0)
 
         return self.pushNotifications([notification])
@@ -130,7 +130,7 @@ public class Hub {
         let notifications = tokens.map { Notification(payload: payload,
                                                       token: $0,
                                                       identifier: 0,
-                                                      expiration: nil,
+                                                      expires: nil,
                                                       priority: 0)
         }
 
@@ -142,7 +142,7 @@ public class Hub {
         let notifications = payloads.map { Notification(payload: $0,
                                                         token: token,
                                                         identifier: 0,
-                                                        expiration: nil,
+                                                        expires: nil,
                                                         priority: 0)
         }
 
@@ -166,23 +166,26 @@ public class Hub {
         return UInt(count)
     }
 
-    public func readFailed(_ notifications: AutoreleasingUnsafeMutablePointer<Notification?>?,
-                           autoReconnect reconnect: Bool) throws {
+    @discardableResult
+    public func readFailed(autoReconnect reconnect: Bool) throws -> Notification? {
         let identifier: UInt = 0
-        var apnError: NSError?
-        var id = Int(identifier)
 
-        try pusher.readFailedIdentifier(&id, apnError: &apnError)
+        let failedPair = try pusher.readFailedIdentifier()
+        let apnError = failedPair.apnError
 
         if let apnError = apnError {
-            let notification: Notification? = notificationForIdentifier[identifier]?.0
+            let notification: Notification? = notificationForIdentifier[identifier]?.notification
 
             delegate?.notification(notification, didFailWithError: apnError)
 
             if reconnect {
                 try self.reconnect()
             }
+
+            return notification
         }
+
+        return nil
     }
 
     public func readFailed(_ notifications: inout [Any]?,
@@ -191,8 +194,7 @@ public class Hub {
         var failed: [Any] = []
 
         for _ in 0..<max {
-            var notification: Notification?
-            try readFailed(&notification, autoReconnect: reconnect)
+            let notification: Notification? = try readFailed(autoReconnect: reconnect)
 
             guard
                 let aNotification = notification
@@ -215,7 +217,7 @@ public class Hub {
         let oldBefore = Date(timeIntervalSinceNow: -feedbackSpan)
 
         let filteredIdentifiers = notificationForIdentifier.filter { element in
-            let (_, date) = element.1
+            let (_, date) = element.value
             return oldBefore.compare(date) == .orderedDescending
         }
 
@@ -229,5 +231,5 @@ public class Hub {
 
     // MARK: Private Instance Properties
 
-    private var notificationForIdentifier: [UInt: (Notification, Date)] = [:]
+    private var notificationForIdentifier: [UInt: (notification: Notification, date: Date)] = [:]
 }

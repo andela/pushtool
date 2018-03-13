@@ -107,11 +107,11 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         var ids: [Any]?
 
         do {
-            ids = try SecIdentityTools.identities(withPKCS12Data: data,
+            ids = try SecIdentityTools.identities(with: data,
                                                   password: password)
         } catch let error as PushError {
             if !password.isEmpty && error == .pkcs12Password {
-                ids = try? SecIdentityTools.identities(withPKCS12Data: data,
+                ids = try? SecIdentityTools.identities(with: data,
                                                        password: nil)
             }
         } catch {
@@ -136,13 +136,13 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
         if let cert = certificate {
             let environment: Environment = selectedEnvironment(for: cert)
-            let summary = SecTools.summary(withCertificate: cert)
+            let summary = SecTools.summary(with: cert)
 
             Logger.logInfo("\(message ?? "Connecting to APN..."), \(summary), \(environment) ")
 
             serial?.async {
                 guard
-                    let ident = identity ?? (try? SecTools.keychainIdentity(withCertificate: certificate))
+                    let ident = identity ?? (try? SecTools.keychainIdentity(with: certificate))
                     else { return }
 
                 let hub = try? Hub.connect(with: self,
@@ -183,10 +183,14 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
         for pair: [Any] in certificateIdentityPairs {
             let certificate = pair[0] as CertificateRef
             let hasIdentity: Bool = !(pair[1] is NSNull)
-            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
-            var summary: NSString?
-            let certType: CertType = SecTools.type(withCertificate: certificate, summary: &summary)
-            let date: Date? = SecTools.expiration(withCertificate: certificate)
+            let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
+
+            let result = SecTools.type(with: certificate)
+
+            let certType = result.certType
+            let summary = result.summary
+
+            let date: Date? = SecTools.expiration(with: certificate)
             let expire = "  [\((date != nil) ? formatter.string(from: date ?? Date()) : "expired")]"
 
             certificatePopup.addItem(withTitle: "\(hasIdentity ? "imported: " : "")\(summary ?? "")"
@@ -262,7 +266,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     private func configKey(for certificate: CertificateRef,
                            in environment: Environment) -> String? {
         guard
-            let summary = SecTools.plainSummary(withCertificate: certificate)
+            let summary = SecTools.plainSummary(with: certificate)
             else { return nil }
 
         switch environment {
@@ -284,7 +288,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func enableButtons(forCertificate certificate: CertificateRef, environment: Environment) {
-        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
         let shouldEnableEnvButton: Bool = environmentOptions == .any
         let shouldSelectSandboxEnv: Bool = environment == .sandbox
         pushButton.isEnabled = true
@@ -294,8 +298,8 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func identifier(withCertificate certificate: CertificateRef) -> String {
-        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
-        let summary: String = SecTools.summary(withCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
+        let summary: String = SecTools.summary(with: certificate)
 
         return "\(summary)-\(environmentOptions)"
     }
@@ -323,7 +327,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func preferredEnvironment(for certificate: CertificateRef) -> Environment {
-        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(forCertificate: certificate)
+        let environmentOptions: EnvironmentOptions = SecTools.environmentOptions(for: certificate)
 
         return environmentOptions == .sandbox ? .sandbox : .production
     }
@@ -365,7 +369,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
             let notification = Notification(payload: payload,
                                             token: token,
                                             identifier: 0,
-                                            expiration: expiry,
+                                            expires: expiry,
                                             priority: UInt(priority))
 
             do {
@@ -375,10 +379,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
                 self.serial?.asyncAfter(deadline: popTime) {
                     do {
-                        var failed: Notification?
-
-                        try self.hub?.readFailed(&failed,
-                                                 autoReconnect: true)
+                        try self.hub?.readFailed(autoReconnect: true)
 
                         Logger.logInfo("Payload has been pushed")
                     } catch {

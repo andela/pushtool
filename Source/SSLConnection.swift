@@ -61,11 +61,10 @@ public class SSLConnection {
         }
     }
 
-    public func read(_ data: NSMutableData,
-                     length: UnsafeMutablePointer<UInt>) throws {
+    public func read(_ data: NSMutableData) throws -> UInt {
         guard
             let context = self.context
-            else { return }
+            else { return 0 }
 
         var processed = Int(0)
 
@@ -74,7 +73,7 @@ public class SSLConnection {
                              data.length,
                              &processed)
 
-        length.pointee = UInt(processed)
+        let length = UInt(processed)
 
         switch status {
         case errSecIO:
@@ -82,7 +81,7 @@ public class SSLConnection {
 
         case errSecSuccess,
              errSSLWouldBlock:
-            return
+            return length
 
         case errSSLClosedAbort:
             throw PushError.readClosedAbort
@@ -95,12 +94,12 @@ public class SSLConnection {
         }
     }
 
-    public func write(_ data: NSData,
-                      length: UnsafeMutablePointer<UInt>) throws {
+    public func write(_ data: NSData) throws -> UInt {
         guard
             let context = self.context
-            else { return }
+            else { return 0 }
 
+        var length: UInt
         var processed = Int(0)
 
         let status = SSLWrite(context,
@@ -108,7 +107,7 @@ public class SSLConnection {
                               data.length,
                               &processed)
 
-        length.pointee = UInt(processed)
+        length = UInt(processed)
 
         switch status {
         case errSecIO:
@@ -116,7 +115,7 @@ public class SSLConnection {
 
         case errSecSuccess,
              errSSLWouldBlock:
-            return
+            return length
 
         case errSSLClosedAbort:
             throw PushError.writeClosedAbort

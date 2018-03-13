@@ -13,7 +13,7 @@ public class SecTools {
                                             data as CFData)
     }
 
-    public class func certificate(withIdentity identity: IdentityRef?) throws -> CertificateRef {
+    public class func certificate(with identity: IdentityRef?) throws -> CertificateRef {
         var cert: SecCertificate?
         var status: OSStatus
 
@@ -31,9 +31,10 @@ public class SecTools {
         return certificate
     }
 
-    public class func environmentOptions(forCertificate certificate: CertificateRef) -> EnvironmentOptions {
-        switch (self.type(withCertificate: certificate,
-                          summary: nil) ) {
+    public class func environmentOptions(for certificate: CertificateRef) -> EnvironmentOptions {
+        let result = self.type(with: certificate)
+
+        switch result.certType {
         case .iosDevelopment,
              .macDevelopment:
             return .sandbox
@@ -54,22 +55,23 @@ public class SecTools {
         }
     }
 
-    public class func environmentOptions(forIdentity identity: Any) -> EnvironmentOptions {
+    public class func environmentOptions(forIdentity identity: IdentityRef) -> EnvironmentOptions {
         guard
-            let certificate: CertificateRef = try? self.certificate(withIdentity: identity as IdentityRef) as CertificateRef
+            let certificate: CertificateRef = try? self.certificate(with: identity) as CertificateRef
             else { return .sandbox }
 
-        return self.environmentOptions(forCertificate: certificate)
+        return self.environmentOptions(for: certificate)
     }
 
-    public class func expiration(withCertificate certificate: Any) -> Date? {
+    public class func expiration(with certificate: Any) -> Date? {
         return self.value(withCertificate: certificate as CertificateRef,
                           key: kSecOIDInvalidityDate) as? Date
     }
 
     public class func isPushCertificate(_ certificate: CertificateRef) -> Bool {
-        switch (self.type(withCertificate: certificate,
-                          summary: nil)) {
+         let result = self.type(with: certificate)
+
+        switch result.certType {
         case .iosDevelopment,
              .iosProduction,
              .macDevelopment,
@@ -106,7 +108,6 @@ public class SecTools {
         return keyRef
     }
 
-    @objc(keychainCertificatesWithError:)
     public class func keychainCertificates() throws -> [CertificateRef] {
         let candidates = try self.allKeychainCertificates()
 
@@ -119,7 +120,7 @@ public class SecTools {
         return certificates
     }
 
-    public class func keychainIdentity(withCertificate certificate: Any?) throws -> Any {
+    public class func keychainIdentity(with certificate: Any?) throws -> Any {
         var ident: SecIdentity?
 
         var status: OSStatus
@@ -143,26 +144,20 @@ public class SecTools {
         return id
     }
 
-    public class func summary(withCertificate certificate: CertificateRef) -> String {
-        var result: NSString?
+    public class func summary(with certificate: CertificateRef) -> String {
+        let result = self.type(with: certificate)
 
-        _ = self.type(withCertificate: certificate,
-                      summary: &result)
-
-        guard let resultValue = result else {
+        guard let resultValue = result.summary else {
             return ""
         }
 
-        return resultValue as String
+        return resultValue
     }
 
-    public class func type(withCertificate certificate: CertificateRef,
-                           summary: AutoreleasingUnsafeMutablePointer<NSString?>?) -> CertType {
-        if summary != nil {
-            summary?.pointee = nil
-        }
+    public class func type(with certificate: CertificateRef) -> (certType: CertType, summary: String? ) {
+        var summary: String?
 
-        let name: String? = self.plainSummary(withCertificate: certificate)
+        let name: String? = self.plainSummary(with: certificate)
 
         for certType in CertType.allTypes {
             guard
@@ -171,22 +166,19 @@ public class SecTools {
                 name.hasPrefix(prefix)
                 else { continue }
 
-            if let summary = summary {
-                summary.pointee = name.dropFirst(prefix.count) as NSString
-            }
+                summary = String(name.dropFirst(prefix.count) )
 
-            return  certType
+            return  (certType, summary)
         }
 
-        if let summary = summary,
-            let name = name {
-            summary.pointee = name as NSString
+        if let name = name {
+            summary = name
         }
 
-        return .unknown
+        return (.unknown, summary)
     }
 
-    public class func values(withCertificate certificate: Any,
+    public class func values(with certificate: Any,
                              keys: [Any]) -> [AnyHashable: [AnyHashable: Any]]? {
         guard
             case let cert as SecCertificate = certificate
@@ -221,7 +213,7 @@ public class SecTools {
         return certificates
     }
 
-    public class func plainSummary(withCertificate certificate: CertificateRef?) -> String? {
+    public class func plainSummary(with certificate: CertificateRef?) -> String? {
         guard
             case let cert as SecCertificate = certificate,
             let summary = SecCertificateCopySubjectSummary(cert) as String?
@@ -232,7 +224,7 @@ public class SecTools {
 
     private class func value(withCertificate certificate: CertificateRef,
                              key: AnyHashable) -> Any? {
-        let values = self.values(withCertificate: certificate,
+        let values = self.values(with: certificate,
                                  keys: [key])
 
         return values?[key]?[kSecPropertyKeyValue]

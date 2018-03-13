@@ -34,16 +34,16 @@ extension AppDelegate {
                 let certificate: CertificateRef = self.selectedCertificate
                 else { Logger.logWarn("Unable to connect to feedback service: no certificate selected"); return }
 
-            let summary = SecTools.summary(withCertificate: certificate)
+            let summary = SecTools.summary(with: certificate)
             let environment = self.selectedEnvironment(for: certificate)
             Logger.logInfo("Connecting to feedback service... \(summary), \(environment)")
 
             let feedback: PushFeedback
 
             do {
-                let identity = try SecTools.keychainIdentity(withCertificate: certificate)
+                let identity = try SecTools.keychainIdentity(with: certificate)
 
-                feedback = try PushFeedback.connect(withIdentity: identity as IdentityRef,
+                feedback = try PushFeedback.connect(with: identity as IdentityRef,
                                                     environment: self.selectedEnvironment(for: certificate))
             } catch {
                 Logger.logWarn("Unable to connect to feedback service: \(error.localizedDescription)"); return }
@@ -95,7 +95,7 @@ extension AppDelegate {
                     let certificate: CertificateRef
 
                     do {
-                        certificate = try SecTools.certificate(withIdentity: identity as IdentityRef) as CertificateRef
+                        certificate = try SecTools.certificate(with: identity as IdentityRef) as CertificateRef
                     } catch {
                         Logger.logWarn("Unable to import p12 file"); return }
 
@@ -106,7 +106,7 @@ extension AppDelegate {
             if pairs.isEmpty {
                 Logger.logWarn("Unable to import p12 file: no push certificates found"); return }
 
-            Logger.logInfo("Impored \(pairs.count) certificate\(pairs.count == 1 ? "":"s")")
+            Logger.logInfo("Imported \(pairs.count) certificate\(pairs.count == 1 ? "":"s")")
             let index: Int = self.certificateIdentityPairs.count
 
             self.certificateIdentityPairs += pairs
@@ -128,16 +128,16 @@ extension AppDelegate {
             Logger.logWarn("No push certificates in keychain.")
         }
 
-        certs = certs.sorted {(_ optA: CertificateRef, _ optB: CertificateRef) -> Bool in
-            let envOptionsA: EnvironmentOptions = SecTools.environmentOptions(forCertificate: optA as CertificateRef)
-            let envOptionsB: EnvironmentOptions = SecTools.environmentOptions(forCertificate: optB as CertificateRef)
+        certs = certs.sorted { optA, optB in
+            let envOptionsA: EnvironmentOptions = SecTools.environmentOptions(for: optA as CertificateRef)
+            let envOptionsB: EnvironmentOptions = SecTools.environmentOptions(for: optB as CertificateRef)
 
             if envOptionsA != envOptionsB {
                 return envOptionsA < envOptionsB
             }
 
-            let aname: String = SecTools.summary(withCertificate: optA as CertificateRef)
-            let bname: String = SecTools.summary(withCertificate: optB as CertificateRef)
+            let aname: String = SecTools.summary(with: optA as CertificateRef)
+            let bname: String = SecTools.summary(with: optB as CertificateRef)
 
             return aname < bname
         }
@@ -219,7 +219,7 @@ extension AppDelegate {
             else { return nil }
 
         let environment = selectedEnvironment(for: cert)
-        let summary = SecTools.summary(withCertificate: certificate)
+        let summary = SecTools.summary(with: certificate)
         let identifier: String
 
         if environment == .sandbox {

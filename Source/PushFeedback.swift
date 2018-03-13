@@ -7,29 +7,29 @@ public class PushFeedback {
     public let sandboxPushHost = "feedback.sandbox.push.apple.com"
     public let tokenMaxSize = 32
 
-    public class func connect(withIdentity identity: IdentityRef,
+    public class func connect(with identity: IdentityRef,
                               environment: Environment) throws -> PushFeedback {
         let feedback = PushFeedback()
 
-        try feedback.connect(withIdentity: identity,
+        try feedback.connect(with: identity,
                              environment: environment)
 
         return feedback
     }
 
-    public class func connect(withPKCS12Data data: Data,
+    public class func connect(with data: Data,
                               password: String?,
                               environment: Environment) throws -> PushFeedback {
         let feedback = PushFeedback()
 
-        try feedback.connect(withPKCS12Data: data,
+        try feedback.connect(with: data,
                              password: password,
                              environment: environment)
 
         return feedback
     }
 
-    public func connect(withIdentity identity: IdentityRef,
+    public func connect(with identity: IdentityRef,
                         environment: Environment) throws {
         self.connection?.disconnect()
 
@@ -52,16 +52,16 @@ public class PushFeedback {
         self.connection = connection
     }
 
-    public func connect(withPKCS12Data data: Data,
+    public func connect(with data: Data,
                         password: String?,
                         environment: Environment) throws {
         guard
             let password = password,
-            let identity = try SecIdentityTools.identity(withPKCS12Data: data,
+            let identity = try SecIdentityTools.identity(with: data,
                                                          password: password) as IdentityRef?
             else { return }
 
-        try connect(withIdentity: identity,
+        try connect(with: identity,
                     environment: environment)
     }
 
@@ -89,13 +89,11 @@ public class PushFeedback {
             let data = NSMutableData(length: dataSize)
             else { return (Data(), Date()) }
 
-        var length: UInt = 0
+        let length = try connection?.read(data)
 
-        try connection?.read(data, length: &length)
-
-        if length != data.length {
-            throw PushError.feedbackLength
-        }
+        guard let dataLength = length,
+            dataLength != data.length
+        else { throw PushError.feedbackLength }
 
         var time: UInt32 = 0
 
@@ -114,7 +112,7 @@ public class PushFeedback {
         }
 
         let token = data.subdata(with: NSRange(location: 6,
-                                               length: Int(length - 6)))
+                                               length: Int(dataLength - 6)))
 
         return (token, date)
     }
@@ -122,6 +120,6 @@ public class PushFeedback {
     private func readToken() throws -> (String, Date) {
         let (data, date) = try readTokenData()
 
-        return (Notification.hex(from: data), date)
+        return (data.hexEncodedString(), date)
     }
 }
